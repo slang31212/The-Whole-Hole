@@ -81,5 +81,8 @@ function renderDashboard() {
   renderTable(platforms);
 }
 
+const REFRESH_INTERVAL_MS = 5000;
+
 seedAnnouncedPlatformsOnce();
 renderDashboard();
+setInterval(renderDashboard, REFRESH_INTERVAL_MS);
