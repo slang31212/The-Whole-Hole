@@ -52,3 +52,16 @@ python3 -m http.server 8000
 
 Then visit `http://localhost:8000`. Data is stored in the browser's
 `localStorage`.
+
+## Add to Home Screen (iPad/iPhone)
+
+The app needs to be served over HTTP(S) (not opened as a `file://` page) for
+"Add to Home Screen" to pick up the icon and standalone display mode. In
+Safari on iPad: open `index.html` (or `dashboard.html`) from a server, tap
+Share, then "Add to Home Screen". It launches full-screen with its own icon,
+separate from `index.html` and `dashboard.html` if you add both.
+
+This is a Home Screen app shortcut, not a native iPadOS widget — true
+Home Screen/Today-View widgets require native WidgetKit code and can't
+read a webpage's `localStorage`, so they're out of scope for a static
+site like this one.
