@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floating Wind Platform Counter</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Floating Wind Platform Counter</h1>
+  <p class="subtitle">Track installed floating offshore wind platforms, their turbines, and their floating substructures.</p>
+</header>
+
+<main>
+  <section class="summary" id="summary">
+    <div class="stat">
+      <span class="stat-value" id="totalPlatforms">0</span>
+      <span class="stat-label">Platforms</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="totalCapacity">0</span>
+      <span class="stat-label">Total Capacity (MW)</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="totalDisplacement">0</span>
+      <span class="stat-label">Total Displacement (t)</span>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <h2>Add a Platform</h2>
+    <form id="platformForm">
+      <fieldset>
+        <legend>Platform</legend>
+        <label>Site / Project name
+          <input type="text" id="siteName" placeholder="e.g. Hywind Tampen" required>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Turbine</legend>
+        <label>Manufacturer / model
+          <input type="text" id="turbineModel" placeholder="e.g. Siemens Gamesa SG 8.0-167 DD" required>
+        </label>
+        <label>Rated capacity (MW)
+          <input type="number" id="turbineCapacity" min="0" step="0.1" required>
+        </label>
+        <label>Rotor diameter (m)
+          <input type="number" id="rotorDiameter" min="0" step="0.1">
+        </label>
+        <label>Hub height above water (m)
+          <input type="number" id="hubHeight" min="0" step="0.1">
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Floating Base</legend>
+        <label>Substructure type
+          <select id="baseType" required>
+            <option value="">Select type...</option>
+            <option value="Spar-buoy">Spar-buoy</option>
+            <option value="Semi-submersible">Semi-submersible</option>
+            <option value="Tension-leg platform (TLP)">Tension-leg platform (TLP)</option>
+            <option value="Barge">Barge</option>
+          </select>
+        </label>
+        <label>Displacement (t)
+          <input type="number" id="displacement" min="0" step="1">
+        </label>
+        <label>Draft (m)
+          <input type="number" id="draft" min="0" step="0.1">
+        </label>
+        <label>Mooring system
+          <input type="text" id="mooring" placeholder="e.g. 3-point catenary chain">
+        </label>
+        <label>Water depth (m)
+          <input type="number" id="waterDepth" min="0" step="1">
+        </label>
+      </fieldset>
+
+      <button type="submit">Add Platform</button>
+    </form>
+  </section>
+
+  <section class="list-section">
+    <h2>Platforms (<span id="listCount">0</span>)</h2>
+    <ul id="platformList"></ul>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
