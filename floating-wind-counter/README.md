@@ -32,6 +32,15 @@ projects that aren't operational yet, each linked to its source:
 These are seeded once via `localStorage`; remove or edit them like any
 other entry.
 
+## Pages
+
+- `index.html` — add, edit, and remove platforms; filter the list by status.
+- `dashboard.html` — read-only dashboard with the same running counter,
+  a bar chart breakdown by status and by floating base type, and a full
+  table of every tracked platform.
+
+Both pages read/write the same `localStorage` data via `data.js`.
+
 ## Running it
 
 No build step or dependencies — just open `index.html` in a browser, or serve

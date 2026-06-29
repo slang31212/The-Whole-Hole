@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floating Wind Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <nav class="top-nav"><a href="index.html">&larr; Add / Edit Platforms</a></nav>
+  <h1>Floating Wind Dashboard</h1>
+  <p class="subtitle">Live counter and breakdown of tracked floating offshore wind platforms.</p>
+</header>
+
+<main>
+  <section class="summary" id="summary">
+    <div class="stat">
+      <span class="stat-value" id="totalPlatforms">0</span>
+      <span class="stat-label">Platforms</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="totalCapacity">0</span>
+      <span class="stat-label">Total Capacity (MW)</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="totalDisplacement">0</span>
+      <span class="stat-label">Total Displacement (t)</span>
+    </div>
+  </section>
+
+  <section class="chart-section">
+    <h2>By Status</h2>
+    <div class="bar-chart" id="statusChart"></div>
+  </section>
+
+  <section class="chart-section">
+    <h2>By Floating Base Type</h2>
+    <div class="bar-chart" id="baseTypeChart"></div>
+  </section>
+
+  <section class="table-section">
+    <h2>All Platforms</h2>
+    <table class="platform-table">
+      <thead>
+        <tr>
+          <th>Site</th>
+          <th>Status</th>
+          <th>Turbine</th>
+          <th>Capacity (MW)</th>
+          <th>Base Type</th>
+        </tr>
+      </thead>
+      <tbody id="platformTableBody"></tbody>
+    </table>
+  </section>
+</main>
+
+<script src="data.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

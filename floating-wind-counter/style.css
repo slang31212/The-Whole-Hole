@@ -244,3 +244,91 @@ button:hover {
 .source-link:hover {
   text-decoration: underline;
 }
+
+.top-nav {
+  text-align: right;
+  margin-bottom: 0.5rem;
+}
+
+.top-nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.top-nav a:hover {
+  text-decoration: underline;
+}
+
+.chart-section, .table-section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 40px;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.bar-label {
+  color: var(--muted);
+}
+
+.bar-track {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 6px 0 0 6px;
+  transition: width 0.3s ease;
+}
+
+.bar-fill.under-construction {
+  background: #ffc400;
+}
+
+.bar-fill.planned {
+  background: var(--muted);
+}
+
+.bar-value {
+  text-align: right;
+  font-weight: 600;
+}
+
+.platform-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.platform-table th, .platform-table td {
+  text-align: left;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.platform-table th {
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+}
