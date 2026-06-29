@@ -91,3 +91,18 @@ function escapeHtml(str) {
 function statusClass(status) {
   return (status || "Operational").toLowerCase().replace(/\s+/g, "-");
 }
+
+const PLATFORM_FIELDS = [
+  { key: "siteName", label: "Site / Project Name" },
+  { key: "status", label: "Status" },
+  { key: "sourceUrl", label: "Source URL", isLink: true },
+  { key: "turbineModel", label: "Turbine Manufacturer / Model" },
+  { key: "turbineCapacity", label: "Turbine Rated Capacity (MW)" },
+  { key: "rotorDiameter", label: "Rotor Diameter (m)" },
+  { key: "hubHeight", label: "Hub Height Above Water (m)" },
+  { key: "baseType", label: "Floating Base Substructure Type" },
+  { key: "displacement", label: "Base Displacement (t)" },
+  { key: "draft", label: "Base Draft (m)" },
+  { key: "mooring", label: "Mooring System" },
+  { key: "waterDepth", label: "Water Depth (m)" },
+];

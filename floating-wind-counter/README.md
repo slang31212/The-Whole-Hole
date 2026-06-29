@@ -37,9 +37,12 @@ other entry.
 - `index.html` — add, edit, and remove platforms; filter the list by status.
 - `dashboard.html` — read-only dashboard with the same running counter,
   a bar chart breakdown by status and by floating base type, and a full
-  table of every tracked platform.
+  table of every tracked platform. Tap/click a row to open its full
+  details.
+- `detail.html` — spreadsheet-style (field / value rows) view of a single
+  platform's full record, opened by tapping a row in the dashboard table.
 
-Both pages read/write the same `localStorage` data via `data.js`.
+All pages read/write the same `localStorage` data via `data.js`.
 
 ## Running it
 

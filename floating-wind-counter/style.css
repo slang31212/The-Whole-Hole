@@ -333,3 +333,24 @@ button:hover {
   font-size: 0.75rem;
   letter-spacing: 0.03em;
 }
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.clickable-row:hover {
+  background: rgba(63, 193, 201, 0.08);
+}
+
+.spreadsheet-table th {
+  width: 45%;
+  text-transform: none;
+  font-size: 0.85rem;
+  color: var(--text);
+  font-weight: 600;
+  background: var(--bg);
+}
+
+.spreadsheet-table td {
+  color: var(--text);
+}

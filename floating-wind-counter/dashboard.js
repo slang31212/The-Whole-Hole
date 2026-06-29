@@ -44,8 +44,10 @@ function renderTable(platforms) {
     return;
   }
 
-  platforms.forEach((p) => {
+  platforms.forEach((p, index) => {
     const tr = document.createElement("tr");
+    tr.className = "clickable-row";
+    tr.dataset.index = index;
     tr.innerHTML = `
       <td>${escapeHtml(p.siteName)}</td>
       <td><span class="status-badge ${statusClass(p.status)}">${escapeHtml(p.status || "Operational")}</span></td>
@@ -54,6 +56,12 @@ function renderTable(platforms) {
       <td>${escapeHtml(p.baseType)}</td>
     `;
     body.appendChild(tr);
+  });
+
+  body.querySelectorAll(".clickable-row").forEach((row) => {
+    row.addEventListener("click", () => {
+      window.location.href = `detail.html?i=${row.dataset.index}`;
+    });
   });
 }
 
