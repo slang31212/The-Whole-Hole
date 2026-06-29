@@ -36,6 +36,16 @@
         <label>Site / Project name
           <input type="text" id="siteName" placeholder="e.g. Hywind Tampen" required>
         </label>
+        <label>Status
+          <select id="status" required>
+            <option value="Operational">Operational</option>
+            <option value="Under Construction">Under Construction</option>
+            <option value="Planned">Planned / Announced</option>
+          </select>
+        </label>
+        <label>Source URL (for announcements)
+          <input type="url" id="sourceUrl" placeholder="https://...">
+        </label>
       </fieldset>
 
       <fieldset>
@@ -84,7 +94,17 @@
   </section>
 
   <section class="list-section">
-    <h2>Platforms (<span id="listCount">0</span>)</h2>
+    <div class="list-header">
+      <h2>Platforms (<span id="listCount">0</span>)</h2>
+      <label class="filter-label">Filter
+        <select id="statusFilter">
+          <option value="All">All</option>
+          <option value="Operational">Operational</option>
+          <option value="Under Construction">Under Construction</option>
+          <option value="Planned">Planned / Announced</option>
+        </select>
+      </label>
+    </div>
     <ul id="platformList"></ul>
   </section>
 </main>

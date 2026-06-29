@@ -186,3 +186,61 @@ button:hover {
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.filter-label select {
+  width: auto;
+  margin-top: 0;
+}
+
+.status-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.status-badge.operational {
+  background: rgba(63, 193, 201, 0.2);
+  color: var(--accent);
+}
+
+.status-badge.under-construction {
+  background: rgba(255, 196, 0, 0.18);
+  color: #ffc400;
+}
+
+.status-badge.planned {
+  background: rgba(155, 182, 194, 0.18);
+  color: var(--muted);
+}
+
+.source-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.source-link:hover {
+  text-decoration: underline;
+}
