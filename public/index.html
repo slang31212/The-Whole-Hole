@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>The Whole Hole</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>The Whole Hole</h1>
+    <p class="tagline">Vaults for stuff you don't want to get lost.</p>
+  </header>
+
+  <main>
+    <section id="vault-list-view">
+      <div class="section-header">
+        <h2>Your Vaults</h2>
+        <button id="new-vault-btn">+ New Vault</button>
+      </div>
+      <ul id="vault-list"></ul>
+    </section>
+
+    <section id="vault-view" hidden>
+      <div class="section-header">
+        <h2 id="vault-name"></h2>
+        <button id="lock-vault-btn">Lock</button>
+      </div>
+      <ul id="item-list"></ul>
+      <form id="add-item-form">
+        <input type="text" id="item-title" placeholder="Title" required />
+        <input type="text" id="item-secret" placeholder="Secret value" required />
+        <button type="submit">Add</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="modal-backdrop" hidden>
+    <div id="modal">
+      <h3 id="modal-title"></h3>
+      <form id="modal-form">
+        <input type="text" id="modal-name-input" placeholder="Vault name" />
+        <input type="password" id="modal-password-input" placeholder="Password" required />
+        <p id="modal-error" class="error" hidden></p>
+        <div class="modal-actions">
+          <button type="button" id="modal-cancel-btn">Cancel</button>
+          <button type="submit" id="modal-submit-btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
