@@ -1,4 +1,4 @@
-# VESSEL LEASE AGREEMENT
+# VESSEL LEASE AGREEMENT (LONG-TERM / DRY LEASE)
 
 **This Vessel Lease Agreement ("Agreement")** is made and entered into as of [DATE], by and between:
 
@@ -6,7 +6,7 @@
 Address: [LESSOR ADDRESS]
 Phone: [LESSOR PHONE] | Email: [LESSOR EMAIL]
 
-**Lessee (Charterer/Renter):** [LESSEE FULL NAME / COMPANY NAME]
+**Lessee:** [LESSEE FULL NAME / COMPANY NAME]
 Address: [LESSEE ADDRESS]
 Phone: [LESSEE PHONE] | Email: [LESSEE EMAIL]
 
@@ -19,95 +19,112 @@ Phone: [LESSEE PHONE] | Email: [LESSEE EMAIL]
 | Field | Details |
 |---|---|
 | Vessel Name | [VESSEL NAME] |
-| Make / Model | [MAKE / MODEL] |
+| Make / Model / Type | [MAKE / MODEL / TYPE] |
 | Year Built | [YEAR] |
-| Hull Identification Number (HIN) | [HIN] |
+| Hull Identification Number (HIN) / IMO No. | [HIN / IMO NUMBER] |
 | Registration / Documentation No. | [REGISTRATION NUMBER] |
 | Flag / Port of Registry | [FLAG / PORT] |
+| Classification Society | [CLASS SOCIETY, e.g., ABS/Lloyd's, if applicable] |
 | Length Overall (LOA) | [LENGTH] |
-| Gross Tonnage | [TONNAGE] |
+| Gross / Net Tonnage | [TONNAGE] |
 | Engine(s) / Horsepower | [ENGINE DETAILS] |
 | Included Equipment/Tender/Gear | [LIST EQUIPMENT] |
 
 ## 2. Lease Term
 
-This lease begins on **[START DATE]** at **[START TIME/LOCATION]** and ends on **[END DATE]** at **[END TIME/LOCATION]**, for a total of **[NUMBER]** days ("Lease Term"), unless earlier terminated or extended in writing by mutual agreement of the Parties.
+- **Commencement Date:** [START DATE]
+- **Minimum Term:** This Agreement shall run for a minimum, non-cancellable initial term of **five (5) years** from the Commencement Date ("Minimum Term"), unless terminated earlier solely for a Default under Section 15.
+- **Renewal:** After the Minimum Term, this Agreement shall automatically renew for successive periods of [RENEWAL PERIOD, e.g., "one (1) year"] unless either Party provides written notice of non-renewal at least [NUMBER] days before the end of the then-current term.
+- **Early Termination:** Lessee may not terminate this Agreement before the end of the Minimum Term except as permitted under Section 15. Any early termination by Lessee for convenience shall require payment of an early termination fee equal to [FORMULA, e.g., "the remaining monthly rent through the end of the Minimum Term" or a flat $ amount].
 
-## 3. Lease Area / Navigation Limits
+## 3. Delivery and Redelivery
 
-The vessel may be operated only within the following area(s): [NAVIGATION LIMITS, e.g., "coastal waters within 50 nautical miles of Port X"]. The Lessee shall not take the vessel outside these limits without prior written consent of the Lessor.
+- **Delivery Location/Condition:** Vessel shall be delivered to Lessee at [LOCATION] on the Commencement Date, seaworthy, fully classed (if applicable), and in the condition recorded on the joint delivery inspection (Exhibit A).
+- **Redelivery Location/Condition:** At the end of the Term, Lessee shall redeliver the vessel to Lessor at [LOCATION], in the same condition as delivered, ordinary wear and tear excepted, free of cargo, liens, and encumbrances arising from Lessee's operation.
 
-## 4. Rent and Payment Terms
+## 4. Trading / Operating Limits
 
-- **Total Lease Fee:** $[AMOUNT]
-- **Deposit (due at signing):** $[DEPOSIT AMOUNT], due on [DATE]
-- **Balance Due:** $[BALANCE AMOUNT], due on [DATE]
-- **Payment Method:** [WIRE / CHECK / CARD / ESCROW]
-- **Late Payment:** A late fee of [PERCENT/AMOUNT] applies to payments received after [X] days past due.
+The vessel may be operated only within the following area(s) and for the following purposes: [TRADING LIMITS / GEOGRAPHIC AREA / PERMITTED USE]. Lessee shall not operate outside these limits, or use the vessel for any purpose other than [PERMITTED USE], without Lessor's prior written consent.
 
-## 5. Security Deposit
+## 5. Rent and Payment Terms
 
-Lessee shall pay a refundable security deposit of $[AMOUNT] prior to the start of the Lease Term. This deposit will be returned within [NUMBER] days after the vessel is returned, less any deductions for damage, missing equipment, unpaid fuel/dockage, or other breach of this Agreement.
+- **Monthly Rent:** $[AMOUNT] per month, payable in advance on the [DAY] of each month, beginning on the Commencement Date.
+- **Annual Escalation:** Rent shall increase by [PERCENT]% (or per [CPI/INDEX]) on each anniversary of the Commencement Date.
+- **Payment Method:** [WIRE / ACH / CHECK]
+- **Late Payment:** A late fee of [PERCENT/AMOUNT] applies to any payment not received within [X] days of its due date; continued non-payment beyond [X] days constitutes a Default under Section 15.
+- **Taxes:** Lessee is responsible for all applicable sales, use, or lease taxes, and any registration or documentation fees arising during the Term, unless otherwise agreed.
 
-## 6. Use of Vessel
+## 6. Security Deposit
 
-- The vessel shall be used only for [LAWFUL PURPOSE, e.g., "recreational cruising"] and not for subletting, commercial charter, racing, towing, or any illegal activity.
-- Maximum number of persons aboard: [NUMBER].
-- Lessee shall comply with all applicable maritime laws, Coast Guard regulations, and local port authority rules.
-- [ ] Pets allowed &nbsp;&nbsp; [ ] Smoking allowed &nbsp;&nbsp; [ ] Overnight stays allowed
+Lessee shall pay a refundable security deposit equal to [NUMBER] months' rent ($[AMOUNT]) prior to delivery. The deposit shall be returned within [NUMBER] days after redelivery, less any deductions for unpaid rent, damage beyond ordinary wear and tear, unresolved liens, or other breach of this Agreement.
 
-## 7. Crew and Operation
+## 7. Use of Vessel
 
-☐ **Bareboat (Lessee operates the vessel)** — Lessee represents that it holds a valid [LICENSE/CERTIFICATION, e.g., boating license] and sufficient experience to safely operate the vessel.
+- The vessel shall be used only for [PERMITTED USE, e.g., "commercial fishing," "commercial passenger charter," "cargo/workboat operations"] and not for any illegal purpose.
+- Lessee shall comply with all applicable maritime laws, flag-state and port-state regulations, classification society rules, and Coast Guard (or equivalent) requirements throughout the Term.
+- **Subletting/Sub-charter:** Lessee ☐ may / ☐ may not sublease, sub-charter, or assign use of the vessel to a third party without Lessor's prior written consent, which shall not be unreasonably withheld.
 
-☐ **Crewed Charter** — Lessor shall provide a licensed captain/crew at Lessor's expense. Lessee shall comply with all instructions of the captain regarding safety and operation.
+## 8. Crew and Operation
 
-*(Check applicable option and delete the other, or list crew names/roles below.)*
-Crew: [NAME(S) / ROLE(S)]
+☐ **Dry Lease / Bareboat (Lessee crews and operates the vessel)** — Lessee shall, at its own expense, crew, victual, and operate the vessel with duly licensed and competent personnel meeting all flag-state and applicable manning requirements, and shall provide evidence of such licensing upon request.
 
-## 8. Fuel, Dockage, and Consumables
+☐ **Lessor-Provided Crew** — Lessor shall provide licensed crew under a separate crewing/management agreement (attach as Exhibit C); crew costs and terms are set out therein.
 
-Lessee is responsible for fuel, oil, ice, dockage/mooring fees, and consumables during the Lease Term unless otherwise stated: [EXCEPTIONS/INCLUSIONS]. The vessel shall be returned with the same fuel level as at departure, or Lessee shall reimburse the cost of refueling.
+*(Check the applicable option and delete the other.)*
 
-## 9. Maintenance and Condition
+## 9. Fuel, Dockage, Consumables, and Operating Expenses
 
-- Lessor warrants the vessel is seaworthy and in good operating condition at the start of the Lease Term, subject to a joint inspection checklist (Exhibit A) signed by both Parties at delivery and return.
-- Lessee shall operate the vessel with due care and shall promptly notify Lessor of any mechanical issues, damage, or incidents.
-- Routine maintenance during the Lease Term is the responsibility of [LESSOR/LESSEE]. Repairs due to normal wear are the responsibility of the Lessor; repairs due to Lessee's misuse or negligence are the responsibility of the Lessee.
+Lessee is responsible for all fuel, lubricants, dockage/berthing fees, port charges, crew wages (if Lessee-crewed), insurance premiums (Section 12), and all other operating expenses incurred during the Term, unless otherwise stated: [EXCEPTIONS/INCLUSIONS].
 
-## 10. Insurance
+## 10. Maintenance, Drydocking, and Survey
 
-Lessee shall maintain (or be added as an additional insured under) marine liability and hull insurance with minimum coverage of $[AMOUNT], naming [LESSOR NAME] as loss payee/additional insured, for the duration of the Lease Term. Proof of insurance must be provided before the vessel is delivered.
+- **Lessee's Obligations:** Lessee shall, at its own cost, maintain the vessel in good operating condition and in class (if applicable) throughout the Term, including routine maintenance, scheduled drydocking, classification surveys, and repairs arising from normal operation.
+- **Lessor's Obligations:** Lessor is responsible for [pre-existing defects at delivery / major structural repairs not caused by Lessee's operation — specify allocation].
+- Lessee shall promptly notify Lessor of any condition affecting class, seaworthiness, or safety, and shall not make permanent alterations to the vessel without Lessor's prior written consent.
+- Lessor (or its surveyor) may inspect the vessel at reasonable times and with reasonable notice, not more than [NUMBER] times per year, except in case of emergency.
 
-## 11. Liability and Indemnification
+## 11. Loss, Damage, and Total Loss
 
-Lessee assumes all risk of loss, damage, or injury arising from use of the vessel during the Lease Term, except to the extent caused by the Lessor's gross negligence or willful misconduct. Lessee agrees to indemnify and hold harmless the Lessor from any claims, damages, fines, or liabilities arising from Lessee's operation or possession of the vessel.
+1. Lessee shall immediately notify Lessor of any damage, casualty, grounding, or loss, and shall not authorize repairs exceeding $[AMOUNT] without Lessor's authorization (except emergency repairs necessary for safety of life or vessel).
+2. If the vessel becomes an actual or constructive total loss during the Term, this Agreement shall terminate as of the date of loss, and insurance proceeds shall be applied first to any outstanding balance owed to Lessor, with any excess to Lessee, subject to the parties' respective insurable interests.
+3. Repairs not covered by insurance and caused by Lessee's negligence or misuse shall be Lessee's sole responsibility.
 
-## 12. Damage, Loss, or Breakdown
+## 12. Insurance
 
-In the event of damage, mechanical breakdown, or loss during the Lease Term:
-1. Lessee shall immediately notify Lessor at [EMERGENCY CONTACT NUMBER].
-2. Lessee shall not attempt repairs exceeding $[AMOUNT] without Lessor's authorization.
-3. Costs of repair/replacement not covered by insurance and caused by Lessee's negligence shall be deducted from the security deposit, with any excess billed to Lessee.
+Lessee shall obtain and maintain, at its own expense, for the entire Term:
+- **Hull & Machinery Insurance** covering full replacement/agreed value of the vessel, naming Lessor as loss payee.
+- **Protection & Indemnity (P&I) / Marine Liability Insurance** with minimum coverage of $[AMOUNT], naming Lessor as an additional insured.
+- **War Risk Insurance** if operating in [APPLICABLE WATERS], if required.
 
-## 13. Cancellation and Refund Policy
+Lessee shall provide Lessor with certificates of insurance before delivery and upon each renewal, and insurers shall be required to give Lessor [NUMBER] days' notice before cancellation or material change.
 
-- Cancellation by Lessee more than [NUMBER] days before the Lease Term start: [REFUND TERMS, e.g., "full refund of deposit"].
-- Cancellation within [NUMBER] days of start: [REFUND TERMS, e.g., "deposit forfeited"].
-- Cancellation by Lessor for reasons other than Lessee's breach: full refund of all amounts paid.
-- Force majeure (severe weather, government restriction, mechanical failure beyond Lessor's control): [POLICY, e.g., "reschedule or pro-rated refund"].
+## 13. Liability and Indemnification
 
-## 14. Termination
+Lessee assumes all risk of loss, damage, injury, or environmental liability arising from its possession, crewing, and operation of the vessel during the Term, except to the extent caused by Lessor's gross negligence or willful misconduct. Lessee agrees to indemnify, defend, and hold harmless Lessor from any claims, fines, penalties, liens, or liabilities (including environmental/pollution claims) arising from Lessee's operation or possession of the vessel.
 
-Either Party may terminate this Agreement immediately upon written notice if the other Party materially breaches any term herein. Lessor may terminate and repossess the vessel without notice if Lessee operates it unsafely, illegally, or outside the agreed navigation limits.
+## 14. Liens and Encumbrances
 
-## 15. Governing Law and Dispute Resolution
+Lessee shall keep the vessel free of all liens, mortgages, and encumbrances arising from its operation (including crew wage claims, supplier claims, and repair liens) and shall promptly discharge or bond around any such lien at its own expense. Lessee shall give notice to third parties, where required, that the vessel is owned by Lessor and may not be encumbered by Lessee's acts.
+
+## 15. Default and Termination
+
+The following constitute a "Default": (a) failure to pay rent within [NUMBER] days of the due date; (b) failure to maintain required insurance; (c) unauthorized subletting or assignment; (d) operating outside agreed trading limits or for an unpermitted purpose; (e) any material breach not cured within [NUMBER] days of written notice; (f) Lessee's insolvency or bankruptcy.
+
+Upon Default, Lessor may, in addition to any other remedy at law: (i) terminate this Agreement and repossess the vessel; (ii) recover all unpaid rent and damages, including rent that would have accrued through the end of the Minimum Term; and (iii) draw upon the security deposit.
+
+## 16. Purchase Option (Optional)
+
+☐ Lessee shall have the option to purchase the vessel at the end of the Minimum Term (or any renewal term) for a purchase price of $[AMOUNT] or [FORMULA, e.g., "fair market value less rent credit of X%"], exercisable by written notice at least [NUMBER] days before the end of the then-current term.
+
+*(Delete this section if no purchase option applies.)*
+
+## 17. Governing Law and Dispute Resolution
 
 This Agreement shall be governed by the laws of [STATE/COUNTRY/JURISDICTION]. Any dispute arising under this Agreement shall be resolved by [MEDIATION / ARBITRATION / COURTS] in [JURISDICTION/VENUE].
 
-## 16. Entire Agreement
+## 18. Entire Agreement
 
-This Agreement, including any attached exhibits (e.g., inspection checklist, inventory list), constitutes the entire agreement between the Parties and supersedes all prior negotiations or agreements, whether oral or written. Amendments must be in writing and signed by both Parties.
+This Agreement, including any attached exhibits (delivery/redelivery inspection, crewing agreement, purchase option terms), constitutes the entire agreement between the Parties and supersedes all prior negotiations or agreements, whether oral or written. Amendments must be in writing and signed by both Parties.
 
 ---
 
@@ -127,22 +144,34 @@ Print Name: [LESSEE NAME]
 
 ---
 
-### Exhibit A — Delivery / Return Inspection Checklist
+### Exhibit A — Delivery Inspection Checklist
 
-| Item | Condition at Delivery | Condition at Return | Notes |
-|---|---|---|---|
-| Hull | | | |
-| Engine(s) | | | |
-| Electronics/Navigation | | | |
-| Safety Equipment (life jackets, flares, fire extinguisher) | | | |
-| Anchor & Ground Tackle | | | |
-| Tender/Dinghy | | | |
-| Fuel Level | | | |
-| Interior/Cabin | | | |
-| Other Equipment | | | |
+| Item | Condition at Delivery | Notes |
+|---|---|---|
+| Hull | | |
+| Engine(s) | | |
+| Electronics/Navigation | | |
+| Safety Equipment (life jackets, flares, EPIRB, fire extinguisher) | | |
+| Class/Survey Status | | |
+| Anchor & Ground Tackle | | |
+| Tender/Dinghy | | |
+| Other Equipment | | |
 
-*(Both Parties should sign and date this checklist at delivery and again at return.)*
+### Exhibit B — Redelivery Inspection Checklist
+
+| Item | Condition at Redelivery | Notes |
+|---|---|---|
+| Hull | | |
+| Engine(s) | | |
+| Electronics/Navigation | | |
+| Safety Equipment | | |
+| Class/Survey Status | | |
+| Anchor & Ground Tackle | | |
+| Tender/Dinghy | | |
+| Other Equipment | | |
+
+*(Both Parties, or their surveyors, should sign and date each checklist.)*
 
 ---
 
-**How to use this template:** Replace every bracketed field like `[VESSEL NAME]` or `[AMOUNT]` with the actual details for your lease. Delete any clauses that don't apply (e.g., the crewed vs. bareboat option you're not using), and consider having a maritime attorney review the final version before signing, especially for commercial charters or high-value vessels.
+**How to use this template:** Replace every bracketed field like `[VESSEL NAME]` or `[AMOUNT]` with your actual lease details. This version assumes a long-term commercial dry lease with a **5-year minimum term** — adjust the renewal period, escalation, and purchase option to fit your deal, and delete Section 16 if no purchase option applies. Given the multi-year commitment and potential regulatory/liability exposure, have a maritime attorney review the final version before signing.
