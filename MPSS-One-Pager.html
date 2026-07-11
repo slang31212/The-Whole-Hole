@@ -1,0 +1,122 @@
+<title>MILC — MPSS Infrastructure Leasing · One-Page Brief</title>
+<style>
+  :root{
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --paper:#eef1f3;--card:#fff;--text:#17242e;--muted:#5a6975;--heading:#12293b;--ink:#12293b;
+    --line:#c9d2d8;--line-soft:#e0e6ea;--amber:#c1651b;--amber-ink:#a8551a;--sea:#0e2130;--wash:#f4f6f7;--good:#2f7d55;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --paper:#0c161e;--card:#13232e;--text:#dce6ec;--muted:#93a6b2;--heading:#dbe8f0;--ink:#cfe0ec;
+    --line:#294050;--line-soft:#1d3340;--amber:#e08a3c;--amber-ink:#e79a52;--sea:#081119;--wash:#0f1e28;--good:#5cbd86;}}
+  :root[data-theme="light"]{--paper:#eef1f3;--card:#fff;--text:#17242e;--muted:#5a6975;--heading:#12293b;--ink:#12293b;--line:#c9d2d8;--line-soft:#e0e6ea;--amber:#c1651b;--amber-ink:#a8551a;--sea:#0e2130;--wash:#f4f6f7;--good:#2f7d55;}
+  :root[data-theme="dark"]{--paper:#0c161e;--card:#13232e;--text:#dce6ec;--muted:#93a6b2;--heading:#dbe8f0;--ink:#cfe0ec;--line:#294050;--line-soft:#1d3340;--amber:#e08a3c;--amber-ink:#e79a52;--sea:#081119;--wash:#0f1e28;--good:#5cbd86;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--text);font-family:var(--serif);font-size:15px;line-height:1.5}
+  .page{max-width:800px;margin:0 auto;padding:22px 24px 40px}
+  h1,h2,.eyebrow,.kpi,.lab,.step,.contact{font-family:var(--sans)}
+  .head{background:radial-gradient(120% 130% at 85% -20%,rgba(193,101,27,.18),transparent 55%),linear-gradient(168deg,var(--sea),#123047 92%);color:#eaf1f5;border-radius:12px;padding:22px 26px 20px;position:relative;overflow:hidden}
+  .head::after{content:"";position:absolute;left:0;right:0;bottom:14px;height:2px;background:linear-gradient(90deg,transparent,var(--amber) 12%,var(--amber) 88%,transparent)}
+  .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.66rem;font-weight:700;color:#e9a765}
+  .head h1{font-family:var(--sans);font-size:1.55rem;line-height:1.08;margin:.35rem 0 .3rem;font-weight:800;color:#fff;letter-spacing:-.02em;text-wrap:balance}
+  .head .thesis{color:#f4c48a;font-family:var(--sans);font-weight:700;font-size:.98rem;margin:.1rem 0}
+  .head p{color:#c2d4df;margin:.45rem 0 0;font-size:.92rem;max-width:70ch}
+
+  .lede{font-size:.98rem;margin:14px 0 6px}
+  .lede b{color:var(--heading)}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
+  .kpi{background:var(--card);border:1px solid var(--line-soft);border-radius:9px;padding:11px 13px}
+  .kpi .n{font-family:var(--sans);font-size:1.15rem;font-weight:800;color:var(--heading);font-variant-numeric:tabular-nums;line-height:1.05}
+  .kpi .l{font-size:.64rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:4px;font-family:var(--sans)}
+  .kpi .s{font-size:.68rem;color:var(--amber-ink);margin-top:2px;font-weight:600;font-family:var(--sans)}
+
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .box{background:var(--card);border:1px solid var(--line-soft);border-radius:9px;padding:12px 15px}
+  .box .lab{font-family:var(--sans);text-transform:uppercase;letter-spacing:.06em;font-size:.66rem;font-weight:700;color:var(--amber-ink);margin-bottom:4px}
+  .box p{margin:.15rem 0;font-size:.9rem}
+  .box ul{margin:.2rem 0;padding-left:1.05rem}
+  .box li{margin:.15rem 0;font-size:.88rem}
+  .box li::marker{color:var(--amber)}
+
+  .ask{background:var(--ink);color:#eef4f8;border-radius:10px;padding:15px 20px;margin:12px 0;display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center}
+  .ask .big{font-family:var(--sans);font-size:1.6rem;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;line-height:1}
+  .ask .big span{color:#f4c48a}
+  .ask .t{flex:1;min-width:230px}
+  .ask .t .lab{font-family:var(--sans);text-transform:uppercase;letter-spacing:.09em;font-size:.64rem;color:#e9a765;font-weight:700}
+  .ask .t p{margin:.2rem 0 0;color:#cfe0ea;font-size:.86rem}
+
+  .thesisbox{border-left:3px solid var(--amber);background:var(--wash);border-radius:0 9px 9px 0;padding:12px 16px;margin:12px 0;font-size:.95rem}
+  .thesisbox b{color:var(--heading)}
+  .contact{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-family:var(--sans);font-size:.76rem;color:var(--muted);margin-top:12px;border-top:1px solid var(--line);padding-top:8px}
+  .contact b{color:var(--heading)}
+  .toggle{position:fixed;top:10px;right:10px;font-family:var(--sans);font-size:.7rem;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer;z-index:5}
+  @media print{
+    :root,:root[data-theme="dark"]{--paper:#fff;--card:#fff;--text:#141414;--muted:#444;--heading:#0e2130;--ink:#0e2130;--line:#999;--line-soft:#c4c4c4;--amber:#9a4e12;--amber-ink:#8a460f;--sea:#0e2130;--wash:#f3f4f5;--good:#2f7d55;}
+    @page{margin:10mm}
+    body{background:#fff;font-size:9pt;line-height:1.4}
+    .page{padding:0;max-width:none}
+    .toggle{display:none}
+    .head,.ask,.kpi .n{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .head h1{font-size:17pt}
+  }
+  @media (max-width:600px){.kpis{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}}
+</style>
+<button class="toggle" id="t" aria-label="Toggle theme">◐ Theme</button>
+<div class="page">
+
+  <header class="head">
+    <div class="eyebrow">Seaways Engineering · MILC — MPSS Infrastructure Leasing Company</div>
+    <h1>Standardized floating offshore infrastructure, leased</h1>
+    <div class="thesis">The product is time and capital efficiency. The hull is the mechanism.</div>
+    <p>Customers replace hundreds of millions — often billions — of bespoke offshore capital with a standardized, proven hull they lease. MILC owns that infrastructure for decades and captures a fraction of the savings it creates.</p>
+  </header>
+
+  <p class="lede">Offshore development has always meant committing enormous capital to a one-off floating asset, years before first production. MILC breaks that model: the operator <b>leases</b> a standardized hull instead of building one — <b>freeing capital, accelerating first production, and shedding end-of-life ownership.</b> It is the aircraft-, FPSO-, rail- and shipping-leasing model applied to offshore infrastructure: <b>customers buy production, not steel.</b></p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">$0.7–1.3B+</div><div class="l">Bespoke CAPEX avoided</div><div class="s">per development</div></div>
+    <div class="kpi"><div class="n">Months → years</div><div class="l">Earlier to production</div><div class="s">time is the value</div></div>
+    <div class="kpi"><div class="n">Own → lease</div><div class="l">No decommissioning</div><div class="s">hull returns to MILC</div></div>
+    <div class="kpi"><div class="n">$200–500k</div><div class="l">Day-rate / hull</div><div class="s">10–15-yr firm, dry lease</div></div>
+    <div class="kpi"><div class="n">~$25–45M</div><div class="l">MPSS hull cost</div><div class="s">10–40× below comparables</div></div>
+    <div class="kpi"><div class="n">50–70 yr</div><div class="l">Hull life MILC owns</div><div class="s">re-let 3–5× over life</div></div>
+  </div>
+
+  <div class="row">
+    <div class="box">
+      <div class="lab">Proven, not speculative</div>
+      <p>35 years of independent validation before a dollar is modelled:</p>
+      <ul>
+        <li>Lloyd's Register safety-technology review — "no inherent weaknesses"</li>
+        <li>University of Glasgow tank testing (Faulkner &amp; Incecik)</li>
+        <li>W.S. Atkins structural analysis · IMT 1995 commercial study</li>
+        <li>12 shipyard cost enquiries · ABS / DNV engagement on record</li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="lab">Why it's defensible &amp; timely</div>
+      <ul>
+        <li><b>Why now:</b> floating wind, substations, offshore electrification, AI/data-centre power — all need large, standardized decks</li>
+        <li><b>Why unbuilt:</b> today's semis evolved from drilling rigs; MPSS was designed for standardized production</li>
+        <li><b>Moat:</b> validated design + fabrication method + a demand-aggregating lease model, hard to assemble from scratch</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ask">
+    <div><div class="big">~$50<span>M</span></div></div>
+    <div class="t"><div class="lab">The ask — first unit</div><p>~$45M hull + ~$5M development. Sign the anchor lease first, then finance the hull against that charter (the FPSO template — the lender underwrites the contract, not the concept). One unit generates ~$120M/yr of operating lease cash flow at mid day-rate; a five-unit fleet, ~$600M/yr.</p></div>
+  </div>
+
+  <div class="thesisbox">
+    MILC is not building another offshore platform. It is <b>standardizing floating offshore infrastructure and applying a proven long-term leasing model</b> to an industry that has always relied on bespoke capital projects. Customers reduce capital, accelerate delivery, and avoid asset ownership; MILC builds a fleet of long-life assets leased repeatedly over decades. <b>The product is time and capital efficiency.</b>
+  </div>
+
+  <div class="contact">
+    <span><b>Seaways Engineering (U.K.) Ltd — MILC</b> · MPSS Infrastructure Leasing Company</span>
+    <span>Stewart Lang · stewart.lang@seaways-mpss.com · Confidential working draft, 11 Jul 2026</span>
+  </div>
+  <p style="font-size:.72rem;color:var(--muted);margin:8px 0 0;font-family:var(--sans)">Figures are internal estimates and public offshore-market observations, subject to fabrication-cost confirmation, class re-engagement and a signed anchor lease. Prepared for discussion; not an offer of securities.</p>
+
+</div>
+<script>document.getElementById('t').addEventListener('click',function(){var r=document.documentElement,c=r.getAttribute('data-theme');if(!c)c=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';r.setAttribute('data-theme',c==='dark'?'light':'dark');});</script>
