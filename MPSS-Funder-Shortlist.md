@@ -1,65 +1,92 @@
 # MPSS / MILC — Funder & Grant Shortlist
 
-**For:** Seaways Engineering / MILC — non-dilutive funding for (A) the **cable-risk / floating-wind pilot** and (B) the **Crystal Sea** ocean-water variant
+**For:** Seaways Engineering / MILC — non-dilutive funding for (A) the **cable-risk / floating-wind pilot** and the **substation / HVDC power-island**, and (B) the **Crystal Sea** ocean-water variant
 **Prepared by:** Marketing Director · **Date:** July 11, 2026 · Live search via Granted + Kindora funder databases
 
 ---
 
-## Read this first — the eligibility reality
+## The strategic unlock — run two entities, two grant tracks
 
-The searchable grant databases are **US-centric**: most foundation programs require a **US 501(c)(3) nonprofit**, and most federal/state programs require a **US-domiciled applicant** (SBIR/STTR needs a US-based, >50% US-owned small business). **MILC/Seaways is a UK for-profit**, so a large share of what the databases surface is off-limits without a US entity or a US project partner.
+You have a **US company** *and* **UK-citizen founders** (so a UK company is available too). That dual footprint is a genuine funding asset — use both:
 
-**What that means practically:**
-- **Your best non-dilutive money is UK/European and for-profit-eligible** — and the single biggest one (**Horizon Europe**, which the UK is now associated to) *did* surface below.
-- **The highest-value UK routes are only partly covered by these tools** and should be pursued **directly** (see "Pursue direct" at the end): Innovate UK, ORE Catapult (already in your pipeline via the Cooper letter), the Crown Estate / Crown Estate Scotland, the Net Zero Technology Centre, and Welsh/Scottish marine-energy funds.
-- **Grants are a supporting act, not the main event.** For a ~$45M hull financed against an anchor lease, grants are best aimed at the **instrumented cable-risk pilot** (a fundable R&D proof) and the **Crystal Sea environmental narrative** — not the fleet capex.
+| Entity | Unlocks | Best for |
+|---|---|---|
+| **US company** | The full **DOE / ARPA-E / Navy / Reclamation / NSF / EPA** ecosystem. SBIR/STTR requires a **US-based, >50% US-owned small business** — you qualify. | The **cable-risk pilot**, floating-wind **systems-engineering / cost-reduction**, **HVDC**, desalination, defence resilience. This is the deepest non-dilutive pool available to you. |
+| **UK company** | **Horizon Europe** (UK is associated), **Innovate UK**, **ORE Catapult**, **Crown Estate**, **Net Zero Technology Centre**. | The **European commercial pipeline** you're already working — TenneT, RWE, Celtic/North Sea — where a UK/EU applicant is the natural fit. |
 
-Everything below is filtered to what's genuinely worth your time, with an eligibility flag on each.
+**The move:** file the **cable-risk pilot and HVDC/systems-engineering work through the US entity** (biggest pool, on-topic programs), and the **European wind-market work through a UK entity** (aligned to your live pipeline). Grants remain a supporting act — aimed at the **pilot** and the **Crystal Sea narrative**, not the ~$45M hull capex.
 
 ---
 
-## Track A — Cable-risk pilot / floating offshore wind
+## Track A1 — Cable-risk pilot & floating wind (US federal — your deepest pool)
 
-| Funder / Program | Amount | Fit & angle | Eligibility | Link |
-|---|---|---|---|---|
-| **Horizon Europe** (EU R&I framework) | Large, consortium-based | **Top pick.** Renewable energy, industrial innovation, climate — the natural home for an MPSS low-motion cable-integrity pilot with UK/EU partners. UK is associated. | UK/EU for-profits **eligible** (usually via consortium) | research-and-innovation.ec.europa.eu → funding-programmes-and-open-calls |
-| **Blue Action Accelerator** (Blue Action + Founders Factory) | $150k seed + accelerator | Global ocean/climate-tech; explicitly names offshore wind, marine energy, resilient coastal infrastructure. Good for the pilot's commercialization story. | **Global, for-profit startups — eligible** | foundersfactory.com/blue-action-accelerator |
-| **Innovations in Floating Offshore Wind** (NOWRDC) | up to $10.6M (pool) | Directly on-theme: floating-wind transmission, ports/vessels. Strong topical fit for the substation/power-island + cable pilot. | US consortium — **needs a US partner/entity** | nationaloffshorewind.org |
-| **Installation Noise Reduction & Reliable Moorings for Offshore Wind & Marine Energy** (US DOE WETO/WPTO) | $16.9M program | Reliable-moorings theme aligns with MPSS station-keeping + Phase-2 mooring package. | US-oriented — **partner/entity needed** | energy.gov/cmei/water |
-| **DOE SBIR/STTR — Water Power / Wind topics** | Phase I ~$200k; Phase II ~$1.1M | Marine-energy / offshore-wind R&D; good if you stand up a US small-business arm. | **US small business only** (>50% US-owned) | energy.gov → SBIR/STTR |
-| **MSTIC — Request for Prototype Projects** (Advanced Technology Int'l) | Varies (prototype) | Maritime energy-and-power / naval systems prototypes; deadline ~Jul 28, 2026. | US consortium members | submissions1.ati.org |
-| **Autodesk Foundation — Energy & Materials** | Not specified | Global; scales early-stage decarbonization tech. Worth an LOI on the wind-enablement angle. | Global; **verify for-profit** eligibility | autodesk.fluxx.io/apply/investment |
+| Program (funder) | Amount | Why it fits | Link |
+|---|---|---|---|
+| **Floating Offshore Wind Shot** (DOE) | Initiative / FOAs | **Bullseye.** Explicitly targets *subsea power-cable reliability* — your exact cable-fatigue thesis. | energy.gov/cmei/systems/floating-offshore-wind-shot |
+| **ATLANTIS — Phase Two** (ARPA-E) | ~$31M | *Systems engineering of floating offshore wind to drive down cost* — literally the MPSS thesis (low-cost hull architecture). | arpa-e.energy.gov → ATLANTIS |
+| **Innovations in Floating Offshore Wind** (DOE / CEC / NOWRDC) | up to **$10.6M** | Ports & vessels, **transmission technology**, UUVs — direct fit for the platform + substation. | energy.gov/cmei/systems (or nationaloffshorewind.org) |
+| **Hydropower & Marine Energy SBIR/STTR** (DOE EERE / WPTO) | Phase I **$200k** → Phase II **$1.1–1.6M** | Bread-and-butter non-dilutive R&D to fund the instrumented pilot. Rolling topics. | energy.gov/cmei/water → SBIR/STTR |
+| **HAEJO SBIR/STTR** (ARPA-E) | **$314k–$4.5M** | "Harnessing Autonomy for Energy Joint Ventures Offshore" — offshore-energy JV structures. | simpler.grants.gov (HAEJO) |
+| **Installation Noise Reduction & Reliable Moorings** (DOE WETO/WPTO) | FOA | Aligns with the **Phase-2 mooring package**. | energy.gov/cmei/water |
+| **Energy Technologies / SBIR (EN)** (NSF) | up to **$2M** | Novel energy generation/storage/distribution incl. floating offshore wind. | seedfund.nsf.gov/topics/energy-technologies |
+
+## Track A2 — Grid / HVDC / substation power-island (US — for the TenneT/RWE angle)
+
+| Program (funder) | Amount | Why it fits | Link |
+|---|---|---|---|
+| **IDEAL HVDC** / **HVDC CORE Initiative** (DOE WETO + Office of Electricity) | ~$11M (past round); CORE targets −35% HVDC cost | Directly supports a **floating HVDC substation / power-island** — the Cooper/ORE-Catapult track. | energy.gov/oe/hvdc-cost-reduction-core-initiative |
+| **i2X — iCRS-T** (DOE IESO) | Not specified | Interconnection-cost reduction for transmission — the exact "substation/export gap" problem. Deadline **~Jul 23**. | energy.gov/cmei/i2x |
+| **SPARK — Grid Resilience** (DOE Office of Electricity) | **$10–100M** (TA1 pool $427M) | Advanced transmission technology upgrades. | energy.gov/oe/spark |
+| **GRIP** (DOE) | >$6B announced | Grid resilience & innovation partnerships — maritime energy applications. | energy.gov/oe/grip |
+| **Prop 4 Offshore Wind Port Development** (California Energy Commission) | up to **$475M** | If you fabricate/stage on a US West-Coast port. | energy.ca.gov → Prop 4 OSW Port |
+| **Ocean Wind Pro-NJ Trust** / **NJ OSW Tax Credit** (New Jersey) | Varies | US East-Coast OSW supply-chain incentives. | pronjtrust.org · njeda.gov |
+
+## Track A3 — Defence / resilience (US — for the "power-island / defence support" use case)
+
+| Program (funder) | Amount | Why it fits | Link |
+|---|---|---|---|
+| **Innovative Energy Resilience Solutions** (US Navy) | Varies | *Deployable* energy to power Navy/Marine installations — MPSS as a floating power island. | sam.gov (DoN energy resilience) |
+| **ONR Long-Range BAA** (Office of Naval Research) | Varies | Broad S&T; small-business eligible; a route for marine-platform work. | onr.navy.mil → funding |
+| **Navy SBIR/STTR** | Phase I up to **$175–250k**; Phase II >$1M | Marine/undersea systems R&D. Deadline **~Jul 22**. | navysbir.com |
+
+## Track A4 — UK / EU (file through a UK entity — aligned to your live pipeline)
+
+| Program | Amount | Why it fits | Route |
+|---|---|---|---|
+| **Horizon Europe** (EU R&I) | Large (consortium) | Top EU pick; renewable energy / climate; pairs with **ORE Catapult**. | research-and-innovation.ec.europa.eu |
+| **Innovate UK** (Smart Grants / Energy Catalyst) | Varies | For-profit R&D grants for UK companies. | iuk.ktn-uk.org / gov.uk |
+| **ORE Catapult** | Programme + test infra | Already in motion via the **Cooper letter**; route to UK floating-wind innovation funding + testing. | ore.catapult.org.uk |
+| **The Crown Estate / Crown Estate Scotland** | Supply-chain / innovation funds | Floating-wind leasing authority; supply-chain and innovation programmes. | thecrownestate.co.uk |
+| **Net Zero Technology Centre** (Aberdeen) | Calls | Offshore-energy tech funding. | netzerotc.com |
+| **Blue Action Accelerator** (Founders Factory) | $150k + accel. | Global, for-profit ocean/climate-tech; names offshore wind. | foundersfactory.com/blue-action-accelerator |
 
 ---
 
 ## Track B — Crystal Sea (ocean-water reclamation + clean power)
 
-| Funder / Program | Amount | Fit & angle | Eligibility | Link |
-|---|---|---|---|---|
-| **HighShip Material Science Research Foundation** (Germany) | Not specified (rolling) | **Strong dual fit:** maritime research + **wastewater / water research** *and* composite/material + new production methods (also relevant to hull fabrication). | Germany/worldwide; **research projects — check for-profit** | msrf.de |
-| **ocean tribute Award** (Deutsche Meeresstiftung / boot Düsseldorf) | €20,000 (prize) | International award for ocean-protection **technical innovation** incl. **waste & nutrient reduction** — squarely Crystal Sea's "stops dumping sewage" story. Deadline ~Aug 31, 2026. | International initiatives/projects — **eligible** | boot.de → Awards / Jetzt bewerben |
-| **11th Hour Racing — Grant Giving** | $40k–$150k | Ocean health; **clean technologies & best practices**, ecosystem restoration. Credibility + narrative more than capex. | US/Global; typically **nonprofit/project** — verify | 11thhourracing.org/apply-for-a-grant |
-| **The Ocean Foundation** | ~$10k avg (LOI, quarterly) | Marine conservation / blue economy; small but a recognizable stamp for the environmental narrative. | Donor-driven; **nonprofit-leaning** | oceanfdn.org → RFP |
-| **Desalination Construction Projects** (US Bureau of Reclamation) | Varies; deadline Aug 26, 2026 | Crystal Sea produces potable water — direct topical match for desal planning/design/construction. | **US applicants** — partner/entity needed | simpler.grants.gov |
-| **Energy-Water Desalination Hub** (US DOE) | ~$100M (R&D hub) | Large desalination R&D hub; relevant only via a US research partner. | US R&D consortium | energy.gov/cmei/amo |
-| **NOAA Marine Debris Interception Technologies** | $100k–$1M (LOI first) | Tangential (debris vs. sewage) but usable if Crystal Sea adds a debris/interception module. | US trust resources | grants.gov |
+| Program (funder) | Amount | Why it fits | Eligibility / Link |
+|---|---|---|---|
+| **WaterSMART: Desalination Construction Projects** (US Bureau of Reclamation) | **$1k – $120M** | Cost-shared **planning, design, and construction** of seawater desalination — Crystal Sea produces potable water. Deadline **Aug 26, 2026**. | Often needs a public-entity partner; verify. usbr.gov/watersmart/desalination |
+| **Water Desalination Grant Program** (California DWR) | up to **$10M** (CAP6 ~$1M) | Explicitly funds **pilot, demonstration & research** desal projects — ideal for a Crystal Sea demo. | Small-business eligible. water.ca.gov |
+| **EPA SBIR — water reuse** | Phase I up to **$100k** | Water-reuse innovation; sewage-to-resource fits. | US small business. epa.gov/sbir |
+| **NOAA Ocean-Based Climate Resilience Accelerators** | up to **$250k** (Phase One) | Commercialization support for ocean-climate tech. | US small business. venturewell.org/noaa |
+| **Grants for Ocean Projects** (Schmidt Marine Technology Partners) | Varies ($1–3M pools) | Ocean health, plastic/pollution, habitat — the Crystal Sea "cleaner oceans" story. | Foundation; project-based. schmidtmarine.org |
+| **ocean tribute Award** (boot Düsseldorf, DE) | **€20,000** | Ocean-protection technical innovation incl. **waste/nutrient reduction**. Deadline **~Aug 31**. | International — eligible. boot.de |
+| **HighShip Material Science Research Foundation** (DE) | Rolling | Maritime + **wastewater/water research** and composite materials (also hull-relevant). | Germany/worldwide. msrf.de |
 
 ---
 
-## The honest recommendation
+## The honest recommendation & sequencing
 
-1. **Lead with Horizon Europe + a UK/EU consortium** for the cable-risk pilot — it's the largest pot you're actually eligible for, and it pairs naturally with ORE Catapult (your Cooper track) as a partner/test route.
-2. **Use the small, winnable awards for narrative & validation, not cash:** the **ocean tribute Award** and **Blue Action Accelerator** give you credible third-party stamps and a platform, fast, for modest effort.
-3. **Treat US federal money (DOE/NOWRDC/Reclamation) as conditional** — worth it only if you stand up a US entity or a US project partner; otherwise it's a time sink.
-4. **Pursue direct (not well covered by these databases, but likely your best UK routes):**
-   - **Innovate UK** (Smart / Energy Catalyst grants) — for-profit R&D, UK.
-   - **ORE Catapult** — already in motion via the Cooper letter; a route to UK floating-wind innovation funding + test infrastructure.
-   - **The Crown Estate / Crown Estate Scotland** — floating-wind leasing and supply-chain / innovation funds.
-   - **Net Zero Technology Centre (Aberdeen)** — offshore energy tech funding calls.
-   - **Welsh Government / Celtic Sea** floating-wind supply-chain funds (ties to your Celtic Sea pilot idea).
+1. **File the cable-risk pilot through the US entity — this is your single biggest non-dilutive opportunity.** Anchor it on the **DOE Floating Offshore Wind Shot** (cable reliability) + a **Hydropower & Marine Energy SBIR** ($200k Phase I → $1.6M Phase II) to fund the instrumented Celtic/North Sea pilot. Add **ARPA-E ATLANTIS** as the marquee systems-engineering / cost-reduction bid.
+2. **Run the HVDC / substation grants (IDEAL HVDC, i2X, SPARK) alongside your TenneT/RWE outreach** — the grant narrative and the commercial pitch are the same "close the substation/export gap" story.
+3. **File the European wind-market work through a UK entity** via **Horizon Europe + ORE Catapult** (already in motion through Cooper). This keeps you native to your live pipeline.
+4. **Use the small awards for narrative & validation, fast:** **ocean tribute Award**, **Blue Action**, **Schmidt Marine** — credible third-party stamps for modest effort.
+5. **Crystal Sea:** lead with **California DWR** (funds pilots/demos) and **Bureau of Reclamation WaterSMART** in the US; **ocean tribute** for the story.
+6. **Watch the near-term deadlines:** Navy SBIR (~Jul 22), i2X iCRS-T (~Jul 23), Reclamation Drought (~Jul 28), EPA rural wastewater (~Aug 14), Reclamation Desalination (~Aug 26), ocean tribute (~Aug 31).
 
-*Want me to go deeper on any of these — pull full eligibility/deadline detail on the top 3–4, draft an ocean tribute Award entry around Crystal Sea, or map a Horizon Europe consortium for the cable-risk pilot? Say which and I'll run it.*
+*Want me to go deeper on any of these — pull full eligibility/deadline/match detail on the top 3–4 US programs (via `get_grant`), draft the DOE Floating Offshore Wind Shot / SBIR concept around the cable pilot, or map a Horizon Europe consortium? Say which and I'll run it.*
 
 ---
 
-*Source: live queries against the Granted and Kindora funder databases, July 11, 2026. Amounts, deadlines, and eligibility should be confirmed on each funder's page before applying — grant terms change frequently.*
+*Source: live queries against the Granted and Kindora funder databases, July 11, 2026. Amounts, deadlines, and eligibility change frequently — confirm on each funder's page before applying. SBIR/STTR eligibility requires a US-based small business that is >50% US-owned.*
