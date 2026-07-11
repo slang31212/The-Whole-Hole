@@ -1,0 +1,115 @@
+<title>MPSS — Closing the Offshore Substation &amp; Export Gap</title>
+<style>
+  :root{
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --paper:#eef1f3;--card:#fff;--text:#17242e;--muted:#5a6975;--heading:#12293b;--ink:#12293b;
+    --line:#c9d2d8;--line-soft:#e0e6ea;--amber:#c1651b;--amber-ink:#a8551a;--sea:#0e2130;--wash:#f4f6f7;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --paper:#0c161e;--card:#13232e;--text:#dce6ec;--muted:#93a6b2;--heading:#dbe8f0;--ink:#cfe0ec;
+    --line:#294050;--line-soft:#1d3340;--amber:#e08a3c;--amber-ink:#e79a52;--sea:#081119;--wash:#0f1e28;}}
+  :root[data-theme="light"]{--paper:#eef1f3;--card:#fff;--text:#17242e;--muted:#5a6975;--heading:#12293b;--ink:#12293b;--line:#c9d2d8;--line-soft:#e0e6ea;--amber:#c1651b;--amber-ink:#a8551a;--sea:#0e2130;--wash:#f4f6f7;}
+  :root[data-theme="dark"]{--paper:#0c161e;--card:#13232e;--text:#dce6ec;--muted:#93a6b2;--heading:#dbe8f0;--ink:#cfe0ec;--line:#294050;--line-soft:#1d3340;--amber:#e08a3c;--amber-ink:#e79a52;--sea:#081119;--wash:#0f1e28;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--text);font-family:var(--serif);font-size:16px;line-height:1.6}
+  .doc{max-width:760px;margin:0 auto;padding:0 24px 60px}
+  h1,h2,h3,.eyebrow,th,.n,.tag,.label{font-family:var(--sans)}
+  .cover{background:linear-gradient(172deg,var(--sea),#123047 90%);color:#eaf1f5;border-radius:12px;margin:22px 0 24px;padding:34px 34px 30px;position:relative;overflow:hidden}
+  .cover::after{content:"";position:absolute;left:0;right:0;bottom:20px;height:2px;background:linear-gradient(90deg,transparent,var(--amber) 12%,var(--amber) 88%,transparent)}
+  .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.7rem;font-weight:700;color:#e9a765}
+  .cover h1{font-family:var(--sans);font-size:1.9rem;line-height:1.08;margin:.4rem 0 .3rem;font-weight:800;color:#fff;letter-spacing:-.02em;text-wrap:balance}
+  .cover p{color:#b9cdd9;margin:.3rem 0 0;font-size:1rem;max-width:60ch}
+  h2{font-size:1.2rem;color:var(--heading);margin:1.6rem 0 .3rem;letter-spacing:-.01em}
+  h3{font-family:var(--sans);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--amber-ink);margin:1.3rem 0 .3rem;font-weight:700}
+  p{margin:.5rem 0}
+  strong{color:var(--heading)}
+  .hero{display:flex;gap:18px;align-items:stretch;margin:18px 0;flex-wrap:wrap}
+  .heronum{flex:1;min-width:200px;background:var(--ink);color:#eef4f8;border-radius:12px;padding:20px 22px}
+  .heronum .big{font-family:var(--sans);font-size:2.4rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1}
+  .heronum .sub{color:#b9cdd9;font-family:var(--sans);font-size:.85rem;margin-top:6px}
+  .heronum .big span{color:#f4c48a}
+  .tablewrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line-soft);border-radius:10px}
+  table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.86rem;background:var(--card)}
+  th{background:var(--ink);color:#eaf1f5;text-align:left;padding:8px 12px;font-size:.74rem;text-transform:uppercase;letter-spacing:.03em}
+  td{padding:8px 12px;border-top:1px solid var(--line-soft);vertical-align:top}
+  td.n{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;color:var(--heading);font-weight:600}
+  tbody tr:nth-child(even) td{background:var(--wash)}
+  tfoot td{border-top:2px solid var(--line);font-weight:800;color:var(--heading);background:var(--wash)}
+  .answer{background:var(--wash);border:1px solid var(--line-soft);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;padding:16px 20px;margin:14px 0}
+  ul.clean{margin:.4rem 0;padding-left:1.1rem}
+  ul.clean li{margin:.28rem 0}
+  ul.clean li::marker{color:var(--amber)}
+  .terms{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0;font-family:var(--sans)}
+  .term{background:var(--card);border:1px solid var(--line-soft);border-radius:10px;padding:12px 14px}
+  .term .v{font-size:1.05rem;font-weight:800;color:var(--heading)}
+  .term .l{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:2px}
+  .cta{background:var(--ink);color:#eaf1f5;border-radius:12px;padding:18px 22px;margin:20px 0 0}
+  .cta strong{color:#f4c48a}
+  .foot{font-size:.8rem;color:var(--muted);margin-top:18px}
+  .toggle{position:fixed;top:12px;right:12px;font-family:var(--sans);font-size:.72rem;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer}
+  @media print{
+    :root,:root[data-theme="dark"]{--paper:#fff;--card:#fff;--text:#111;--muted:#444;--heading:#0e2130;--ink:#0e2130;--line:#999;--line-soft:#ccc;--amber:#9a4e12;--amber-ink:#8a460f;--wash:#f3f4f5;}
+    @page{margin:15mm}
+    body{background:#fff;font-size:10.5pt}
+    .toggle{display:none}
+    .cover,.heronum,.cta,th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .hero,.tablewrap,.answer,.cta,table{page-break-inside:avoid}
+  }
+  @media (max-width:620px){.terms{grid-template-columns:repeat(2,1fr)}}
+</style>
+<button class="toggle" id="t" aria-label="Toggle theme">◐ Theme</button>
+<div class="doc">
+  <header class="cover">
+    <div class="eyebrow">Seaways Engineering · MILC — briefing note</div>
+    <h1>Closing the offshore substation &amp; export gap</h1>
+    <p>A leased, class-lineage, low-motion platform to host the offshore substation, HVDC converter, and grid-tie that floating-wind economics leave stranded.</p>
+  </header>
+
+  <h2>The gap developers already have to fund — separately</h2>
+  <p>Headline floating-wind CAPEX quotes the turbine, the floater, and the mooring. They routinely <strong>exclude the offshore substation, the export cable, and the grid-tie package</strong>. On a 1 GW farm that excluded scope is roughly:</p>
+
+  <div class="hero">
+    <div class="heronum"><div class="big">~$1.1<span>B</span></div><div class="sub">excluded export &amp; substation package per 1&nbsp;GW farm</div></div>
+    <div class="heronum"><div class="big">~$17.0<span>M</span></div><div class="sub">per 15&nbsp;MW turbine position (~$1.13M / MW)</div></div>
+  </div>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>Excluded scope (typical)</th><th style="text-align:right">Cost / MW</th></tr></thead>
+    <tbody>
+      <tr><td>Offshore substation / HVAC platform</td><td class="n">~$373k</td></tr>
+      <tr><td>Export cable (before installation)</td><td class="n">~$356k</td></tr>
+      <tr><td>Export cable installation (offshore + onshore)</td><td class="n">~$237k</td></tr>
+      <tr><td>Substation installation (offshore + onshore)</td><td class="n">~$107k</td></tr>
+      <tr><td>Onshore substation</td><td class="n">~$58k</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total missing package</td><td class="n">~$1.13M / MW</td></tr></tfoot>
+  </table></div>
+  <p class="foot">Reference basis: 2025 industry floating-wind cost stack, 15 MW turbine position; GBP→USD at 1.3235.</p>
+
+  <h2>The MPSS answer</h2>
+  <div class="answer">
+    <p style="margin:.1rem 0"><strong>The MPSS is the deck that hosts that package</strong> — a standardized, four-column semi-submersible with an <strong>8,100 m² deck and 10,000 t payload</strong>, leased on a dry charter. It carries the offshore substation, HVDC converter, or a full power-island (substation + storage + power conditioning) without the developer buying a $400M–$1B purpose-built hull.</p>
+  </div>
+  <ul class="clean">
+    <li><strong>Low motion is a cable-life advantage.</strong> Natural periods of ~24 s (heave) and ~42 s (pitch/roll) sit outside the 8–16 s swell-resonance band, cutting cyclic cable fatigue an estimated 40–50% — directly relevant to the €61.5B offshore-cable failure exposure (2024–35). <em>Detailed cable analysis available on request.</em></li>
+    <li><strong>Fast &amp; standardized.</strong> Delivered 30–36 months from signature; serial-fabricated flat-panel construction (~18 man-hours/tonne vs. 150–180 for conventional semis).</li>
+    <li><strong>Proven, not speculative.</strong> 35 years of independent validation — Lloyd's Register, ABS, DNV, W.S. Atkins, and University of Glasgow (Professors Faulkner &amp; Incecik).</li>
+    <li><strong>No CAPEX, no residual risk.</strong> You lease the deck and run your own topsides; we own, class-maintain, and insure the hull.</li>
+  </ul>
+
+  <h2>Commercial terms at a glance</h2>
+  <div class="terms">
+    <div class="term"><div class="v">$200–500k</div><div class="l">Day-rate</div></div>
+    <div class="term"><div class="v">10–15 yr</div><div class="l">Firm term</div></div>
+    <div class="term"><div class="v">30–36 mo</div><div class="l">To delivery</div></div>
+    <div class="term"><div class="v">Dry lease</div><div class="l">You run topsides</div></div>
+  </div>
+
+  <div class="cta">
+    <p style="margin:0"><strong>The conversation we'd like to start:</strong> a 30-minute exploratory call on where an MPSS-hosted substation / HVDC platform could close the export-scope gap on one of your near-term floating-wind or interconnector projects. General Arrangement and full technical package available under NDA.</p>
+  </div>
+
+  <p class="foot">Seaways Engineering (U.K.) Ltd · MILC — MPSS Infrastructure Leasing Company · Confidential briefing note · Figures are 2025 reference estimates; site-specific numbers on engagement.</p>
+</div>
+<script>document.getElementById('t').addEventListener('click',function(){var r=document.documentElement,c=r.getAttribute('data-theme');if(!c)c=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';r.setAttribute('data-theme',c==='dark'?'light':'dark');});</script>
