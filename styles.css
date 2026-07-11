@@ -469,6 +469,41 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0; }
 .logos li:last-child { border-bottom: 0; }
 .logos li span { font-weight: 500; font-size: .86rem; color: var(--slate-light); }
 
+/* ===================== HULL COMPARISON ===================== */
+.hulls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 18px;
+}
+.hull-card {
+  margin: 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.hull-card-mpss {
+  border: 2px solid var(--accent);
+  box-shadow: 0 8px 30px rgba(46, 163, 217, .22);
+}
+.hull-art {
+  background: linear-gradient(180deg, #163a5a 0%, #0f2f4b 100%);
+  line-height: 0;
+}
+.hull-art svg { width: 100%; height: auto; display: block; }
+.hull-card figcaption { padding: 18px 20px 20px; }
+.hull-card figcaption h3 { font-size: 1.16rem; color: var(--navy-900); margin-bottom: 6px; }
+.hull-card-mpss figcaption h3 { color: var(--accent-deep); }
+.hull-type { margin: 0; font-size: .92rem; color: var(--slate-light); }
+.hull-note {
+  font-size: .88rem;
+  color: var(--slate-light);
+  margin: 0 0 34px;
+  font-style: italic;
+}
+
 /* ===================== TABLES ===================== */
 .table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
 .matrix {
@@ -570,6 +605,7 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0; }
   .split-arrow { transform: rotate(90deg); }
   .hero-content { padding-bottom: 130px; }
   .specs-grid { grid-template-columns: 1fr 1fr; }
+  .hulls { grid-template-columns: 1fr; max-width: 460px; margin-left: auto; margin-right: auto; }
   .five-s { grid-template-columns: repeat(4, 1fr); }
   .five-s .s-card:nth-child(1),
   .five-s .s-card:nth-child(2) { grid-column: span 2; }

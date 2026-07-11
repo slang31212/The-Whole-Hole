@@ -29,7 +29,7 @@ For the `seaways-mpss.com` domain, point the host at this repository / folder.
 
 ## Content notes
 
-- **Contact details** — search `index.html` for `info@seaways-mpss.com` and update the
+- **Contact details** — search `index.html` for `stewart.lang@seaways-mpss.com` and update the
   email; add phone/address in the `#contact` section as needed.
 - **Copy** lives inline in `index.html`, grouped by clearly-commented sections.
 - Specs, the Five S and the lifecycle/driver tables are hand-built in HTML/CSS (no
