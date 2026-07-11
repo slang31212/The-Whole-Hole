@@ -1,0 +1,279 @@
+<title>MILC — MPSS Infrastructure Leasing · Financial Summary</title>
+<style>
+  :root{
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --paper:#eef1f3;--card:#fff;--text:#17242e;--muted:#5a6975;--heading:#12293b;--ink:#12293b;
+    --line:#c9d2d8;--line-soft:#e0e6ea;--amber:#c1651b;--amber-ink:#a8551a;--sea:#0e2130;--wash:#f4f6f7;
+    --good:#2f7d55;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --paper:#0c161e;--card:#13232e;--text:#dce6ec;--muted:#93a6b2;--heading:#dbe8f0;--ink:#cfe0ec;
+    --line:#294050;--line-soft:#1d3340;--amber:#e08a3c;--amber-ink:#e79a52;--sea:#081119;--wash:#0f1e28;--good:#5cbd86;}}
+  :root[data-theme="light"]{--paper:#eef1f3;--card:#fff;--text:#17242e;--muted:#5a6975;--heading:#12293b;--ink:#12293b;--line:#c9d2d8;--line-soft:#e0e6ea;--amber:#c1651b;--amber-ink:#a8551a;--sea:#0e2130;--wash:#f4f6f7;--good:#2f7d55;}
+  :root[data-theme="dark"]{--paper:#0c161e;--card:#13232e;--text:#dce6ec;--muted:#93a6b2;--heading:#dbe8f0;--ink:#cfe0ec;--line:#294050;--line-soft:#1d3340;--amber:#e08a3c;--amber-ink:#e79a52;--sea:#081119;--wash:#0f1e28;--good:#5cbd86;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--text);font-family:var(--serif);font-size:16px;line-height:1.6}
+  .doc{max-width:840px;margin:0 auto;padding:0 24px 70px}
+  h1,h2,h3,.eyebrow,th,.n,.tag,.label,.kpi,.chart{font-family:var(--sans)}
+  .cover{background:radial-gradient(120% 100% at 82% -10%,rgba(193,101,27,.16),transparent 55%),linear-gradient(172deg,var(--sea),#123047 92%);color:#eaf1f5;border-radius:13px;margin:22px 0 22px;padding:38px 36px 30px;position:relative;overflow:hidden}
+  .cover::after{content:"";position:absolute;left:0;right:0;bottom:22px;height:2px;background:linear-gradient(90deg,transparent,var(--amber) 12%,var(--amber) 88%,transparent)}
+  .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.7rem;font-weight:700;color:#e9a765}
+  .cover h1{font-family:var(--sans);font-size:2rem;line-height:1.05;margin:.4rem 0 .3rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .cover p{color:#b9cdd9;margin:.2rem 0 0;font-size:1.02rem;max-width:62ch}
+  .cover .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .cover .tag{font-size:.72rem;color:#dfeaf0;border:1px solid rgba(233,167,101,.5);border-radius:999px;padding:4px 11px}
+  h2{font-size:1.35rem;color:var(--heading);margin:0 0 .1rem;letter-spacing:-.01em}
+  h3{font-family:var(--sans);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--amber-ink);margin:1.4rem 0 .4rem;font-weight:700}
+  p{margin:.55rem 0}
+  strong{color:var(--heading)}
+  .section{margin:26px 0 0;padding-top:18px}
+  .sechead{display:flex;align-items:baseline;gap:14px;border-top:2px solid var(--ink);padding-top:11px;margin-bottom:8px}
+  .secnum{font-family:var(--sans);font-size:1.5rem;font-weight:800;color:var(--amber);line-height:.9;font-variant-numeric:tabular-nums}
+  .lede{font-size:1.06rem}
+
+  /* KPI dashboard */
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+  .kpi{background:var(--card);border:1px solid var(--line-soft);border-radius:11px;padding:15px 17px}
+  .kpi .n{font-size:1.5rem;font-weight:800;color:var(--heading);font-variant-numeric:tabular-nums;letter-spacing:-.01em;line-height:1}
+  .kpi .l{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:5px}
+  .kpi .s{font-size:.76rem;color:var(--amber-ink);margin-top:3px;font-weight:600}
+
+  .askbox{background:var(--ink);color:#eef4f8;border-radius:12px;padding:20px 24px;margin:16px 0;display:flex;flex-wrap:wrap;gap:18px 30px;align-items:center}
+  .askbox .big{font-family:var(--sans);font-size:1.9rem;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;line-height:1}
+  .askbox .big span{color:#f4c48a}
+  .askbox .t{flex:1;min-width:240px}
+  .askbox .t .lab{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-size:.68rem;color:#e9a765;font-weight:700}
+  .askbox .t p{margin:.25rem 0 0;color:#cfe0ea;font-size:.95rem}
+
+  .tablewrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line-soft);border-radius:10px}
+  table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.86rem;background:var(--card)}
+  th{background:var(--ink);color:#eaf1f5;text-align:left;padding:9px 13px;font-size:.73rem;text-transform:uppercase;letter-spacing:.03em}
+  th.n,td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  td{padding:9px 13px;border-top:1px solid var(--line-soft);vertical-align:top}
+  td.n{color:var(--heading);font-weight:600}
+  tbody tr:nth-child(even) td{background:var(--wash)}
+  tfoot td{border-top:2px solid var(--line);font-weight:800;color:var(--heading);background:var(--wash)}
+  .hl td{background:rgba(193,101,27,.09) !important}
+  .pos{color:var(--good);font-weight:700}
+
+  .note{background:var(--wash);border:1px solid var(--line-soft);border-left:3px solid var(--amber);border-radius:0 9px 9px 0;padding:13px 17px;margin:12px 0;font-size:.95rem}
+  ul.clean{margin:.4rem 0;padding-left:1.15rem}
+  ul.clean li{margin:.3rem 0}
+  ul.clean li::marker{color:var(--amber)}
+  .foot{font-size:.8rem;color:var(--muted);margin-top:8px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .panel{background:var(--card);border:1px solid var(--line-soft);border-radius:11px;padding:15px 18px}
+  .panel h4{font-family:var(--sans);margin:0 0 .4rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--amber-ink)}
+
+  /* chart */
+  .chart{background:var(--card);border:1px solid var(--line-soft);border-radius:11px;padding:18px 20px 12px;margin:14px 0}
+  .chart .cap{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:14px}
+  .bars{display:flex;align-items:flex-end;gap:16px;height:210px;border-bottom:1.5px solid var(--line);padding-bottom:0}
+  .bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+  .bar .val{font-size:.82rem;font-weight:800;color:var(--heading);font-variant-numeric:tabular-nums;margin-bottom:5px}
+  .bar .fill{width:100%;max-width:74px;background:linear-gradient(180deg,var(--amber),var(--amber-ink));border-radius:5px 5px 0 0}
+  .bar.ghost .fill{background:repeating-linear-gradient(135deg,var(--line-soft),var(--line-soft) 5px,transparent 5px,transparent 10px);border:1px solid var(--line)}
+  .bar.ghost .val{color:var(--muted)}
+  .xlab{display:flex;gap:16px;margin-top:8px}
+  .xlab div{flex:1;text-align:center;font-size:.74rem;color:var(--muted);font-family:var(--sans)}
+  .xlab div b{display:block;color:var(--text);font-size:.78rem}
+
+  .toggle{position:fixed;top:12px;right:12px;font-family:var(--sans);font-size:.72rem;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;z-index:5}
+  @media print{
+    :root,:root[data-theme="dark"]{--paper:#fff;--card:#fff;--text:#111;--muted:#444;--heading:#0e2130;--ink:#0e2130;--line:#999;--line-soft:#ccc;--amber:#9a4e12;--amber-ink:#8a460f;--sea:#0e2130;--wash:#f3f4f5;--good:#2f7d55;}
+    @page{margin:15mm}
+    body{background:#fff;font-size:10.5pt}
+    .toggle{display:none}
+    .cover,.askbox,th,.kpi .n,.bar .fill{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .section{page-break-inside:avoid}
+    .kpis,.askbox,.tablewrap,table,.chart,.note,.cols{page-break-inside:avoid}
+    tr,td,th{page-break-inside:avoid}
+  }
+  @media (max-width:640px){.kpis{grid-template-columns:1fr 1fr}.cols{grid-template-columns:1fr}.cover h1{font-size:1.6rem}}
+</style>
+<button class="toggle" id="t" aria-label="Toggle theme">◐ Theme</button>
+<div class="doc">
+
+  <header class="cover">
+    <div class="eyebrow">Seaways Engineering · MILC — MPSS Infrastructure Leasing Company</div>
+    <h1>Financial Summary</h1>
+    <p>An asset-leasing business built on a 10–40× hull-cost advantage: own standardized offshore platforms for ~$45M, lease them at $200–500k/day on 10–15-year contracts.</p>
+    <div class="tags"><span class="tag">Dry-hull lease</span><span class="tag">FPSO financing template</span><span class="tag">Confidential — Working Draft</span><span class="tag">11 July 2026</span></div>
+  </header>
+
+  <!-- AT A GLANCE -->
+  <section class="section" style="border-top:none;padding-top:0">
+    <div class="sechead" style="border-top:none;padding-top:0"><span class="secnum">—</span><div><div class="eyebrow">At a glance</div><h2>The offering in one screen</h2></div></div>
+    <p class="lede"><strong>MILC owns MPSS hulls and leases them.</strong> The lessee (a grid operator, energy major, or developer) brings the topsides and runs the business; MILC provides the floating asset on a long-term, dry (bareboat-style) charter. Because an MPSS hull costs a fraction of comparable offshore tonnage, it can be leased <em>below</em> market day-rates and still generate a far superior return on capital.</p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="n">~$45M</div><div class="l">All-in hull cost</div><div class="s">vs $425M–$1.2B comparables</div></div>
+      <div class="kpi"><div class="n">$200–500k</div><div class="l">Day-rate / hull</div><div class="s">10–15-yr firm term</div></div>
+      <div class="kpi"><div class="n">~$121M</div><div class="l">Unit EBITDA / yr</div><div class="s">mid case (≈$350k/day)</div></div>
+      <div class="kpi"><div class="n">~4.4 mo</div><div class="l">Cash payback</div><div class="s">pre-financing, mid case</div></div>
+      <div class="kpi"><div class="n">~$603M</div><div class="l">5-unit fleet EBITDA / yr</div><div class="s">mid case, steady state</div></div>
+      <div class="kpi"><div class="n">50–70 yr</div><div class="l">Hull life</div><div class="s">re-let 3–5× over life</div></div>
+    </div>
+
+    <div class="askbox">
+      <div><div class="big">~$50<span>M</span></div></div>
+      <div class="t"><div class="lab">The ask — first unit</div><p>~$45M hull + ~$5M development. Structure: sign the anchor lease first, then finance the hull against that contract (the FPSO template — the lender underwrites the charter, not the concept).</p></div>
+    </div>
+  </section>
+
+  <!-- 1 UNIT ECONOMICS -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">01</span><div><div class="eyebrow">The building block</div><h2>Unit economics — one hull</h2></div></div>
+
+    <h3>Build cost</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Item</th><th class="n">Figure</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><td>Hull steel</td><td class="n">~$21M</td><td>~10,000 t × ~$2,100/t</td></tr>
+        <tr><td>Outfitting, mooring interface, certification</td><td class="n">~$24M</td><td>balance to delivered</td></tr>
+      </tbody>
+      <tfoot><tr><td>All-in delivered unit (first of class)</td><td class="n">~$45M</td><td>internal estimate</td></tr>
+      <tr><td>Serial-fabrication target (at scale)</td><td class="n">$25–35M</td><td>pending Hanwha Ocean confirmation</td></tr></tfoot>
+    </table></div>
+
+    <h3>Revenue &amp; EBITDA per hull (95% availability)</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Line</th><th class="n">Low · $200k/day</th><th class="n">Mid · $350k/day</th><th class="n">High · $500k/day</th></tr></thead>
+      <tbody>
+        <tr><td>Annual lease revenue</td><td class="n">$69.4M</td><td class="n">$121.4M</td><td class="n">$173.4M</td></tr>
+        <tr><td>Lessor holding costs</td><td class="n">($1.0M)</td><td class="n">($0.85M)</td><td class="n">($0.7M)</td></tr>
+      </tbody>
+      <tfoot>
+        <tr class="hl"><td>Unit EBITDA</td><td class="n">$68.4M</td><td class="n">$120.5M</td><td class="n">$172.7M</td></tr>
+        <tr><td>Cash payback on ~$45M hull (pre-financing)</td><td class="n">~7.8 mo</td><td class="n">~4.4 mo</td><td class="n">~3.1 mo</td></tr>
+      </tfoot>
+    </table></div>
+    <p class="note"><strong>Read this as capital efficiency, not profit.</strong> EBITDA here is pre-financing and pre-tax, and excludes depreciation; "holding costs" are MILC's narrow lessor obligations (hull integrity, class maintenance, insurance) — the lessee bears topsides, crew, and operations under the dry lease. Payback is unlevered cash-on-cash.</p>
+  </section>
+
+  <!-- 2 CAPITAL EFFICIENCY -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">02</span><div><div class="eyebrow">The wedge</div><h2>Why the return is structural, not optimistic</h2></div></div>
+    <p>Every return figure above is driven by one fact: <strong>the hull is 10–40× cheaper than the tonnage it competes against.</strong> Because hull cost is the denominator of every yield calculation, the advantage holds across any realistic day-rate — it lives in the CAPEX, not the assumptions.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Vessel class</th><th class="n">Hull cost</th><th class="n">Day-rate</th><th class="n">Revenue yield on hull capital*</th></tr></thead>
+      <tbody>
+        <tr><td>Ultra-deepwater drillship (7th/8th-gen)</td><td class="n">~$875M</td><td class="n">~$425k</td><td class="n">~16%/yr</td></tr>
+        <tr><td>Harsh-environment semisub (Norway CAT-D class)</td><td class="n">~$440M</td><td class="n">~$448k</td><td class="n">~33%/yr</td></tr>
+        <tr class="hl"><td><strong>MPSS-derived leased hull</strong> (mid case)</td><td class="n">~$45M</td><td class="n">~$350k</td><td class="n pos">~270%/yr</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note"><strong>Pricing headroom.</strong> To earn the <em>same</em> return on hull capital as a drillship, an MPSS would need to charge only <strong>~$22k/day</strong> — roughly a tenth of its target rate. The gap between that and the $200–500k the market pays for large semisubmersible tonnage is pure capital-cost advantage, available either as margin or as a competitive price cut.</p>
+    <p class="foot">*Revenue yield on hull capital = day-rate × 365 × utilization ÷ hull cost. A capital-efficiency ratio (not a profit margin); it excludes operating cost, financing, and topsides. Comparable hull costs and day-rates are sourced 2025–26 class averages.</p>
+  </section>
+
+  <!-- 3 FLEET PROJECTION -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">03</span><div><div class="eyebrow">Scale-up</div><h2>Five-unit fleet — the ramp</h2></div></div>
+    <p>The model scales one hull at a time, each financed against its own signed lease. No speculative construction: steel is cut only after an anchor lease is in hand.</p>
+
+    <div class="chart">
+      <div class="cap">Steady-state fleet EBITDA by phase — mid case (≈$350k/day, 95% availability)</div>
+      <div class="bars" role="img" aria-label="Fleet EBITDA grows from zero while the first hull is built, to about $120M with one unit in Year 3, $241M with two units in Year 4, $361M with three units in Year 5, and about $603M with five units by Years 6-7.">
+        <div class="bar ghost"><div class="val">—</div><div class="fill" style="height:8px"></div></div>
+        <div class="bar"><div class="val">$120M</div><div class="fill" style="height:40px"></div></div>
+        <div class="bar"><div class="val">$241M</div><div class="fill" style="height:80px"></div></div>
+        <div class="bar"><div class="val">$361M</div><div class="fill" style="height:120px"></div></div>
+        <div class="bar"><div class="val">$603M</div><div class="fill" style="height:200px"></div></div>
+      </div>
+      <div class="xlab">
+        <div><b>Yr 1–2</b>0 on hire<br>hull building</div>
+        <div><b>Yr 3</b>1 unit</div>
+        <div><b>Yr 4</b>2 units</div>
+        <div><b>Yr 5</b>3 units</div>
+        <div><b>Yr 6–7</b>5 units</div>
+      </div>
+    </div>
+
+    <div class="tablewrap"><table>
+      <thead><tr><th>Phase</th><th class="n">Units on hire</th><th class="n">Fleet EBITDA — mid</th><th class="n">Range (low–high)</th></tr></thead>
+      <tbody>
+        <tr><td>Year 1–2 · first hull under construction</td><td class="n">0</td><td class="n">—</td><td class="n">—</td></tr>
+        <tr><td>Year 3 · proof unit on hire</td><td class="n">1</td><td class="n">$120.5M</td><td class="n">$68.4M–$172.7M</td></tr>
+        <tr><td>Year 4 · serial fabrication begins</td><td class="n">2</td><td class="n">$241.0M</td><td class="n">$136.8M–$345.4M</td></tr>
+        <tr><td>Year 5</td><td class="n">3</td><td class="n">$361.5M</td><td class="n">$205.2M–$518.1M</td></tr>
+        <tr class="hl"><td>Year 6–7 · full fleet</td><td class="n">5</td><td class="n">$602.6M</td><td class="n">$341.8M–$863.4M</td></tr>
+      </tbody>
+    </table></div>
+    <p class="foot">EBITDA-level, pre-financing and pre-tax. Phase-2 mooring-package adders (~$4–8k/day/unit) are additive and excluded here.</p>
+  </section>
+
+  <!-- 4 CAPITAL & RETURNS -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">04</span><div><div class="eyebrow">The capital</div><h2>Structure, use of funds &amp; returns</h2></div></div>
+    <div class="cols">
+      <div class="panel">
+        <h4>Use of funds — first unit (~$50M)</h4>
+        <ul class="clean">
+          <li><strong>~$45M</strong> — hull fabrication (Hanwha Ocean), financed against the anchor lease.</li>
+          <li><strong>~$5M</strong> — development: FEED, class re-engagement (LR/ABS/DNV), fabrication-cost confirmation, business development.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>Financing approach</h4>
+        <ul class="clean">
+          <li><strong>Hull:</strong> offshore project / asset-finance debt against the signed charter (FPSO template), typically 60–80% of cost; ECA support via the Korean yard lowers the coupon.</li>
+          <li><strong>Development tranche:</strong> founder / strategic equity or grant.</li>
+          <li><strong>Balance &amp; growth:</strong> strategic and infrastructure equity.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Why the returns compound</h3>
+    <ul class="clean">
+      <li><strong>Fast unlevered payback</strong> (3–8 months of EBITDA against hull cost) means the asset self-funds quickly; with 60–80% debt, the equity cheque is small and equity payback faster still. Levered equity IRRs are modelled at term-sheet stage against actual debt terms.</li>
+      <li><strong>Real residual value.</strong> A 50–70-year hull amortized over ~20 years is substantially deleveraged by the end of its first 10–15-year lease, then re-let 3–5 times. Terminal value is a class-maintained hull with 35+ years of fatigue life — not scrap.</li>
+      <li><strong>Serial economics.</strong> Each additional unit prices toward the $25–35M serial target, widening the yield further as the fleet scales.</li>
+    </ul>
+  </section>
+
+  <!-- 5 SENSITIVITY -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">05</span><div><div class="eyebrow">Stress test</div><h2>Sensitivity</h2></div></div>
+    <p>The economics are robust because the hull is cheap. Even at the low end of the day-rate band and reduced utilization, a single unit returns its capital in well under two years.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Scenario (per hull)</th><th class="n">Annual revenue</th><th class="n">Cash payback on $45M</th></tr></thead>
+      <tbody>
+        <tr><td>Low rate ($200k), 95% availability</td><td class="n">$69.4M</td><td class="n">~7.8 mo</td></tr>
+        <tr><td>Low rate ($200k), 80% availability</td><td class="n">$58.4M</td><td class="n">~9.2 mo</td></tr>
+        <tr><td>Mid rate ($350k), 95% availability</td><td class="n">$121.4M</td><td class="n">~4.4 mo</td></tr>
+        <tr><td>Serial hull ($35M), low rate ($200k)</td><td class="n">$69.4M</td><td class="n">~6.0 mo</td></tr>
+      </tbody>
+    </table></div>
+    <p class="foot">Payback = hull cost ÷ annual revenue, pre-financing. Illustrative; not a substitute for a full levered model.</p>
+  </section>
+
+  <!-- 6 ASSUMPTIONS & RISKS -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">06</span><div><div class="eyebrow">Integrity of the numbers</div><h2>Assumptions, caveats &amp; key risks</h2></div></div>
+    <div class="cols">
+      <div class="panel">
+        <h4>Assumptions &amp; caveats</h4>
+        <ul class="clean">
+          <li>Figures are <strong>EBITDA-level</strong> — exclude financing cost, tax and depreciation; payback is unlevered cash.</li>
+          <li>Day-rate is a <strong>target band, not a signed rate</strong>; the first LOI converts it to contracted revenue.</li>
+          <li>Hull cost is an <strong>estimate pending Hanwha Ocean</strong> confirmation; serial target $25–35M.</li>
+          <li><strong>95% availability</strong> assumed (industry-typical 85–95%).</li>
+          <li>Comparable hull costs/day-rates are sourced class averages, not single named fixtures.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>Key risks &amp; mitigants</h4>
+        <ul class="clean">
+          <li><strong>Fabrication cost</strong> unconfirmed → Hanwha engagement is the gating action.</li>
+          <li><strong>No anchor lessee yet</strong> → no speculative build; traction campaign underway (grid / energy majors).</li>
+          <li><strong>Class approval is historic (1989)</strong> → full LR/ABS/DNV re-engagement budgeted.</li>
+          <li><strong>First-of-class discount</strong> → accepted on unit 1 if term ≥ 10 yr; recovered on units 2–5.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot">Seaways Engineering (U.K.) Ltd · MILC — MPSS Infrastructure Leasing Company · Confidential working draft · 11 July 2026. Prepared for discussion; not an offer of securities. All figures are internal estimates subject to fabrication-cost confirmation, class re-engagement, and a signed anchor lease.</p>
+  </section>
+
+</div>
+<script>document.getElementById('t').addEventListener('click',function(){var r=document.documentElement,c=r.getAttribute('data-theme');if(!c)c=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';r.setAttribute('data-theme',c==='dark'?'light':'dark');});</script>
