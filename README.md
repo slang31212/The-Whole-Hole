@@ -34,6 +34,6 @@ For the `seaways-mpss.com` domain, point the host at this repository / folder.
 - **Copy** lives inline in `index.html`, grouped by clearly-commented sections.
 - Specs, the Five S and the lifecycle/driver tables are hand-built in HTML/CSS (no
   third-party chart images), so they're safe to edit and reuse.
-- Key figures (15,000 t payload, 8,100 m² deck, 2M bbl SWIS storage, 37.5 m survival wave,
+- Key figures (~30,000 t deck payload, 40,000 t+ ballast, 8,100 m² deck, 2M bbl SWIS storage, 37.5 m survival wave,
   ~14-month hull delivery, LR/ABS/DNV approval) and the design heritage are drawn from
   Seaways Engineering source material.
