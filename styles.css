@@ -469,6 +469,29 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0; }
 .logos li:last-child { border-bottom: 0; }
 .logos li span { font-weight: 500; font-size: .86rem; color: var(--slate-light); }
 
+/* ===================== ABOUT US ===================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 30px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+.about-story p {
+  margin: 0 0 18px;
+  font-size: 1.05rem;
+  color: var(--slate);
+}
+.about-story p:last-child { margin-bottom: 0; }
+.about-story strong { color: var(--navy-900); font-weight: 600; }
+.about-facts { position: sticky; top: 88px; }
+.about-facts h3 { font-size: 1.14rem; color: var(--navy-900); margin-bottom: 14px; }
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 24px; }
+  .about-facts { position: static; }
+}
+
 /* ===================== HULL COMPARISON ===================== */
 .hulls {
   display: grid;
