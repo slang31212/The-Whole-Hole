@@ -41,8 +41,9 @@
       document.body.style.overflow = "";
     }
 
-    document.querySelectorAll(".plate-btn").forEach(function (btn) {
-      btn.addEventListener("click", function () {
+    document.querySelectorAll("[data-full]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
         var img = btn.querySelector("img");
         openLightbox(btn.getAttribute("data-full"), img ? img.getAttribute("alt") : "");
       });
@@ -62,7 +63,7 @@
   var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if ("IntersectionObserver" in window && !prefersReduced) {
     var selector = ".section-eyebrow, .section-title, .lead, .card, .s-card, .spec, " +
-      ".hull-card, .plate, .value-strip, .pull-quote, .about-grid, .analogy-head, " +
+      ".hull-card, .plate, .app-card, .value-strip, .pull-quote, .about-grid, .analogy-head, " +
       ".analogy-sub, .analogy-col, .table-wrap, .lifecycle, .split";
     var els = Array.prototype.slice.call(document.querySelectorAll(selector));
     els.forEach(function (el) { el.classList.add("reveal"); });

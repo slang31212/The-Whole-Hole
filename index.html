@@ -33,7 +33,7 @@
         </button>
         <ul id="nav-menu" class="nav-menu">
           <li><a href="#about-us">About</a></li>
-          <li><a href="#about">The MPSS</a></li>
+          <li><a href="#applications">Applications</a></li>
           <li><a href="#five-s">The Five S</a></li>
           <li><a href="#specs">Specs</a></li>
           <li><a href="#comparison">Comparison</a></li>
@@ -46,63 +46,20 @@
 
   <main>
     <!-- ===================== HERO ===================== -->
-    <section class="hero">
+    <section class="hero hero-photo">
       <div class="hero-bg" aria-hidden="true">
-        <svg class="hero-platform" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Illustration of a Multi-Purpose Semi-Submersible production platform">
-          <defs>
-            <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#dbe5ee"/>
-              <stop offset="1" stop-color="#8ea6bd"/>
-            </linearGradient>
-            <linearGradient id="deckG" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#f2f6fb"/>
-              <stop offset="1" stop-color="#c3d2e2"/>
-            </linearGradient>
-            <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#12507a"/>
-              <stop offset="1" stop-color="#0a2c47"/>
-            </linearGradient>
-          </defs>
-
-          <rect x="0" y="360" width="1200" height="160" fill="url(#sea)"/>
-          <path d="M0 372 Q 150 362 300 372 T 600 372 T 900 372 T 1200 372" fill="none" stroke="#2ea3d9" stroke-opacity="0.35" stroke-width="2"/>
-          <path d="M0 392 Q 150 384 300 392 T 600 392 T 900 392 T 1200 392" fill="none" stroke="#2ea3d9" stroke-opacity="0.2" stroke-width="2"/>
-
-          <!-- ring pontoon (deep draft) -->
-          <rect x="358" y="392" width="484" height="34" rx="12" fill="#0e3a5c"/>
-          <!-- columns -->
-          <rect x="392" y="298" width="46" height="106" rx="6" fill="url(#steel)"/>
-          <rect x="512" y="298" width="46" height="106" rx="6" fill="url(#steel)"/>
-          <rect x="642" y="298" width="46" height="106" rx="6" fill="url(#steel)"/>
-          <rect x="762" y="298" width="46" height="106" rx="6" fill="url(#steel)"/>
-          <!-- deck box (buoyant) -->
-          <rect x="356" y="268" width="488" height="36" rx="6" fill="url(#deckG)"/>
-          <rect x="356" y="264" width="488" height="8" rx="4" fill="#9fb4c8"/>
-          <!-- topside modules (skid-on) -->
-          <rect x="392" y="224" width="72" height="44" rx="3" fill="#c9d7e6"/>
-          <rect x="482" y="206" width="82" height="62" rx="3" fill="#dbe6f1"/>
-          <rect x="584" y="232" width="60" height="36" rx="3" fill="#c9d7e6"/>
-          <!-- derrick -->
-          <path d="M662 268 L678 166 L694 268 Z" fill="none" stroke="#aebfd1" stroke-width="4"/>
-          <line x1="670" y1="218" x2="686" y2="218" stroke="#aebfd1" stroke-width="3"/>
-          <line x1="666" y1="243" x2="690" y2="243" stroke="#aebfd1" stroke-width="3"/>
-          <!-- flare -->
-          <rect x="728" y="220" width="14" height="48" fill="#b9c9d9"/>
-          <circle cx="735" cy="214" r="8" fill="#ff8a3d" opacity="0.85"/>
-          <!-- mooring / SCR lines -->
-          <line x1="378" y1="404" x2="150" y2="500" stroke="#0e3a5c" stroke-width="3" stroke-opacity="0.7"/>
-          <line x1="822" y1="404" x2="1050" y2="500" stroke="#0e3a5c" stroke-width="3" stroke-opacity="0.7"/>
-        </svg>
+        <img class="hero-img" src="images/mpss-hero.jpg" alt="" fetchpriority="high" />
+        <div class="hero-scrim"></div>
       </div>
 
       <div class="container hero-content">
         <p class="eyebrow">LANG's MPSS · Multi-Purpose Semi-Submersible</p>
         <h1>Simple. Safe. Swift. Size. <span class="grad">Saves.</span></h1>
         <p class="hero-sub">
-          A validated, standardized deepwater production host built with proven ship-building technology.
-          The MPSS is <strong>a cost-effective solution for working in the ocean — regardless of the work,
-          or the ocean.</strong> It turns the floating host from a bespoke project into pre-positioned,
-          leaseable offshore infrastructure.
+          A validated, standardized low-motion floating platform built with proven ship-building technology —
+          <strong>one architecture for many offshore markets:</strong> power, data centers, water, food,
+          floating wind and deepwater production. It turns the floating host from a bespoke project into
+          pre-positioned, leaseable offshore infrastructure.
         </p>
         <div class="hero-actions">
           <a href="#five-s" class="btn btn-primary">The five-S design</a>
@@ -246,6 +203,75 @@
               heave response — effectively motionless in sub-12&nbsp;m seas.</p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- ===================== APPLICATIONS ===================== -->
+    <section class="section" id="applications">
+      <div class="container">
+        <p class="section-eyebrow">Applications</p>
+        <h2 class="section-title">One platform. Many missions.</h2>
+        <p class="lead">
+          The MPSS is not a single-purpose floater — it's a scalable offshore infrastructure platform. The
+          same validated 90&nbsp;m&nbsp;×&nbsp;90&nbsp;m hull becomes power, data, water, food, wind or oil,
+          defined only by the modules on its deck. One architecture; multiple offshore revenue models.
+        </p>
+
+        <div class="apps">
+          <article class="app-card">
+            <div class="app-media">
+              <button class="app-zoom" data-full="images/app-power-data.jpg" aria-label="Enlarge the power &amp; data centre concept">
+                <img src="images/app-power-data.jpg" alt="MPSS configured as a floating power and data-centre platform with generation, cooling and IT modules on deck" loading="lazy" />
+              </button>
+            </div>
+            <div class="app-body">
+              <h3>Power &amp; data centres</h3>
+              <p>Up to ~300&nbsp;MW of on-platform generation and ~100&nbsp;MW of IT load, with seawater cooling
+                and low PUE — for AI, HPC, cloud and colocation. Hydrogen-ready, low-carbon.</p>
+            </div>
+          </article>
+
+          <article class="app-card app-card-rev">
+            <div class="app-media">
+              <button class="app-zoom" data-full="images/app-food-water.jpg" aria-label="Enlarge the offshore food &amp; water concept">
+                <img src="images/app-food-water.jpg" alt="MPSS configured as an offshore food and power platform combining floating wind, vertical farming, desalination and freshwater storage" loading="lazy" />
+              </button>
+            </div>
+            <div class="app-body">
+              <h3>Food &amp; water security</h3>
+              <p>The turbine powers the platform; the deck makes the business. Vertical farming, aquaculture,
+                desalination and freshwater storage — offshore, without land-use conflict.</p>
+            </div>
+          </article>
+
+          <article class="app-card">
+            <div class="app-media">
+              <button class="app-zoom" data-full="images/app-production.jpg" aria-label="Enlarge the deepwater production concept">
+                <img src="images/app-production.jpg" alt="MPSS configured as a deepwater oil and gas production host with process topsides, flare and cranes" loading="lazy" />
+              </button>
+            </div>
+            <div class="app-body">
+              <h3>Deepwater production</h3>
+              <p>A low-motion production host with a large stable deck, steel-catenary-riser porch and up to
+                2&nbsp;M&nbsp;bbl of onboard storage — the standardized alternative to a bespoke FPU.</p>
+            </div>
+          </article>
+        </div>
+
+        <ul class="app-tags">
+          <li>Floating wind foundation</li>
+          <li>Power islands</li>
+          <li>Hydrogen &amp; CCS</li>
+          <li>Desalination</li>
+          <li>Aquaculture &amp; food</li>
+          <li>Data centres</li>
+          <li>Industrial &amp; utility base</li>
+          <li>Deepwater oil &amp; gas</li>
+        </ul>
+
+        <p class="apps-note">
+          Concept renders of the MPSS / LANG System. <a href="#" class="apps-link" data-full="images/mpss-system-overview.jpg">View the full platform-family overview →</a>
+        </p>
       </div>
     </section>
 
