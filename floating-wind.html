@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Floating Wind — Vessel Delivered Cost | Seaways MPSS</title>
+  <meta name="description" content="An in-depth study of the actual vessel costs of floating offshore wind: day rates by vessel class and a per-turbine delivered-cost model split into pre- and post-turbine-installation marine scope." />
+  <meta name="theme-color" content="#0a1a2f" />
+  <meta name="robots" content="noindex" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Cpath d='M4 20h24M8 20v-6h16v6M13 14V9h6v5' stroke='%232ea3d9' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <style>
+    /* Page-local helpers — layered on top of the shared stylesheet */
+    .fw-note-row td { font-style: italic; color: var(--slate-light) !important; background: var(--bg-tint) !important; }
+    .matrix tbody tr.fw-total td { font-weight: 700; color: var(--navy-900) !important; background: var(--bg-tint) !important; border-top: 2px solid var(--navy-600); }
+    .matrix td.fw-num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .fw-phase { display: inline-block; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+    .fw-phase-pre  { background: #e4f1fa; color: #1c7fb0; }
+    .fw-phase-tow  { background: #fdeede; color: #c96a1f; }
+    .fw-phase-post { background: #e6f6ec; color: #2f8a52; }
+    .fw-legend { display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 8px 0 26px; align-items: center; font-size: .9rem; color: var(--slate); }
+    .fw-source-list { margin: 14px 0 0; padding-left: 20px; color: var(--slate); font-size: .92rem; }
+    .fw-source-list li { margin-bottom: 6px; }
+    .fw-source-list a { color: var(--accent-deep); }
+  </style>
+</head>
+<body>
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="index.html#top" class="brand" aria-label="Seaways MPSS home">
+        <svg class="brand-mark" viewBox="0 0 32 32" width="34" height="34" aria-hidden="true">
+          <rect width="32" height="32" rx="7" fill="#0a1a2f"/>
+          <path d="M4 21h24M8 21v-7h16v7M13 14V8h6v6" stroke="#2ea3d9" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand-text">Seaways<span class="brand-accent"> MPSS</span></span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="index.html#about">The MPSS</a></li>
+          <li><a href="index.html#specs">Specs</a></li>
+          <li><a href="day-rates.html">Day Rates</a></li>
+          <li><a href="floating-wind.html" aria-current="page">Floating Wind</a></li>
+          <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== INTRO ===================== -->
+    <section class="section calc-intro">
+      <div class="container">
+        <p class="section-eyebrow">Floating Wind — Vessel Economics</p>
+        <h1 class="section-title">The vessel delivered cost of floating wind.</h1>
+        <p class="lead">
+          Floating offshore wind is a <strong>marine-logistics business</strong> before it is an energy
+          business. The single biggest lever on installed cost is not the turbine — it is the vessels that
+          pre-lay the moorings, bury the cables, tow the unit out and hook it up. This is a bottom-up study
+          of those costs, built from published day rates and installation schedules and split into
+          <strong>pre-turbine-installation</strong> and <strong>post-turbine-installation</strong> marine scope.
+        </p>
+        <p class="lead" style="font-size:1rem;">
+          The reference unit is a <strong>15&nbsp;MW turbine on a semi-submersible hull</strong>, three
+          catenary mooring lines to three anchor points, ~60–100&nbsp;km offshore in deep water, with the
+          turbine <strong>integrated quayside</strong> and towed out complete — the standard floating-wind
+          base case. Figures are delivered marine-spread costs (charter + mobilisation + ~⅓ weather downtime),
+          shown in GBP with USD at ≈ $1.28/£. They are engineering estimates for discussion, not quotes.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== HEADLINE NUMBERS ===================== -->
+    <section class="section section-alt" style="padding-top:0;">
+      <div class="container">
+        <h2 class="subhead">Headline — one-time marine spread, per 15&nbsp;MW turbine</h2>
+        <div class="specs-grid">
+          <div class="spec">
+            <div class="spec-num">≈ £1.4M</div>
+            <div class="spec-label"><span class="fw-phase fw-phase-pre">Pre-install</span> moorings, anchors &amp; cable vessels</div>
+          </div>
+          <div class="spec">
+            <div class="spec-num">≈ £0.25M</div>
+            <div class="spec-label"><span class="fw-phase fw-phase-tow">Tow-out</span> 3-AHV spread, quay&nbsp;→&nbsp;site</div>
+          </div>
+          <div class="spec">
+            <div class="spec-num">≈ £0.35M</div>
+            <div class="spec-label"><span class="fw-phase fw-phase-post">Post-install</span> hook-up &amp; commissioning</div>
+          </div>
+          <div class="spec">
+            <div class="spec-num">≈ £2.0M</div>
+            <div class="spec-label">All-in one-time marine cost / turbine (≈ $2.6M)</div>
+          </div>
+          <div class="spec">
+            <div class="spec-num">$0</div>
+            <div class="spec-label">Offshore WTIV / jack-up cost — none needed for floating</div>
+          </div>
+          <div class="spec">
+            <div class="spec-num">~⅓</div>
+            <div class="spec-label">Of vessel time typically lost to weather — priced in above</div>
+          </div>
+        </div>
+        <p class="hull-note" style="margin-top:18px;">
+          The story of floating-wind vessel cost is where the money <em>isn't</em>: because the turbine is
+          craned onto the floater in port and towed out complete, floating wind avoids the offshore turbine
+          installation vessel (WTIV / jack-up) entirely — the most expensive vessel in a bottom-fixed build at
+          <strong>$150,000–$250,000/day</strong>. The cost migrates instead to anchor-handlers, cable-lay
+          vessels and tugs.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== LIFECYCLE ===================== -->
+    <section class="section">
+      <div class="container">
+        <p class="section-eyebrow">The marine campaign</p>
+        <h2 class="section-title" style="font-size:1.8rem;">Delivered in three phases.</h2>
+        <div class="lifecycle">
+          <ol class="lifecycle-track">
+            <li>
+              <strong>1 · Pre-install</strong><br>
+              Anchor-handlers pre-lay the moorings &amp; anchors; the cable-lay vessel installs the dynamic
+              inter-array and export cables. All done <em>before</em> the turbine leaves the quay.
+            </li>
+            <li>
+              <strong>2 · Tow-out</strong><br>
+              The complete, commissioned turbine-on-hull is towed from port to site by a three-tug
+              anchor-handler spread inside a fair-weather window.
+            </li>
+            <li>
+              <strong>3 · Post-install</strong><br>
+              On site: connect to the pre-laid moorings, tension the lines, pull in and terminate the power
+              cable, then commission. O&amp;M vessels take over for the 25–30 year operating life.
+            </li>
+          </ol>
+        </div>
+        <p class="lifecycle-note"><span class="dot"></span> Quayside integration is the pivot: it moves the highest-value crane work off the water and into a sheltered, permanently-equipped port.</p>
+      </div>
+    </section>
+
+    <!-- ===================== DAY-RATE REFERENCE ===================== -->
+    <section class="section section-alt">
+      <div class="container">
+        <p class="section-eyebrow">Reference data</p>
+        <h2 class="section-title" style="font-size:1.8rem;">Vessel day rates by class.</h2>
+        <p class="lead" style="font-size:1rem;">
+          The building blocks of every number on this page. Rates are typical charter / term rates, mostly
+          excluding fuel; a marine spread in operation also carries mobilisation, fuel and support craft, which
+          the delivered-cost model below folds in.
+        </p>
+
+        <div class="table-wrap">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Vessel class</th>
+                <th>Role in floating wind</th>
+                <th>Typical day rate</th>
+                <th>Phase</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Anchor-handling vessel — 200&nbsp;t bollard pull</td>
+                <td>Main tug for anchor / mooring pre-lay, tow-out and hook-up</td>
+                <td class="fw-num">≈ £50,000 <small>($64k)</small></td>
+                <td><span class="fw-phase fw-phase-pre">Pre</span> <span class="fw-phase fw-phase-tow">Tow</span></td>
+              </tr>
+              <tr>
+                <td>Anchor-handling vessel — 50–100&nbsp;t bollard pull</td>
+                <td>Support tug on pre-lay and tow-out / hook-up</td>
+                <td class="fw-num">£20,000–£30,000 <small>($26–38k)</small></td>
+                <td><span class="fw-phase fw-phase-pre">Pre</span> <span class="fw-phase fw-phase-tow">Tow</span></td>
+              </tr>
+              <tr>
+                <td>Tow-out spread — 3 anchor-handlers combined</td>
+                <td>One 200&nbsp;t main tug + two 50–100&nbsp;t support tugs, towing one FOWT</td>
+                <td class="fw-num">≈ £130,000 <small>($166k)</small></td>
+                <td><span class="fw-phase fw-phase-tow">Tow</span></td>
+              </tr>
+              <tr>
+                <td>Cable-lay vessel (CLV)</td>
+                <td>Dynamic inter-array &amp; export cable lay, burial and pull-in</td>
+                <td class="fw-num">≈ £150,000 <small>($192k)</small></td>
+                <td><span class="fw-phase fw-phase-pre">Pre</span></td>
+              </tr>
+              <tr>
+                <td>Service operation vessel (SOV / CSOV)</td>
+                <td>Hook-up &amp; commissioning support; O&amp;M base, 60–120 techs, weeks at sea</td>
+                <td class="fw-num">≈ £30,000 <small>($38k)</small></td>
+                <td><span class="fw-phase fw-phase-post">Post</span></td>
+              </tr>
+              <tr>
+                <td>Crew transfer vessel (CTV)</td>
+                <td>Daily technician transfer for near-shore O&amp;M</td>
+                <td class="fw-num">≈ £2,000 <small>($2.6k)</small></td>
+                <td><span class="fw-phase fw-phase-post">Post</span></td>
+              </tr>
+              <tr class="fw-note-row">
+                <td>Wind turbine installation vessel (WTIV / jack-up)</td>
+                <td>Not used offshore for floating wind — shown for contrast with bottom-fixed</td>
+                <td class="fw-num">$150,000–$250,000</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PER-TURBINE DELIVERED MODEL ===================== -->
+    <section class="section">
+      <div class="container">
+        <p class="section-eyebrow">The core model</p>
+        <h2 class="section-title" style="font-size:1.8rem;">Delivered cost per turbine — pre vs post.</h2>
+        <p class="lead" style="font-size:1rem;">
+          Each line is <em>day rate × delivered days</em>, where delivered days include mobilisation and a
+          ~⅓ weather-downtime allowance on the productive window. Ranges reflect vessel size, distance to
+          port and seabed conditions.
+        </p>
+
+        <div class="fw-legend">
+          <span><span class="fw-phase fw-phase-pre">Pre-install</span> before the turbine leaves the quay</span>
+          <span><span class="fw-phase fw-phase-tow">Tow-out</span> the installation move itself</span>
+          <span><span class="fw-phase fw-phase-post">Post-install</span> on-site, once the hull is on station</span>
+        </div>
+
+        <div class="table-wrap">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Marine scope item</th>
+                <th>Vessel spread</th>
+                <th>Delivered days</th>
+                <th>Cost / turbine</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- PRE -->
+              <tr>
+                <td><span class="fw-phase fw-phase-pre">Pre</span> Anchor &amp; mooring pre-lay</td>
+                <td>Main AHV (£50k) + support AHV (£25k)</td>
+                <td class="fw-num">~5 days</td>
+                <td class="fw-num">£0.35–0.60M</td>
+              </tr>
+              <tr>
+                <td><span class="fw-phase fw-phase-pre">Pre</span> Dynamic inter-array cable — lay &amp; pull-in</td>
+                <td>CLV (£150k) + support craft</td>
+                <td class="fw-num">~3 days</td>
+                <td class="fw-num">£0.45–0.60M</td>
+              </tr>
+              <tr>
+                <td><span class="fw-phase fw-phase-pre">Pre</span> Export cable &amp; substation vessel share</td>
+                <td>CLV / HLV, allocated across the array</td>
+                <td class="fw-num">allocated</td>
+                <td class="fw-num">£0.30–0.80M</td>
+              </tr>
+              <!-- TOW -->
+              <tr>
+                <td><span class="fw-phase fw-phase-tow">Tow</span> Tow-out, quay → site</td>
+                <td>3-AHV spread (£130k combined)</td>
+                <td class="fw-num">~2 days</td>
+                <td class="fw-num">£0.20–0.35M</td>
+              </tr>
+              <!-- POST -->
+              <tr>
+                <td><span class="fw-phase fw-phase-post">Post</span> Mooring hook-up &amp; line tensioning</td>
+                <td>Tow AHV spread held on station (~52&nbsp;hrs)</td>
+                <td class="fw-num">~2 days</td>
+                <td class="fw-num">£0.15–0.40M</td>
+              </tr>
+              <tr>
+                <td><span class="fw-phase fw-phase-post">Post</span> Power-cable pull-in, termination &amp; commissioning</td>
+                <td>SOV / construction support vessel (£30k)</td>
+                <td class="fw-num">~3 days</td>
+                <td class="fw-num">£0.10–0.20M</td>
+              </tr>
+              <tr class="fw-total">
+                <td>One-time delivered marine cost</td>
+                <td>Pre + Tow + Post</td>
+                <td class="fw-num">~15 vessel-days</td>
+                <td class="fw-num">≈ £2.0M ($2.6M)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="value-strip">
+          <p class="value-strip-title">How the one-time ≈ £2.0M splits</p>
+          <ul class="value-list">
+            <li>Pre-install ≈ £1.4M (~70%)</li>
+            <li>Tow-out ≈ £0.25M (~12%)</li>
+            <li>Post-install ≈ £0.35M (~18%)</li>
+            <li>WTIV / jack-up avoided: $150–250k/day removed entirely</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FARM-LEVEL ROLLUP ===================== -->
+    <section class="section section-alt">
+      <div class="container">
+        <p class="section-eyebrow">Scaled up</p>
+        <h2 class="section-title" style="font-size:1.8rem;">A 1&nbsp;GW farm — ≈ 67 × 15&nbsp;MW.</h2>
+        <p class="lead" style="font-size:1rem;">
+          At array scale the per-turbine spread multiplies out, and the same vessels move continuously between
+          units across a construction window of roughly April–August. Published installation schedules put a
+          two-AHTS campaign at ~127–153 days for ~47 turbines; the marine spread is on charter the whole time.
+        </p>
+
+        <div class="table-wrap">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Reference figure</th>
+                <th>Basis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>One-time delivered marine cost, per turbine</td>
+                <td class="fw-num">≈ £2.0M ($2.6M)</td>
+                <td>Bottom-up model above</td>
+              </tr>
+              <tr>
+                <td>One-time marine cost, 1&nbsp;GW array (~67 units)</td>
+                <td class="fw-num">≈ £130M ($170M)</td>
+                <td>Per-turbine × 67, vessel spread only</td>
+              </tr>
+              <tr>
+                <td>Mooring hook-up campaign, per turbine</td>
+                <td class="fw-num">~2 days (52 hrs)</td>
+                <td>3 lines + cable, Lannion/COREWIND studies</td>
+              </tr>
+              <tr>
+                <td>Installation window, ~47-turbine array</td>
+                <td class="fw-num">~127–153 days</td>
+                <td>Two AHTS, April–August season</td>
+              </tr>
+              <tr>
+                <td>Total installation &amp; commissioning, 1&nbsp;GW</td>
+                <td class="fw-num">≈ $1.79bn</td>
+                <td>All-in (incl. hardware, insurance, PM, contingency)</td>
+              </tr>
+              <tr>
+                <td>Weather downtime allowance</td>
+                <td class="fw-num">~⅓ of time</td>
+                <td>Standard offshore planning assumption</td>
+              </tr>
+              <tr class="fw-total">
+                <td>Full floating-wind installed CAPEX</td>
+                <td class="fw-num">$6–10M / MW</td>
+                <td>Pre-2030, varies with depth &amp; port logistics</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hull-note" style="margin-top:16px;">
+          The one-time marine spread (~£130M) is the pure vessel charter cost. The much larger $1.79bn
+          installation-and-commissioning line includes the hardware being installed (moorings, anchors, cables),
+          developer's insurance, construction project management and contingency — not vessels alone.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== ADVANTAGE / DRIVERS ===================== -->
+    <section class="section">
+      <div class="container">
+        <p class="section-eyebrow">Why the numbers look this way</p>
+        <h2 class="section-title" style="font-size:1.8rem;">Four cost drivers.</h2>
+        <div class="cards cards-2">
+          <div class="card card-lg">
+            <h3 class="subhead" style="margin-top:0;">Quayside integration removes the WTIV</h3>
+            <p style="color:var(--slate);margin:0;">
+              Bottom-fixed wind lives or dies on jack-up availability at $150–250k/day. Floating wind cranes the
+              turbine onto the hull in a sheltered port with permanent equipment and tows it out complete. The
+              most expensive vessel in offshore wind simply isn't on the critical path.
+            </p>
+          </div>
+          <div class="card card-lg">
+            <h3 class="subhead" style="margin-top:0;">Anchor-handlers are the bottleneck</h3>
+            <p style="color:var(--slate);margin:0;">
+              Fewer than ~60 vessels worldwide carry the &gt;250&nbsp;t bollard pull that floating wind wants —
+              under 4% of the global AHTS fleet, and competing with deepwater oil &amp; gas. Scarcity, not the
+              headline day rate, is the real pre-install cost risk toward 2030.
+            </p>
+          </div>
+          <div class="card card-lg">
+            <h3 class="subhead" style="margin-top:0;">Weather sets the true rate</h3>
+            <p style="color:var(--slate);margin:0;">
+              Tow-out needs a fair-weather window — H<sub>s</sub> ~1–1.5&nbsp;m and a 72-hour clear forecast to
+              reach site and deploy. With ~⅓ of time lost waiting on weather, the <em>effective</em> day rate is
+              far above the charter rate. Standardised, repeatable operations shrink that penalty.
+            </p>
+          </div>
+          <div class="card card-lg">
+            <h3 class="subhead" style="margin-top:0;">Tow-to-port changes O&amp;M economics</h3>
+            <p style="color:var(--slate);margin:0;">
+              For major component exchange a floating unit can be disconnected and towed back to port — a
+              3-AHV spread for ~6–10 days (~£0.8–1.3M/event) — instead of mobilising a jack-up offshore.
+              Day-to-day O&amp;M runs on an SOV (~£30k/day) or CTV (~£2k/day) shared across the array.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ASSUMPTIONS & SOURCES ===================== -->
+    <section class="section section-alt">
+      <div class="container">
+        <h2 class="subhead" style="margin-top:0;">Assumptions</h2>
+        <ul class="fw-source-list">
+          <li>Reference unit: 15&nbsp;MW turbine, semi-submersible hull, 3 catenary mooring lines to 3 anchor points, ~60–100&nbsp;km offshore, deep water, quayside turbine integration.</li>
+          <li>1&nbsp;GW array ≈ 67 units of 15&nbsp;MW. Delivered days include mobilisation and a ~⅓ weather-downtime allowance on the productive window.</li>
+          <li>Currency: GBP shown first, USD at ≈ $1.28/£. Day rates are typical charter/term rates, generally excluding fuel unless noted.</li>
+          <li>Figures are engineering estimates assembled from public sources for discussion — not offers, quotes or project-specific costs.</li>
+        </ul>
+
+        <h2 class="subhead">Sources</h2>
+        <ul class="fw-source-list">
+          <li><a href="https://guidetofloatingoffshorewind.com/guide/i-installation-and-commissioning/">Guide to a Floating Offshore Wind Farm</a> — BVG Associates / The Crown Estate: vessel roles, day rates, tow-out, hook-up, O&amp;M vessels.</li>
+          <li><a href="https://corewind.eu/wp-content/uploads/files/delivery-docs/D4.5.pdf">COREWIND D4.5 — Floating Wind Installation Strategies</a>: campaign schedules and durations.</li>
+          <li><a href="https://www.mdpi.com/2077-1312/10/10/1354">Mooring System Transport and Installation Logistics, Lannion (MDPI, J. Mar. Sci. Eng.)</a>: hook-up duration, pre-lay campaigns.</li>
+          <li><a href="https://www.oedigital.com/news/510324-will-2024-be-the-year-of-ahts-recovery">Offshore Engineer / OEDigital</a> and <a href="https://www.rivieramm.com/news-content-hub/news-content-hub/how-to-navigate-demand-for-anchor-handlers-in-offshore-oil-and-renewables-75586">Riviera Maritime Media</a>: AHTS fleet size, bollard pull and term rates.</li>
+          <li><a href="https://www.blackridgeresearch.com/blog/floating-offshore-wind-fow-and-offshore-wind-farm-turbine-project-cost">Blackridge Research</a> and NREL <em>Cost of Wind Energy Review</em>: CAPEX breakdown and $/MW ranges.</li>
+        </ul>
+        <p class="hull-note calc-disclaimer">
+          In-depth study for discussion only. Vessel day rates, durations and delivered costs are estimates
+          compiled from public references and will vary materially by project, region, water depth, port,
+          contracting model and market conditions at the time of charter.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+          <rect width="32" height="32" rx="7" fill="#13273d"/>
+          <path d="M4 21h24M8 21v-7h16v7M13 14V8h6v6" stroke="#2ea3d9" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Seaways<span class="brand-accent"> MPSS</span></span>
+      </div>
+      <p class="footer-tag">LANG's MPSS — Simple · Safe · Swift · Size · Saves.</p>
+      <p class="footer-copy">© <span id="year"></span> Seaways MPSS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
