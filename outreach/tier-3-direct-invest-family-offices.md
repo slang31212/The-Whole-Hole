@@ -86,7 +86,7 @@ Dear [Name],
 
 Given your infrastructure orientation, I wanted to put a genuinely early opportunity in front of
 you. The MPSS is a validated, LR/ABS/DNV-approved deepwater host we lease rather than sell — one
-15,000-tonne hull re-let across production, accommodation, floating wind ("Turbine Plus") and
+hull carrying 30,000+ long tons of payload, re-let across production, accommodation, floating wind ("Turbine Plus") and
 power at ~$120k–$350k/day, against a 50–70 year life.
 
 The engineering and independent validation are complete. We're raising a modest **$4M seed** for

@@ -17,7 +17,7 @@ roughly 200 family offices that want infrastructure cash flow without bespoke pr
 I'd like 15 minutes to show you an asset built exactly for that box.
 
 The MPSS is a validated, standardized deepwater host — approved by Lloyd's Register, ABS and
-DNV — that we lease rather than sell. One 15,000-tonne hull, re-let across production, floating
+DNV — that we lease rather than sell. One hull carrying 30,000+ long tons of payload, re-let across production, floating
 wind (our "Turbine Plus" install and power-island configuration), accommodation, power and CCS,
 on 10–15 year charters at ~$120k–$350k/day against a 50–70-year asset life. It is FPSO-grade
 bankability with aircraft-leasing re-lettability: the AerCap template, in steel, at sea.
@@ -69,8 +69,9 @@ GIP has put real capital into offshore wind (including the Revolution Wind partn
 into ports and energy infrastructure that live for decades. The MPSS extends that logic to the
 one piece of offshore that is still built bespoke every time: the floating host.
 
-We standardized it. It's LR/ABS/DNV-approved, delivers in ~14 months, carries 15,000 t on
-8,100 m² of open deck, and is effectively motionless in sub-12 m seas. The same hull installs
+We standardized it. It's LR/ABS/DNV-approved, delivers in ~14 months, carries 30,000+ long tons
+on 8,100 m² of open deck (on a hull of just under 10,000 Lt of steel), and is effectively
+motionless in sub-12 m seas. The same hull installs
 wind turbines and carries a power/HVDC island, then re-lets to production, CCS or hydrogen —
 a genuinely re-deployable, float-off/float-on asset rather than a stranded one.
 
@@ -118,8 +119,8 @@ Blackstone's ~$5.6B move into Safe Harbor Marinas said something the rest of the
 slow to price: standardized marine assets with contracted cash flow are infrastructure, and
 they compound. The MPSS applies that thesis one step out to sea.
 
-It's a validated, LR/ABS/DNV-approved deepwater host we lease, not sell — one 15,000-tonne hull
-re-let across production, floating wind ("Turbine Plus"), power, accommodation, data centers
+It's a validated, LR/ABS/DNV-approved deepwater host we lease, not sell — one hull carrying
+30,000+ long tons of payload, re-let across production, floating wind ("Turbine Plus"), power, accommodation, data centers
 and CCS at ~$120k–$350k/day on 10–15 year charters, against a 50–70 year hull. Dry-lease,
 non-recourse, FPSO-template financing: the lender underwrites the charterer, not the concept —
 exactly the bankability profile your marina deal proved out.
@@ -143,7 +144,7 @@ The ~$4B Suntex Marinas valuation showed Centerbridge saw the same pattern we do
 capital-hungry marine asset class matures fast once someone standardizes and leases it. The
 offshore floating host is that class, pre-consolidation.
 
-The MPSS is the standard unit — LR/ABS/DNV-approved, 15,000 t payload, ~14-month delivery, and
+The MPSS is the standard unit — LR/ABS/DNV-approved, 30,000+ long tons of payload, ~14-month delivery, and
 re-lettable across production, workover/tender-assist, accommodation, floating wind and power.
 Today every host is a bespoke build; we make it fleet inventory with contracted charters and
 real residual value. That's the arbitrage between a project and a product.

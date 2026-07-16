@@ -19,7 +19,7 @@ asset whose whole thesis is a 50–70 year life. Most investors can't hold long 
 an MPSS hull's second and third lease cycles. You can.
 
 It's a validated, standardized, LR/ABS/DNV-approved offshore host we lease rather than sell. One
-15,000-tonne hull re-lets across production, floating wind ("Turbine Plus"), accommodation,
+hull carrying 30,000+ long tons of payload re-lets across production, floating wind ("Turbine Plus"), accommodation,
 power and CCS on 10–15 year charters at ~$120k–$350k/day. After the first charter pays down the
 debt, you own a deleveraged, re-lettable asset with decades of runway — terminal value that's a
 re-lease, not scrap.
@@ -90,7 +90,7 @@ QIA's diversified infrastructure and energy positioning — including floating w
 maps directly onto what the MPSS does: it standardizes the one offshore asset still built
 bespoke, the floating host.
 
-It's LR/ABS/DNV-approved, low-motion, 15,000-tonne payload, and re-configurable — turbine
+It's LR/ABS/DNV-approved, low-motion, 30,000+ long tons of payload, and re-configurable — turbine
 install and power/HVDC island today ("Turbine Plus"), production and storage where the economics
 are strong, CCS and hydrogen as they mature. One hull, adapted by its topside package, on
 long-term charters against a 50–70 year life.
@@ -114,7 +114,7 @@ ADIA's appetite for direct infrastructure equity in energy and renewables is exa
 capital a standardized floating-platform program needs. The MPSS turns the offshore host from a
 bespoke, one-field build into a re-lettable, classed product with contracted cash flow.
 
-LR/ABS/DNV-approved, ~14-month delivery, 15,000-tonne payload, low-motion by design — one hull
+LR/ABS/DNV-approved, ~14-month delivery, 30,000+ long tons of payload, low-motion by design — one hull
 that carries production, floating wind ("Turbine Plus"), power and CCS across a 50–70 year life.
 For a long-horizon direct investor, the multi-cycle residual value is the point.
 
@@ -208,7 +208,7 @@ schedule risk actually sits: the floating host and substation. The MPSS standard
 classed hull that carries a power/HVDC island and installs turbines ("Turbine Plus"), then
 re-lets to production, CCS or hydrogen.
 
-LR/ABS/DNV-approved, low-motion, 15,000-tonne payload, ~14-month delivery. It de-risks the part
+LR/ABS/DNV-approved, low-motion, 30,000+ long tons of payload, ~14-month delivery. It de-risks the part
 of your wind thesis that's still bespoke, and gives you a 50–70 year asset with multi-cycle
 residual value.
 
