@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lease vs. Build — the CAPEX case for the MPSS</title>
+  <meta name="description" content="Why lease an MPSS instead of building a bespoke deepwater host like Scarborough: a single-chart comparison of the upfront capital each path demands before first oil." />
+  <meta name="theme-color" content="#0a1a2f" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Cpath d='M4 20h24M8 20v-6h16v6M13 14V9h6v5' stroke='%232ea3d9' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <style>
+    :root{
+      --navy-900:#0a1a2f; --navy-700:#13273d; --ink:#14212e; --slate:#4a5a6b;
+      --slate-light:#64748b; --line:#e6ecf3; --surface:#ffffff; --bg:#eef3f8;
+      --mpss:#1c7fb0; --mpss-light:#2ea3d9; --incumbent:#c2410c; --pos:#0f8a5f;
+      --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;}
+    body{font-family:var(--font); color:var(--ink); background:var(--bg);
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;}
+    .card{width:1000px; max-width:100%; margin:22px auto; background:var(--surface);
+      border-radius:16px; box-shadow:0 10px 34px rgba(10,26,47,.14); padding:26px 30px 22px;}
+
+    .eyebrow{color:var(--mpss); font-weight:700; font-size:11px; text-transform:uppercase;
+      letter-spacing:.16em; margin:0 0 6px;}
+    h1{font-size:23px; letter-spacing:-.02em; line-height:1.15; margin:0 0 5px; color:var(--navy-900);}
+    .sub{margin:0 0 6px; color:var(--slate); font-size:13.5px;}
+
+    .chart{margin:6px 0 2px;}
+    svg{display:block; width:100%; height:auto; overflow:visible;}
+    .cat{font:700 15px var(--font); fill:var(--navy-900);}
+    .catsub{font:500 11.5px var(--font); fill:var(--slate-light);}
+    .val{font:800 16px var(--font);}
+    .val-ink{fill:var(--ink);}
+    .grid line{stroke:var(--line); stroke-width:1;}
+    .axis text{font:600 11px var(--font); fill:var(--slate-light);}
+    .bar{transition:opacity .12s;} .bar:hover{opacity:.88; cursor:default;}
+
+    .takeaway{margin:14px 0 4px; background:linear-gradient(180deg,#f3f8fc,#eaf2f9);
+      border-left:4px solid var(--mpss); border-radius:0 10px 10px 0; padding:12px 16px;
+      font-size:14.5px; color:var(--navy-700); line-height:1.5;}
+    .takeaway b{color:var(--navy-900);} .takeaway .hl{color:var(--incumbent); font-weight:800;}
+    .takeaway .hlb{color:var(--mpss); font-weight:800;}
+
+    .chips{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0 6px;}
+    .chip{background:#f6f9fc; border:1px solid var(--line); border-radius:10px; padding:10px 13px;}
+    .chip .c-num{font-size:19px; font-weight:800; color:var(--navy-900); letter-spacing:-.02em; line-height:1;}
+    .chip .c-num.blue{color:var(--mpss);}
+    .chip .c-lab{font-size:11px; color:var(--slate); margin-top:4px; line-height:1.35;}
+
+    .foot{margin-top:12px; color:var(--slate-light); font-size:10px; line-height:1.45;}
+
+    /* tooltip */
+    #tip{position:fixed; pointer-events:none; opacity:0; transform:translateY(4px);
+      transition:opacity .1s; background:var(--navy-900); color:#fff; border-radius:8px;
+      padding:8px 11px; font-size:12px; line-height:1.4; box-shadow:0 6px 20px rgba(10,26,47,.3);
+      max-width:250px; z-index:20;}
+    #tip .t-h{font-weight:800; margin-bottom:2px;}
+    #tip .t-v{color:#8fd0f0; font-weight:700;}
+
+    @media (max-width:680px){ .card{padding:18px 14px;} .chips{grid-template-columns:1fr;} h1{font-size:19px;} }
+    @media (prefers-color-scheme:dark){
+      body{background:#0a1420;}
+      .card{background:#0e1c2c; box-shadow:0 10px 34px rgba(0,0,0,.5);}
+      :root{--ink:#e7eef6; --navy-900:#eaf2fb; --navy-700:#cfe0f0; --slate:#9db2c6; --slate-light:#7f95ab; --line:#213547; --surface:#0e1c2c;}
+      .cat{fill:#eaf2fb;} .takeaway{background:linear-gradient(180deg,#12263a,#0f2032);}
+      .chip{background:#12263a;} .chip .c-num{color:#eaf2fb;}
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p class="eyebrow">Lease vs. build · The capital decision</p>
+    <h1>CAPEX is the driver — and it isn't close.</h1>
+    <p class="sub">Upfront capital committed to secure a deepwater production host, <b>before a single barrel is sold</b>.</p>
+
+    <div class="chart">
+      <!-- viewBox: 1000 x 330. Scale: $0–$1,600M maps x 40→960 (0.575 px/$M) -->
+      <svg viewBox="0 0 1000 330" role="img"
+           aria-label="Bar chart of upfront capital to secure a production host: a Scarborough-class bespoke new-build is about 1.5 billion dollars, owning an MPSS is 45 million dollars, and leasing an MPSS is roughly zero up front.">
+        <!-- gridlines + x axis -->
+        <g class="grid">
+          <line x1="40"  y1="30" x2="40"  y2="272"/>
+          <line x1="270" y1="30" x2="270" y2="272"/>
+          <line x1="500" y1="30" x2="500" y2="272"/>
+          <line x1="730" y1="30" x2="730" y2="272"/>
+          <line x1="960" y1="30" x2="960" y2="272"/>
+        </g>
+        <g class="axis">
+          <text x="40"  y="290" text-anchor="middle">$0</text>
+          <text x="270" y="290" text-anchor="middle">$400M</text>
+          <text x="500" y="290" text-anchor="middle">$800M</text>
+          <text x="730" y="290" text-anchor="middle">$1.2B</text>
+          <text x="960" y="290" text-anchor="middle">$1.6B</text>
+        </g>
+
+        <!-- ROW 1: Bespoke new-build (Scarborough-class) = ~$1,500M -->
+        <text class="cat"    x="40" y="22">New-build bespoke host — Scarborough-class FPU</text>
+        <rect class="bar" x="40" y="34" width="862.5" height="40" rx="4" fill="#c2410c"
+              data-h="Build it bespoke" data-v="~$1.5B up front" data-n="Illustrative host/topsides scope. Deepwater hosts run $0.6B–$3B+; Scarborough-class sits at the high end. Committed years before first oil."></rect>
+        <text class="val"   x="890" y="59" text-anchor="end" fill="#ffffff">~$1.5B</text>
+        <text class="catsub" x="40" y="90">Range $0.6B–$3B+ · host vessel only · locked in years before first oil</text>
+
+        <!-- ROW 2: Own an MPSS = $45M -->
+        <text class="cat"    x="40" y="120">Own an MPSS outright</text>
+        <rect class="bar" x="40" y="132" width="25.9" height="40" rx="4" fill="#1c7fb0"
+              data-h="Own an MPSS" data-v="$45M up front" data-n="Standardized, class-approved host. ~1/33rd the capital of a bespoke Scarborough-class build."></rect>
+        <text class="val val-ink" x="76" y="157" text-anchor="start">$45M</text>
+        <text class="catsub" x="40" y="188">A standard, class-approved host — about 1/33 the capital</text>
+
+        <!-- ROW 3: Lease an MPSS = ~$0 up front -->
+        <text class="cat"    x="40" y="218">Lease an MPSS</text>
+        <circle class="bar" cx="43" cy="242" r="7" fill="#2ea3d9"
+              data-h="Lease an MPSS" data-v="≈ $0 up front" data-n="No build capital. You pay a day rate as an operating cost, out of production cash flow — capital committed when you sign, not years ahead."></circle>
+        <text class="val val-ink" x="60" y="248" text-anchor="start">≈ $0 up front</text>
+        <text class="catsub" x="40" y="270">CAPEX becomes a day rate — paid from cash flow, not raised before FID</text>
+      </svg>
+    </div>
+
+    <div class="takeaway">
+      Same job — host and process a deepwater field. One path locks up <span class="hl">~$1.5&nbsp;billion</span>
+      of capital years before first oil; owning an MPSS needs <span class="hlb">$45&nbsp;million</span> (~33× less),
+      and <span class="hlb">leasing needs almost none</span> — the cost converts to a day rate paid out of the
+      cash flow the field itself generates.
+    </div>
+
+    <div class="chips">
+      <div class="chip"><div class="c-num blue">~33×</div><div class="c-lab">Less upfront capital to own an MPSS vs a bespoke Scarborough-class build</div></div>
+      <div class="chip"><div class="c-num blue">≈ $0</div><div class="c-lab">Capital at risk before FID when you lease — day rate paid from cash flow</div></div>
+      <div class="chip"><div class="c-num blue">~14 mo</div><div class="c-lab">To a standard MPSS host — versus years to design &amp; build bespoke</div></div>
+    </div>
+
+    <p class="foot">
+      Illustrative comparison for discussion only — not offers, quotes or guarantees. Bespoke figure is host/topsides
+      scope (not full field development); deepwater production hosts typically run $0.6B–$3B+, with Scarborough-class
+      mega-FPUs at the upper end, shown here as the class archetype. MPSS build cost per the Seaways day-rate model
+      ($45M). Leasing shifts host CAPEX to a day-rate operating cost; utilisation, financing and tax excluded.
+    </p>
+  </div>
+
+  <div id="tip"><div class="t-h"></div><div class="t-v"></div><div class="t-n"></div></div>
+  <script>
+    (function(){
+      var tip=document.getElementById('tip'), th=tip.querySelector('.t-h'),
+          tv=tip.querySelector('.t-v'), tn=tip.querySelector('.t-n');
+      document.querySelectorAll('.bar').forEach(function(el){
+        el.addEventListener('mousemove', function(e){
+          th.textContent=el.getAttribute('data-h');
+          tv.textContent=el.getAttribute('data-v');
+          tn.textContent=el.getAttribute('data-n');
+          tip.style.opacity='1'; tip.style.transform='translateY(0)';
+          var x=e.clientX+14, y=e.clientY+14;
+          if(x+250>window.innerWidth) x=e.clientX-264;
+          tip.style.left=x+'px'; tip.style.top=y+'px';
+        });
+        el.addEventListener('mouseleave', function(){ tip.style.opacity='0'; tip.style.transform='translateY(4px)'; });
+      });
+    })();
+  </script>
+</body>
+</html>
