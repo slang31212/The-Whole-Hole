@@ -40,9 +40,10 @@ Stewart Lang · Seaways MPSS · stewart.lang@seaways-mpss.com
 
 Dear Michael,
 
-Stonepeak's energy-transition thesis and your work alongside GIP on Revolution Wind tell me
-you already believe the value in offshore is moving from the wellhead to the platform. The MPSS
-is the platform — decoupled from any single field or wind lease.
+Stonepeak already owns this thesis at sea — Textainer leases standardized steel boxes to some
+200 shipping lines, and Seapeak charters LNG carriers on long contracts. The MPSS is the same
+playbook one step further offshore: a standardized production host you own once and re-let for a
+century, decoupled from any single field or wind lease.
 
 It's a standardized, LR/ABS/DNV-approved semi-submersible host. The same low-motion hull
 installs turbines and hosts a floating power/HVDC island ("Turbine Plus"), then re-lets to

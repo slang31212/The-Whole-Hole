@@ -9,20 +9,22 @@ fabrication-ready; nothing larger is on the table in the first call.
 
 ## 1. Tillery Capital Partners
 
-**To:** Tillery Capital Partners
-**Subject:** Getting in early on standardized offshore infrastructure — a $4M seed
+**To:** Chris Weidenhammer — Managing Partner, Tillery Capital
+**Subject:** A durable, contracted, long-hold real asset — a $4M seed
 
-Dear [Name],
+Dear Chris,
 
-Tillery works the lower-middle-market with an infrastructure lean — which is exactly the entry
-point for the MPSS before it becomes a fleet. We've validated and classed (Lloyd's, ABS, DNV) a
-standardized deepwater host that gets leased, not sold: one hull, re-let across production,
-workover, accommodation, floating wind and power at ~$120k–$350k/day over 10–15 year charters.
+Tillery backs durable, cash-generative businesses in the lower-middle-market and holds them —
+family-office structured, no fund clock. The MPSS is that same kind of asset in steel:
+standardized, contracted, and built to outlast everyone who signs the charter.
 
-The heavy engineering and independent validation are behind us. What we're raising now is a
-modest **$4M seed** for a two-year runway — to first charter LOI and a fabrication-ready first
-hull. It's a small ticket into an asset with a 100+ year life and a leasing model borrowed
-straight from aircraft.
+We've validated and classed (Lloyd's, ABS, DNV) a standardized deepwater host that gets leased,
+not sold: one hull, re-let across production, workover, accommodation, floating wind and power at
+~$120k–$350k/day. Built for a fraction of a conventional host and chartered at the rate that host
+commands — durable contracted cash flow on a 100+ year asset.
+
+The heavy engineering is behind us. What we're raising now is a modest **$4M seed** for a
+two-year runway — to first charter LOI and a fabrication-ready first hull.
 
 Could I have 15 minutes to walk you through it? Nothing to sign — just the case and the numbers.
 
@@ -34,7 +36,7 @@ Stewart Lang · Seaways MPSS · stewart.lang@seaways-mpss.com
 ## 2. Preservation Holdings
 
 **To:** Preservation Holdings
-**Subject:** A 50-year asset for long-hold capital — early backing
+**Subject:** A 100-year asset for long-hold capital — early backing
 
 Dear [Name],
 
@@ -125,22 +127,23 @@ Stewart Lang · Seaways MPSS · stewart.lang@seaways-mpss.com
 
 ## 6. DCA Family Office
 
-**To:** DCA Family Office
-**Subject:** From aircraft leasing to marine leasing — the same model, a longer-lived asset
+**To:** Curt Rocca — Managing Partner, DCA Family Office
+**Subject:** Institutional-quality access to a 100-year asset — without the institutional hassle
 
-Dear [Name],
+Dear Curt,
 
-DCA's history in aircraft leasing means I barely have to explain the thesis: own a standardized
-asset, lease it on long charters, refinance across lessees. The MPSS is the marine equivalent —
-and where an aircraft lives ~25 years, this hull lives 100+.
+DCA gives UHNW and tax-sensitive families institutional-quality access without the institutional
+hassle — patient, flexible capital that can hold what a fund clock never could. The MPSS is built
+for exactly that holder.
 
-It's a validated, LR/ABS/DNV-approved offshore host, re-let across production, accommodation,
-floating wind ("Turbine Plus"), power and CCS at ~$120k–$350k/day. The AerCap playbook you know,
-applied to an asset with a far longer tail and more re-lease cycles.
+It's a standardized, LR/ABS/DNV-approved offshore host we lease rather than sell — one hull
+re-let across production, accommodation, floating wind ("Turbine Plus"), power and CCS at
+~$120k–$350k/day, on a 100+ year asset (Lloyd's: no inherent weakness). Own it once and re-let it
+across five or six charter cycles — long-tail, tax-efficient compounding your families are built
+to hold.
 
 We're raising a modest **$4M seed** for a two-year runway to first LOI and a fabrication-ready
-hull — with the ~$50M first hull the natural next step for a leasing-native backer. Could I have
-15 minutes?
+first hull. Could I have 15 minutes?
 
 Best regards,
 Stewart Lang · Seaways MPSS · stewart.lang@seaways-mpss.com
