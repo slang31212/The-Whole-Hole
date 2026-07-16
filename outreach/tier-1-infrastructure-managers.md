@@ -19,7 +19,7 @@ I'd like 15 minutes to show you an asset built exactly for that box.
 The MPSS is a validated, standardized deepwater host — approved by Lloyd's Register, ABS and
 DNV — that we lease rather than sell. One hull carrying 30,000+ long tons of payload, re-let across production, floating
 wind (our "Turbine Plus" install and power-island configuration), accommodation, power and CCS,
-on 10–15 year charters at ~$120k–$350k/day against a 50–70-year asset life. It is FPSO-grade
+on 10–15 year charters at ~$120k–$350k/day against a 100+ year asset life. It is FPSO-grade
 bankability with aircraft-leasing re-lettability: the AerCap template, in steel, at sea.
 
 The first hull is a ~$50M anchor-equity ticket — deliberately middle-market, deliberately
@@ -46,7 +46,7 @@ is the platform — decoupled from any single field or wind lease.
 
 It's a standardized, LR/ABS/DNV-approved semi-submersible host. The same low-motion hull
 installs turbines and hosts a floating power/HVDC island ("Turbine Plus"), then re-lets to
-CCS, hydrogen, power or production as leases roll — 10–15 year charters, 50–70 year hull.
+CCS, hydrogen, power or production as leases roll — 10–15 year charters, 100+ year hull.
 Because it's a product and not a project, the delivery and residual-value risk that kills
 bespoke FPUs largely disappears.
 
@@ -97,7 +97,7 @@ asset that lets you do both at once.
 It is a validated, standardized, LR/ABS/DNV-approved host. One low-motion hull hosts deepwater
 production and up to 2M bbl of storage today (declining but cash-rich), installs wind turbines
 and carries a floating power/HVDC island tomorrow ("Turbine Plus"), and re-lets to CCS and
-hydrogen after that — 50–70 year life, 10–15 year charters. It is the physical hedge your
+hydrogen after that — 100+ year life, 10–15 year charters. It is the physical hedge your
 transition thesis is already paying for in bespoke form.
 
 I'd welcome 15 minutes with the right person on your team to discuss a JV or anchor equity in
@@ -121,7 +121,7 @@ they compound. The MPSS applies that thesis one step out to sea.
 
 It's a validated, LR/ABS/DNV-approved deepwater host we lease, not sell — one hull carrying
 30,000+ long tons of payload, re-let across production, floating wind ("Turbine Plus"), power, accommodation, data centers
-and CCS at ~$120k–$350k/day on 10–15 year charters, against a 50–70 year hull. Dry-lease,
+and CCS at ~$120k–$350k/day on 10–15 year charters, against a 100+ year hull. Dry-lease,
 non-recourse, FPSO-template financing: the lender underwrites the charterer, not the concept —
 exactly the bankability profile your marina deal proved out.
 

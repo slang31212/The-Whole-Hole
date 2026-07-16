@@ -15,8 +15,10 @@ frame, not the seed. **Pritzker** is the exception: a true direct-invest family 
 Dear Michael,
 
 PPC's model — direct acquisition, patient capital, 20-year-plus holds — is the rare fit for an
-asset whose whole thesis is a 50–70 year life. Most investors can't hold long enough to capture
-an MPSS hull's second and third lease cycles. You can.
+asset whose whole thesis is a 100+ year life — the span Prof. Douglas Faulkner predicted, held
+there by simple in-field maintenance (deballast the affected section clear of the water, then
+paint, repair or replace). Most investors can't hold long enough to capture an MPSS hull's
+fifth or sixth lease cycle. You can.
 
 It's a validated, standardized, LR/ABS/DNV-approved offshore host we lease rather than sell. One
 hull carrying 30,000+ long tons of payload re-lets across production, floating wind ("Turbine Plus"), accommodation,
@@ -65,7 +67,7 @@ Dear [Name],
 
 KIA's global infrastructure and energy mandate is built for assets that outlast any single
 project. The MPSS is one: a validated, standardized, LR/ABS/DNV-approved floating host with a
-50–70 year life that re-lets across offshore power, renewable install and production.
+100+ year life that re-lets across offshore power, renewable install and production.
 
 Rather than fund a bespoke platform tied to one field or one wind lease, KIA could hold
 standardized, contracted, re-deployable capacity — 10–15 year charters against a hull that
@@ -93,7 +95,7 @@ bespoke, the floating host.
 It's LR/ABS/DNV-approved, low-motion, 30,000+ long tons of payload, and re-configurable — turbine
 install and power/HVDC island today ("Turbine Plus"), production and storage where the economics
 are strong, CCS and hydrogen as they mature. One hull, adapted by its topside package, on
-long-term charters against a 50–70 year life.
+long-term charters against a 100+ year life.
 
 At QIA's scale the fit is a JV or platform co-invest. I'd welcome 15 minutes with your
 infrastructure team to explore it — approvals and economics in hand, nothing to sign.
@@ -115,7 +117,7 @@ capital a standardized floating-platform program needs. The MPSS turns the offsh
 bespoke, one-field build into a re-lettable, classed product with contracted cash flow.
 
 LR/ABS/DNV-approved, ~14-month delivery, 30,000+ long tons of payload, low-motion by design — one hull
-that carries production, floating wind ("Turbine Plus"), power and CCS across a 50–70 year life.
+that carries production, floating wind ("Turbine Plus"), power and CCS across a 100+ year life.
 For a long-horizon direct investor, the multi-cycle residual value is the point.
 
 I'd value 15 minutes to discuss a JV or anchor position with the right person on your team.
@@ -139,7 +141,7 @@ mass that keeps it effectively motionless in sub-12 m seas, and that survived a 
 with no water on deck.
 
 It's LR/ABS/DNV-approved and standardized — one hull for turbine install and power islands
-("Turbine Plus"), production, CCS and hydrogen, re-let across a 50–70 year life. It's a
+("Turbine Plus"), production, CCS and hydrogen, re-let across a 100+ year life. It's a
 climate-and-infrastructure asset that earns from the transition without betting on one project.
 
 I'd like 15 minutes to explore a JV or platform investment with your team. Approvals and
@@ -160,7 +162,7 @@ Dear [Name],
 CPP Investments underwrites infrastructure on long horizons and hard contracts — which is
 precisely how the MPSS is built to be owned. It's a validated, LR/ABS/DNV-approved floating
 host, leased on 10–15 year charters, re-lettable across production, floating wind, power and
-CCS, against a 50–70 year asset.
+CCS, against a 100+ year asset.
 
 The cash-flow profile is FPSO-grade with aircraft-leasing re-lettability: the lender
 underwrites the charterer, not the concept. That's the institutional-quality risk profile a
@@ -183,7 +185,7 @@ Dear [Name],
 
 Ontario Teachers' has long favored stable, contracted infrastructure held for decades. The MPSS
 fits that discipline: a standardized, LR/ABS/DNV-approved floating host on 10–15 year charters,
-re-let across production, floating wind ("Turbine Plus"), power and CCS, with a 50–70 year life
+re-let across production, floating wind ("Turbine Plus"), power and CCS, with a 100+ year life
 that carries real residual value into a second and third lease.
 
 It converts the offshore host from a bespoke project into an ownable, re-deployable asset —
@@ -210,7 +212,7 @@ classed hull that carries a power/HVDC island and installs turbines ("Turbine Pl
 re-lets to production, CCS or hydrogen.
 
 LR/ABS/DNV-approved, low-motion, 30,000+ long tons of payload, ~14-month delivery. It de-risks the part
-of your wind thesis that's still bespoke, and gives you a 50–70 year asset with multi-cycle
+of your wind thesis that's still bespoke, and gives you a 100+ year asset with multi-cycle
 residual value.
 
 I'd welcome 15 minutes with your infrastructure team to explore a JV or platform co-invest.
@@ -234,7 +236,7 @@ workover demand — all of which the MPSS serves from a single standardized hull
 It's LR/ABS/DNV-approved and re-configurable: production and storage for marginal-field
 development, tender-assist and workover support, accommodation/flotel, and turbine install /
 power islands ("Turbine Plus") as the region's wind build-out accelerates. One hull, many
-missions, a 50–70 year life.
+missions, a 100+ year life.
 
 I'd value 15 minutes to explore where this fits Khazanah — a JV or an anchor position in the
 first regional hull. Approvals and economics in hand.

@@ -21,7 +21,7 @@ workover, accommodation, floating wind and power at ~$120k–$350k/day over 10�
 
 The heavy engineering and independent validation are behind us. What we're raising now is a
 modest **$4M seed** for a two-year runway — to first charter LOI and a fabrication-ready first
-hull. It's a small ticket into an asset with a 50–70 year life and a leasing model borrowed
+hull. It's a small ticket into an asset with a 100+ year life and a leasing model borrowed
 straight from aircraft.
 
 Could I have 15 minutes to walk you through it? Nothing to sign — just the case and the numbers.
@@ -39,7 +39,7 @@ Stewart Lang · Seaways MPSS · stewart.lang@seaways-mpss.com
 Dear [Name],
 
 The name says the thesis: preserve and compound over long horizons. The MPSS is built for that
-clock — a validated, LR/ABS/DNV-approved offshore host with a 50–70 year life, leased on 10–15
+clock — a validated, LR/ABS/DNV-approved offshore host with a 100+ year life, leased on 10–15
 year charters and re-let across production, accommodation, floating wind and power as each lease
 rolls. The residual value is a re-lease, not scrap.
 
@@ -66,7 +66,7 @@ premise is turning a bespoke offshore project into a repeatable infrastructure p
 MPSS is validated and classed (Lloyd's, ABS, DNV); the hard part is done.
 
 One standardized hull, re-let across production, tender-assist and workover support,
-accommodation, and floating wind — 10–15 year charters, 50–70 year life. We're raising a modest
+accommodation, and floating wind — 10–15 year charters, 100+ year life. We're raising a modest
 **$4M seed** for a two-year runway to first LOI and fabrication-ready status, with the first
 ~$50M hull the natural next step for backers who want to build from the ground floor.
 
@@ -87,7 +87,7 @@ Dear [Name],
 Given your infrastructure orientation, I wanted to put a genuinely early opportunity in front of
 you. The MPSS is a validated, LR/ABS/DNV-approved deepwater host we lease rather than sell — one
 hull carrying 30,000+ long tons of payload, re-let across production, accommodation, floating wind ("Turbine Plus") and
-power at ~$120k–$350k/day, against a 50–70 year life.
+power at ~$120k–$350k/day, against a 100+ year life.
 
 The engineering and independent validation are complete. We're raising a modest **$4M seed** for
 a two-year runway to first charter LOI and a fabrication-ready first hull — a small ticket into
@@ -108,7 +108,7 @@ Stewart Lang · Seaways MPSS · stewart.lang@seaways-mpss.com
 Dear [Name],
 
 CODI's permanent-holding model is the rare structure that can actually capture an asset with a
-50–70 year life across multiple lease cycles — most owners are forced to sell before the
+100+ year life across multiple lease cycles — most owners are forced to sell before the
 residual value shows up. The MPSS is that asset: a validated, LR/ABS/DNV-approved offshore host,
 leased and re-let across production, accommodation, floating wind and power.
 
@@ -132,7 +132,7 @@ Dear [Name],
 
 DCA's history in aircraft leasing means I barely have to explain the thesis: own a standardized
 asset, lease it on long charters, refinance across lessees. The MPSS is the marine equivalent —
-and where an aircraft lives ~25 years, this hull lives 50–70.
+and where an aircraft lives ~25 years, this hull lives 100+.
 
 It's a validated, LR/ABS/DNV-approved offshore host, re-let across production, accommodation,
 floating wind ("Turbine Plus"), power and CCS at ~$120k–$350k/day. The AerCap playbook you know,
@@ -163,7 +163,7 @@ stiffened mild-steel plate, delivered in ~14 months, effectively motionless in s
 
 One hull, chartered like a vessel and re-let across production, tender-assist and workover
 support, accommodation/flotel, floating wind ("Turbine Plus") and power — 10–15 year charters
-against a 50–70 year life. It's the leasing economics your house already understands, on an
+against a 100+ year life. It's the leasing economics your house already understands, on an
 asset with an unusually long tail.
 
 We're raising a modest **$4M seed** for a two-year runway to first charter LOI, with the ~$50M
