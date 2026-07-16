@@ -10,7 +10,7 @@ frame, not the seed. **Pritzker** is the exception: a true direct-invest family 
 ## 1. Pritzker Private Capital (PPC)
 
 **To:** Michael Nelson — Managing Partner, Pritzker Private Capital
-**Subject:** A 50-year leaseable asset for 20-year-hold capital
+**Subject:** A 100-year leaseable asset for 20-year-hold capital
 
 Dear Michael,
 
