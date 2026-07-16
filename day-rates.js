@@ -23,7 +23,7 @@
   /* ---- Default model shown on first visit ---- */
   function defaultState() {
     return {
-      capex: 600000000,
+      capex: 45000000,
       daysYear: 365,
       rows: [
         makeRow(PRESETS[0]),
