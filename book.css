@@ -1,0 +1,617 @@
+/* =========================================================
+   MPSS Infrastructure Investment Book — module stylesheet
+   Extends styles.css (shared navy / ocean / steel palette).
+   Every screen here is a self-contained "module" so the book
+   can be re-ordered and re-cut for different audiences.
+   ========================================================= */
+
+:root {
+  --green: #2fbf71;
+  --green-deep: #199a55;
+  --green-glow: #57e39a;
+  --gold: #e5b93c;
+}
+
+/* ---------- Book cover ---------- */
+.book-cover {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(120% 120% at 70% 10%, #12406b 0%, #0a1a2f 60%);
+  color: #eaf2fb;
+  padding: 96px 0 88px;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+.book-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(46, 163, 217, .05) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(0deg, rgba(46, 163, 217, .05) 0 1px, transparent 1px 64px);
+  pointer-events: none;
+}
+.book-cover .container { position: relative; z-index: 1; }
+.book-kicker {
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--accent-glow);
+  margin: 0 0 20px;
+}
+.book-title {
+  font-size: clamp(2.3rem, 5.6vw, 4rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  margin: 0 0 20px;
+  max-width: 900px;
+}
+.book-title .grad { background: linear-gradient(100deg, var(--accent-glow), #9ad9f6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.book-sub {
+  font-size: clamp(1.05rem, 1.9vw, 1.32rem);
+  color: #c4d6e8;
+  max-width: 720px;
+  margin: 0 0 34px;
+}
+.book-edition {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: .92rem;
+  color: #eaf4fb;
+  background: rgba(255, 255, 255, .05);
+}
+.book-edition .pip { width: 9px; height: 9px; border-radius: 50%; background: var(--accent-glow); }
+
+/* ---------- Contents ---------- */
+.contents {
+  margin: 46px 0 0;
+  padding: 30px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, .16);
+}
+.contents-title {
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .78rem;
+  font-weight: 700;
+  color: #8fabc6;
+  margin: 0 0 18px;
+}
+.contents-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 34px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: chap;
+}
+.contents-grid li { counter-increment: chap; }
+.contents-grid a {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 11px 6px;
+  color: #d5e4f2;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  font-weight: 500;
+}
+.contents-grid a:hover { color: #fff; text-decoration: none; }
+.contents-grid a::before {
+  content: counter(chap, decimal-leading-zero);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--accent-glow);
+  font-size: .9rem;
+  min-width: 26px;
+}
+
+/* ---------- Chapter scaffolding ---------- */
+.chapter { scroll-margin-top: 80px; }
+.chapter-mark {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.chapter-num {
+  font-variant-numeric: tabular-nums;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: var(--accent-deep);
+  padding: 5px 12px;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+}
+.chapter-mark.light .chapter-num { color: var(--accent-glow); border-color: rgba(87, 196, 240, .55); }
+.chapter-kicker {
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: .76rem;
+  font-weight: 700;
+  color: var(--slate);
+}
+.chapter-mark.light .chapter-kicker { color: #9fc0dc; }
+
+/* ---------- Cascade (the problem) ---------- */
+.cascade {
+  max-width: 560px;
+  margin: 8px auto 0;
+  text-align: center;
+}
+.cascade-item {
+  padding: 15px 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  color: var(--navy-900);
+  box-shadow: var(--shadow-sm);
+}
+.cascade-item.trigger {
+  background: linear-gradient(120deg, #0e2846, #14507a);
+  color: #fff;
+  border-color: transparent;
+}
+.cascade-item.loss { background: #fbeceb; border-color: #f2cfcb; color: #a5352b; }
+.cascade-arrow { font-size: 1.4rem; line-height: 1; color: var(--accent); padding: 7px 0; }
+.cascade-solve {
+  margin: 26px auto 0;
+  max-width: 620px;
+  text-align: center;
+  padding: 22px 26px;
+  border-radius: var(--radius);
+  background: linear-gradient(120deg, #0e2846, #14507a);
+  color: #eaf4fb;
+  font-size: 1.3rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-md);
+}
+.cascade-solve strong { color: var(--accent-glow); }
+
+/* ---------- Protect grid (icons) ---------- */
+.protect-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.protect-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 30px 20px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.protect-tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.protect-tile svg { width: 54px; height: 54px; }
+.protect-tile .protect-label { font-weight: 700; color: var(--navy-900); font-size: 1.06rem; }
+.protect-tile.future { border-style: dashed; background: var(--bg-alt); }
+.protect-tile.future .protect-label { color: var(--accent-deep); }
+
+/* ---------- Win boxes (four metrics) ---------- */
+.win-boxes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .08);
+}
+.win-box {
+  background: #0c2137;
+  padding: 34px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.win-num {
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.win-num .u { font-size: .42em; font-weight: 700; color: var(--accent-glow); margin-left: 4px; letter-spacing: 0; }
+.win-label { font-size: .96rem; color: #a7c0d8; font-weight: 500; }
+
+/* ---------- RAO comparison ---------- */
+.rao {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px 30px 26px;
+  box-shadow: var(--shadow-sm);
+}
+.rao-group { margin-bottom: 26px; }
+.rao-group:last-child { margin-bottom: 0; }
+.rao-group-title {
+  font-weight: 700;
+  color: var(--navy-900);
+  font-size: 1.05rem;
+  margin: 0 0 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.rao-group-title small { font-weight: 500; color: var(--slate-light); font-size: .82rem; }
+.rao-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 54px;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 9px;
+}
+.rao-row:last-child { margin-bottom: 0; }
+.rao-name { font-size: .92rem; font-weight: 600; color: var(--slate); }
+.rao-track { height: 20px; background: var(--bg-tint); border-radius: 5px; overflow: hidden; }
+.rao-bar {
+  height: 100%;
+  border-radius: 5px;
+  background: var(--slate-light);
+  min-width: 3px;
+}
+.rao-val { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--slate); font-size: .9rem; }
+.rao-row.is-mpss .rao-name { color: var(--accent-deep); font-weight: 800; }
+.rao-row.is-mpss .rao-bar { background: linear-gradient(90deg, var(--accent-deep), var(--accent-glow)); }
+.rao-row.is-mpss .rao-val { color: var(--accent-deep); }
+.rao-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: .84rem;
+  color: var(--slate-light);
+}
+.rao-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.rao-legend i { width: 13px; height: 13px; border-radius: 3px; }
+.rao-legend .k-mpss { background: linear-gradient(90deg, var(--accent-deep), var(--accent-glow)); }
+.rao-legend .k-peer { background: var(--slate-light); }
+
+.rao-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 14px;
+  margin-top: 30px;
+  font-weight: 700;
+  color: var(--navy-900);
+}
+.rao-chain span { padding: 9px 18px; background: var(--bg-tint); border-radius: 999px; }
+.rao-chain b { color: var(--accent); font-size: 1.15rem; }
+
+/* ---------- Advantages (three graphics) ---------- */
+.adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 34px; }
+.adv-card {
+  text-align: center;
+  padding: 30px 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.adv-card svg { width: 76px; height: 76px; margin-bottom: 8px; }
+.adv-card h3 { font-size: 1.1rem; color: var(--navy-900); margin: 0 0 8px; text-transform: uppercase; letter-spacing: .05em; }
+.adv-card p { margin: 0; color: var(--slate); font-size: .95rem; }
+
+/* ---------- Motion = Money split ---------- */
+.money-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.money-col {
+  border-radius: var(--radius);
+  padding: 30px 28px;
+  box-shadow: var(--shadow-sm);
+}
+.money-col.higher { background: linear-gradient(180deg, #fbeeec, #f7e2df); border: 1px solid #f0cdc8; }
+.money-col.lower { background: linear-gradient(180deg, #e9f7f0, #ddf3e8); border: 1px solid #c3e8d4; }
+.money-col h3 {
+  text-align: center;
+  font-size: 1.24rem;
+  margin: 0 0 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid rgba(0, 0, 0, .06);
+}
+.money-col.higher h3 { color: #a5352b; }
+.money-col.lower h3 { color: var(--green-deep); }
+.money-flow { list-style: none; margin: 0; padding: 0; text-align: center; }
+.money-flow li { font-weight: 600; color: var(--ink); padding: 3px 0; }
+.money-flow li::after {
+  content: "↓";
+  display: block;
+  color: rgba(0, 0, 0, .3);
+  font-size: .95rem;
+  line-height: 1.4;
+}
+.money-flow li:last-child::after { content: none; }
+.money-col.higher .money-flow li { color: #7a2a22; }
+.money-col.lower .money-flow li { color: #14663f; }
+.money-punch {
+  text-align: center;
+  margin: 32px auto 0;
+  max-width: 640px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--navy-900);
+}
+.money-punch .up { color: #a5352b; }
+.money-punch .down { color: var(--green-deep); }
+
+/* ---------- Giant savings number ---------- */
+.savings {
+  text-align: center;
+  padding: 20px 0 8px;
+}
+.savings-eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .82rem; font-weight: 700; color: #9fc0dc; margin: 0 0 6px; }
+.savings-context { font-size: 1.15rem; color: #cfe0f0; margin: 0 0 8px; }
+.savings-num {
+  font-size: clamp(2.8rem, 9vw, 6.4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  background: linear-gradient(120deg, var(--green-glow), var(--green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 6px 0 4px;
+}
+.savings-caption { font-size: 1.05rem; color: #bcd0e4; margin: 0 0 34px; }
+.savings-avoided {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 12px;
+  list-style: none;
+  margin: 0 auto 26px;
+  padding: 0;
+  max-width: 760px;
+}
+.savings-avoided li {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(87, 227, 154, .3);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-weight: 600;
+  font-size: .94rem;
+  color: #dbeee4;
+}
+.fineprint { font-size: .82rem; color: #8fabc6; font-style: italic; max-width: 640px; margin: 0 auto; }
+
+/* ---------- The asset we lease ---------- */
+.asset {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 36px;
+  align-items: center;
+}
+.asset-art {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: linear-gradient(180deg, #163a5a 0%, #0f2f4b 100%);
+  box-shadow: var(--shadow-md);
+  line-height: 0;
+}
+.asset-art svg { width: 100%; height: auto; display: block; }
+.asset-badge {
+  display: inline-block;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #06263a;
+  font-weight: 700;
+  font-size: .9rem;
+  margin-bottom: 16px;
+}
+.asset-bullets { list-style: none; margin: 0; padding: 0; }
+.asset-bullets li {
+  position: relative;
+  padding: 12px 0 12px 34px;
+  font-size: 1.06rem;
+  font-weight: 600;
+  color: var(--navy-900);
+  border-bottom: 1px solid var(--line);
+}
+.asset-bullets li:last-child { border-bottom: 0; }
+.asset-bullets li::before {
+  content: "";
+  position: absolute; left: 4px; top: 17px;
+  width: 9px; height: 16px;
+  border: solid var(--accent-deep);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+/* ---------- Lease menu ---------- */
+.lease-menu {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+.lease-card {
+  padding: 24px 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.lease-card .lease-tier { font-size: .74rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--accent-deep); margin: 0 0 8px; }
+.lease-card h4 { margin: 0 0 8px; font-size: 1.12rem; color: var(--navy-900); }
+.lease-card p { margin: 0; font-size: .92rem; color: var(--slate); }
+
+/* ---------- Infrastructure economics chips ---------- */
+.econ-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 14px;
+}
+.econ-node {
+  flex: 1 1 150px;
+  padding: 24px 22px;
+  border-radius: var(--radius);
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.econ-node .econ-k { font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--accent-deep); }
+.econ-node .econ-v { display: block; margin-top: 6px; font-weight: 600; color: var(--navy-900); font-size: 1.02rem; }
+.econ-node.accent { background: linear-gradient(135deg, #0e2846, #14507a); border-color: transparent; }
+.econ-node.accent .econ-k { color: var(--accent-glow); }
+.econ-node.accent .econ-v { color: #fff; }
+
+/* ---------- Eight markets ---------- */
+.markets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.market {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  font-weight: 700;
+  color: var(--navy-900);
+}
+.market svg { width: 30px; height: 30px; flex: none; color: var(--accent-deep); }
+.markets-lead {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--navy-900);
+  margin: 0 0 30px;
+}
+.markets-lead b { color: var(--accent-deep); }
+
+/* ---------- Why now ---------- */
+.whynow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.whynow span {
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .16);
+  font-weight: 600;
+  color: #dbeafc;
+}
+.whynow span.peak { background: var(--accent); color: #06263a; border-color: transparent; }
+.whynow .arrow { background: none; border: 0; color: var(--accent-glow); font-size: 1.2rem; padding: 0 2px; }
+.whynow-punch {
+  text-align: center;
+  margin: 34px auto 0;
+  max-width: 720px;
+  font-size: 1.24rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ---------- Fleet strategy ---------- */
+.fleet {
+  max-width: 560px;
+  margin: 0 auto;
+}
+.fleet-step {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.fleet-step .fleet-badge {
+  flex: none;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+}
+.fleet-step h4 { margin: 0 0 2px; font-size: 1.06rem; color: var(--navy-900); }
+.fleet-step p { margin: 0; font-size: .92rem; color: var(--slate); }
+.fleet-step.finale { background: linear-gradient(135deg, #0e2846, #14507a); border-color: transparent; }
+.fleet-step.finale h4 { color: #fff; }
+.fleet-step.finale p { color: #bcd0e4; }
+.fleet-step.finale .fleet-badge { background: var(--gold); color: #3a2c05; }
+.fleet-arrow { text-align: center; color: var(--accent); font-size: 1.3rem; line-height: 1; padding: 7px 0; }
+
+/* ---------- The ask ---------- */
+.ask-inner { max-width: 780px; }
+.ask-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  list-style: none;
+  margin: 8px 0 36px;
+  padding: 0;
+}
+.ask-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: var(--radius);
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #eaf4fb;
+}
+.ask-list li svg { width: 26px; height: 26px; flex: none; color: var(--accent-glow); }
+
+/* ---------- Chapter divider spacing on dark sections ---------- */
+.section-dark .chapter-kicker { color: #9fc0dc; }
+.section-dark .lead { color: #bcd0e4; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .protect-grid { grid-template-columns: repeat(2, 1fr); }
+  .win-boxes { grid-template-columns: repeat(2, 1fr); }
+  .adv-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .asset { grid-template-columns: 1fr; }
+  .lease-menu { grid-template-columns: repeat(2, 1fr); }
+  .markets { grid-template-columns: repeat(2, 1fr); }
+  .contents-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .protect-grid { grid-template-columns: 1fr; }
+  .win-boxes { grid-template-columns: 1fr; }
+  .money-split { grid-template-columns: 1fr; }
+  .lease-menu { grid-template-columns: 1fr; }
+  .markets { grid-template-columns: 1fr; }
+  .ask-list { grid-template-columns: 1fr; }
+  .rao-row { grid-template-columns: 92px 1fr 46px; gap: 10px; }
+  .rao { padding: 22px 18px; }
+}
