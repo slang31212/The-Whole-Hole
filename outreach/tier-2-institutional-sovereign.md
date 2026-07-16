@@ -9,10 +9,10 @@ frame, not the seed. **Pritzker** is the exception: a true direct-invest family 
 
 ## 1. Pritzker Private Capital (PPC)
 
-**To:** Pritzker Private Capital — Direct Investments
+**To:** Michael Nelson — Managing Partner, Pritzker Private Capital
 **Subject:** A 50-year leaseable asset for 20-year-hold capital
 
-Dear [Name],
+Dear Michael,
 
 PPC's model — direct acquisition, patient capital, 20-year-plus holds — is the rare fit for an
 asset whose whole thesis is a 50–70 year life. Most investors can't hold long enough to capture
@@ -127,10 +127,10 @@ Stewart Lang · Seaways MPSS · stewart.lang@seaways-mpss.com
 
 ## 6. Temasek
 
-**To:** Temasek — Energy & Resources / Climate
+**To:** Uwe Krueger — Head of Industrials, Business Services, Energy & Resources, Temasek
 **Subject:** From Green Volt to a standardized floating host that fits any sea state
 
-Dear [Name],
+Dear Uwe,
 
 Temasek's floating-wind exposure (Green Volt among them) shows you already back offshore
 capacity in motion-heavy waters. The MPSS is the host built for exactly that problem: a

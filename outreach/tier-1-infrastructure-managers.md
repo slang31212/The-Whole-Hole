@@ -35,10 +35,10 @@ Stewart Lang · Seaways MPSS · stewart.lang@seaways-mpss.com
 
 ## 2. Stonepeak Infrastructure Partners
 
-**To:** Stonepeak — Energy Transition / Origination
+**To:** Michael Bricker — Senior Managing Director & Co-Head of Energy, Stonepeak
 **Subject:** Floating host for offshore wind + power — a re-lettable hull, not a one-off FPU
 
-Dear [Name],
+Dear Michael,
 
 Stonepeak's energy-transition thesis and your work alongside GIP on Revolution Wind tell me
 you already believe the value in offshore is moving from the wellhead to the platform. The MPSS
@@ -85,10 +85,10 @@ Stewart Lang · Seaways MPSS · stewart.lang@seaways-mpss.com
 
 ## 4. Mubadala
 
-**To:** Mubadala — Energy / Infrastructure
+**To:** Saed Arar — Head of Infrastructure, Mubadala
 **Subject:** Floating-platform capacity that de-risks O&G while it builds power & wind
 
-Dear [Name],
+Dear Saed,
 
 Your $6.1B Hornsea 3 co-investment with Apollo made Mubadala's direction clear: keep the
 energy returns, move the exposure toward floating power and offshore wind. The MPSS is a single
@@ -110,10 +110,10 @@ Stewart Lang · Seaways MPSS · stewart.lang@seaways-mpss.com
 
 ## 5. Blackstone Infrastructure
 
-**To:** Blackstone Infrastructure — Origination
+**To:** Sebastien Sherman — Senior Managing Director, Blackstone Infrastructure
 **Subject:** Marine leasing as an asset class — the offshore parallel to Safe Harbor Marinas
 
-Dear [Name],
+Dear Sebastien,
 
 Blackstone's ~$5.6B move into Safe Harbor Marinas said something the rest of the market is
 slow to price: standardized marine assets with contracted cash flow are infrastructure, and
