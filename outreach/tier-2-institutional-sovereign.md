@@ -134,8 +134,9 @@ Dear [Name],
 
 Temasek's floating-wind exposure (Green Volt among them) shows you already back offshore
 capacity in motion-heavy waters. The MPSS is the host built for exactly that problem: a
-deep-draft ring pontoon that stays effectively motionless in sub-12 m seas and has survived a
-37.5 m test wave with no water on deck.
+deep-draft ring pontoon carrying over 40,000 long tons of water ballast — an enormous virtual
+mass that keeps it effectively motionless in sub-12 m seas, and that survived a 37.5 m test wave
+with no water on deck.
 
 It's LR/ABS/DNV-approved and standardized — one hull for turbine install and power islands
 ("Turbine Plus"), production, CCS and hydrogen, re-let across a 50–70 year life. It's a

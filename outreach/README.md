@@ -27,7 +27,7 @@ so no letter dangles board control, large equity, or exclusivity. The letters se
 
 - **Validated, standardized** deepwater host — approved by **Lloyd's Register, ABS and DNV** (primary structure, intact & damaged stability, mooring, ballast).
 - **30,000+ Lt** deck payload (long tons; 90X reference hull) on a hull of **just under 10,000 Lt** of steel — a ~3:1 payload-to-steel ratio · **8,100 m²** open deck · **~14-month** hull delivery · single operating draft.
-- **Low-motion** deep-draft ring pontoon — effectively motionless in sub-12 m seas; tested to a **37.5 m (123 ft)** survival wave with no water on deck.
+- **Low-motion** deep-draft ring pontoon — over **40,000 Lt** of water ballast gives the hull an enormous virtual (added) mass, so it's effectively motionless in sub-12 m seas; tested to a **37.5 m (123 ft)** survival wave with no water on deck.
 - **One hull, any mission** — the topside package changes, not the hull.
 - **Re-lettable across industries** — the AerCap "own the asset, lease it, refinance across lessees" template, applied to a 50–70-year marine asset.
 
