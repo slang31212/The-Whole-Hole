@@ -54,104 +54,13 @@
       </div>
     </section>
 
-    <!-- ===================== CALCULATOR ===================== -->
-    <section class="section section-alt calc-section" style="padding-top:0;">
-      <div class="container">
-
-        <!-- Toolbar -->
-        <div class="calc-toolbar">
-          <div class="calc-add">
-            <label for="preset-select" class="calc-add-label">Add a tenant</label>
-            <div class="calc-add-row">
-              <select id="preset-select" class="calc-select" aria-label="Choose a tenant to add"></select>
-              <button type="button" id="add-preset" class="btn btn-primary btn-sm">Add tenant</button>
-              <button type="button" id="add-blank" class="btn btn-ghost btn-sm">Blank row</button>
-            </div>
-          </div>
-          <div class="calc-tools">
-            <button type="button" id="export-csv" class="btn btn-ghost btn-sm">Export CSV</button>
-            <button type="button" id="reset-all" class="btn btn-ghost btn-sm calc-danger">Reset to defaults</button>
-          </div>
-        </div>
-
-        <!-- Global assumptions -->
-        <div class="calc-assumptions">
-          <div class="assume-field">
-            <label for="capex">Host build / lease-in cost (CAPEX)</label>
-            <div class="input-money">
-              <span class="prefix">$</span>
-              <input type="text" inputmode="numeric" id="capex" class="calc-num" />
-            </div>
-            <span class="assume-hint">Used for payback &amp; return-on-asset.</span>
-          </div>
-          <div class="assume-field">
-            <label for="days-year">On-hire days per year (max)</label>
-            <input type="text" inputmode="numeric" id="days-year" class="calc-num" />
-            <span class="assume-hint">365 for a full year; utilisation is applied per tenant.</span>
-          </div>
-        </div>
-
-        <!-- The spreadsheet -->
-        <div class="table-wrap calc-table-wrap">
-          <table class="calc-table" id="rate-table">
-            <thead>
-              <tr>
-                <th class="col-on"><abbr title="Include this tenant in the totals">On</abbr></th>
-                <th class="col-name">Tenant / use case</th>
-                <th class="col-in">Day rate<br><small>$/day</small></th>
-                <th class="col-in">Term<br><small>years</small></th>
-                <th class="col-in">Utilisation<br><small>%</small></th>
-                <th class="col-in">Operating cost<br><small>$/day</small></th>
-                <th class="col-calc">Revenue / yr</th>
-                <th class="col-calc">Net / yr</th>
-                <th class="col-calc">Net over term</th>
-                <th class="col-calc">Payback</th>
-                <th class="col-x" aria-label="Remove"></th>
-              </tr>
-            </thead>
-            <tbody id="rate-body"><!-- rows injected by JS --></tbody>
-            <tfoot>
-              <tr class="calc-total-row">
-                <td></td>
-                <td class="calc-total-label">Active tenants (blended)</td>
-                <td class="num" id="t-dayrate">—</td>
-                <td></td>
-                <td class="num" id="t-util">—</td>
-                <td></td>
-                <td class="num calc-calc" id="t-rev">—</td>
-                <td class="num calc-calc" id="t-net">—</td>
-                <td class="num calc-calc" id="t-termnet">—</td>
-                <td class="num calc-calc" id="t-payback">—</td>
-                <td></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-        <p class="calc-foot-note" id="empty-note" hidden>
-          No tenants yet — add one from the list above to start modelling.
-        </p>
-
-        <!-- Comparison bars -->
-        <div class="calc-compare">
-          <h3 class="subhead">Net revenue per year — compare tenants</h3>
-          <div id="compare-bars" class="compare-bars"><!-- bars injected by JS --></div>
-        </div>
-
-        <p class="hull-note calc-disclaimer">
-          Illustrative model for discussion only. Day rates, terms, utilisation, operating costs and CAPEX
-          are placeholder defaults you can edit — they are not offers, quotes or guarantees. Net revenue is
-          shown before financing, tax and mobilisation. Payback is CAPEX ÷ net revenue per year.
-        </p>
-      </div>
-    </section>
-
     <!-- ===================== LEASE VS BUILD / OPPORTUNITY ===================== -->
     <section class="section" id="lease-vs-build">
       <div class="container">
         <p class="section-eyebrow">Lease vs. Build</p>
         <h2 class="section-title">Why a ready host sells — even when the majors build their own.</h2>
         <p class="lead">
-          The model above prices the asset. This is the case for it. A standard host that already
+          The model below prices the asset. This is the case for it. A standard host that already
           exists — or has its design frozen, long-lead items ordered and a yard slot held — is not
           competing with an operator's in-house host programme. It sells them the one thing that
           programme can never be: <strong>fast</strong>. That is the whole trade.
@@ -266,6 +175,98 @@
         </div>
       </div>
     </section>
+
+    <!-- ===================== CALCULATOR ===================== -->
+    <section class="section section-alt calc-section" style="padding-top:0;">
+      <div class="container">
+
+        <!-- Toolbar -->
+        <div class="calc-toolbar">
+          <div class="calc-add">
+            <label for="preset-select" class="calc-add-label">Add a tenant</label>
+            <div class="calc-add-row">
+              <select id="preset-select" class="calc-select" aria-label="Choose a tenant to add"></select>
+              <button type="button" id="add-preset" class="btn btn-primary btn-sm">Add tenant</button>
+              <button type="button" id="add-blank" class="btn btn-ghost btn-sm">Blank row</button>
+            </div>
+          </div>
+          <div class="calc-tools">
+            <button type="button" id="export-csv" class="btn btn-ghost btn-sm">Export CSV</button>
+            <button type="button" id="reset-all" class="btn btn-ghost btn-sm calc-danger">Reset to defaults</button>
+          </div>
+        </div>
+
+        <!-- Global assumptions -->
+        <div class="calc-assumptions">
+          <div class="assume-field">
+            <label for="capex">Host build / lease-in cost (CAPEX)</label>
+            <div class="input-money">
+              <span class="prefix">$</span>
+              <input type="text" inputmode="numeric" id="capex" class="calc-num" />
+            </div>
+            <span class="assume-hint">Used for payback &amp; return-on-asset.</span>
+          </div>
+          <div class="assume-field">
+            <label for="days-year">On-hire days per year (max)</label>
+            <input type="text" inputmode="numeric" id="days-year" class="calc-num" />
+            <span class="assume-hint">365 for a full year; utilisation is applied per tenant.</span>
+          </div>
+        </div>
+
+        <!-- The spreadsheet -->
+        <div class="table-wrap calc-table-wrap">
+          <table class="calc-table" id="rate-table">
+            <thead>
+              <tr>
+                <th class="col-on"><abbr title="Include this tenant in the totals">On</abbr></th>
+                <th class="col-name">Tenant / use case</th>
+                <th class="col-in">Day rate<br><small>$/day</small></th>
+                <th class="col-in">Term<br><small>years</small></th>
+                <th class="col-in">Utilisation<br><small>%</small></th>
+                <th class="col-in">Operating cost<br><small>$/day</small></th>
+                <th class="col-calc">Revenue / yr</th>
+                <th class="col-calc">Net / yr</th>
+                <th class="col-calc">Net over term</th>
+                <th class="col-calc">Payback</th>
+                <th class="col-x" aria-label="Remove"></th>
+              </tr>
+            </thead>
+            <tbody id="rate-body"><!-- rows injected by JS --></tbody>
+            <tfoot>
+              <tr class="calc-total-row">
+                <td></td>
+                <td class="calc-total-label">Active tenants (blended)</td>
+                <td class="num" id="t-dayrate">—</td>
+                <td></td>
+                <td class="num" id="t-util">—</td>
+                <td></td>
+                <td class="num calc-calc" id="t-rev">—</td>
+                <td class="num calc-calc" id="t-net">—</td>
+                <td class="num calc-calc" id="t-termnet">—</td>
+                <td class="num calc-calc" id="t-payback">—</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <p class="calc-foot-note" id="empty-note" hidden>
+          No tenants yet — add one from the list above to start modelling.
+        </p>
+
+        <!-- Comparison bars -->
+        <div class="calc-compare">
+          <h3 class="subhead">Net revenue per year — compare tenants</h3>
+          <div id="compare-bars" class="compare-bars"><!-- bars injected by JS --></div>
+        </div>
+
+        <p class="hull-note calc-disclaimer">
+          Illustrative model for discussion only. Day rates, terms, utilisation, operating costs and CAPEX
+          are placeholder defaults you can edit — they are not offers, quotes or guarantees. Net revenue is
+          shown before financing, tax and mobilisation. Payback is CAPEX ÷ net revenue per year.
+        </p>
+      </div>
+    </section>
+
   </main>
 
   <!-- ===================== FOOTER ===================== -->
