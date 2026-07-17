@@ -9,9 +9,10 @@ leaseable offshore infrastructure that compresses the timeline from FID to first
 
 | File | Purpose |
 |------|---------|
-| `index.html` | The full single-page site (hero, the MPSS, the Five S, specs, the model, heritage, leasing, contact). |
+| `index.html` | The full single-page site (hero, the MPSS, the Five S, specs, the model, evidence, leasing, contact). |
 | `styles.css` | All styling. Navy / ocean-blue / steel palette; fully responsive. |
 | `main.js`   | Mobile nav toggle and footer year. The site works without JS. |
+| `docs/` | The independent IMT Offshore Engineering evaluation report (PDF), linked from the Evidence section. |
 
 ## Running locally
 
@@ -37,3 +38,7 @@ For the `seaways-mpss.com` domain, point the host at this repository / folder.
 - Key figures (15,000 t payload, 8,100 m² deck, 2M bbl SWIS storage, 37.5 m survival wave,
   ~14-month hull delivery, LR/ABS/DNV approval) and the design heritage are drawn from
   Seaways Engineering source material.
+- The **Evidence** section (`#evidence`) is grounded strictly in the 1994–95 IMT Offshore
+  Engineering (UK) Ltd study — figures (US$58.5M delivered cost, 13,100 t floating steel,
+  392,000 bbl storage, 5,184 m² deck), the verdict quote, real shipyard quotes and the
+  stability findings all come from that report, hosted in `docs/`.
