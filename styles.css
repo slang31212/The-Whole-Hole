@@ -976,6 +976,108 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0; }
 .chip:hover { background: rgba(255, 255, 255, .2); transform: translateY(-1px); }
 .check-note { margin: 14px 0 0; color: #bcd9ef; font-size: .96rem; }
 
+/* Leverage explainer */
+.lev-explainer {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 26px 22px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.lev-eyebrow {
+  font-size: .74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--accent-deep);
+  margin: 0 0 16px;
+}
+.lev-eq {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 12px;
+}
+.lev-term {
+  flex: 1 1 200px;
+  min-width: 0;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.lev-t-label {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--slate-light);
+}
+.lev-t-val {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--navy-900);
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.lev-t-sub { font-size: .82rem; color: var(--slate); font-variant-numeric: tabular-nums; }
+.lev-op {
+  align-self: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  flex: 0 0 auto;
+}
+.lev-equity { border-color: var(--accent); background: var(--bg-tint); }
+.lev-equity.lev-good { border-color: #1f9d57; background: #eafaf0; }
+.lev-equity.lev-good .lev-t-val { color: #157a41; }
+.lev-equity.lev-bad { border-color: #c0392b; background: #fdeeec; }
+.lev-equity.lev-bad .lev-t-val { color: #a5281c; }
+
+.lev-read { margin-top: 18px; }
+.lev-registers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.lev-read-lead { font-size: .92rem; color: var(--slate); margin-right: 2px; }
+.lev-reg {
+  font: inherit;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--accent-deep);
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 15px;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .12s ease;
+}
+.lev-reg:hover { transform: translateY(-1px); border-color: var(--accent); }
+.lev-reg.is-active {
+  color: var(--white);
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+}
+.lev-sentence {
+  margin: 14px 0 0;
+  color: var(--ink);
+  font-size: 1.02rem;
+  line-height: 1.55;
+  max-width: 68ch;
+}
+
+@media (max-width: 640px) {
+  .lev-op { align-self: center; transform: rotate(90deg); margin: -4px 0; }
+  .lev-term { flex-basis: 100%; }
+}
+
 /* Result cards */
 .result-grid {
   display: grid;

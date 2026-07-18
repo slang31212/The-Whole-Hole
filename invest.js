@@ -175,6 +175,20 @@
     });
     el.addEventListener("blur", function () { el.value = displayVal(key); });
   });
+  /* ---- Leverage-explainer reading level ---- */
+  var levReg = "kid";
+  Array.prototype.forEach.call(document.querySelectorAll(".lev-reg"), function (btn) {
+    btn.addEventListener("click", function () {
+      levReg = btn.dataset.reg || "kid";
+      Array.prototype.forEach.call(document.querySelectorAll(".lev-reg"), function (b) {
+        var on = b === btn;
+        b.classList.toggle("is-active", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      renderLeverage(compute());
+    });
+  });
+
   function displayVal(key) {
     var v = toNum(state[key]);
     return moneyFields[key] ? v.toLocaleString("en-US") : String(v);
@@ -235,9 +249,127 @@
     var heroCard = document.querySelector(".result-card-hero");
     if (heroCard) heroCard.classList.toggle("result-neg", isFinite(m.irr) && m.irr < 0);
 
+    renderLeverage(m);
     renderSchedule(m);
     renderChart(m);
   }
+
+  /* ---- Leverage explainer ----
+     Shows how the asset's own (unlevered) yield turns into the yield on
+     equity once debt interest is paid, and reads that mechanism back in
+     plain language at three levels: a kid, a grown-up, an analyst. */
+  function cents(rate) { return Math.round(rate * 100) + "¢"; }
+
+  function renderLeverage(m) {
+    var host = $("lev-explainer");
+    if (!host) return;
+
+    var assetCost = toNum(state.assetCost);
+    var assetCF = toNum(state.netCharter);
+    var assetYield = assetCost > 0 ? assetCF / assetCost : 0;
+    var debtPct = clampPct(state.debtPct);
+    var rate = toNum(state.interestRate) / 100;
+    var interest = m.interest;
+    var debt = m.debt;
+    var equity = m.equityTotal;
+    var toEquity = m.projLeveredCF;                 // asset CF − interest
+    var leveredYield = equity > 0 ? toEquity / equity : 0;
+
+    // ----- Equation row -----
+    $("lev-asset-val").textContent = fmtShort(assetCF);
+    $("lev-asset-sub").textContent = fmtPct(assetYield, 1) + " of " + fmtShort(assetCost);
+    $("lev-debt-val").textContent = fmtShort(interest);
+    $("lev-debt-sub").textContent = debt > 0
+      ? debtPct.toFixed(0) + "% debt at " + fmtPct(rate, 1)
+      : "no debt";
+    $("lev-eq-val").textContent = fmtShort(toEquity);
+    $("lev-eq-sub").textContent = equity > 0
+      ? fmtPct(leveredYield, 1) + " on " + fmtShort(equity)
+      : "no equity";
+
+    // Colour the result: green when leverage helps, amber/red when it hurts.
+    var eqTerm = document.querySelector(".lev-equity");
+    if (eqTerm) {
+      eqTerm.classList.toggle("lev-good", debt > 0 && toEquity > 0 && leveredYield > assetYield);
+      eqTerm.classList.toggle("lev-bad", toEquity <= 0 || (debt > 0 && leveredYield < assetYield));
+    }
+
+    // ----- Auto-read sentence -----
+    var f = {
+      assetCF: assetCF, assetCost: assetCost, assetYield: assetYield,
+      debt: debt, debtPct: debtPct, rate: rate, interest: interest,
+      equity: equity, toEquity: toEquity, leveredYield: leveredYield,
+      upliftPts: (leveredYield - assetYield) * 100,
+      carryPts: (assetYield - rate) * 100,
+      amp: assetYield !== 0 ? leveredYield / assetYield : 0
+    };
+    $("lev-sentence").textContent = (levText[levReg] || levText.kid)(f);
+  }
+
+  var levText = {
+    kid: function (f) {
+      if (f.equity <= 0) {
+        return "You borrowed every single dollar, so none of the money is yours — there's nothing of your own to earn a return on. Put in some of your own money and this fills in.";
+      }
+      if (f.toEquity <= 0) {
+        return "The platform earns " + fmtShort(f.assetCF) + " a year, but the bank's rent (interest) is " +
+          fmtShort(f.interest) + " — just as big, or bigger. After you pay the bank there's little or nothing left for you. That's what borrowing too much does.";
+      }
+      if (f.debt <= 0) {
+        return "You buy the whole platform with your own money — no bank, no rent. It earns " + fmtShort(f.assetCF) +
+          " a year, which is about " + cents(f.assetYield) + " back for every dollar it cost. That " + cents(f.assetYield) +
+          " is all yours.";
+      }
+      var turned = f.leveredYield > f.assetYield
+        ? "Borrowing turned " + cents(f.assetYield) + " into " + cents(f.leveredYield) + " — the bank's money is working for you."
+        : "But the bank's rent is pricey, so borrowing actually shrank your " + cents(f.assetYield) + " down to " + cents(f.leveredYield) + ".";
+      return "The platform earns " + fmtShort(f.assetCF) + " a year — like getting " + cents(f.assetYield) +
+        " for every dollar it cost. You borrow money to help buy it, and the bank's rent is " + fmtShort(f.interest) +
+        ". After you pay the bank, " + fmtShort(f.toEquity) + " is left — and because you only put in " +
+        fmtShort(f.equity) + " of your own, that's like " + cents(f.leveredYield) + " back on every dollar you put in. " + turned;
+    },
+    grownup: function (f) {
+      if (f.equity <= 0) {
+        return "At 100% debt there's no equity in the stack, so there's no capital of yours to earn a return on. Lower the debt share and the equity yield appears.";
+      }
+      if (f.toEquity <= 0) {
+        return "The asset yields " + fmtPct(f.assetYield, 1) + " (" + fmtShort(f.assetCF) + " on " + fmtShort(f.assetCost) +
+          "), but interest of " + fmtShort(f.interest) + " swallows all of it — nothing is left for equity. The borrowing is too heavy or too expensive for the cash flow to carry.";
+      }
+      if (f.debt <= 0) {
+        return "No debt in the stack — equity funds the whole " + fmtShort(f.assetCost) + ", so your cash yield equals the asset's own " +
+          fmtPct(f.assetYield, 1) + " net yield. Nothing is amplified in either direction.";
+      }
+      var verb = f.leveredYield > f.assetYield
+        ? "leverage lifts the yield by " + Math.abs(f.upliftPts).toFixed(1) + " points, because the asset earns more than the debt costs."
+        : "leverage drags the yield down by " + Math.abs(f.upliftPts).toFixed(1) + " points, because the debt costs more than the asset earns.";
+      return "The asset throws off " + fmtShort(f.assetCF) + " a year — a " + fmtPct(f.assetYield, 1) + " yield on its " +
+        fmtShort(f.assetCost) + " cost. Interest of " + fmtShort(f.interest) + " comes off the top, leaving " +
+        fmtShort(f.toEquity) + " for equity. Because equity is only " + fmtShort(f.equity) + " of the stack, that same cash is a " +
+        fmtPct(f.leveredYield, 1) + " return on your money — " + verb;
+    },
+    analyst: function (f) {
+      if (f.equity <= 0) {
+        return "100% LTV — no equity tranche, so cash-on-cash is undefined. Reduce leverage below 100% to size an equity return.";
+      }
+      if (f.toEquity <= 0) {
+        return "Unlevered net yield " + fmtPct(f.assetYield, 1) + " on " + fmtShort(f.assetCost) + "; interest-only debt at " +
+          fmtPct(f.rate, 1) + " on " + fmtShort(f.debt) + " (" + f.debtPct.toFixed(0) + "% LTV) costs " + fmtShort(f.interest) +
+          ", fully consuming project cash flow. Debt service coverage < 1.0× — no residual cash to equity.";
+      }
+      if (f.debt <= 0) {
+        return "0% LTV, no interest expense. Cash-on-cash equals the asset's " + fmtPct(f.assetYield, 1) +
+          " unlevered net yield — no leverage effect.";
+      }
+      var carry = f.carryPts >= 0
+        ? "Positive carry of " + f.carryPts.toFixed(1) + " pts between asset yield and cost of debt, amplified " + f.amp.toFixed(1) + "× by the equity ratio."
+        : "Negative carry of " + Math.abs(f.carryPts).toFixed(1) + " pts (cost of debt > asset yield) dilutes cash-on-cash below the unlevered yield.";
+      return "Unlevered net yield " + fmtPct(f.assetYield, 1) + " on " + fmtShort(f.assetCost) + ". Interest-only debt at " +
+        fmtPct(f.rate, 1) + " on " + fmtShort(f.debt) + " (" + f.debtPct.toFixed(0) + "% LTV) costs " + fmtShort(f.interest) +
+        ", leaving " + fmtShort(f.toEquity) + " to " + fmtShort(f.equity) + " of equity — a " + fmtPct(f.leveredYield, 1) +
+        " cash-on-cash. " + carry;
+    }
+  };
 
   function renderSchedule(m) {
     var body = $("schedule-body");

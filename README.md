@@ -11,7 +11,7 @@ leaseable offshore infrastructure that compresses the timeline from FID to first
 |------|---------|
 | `index.html` | The full single-page site (hero, the MPSS, the Five S, specs, the model, heritage, leasing, contact). |
 | `day-rates.html` + `day-rates.js` | An editable day-rate leasing model — swap tenants in/out, compare revenue, net and payback; export to CSV. |
-| `invest.html` + `invest.js` | **For Family Offices.** An investor page framing the MPSS as a hard, income-producing real asset, with an interactive equity-returns calculator: type in a check size and see ownership, cash yield, IRR, MOIC and payback compute live, plus a year-by-year distribution schedule and CSV export. |
+| `invest.html` + `invest.js` | **For Family Offices.** An investor page framing the MPSS as a hard, income-producing real asset, with an interactive equity-returns calculator: type in a check size and see ownership, cash yield, IRR, MOIC and payback compute live, plus a year-by-year distribution schedule and CSV export. Includes a live **cash-flow leverage explainer** — an `asset cash flow − debt interest = cash to equity` equation bar with a one-line plain-language read-out at three levels (a kid / a grown-up / an analyst) that recomputes from the same assumptions. |
 | `styles.css` | All styling. Navy / ocean-blue / steel palette; fully responsive. |
 | `main.js`   | Mobile nav toggle and footer year. The site works without JS (the calculators need JS). |
 

@@ -293,6 +293,40 @@
           </div>
         </div>
 
+        <!-- Leverage explainer: how the asset's yield becomes an equity yield -->
+        <div class="lev-explainer" id="lev-explainer">
+          <p class="lev-eyebrow">What the borrowing is doing</p>
+          <div class="lev-eq" role="img" aria-label="Cash-flow leverage equation" id="lev-eq">
+            <div class="lev-term lev-asset">
+              <span class="lev-t-label">Asset net cash flow</span>
+              <span class="lev-t-val" id="lev-asset-val">—</span>
+              <span class="lev-t-sub" id="lev-asset-sub">—</span>
+            </div>
+            <span class="lev-op" aria-hidden="true">−</span>
+            <div class="lev-term lev-debt">
+              <span class="lev-t-label">Debt interest</span>
+              <span class="lev-t-val" id="lev-debt-val">—</span>
+              <span class="lev-t-sub" id="lev-debt-sub">—</span>
+            </div>
+            <span class="lev-op" aria-hidden="true">=</span>
+            <div class="lev-term lev-equity">
+              <span class="lev-t-label">Cash to equity</span>
+              <span class="lev-t-val" id="lev-eq-val">—</span>
+              <span class="lev-t-sub" id="lev-eq-sub">—</span>
+            </div>
+          </div>
+
+          <div class="lev-read">
+            <div class="lev-registers" role="group" aria-label="Choose a reading level for the explanation">
+              <span class="lev-read-lead">Explain this like I'm</span>
+              <button type="button" class="lev-reg is-active" data-reg="kid" aria-pressed="true">a kid</button>
+              <button type="button" class="lev-reg" data-reg="grownup" aria-pressed="false">a grown-up</button>
+              <button type="button" class="lev-reg" data-reg="analyst" aria-pressed="false">an analyst</button>
+            </div>
+            <p class="lev-sentence" id="lev-sentence" aria-live="polite">—</p>
+          </div>
+        </div>
+
         <!-- Your check -->
         <div class="check-panel">
           <label for="your-check" class="check-label">Your equity check</label>
