@@ -231,6 +231,34 @@
         " of the equity in a " + fmtShort(toNum(state.assetCost)) + " asset.";
     }
 
+    // Yield build-up: asset cash flow − interest = cash to equity
+    var assetCost = toNum(state.assetCost);
+    var netCharter = toNum(state.netCharter);
+    var unlevYield = assetCost > 0 ? netCharter / assetCost : 0;
+    var levYield = m.equityTotal > 0 ? m.projLeveredCF / m.equityTotal : 0;
+    $("yb-asset").textContent = fmtShort(netCharter) + " / yr";
+    $("yb-asset-pct").textContent = fmtPct(unlevYield, 1) + " of asset";
+    $("yb-int").textContent = fmtShort(m.interest) + " / yr";
+    $("yb-int-pct").textContent = fmtPct(toNum(state.interestRate) / 100, 0) + " on " + fmtShort(m.debt);
+    $("yb-equity").textContent = fmtShort(m.projLeveredCF) + " / yr";
+    $("yb-equity-pct").textContent = fmtPct(levYield, 1) + " on " + fmtShort(m.equityTotal) + " equity";
+
+    var lift = levYield - unlevYield;
+    var explain;
+    if (m.debt <= 0) {
+      explain = "All-equity deal: your cash yield equals the asset's own " + fmtPct(unlevYield, 1) +
+        " — add debt to amplify it.";
+    } else if (lift >= 0) {
+      explain = "Positive leverage: the asset nets " + fmtPct(unlevYield, 1) + " but the debt costs only " +
+        fmtPct(toNum(state.interestRate) / 100, 1) + ", so borrowing lifts the cash yield to " +
+        fmtPct(levYield, 1) + ". This is the annual cash only — the exit residual is on top.";
+    } else {
+      explain = "Negative leverage: the debt costs " + fmtPct(toNum(state.interestRate) / 100, 1) +
+        ", more than the asset's " + fmtPct(unlevYield, 1) + " net yield, so borrowing drags the cash yield " +
+        "down to " + fmtPct(levYield, 1) + ". Lower the leverage or the rate.";
+    }
+    $("yield-explain").textContent = explain;
+
     // Negative-return guard styling on the hero card
     var heroCard = document.querySelector(".result-card-hero");
     if (heroCard) heroCard.classList.toggle("result-neg", isFinite(m.irr) && m.irr < 0);

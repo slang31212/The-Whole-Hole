@@ -343,6 +343,28 @@
           </div>
         </div>
 
+        <!-- Yield build-up: where the cash yield comes from -->
+        <div class="yield-bridge" id="yield-bridge">
+          <div class="yb-step">
+            <span class="yb-label">Asset net cash flow</span>
+            <span class="yb-num" id="yb-asset">—</span>
+            <span class="yb-pct" id="yb-asset-pct">—</span>
+          </div>
+          <span class="yb-op" aria-hidden="true">−</span>
+          <div class="yb-step">
+            <span class="yb-label">Debt interest</span>
+            <span class="yb-num" id="yb-int">—</span>
+            <span class="yb-pct" id="yb-int-pct">—</span>
+          </div>
+          <span class="yb-op" aria-hidden="true">=</span>
+          <div class="yb-step yb-step-out">
+            <span class="yb-label">Cash to equity</span>
+            <span class="yb-num" id="yb-equity">—</span>
+            <span class="yb-pct" id="yb-equity-pct">—</span>
+          </div>
+        </div>
+        <p class="yield-explain" id="yield-explain">—</p>
+
         <!-- Cumulative chart -->
         <div class="calc-compare invest-chart-wrap">
           <h3 class="subhead">Your capital, returned and compounded</h3>
