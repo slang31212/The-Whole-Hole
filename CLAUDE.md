@@ -22,7 +22,7 @@ strictly progressive enhancement.
 
 | File | Purpose |
 |------|---------|
-| `index.html` | The full single-page marketing site: header/nav, hero (inline SVG rig), the MPSS (about), Five S, specs, hull comparison, the model (problem/solution), heritage, leasing, contact, footer. |
+| `index.html` | The full single-page marketing site: header/nav, hero (inline SVG rig), the MPSS (about), Five S, specs, hull comparison, the model (problem/solution), heritage, leasing, investment ("The Ask", `#invest`), contact, footer. |
 | `day-rates.html` | The day-rate leasing calculator page. Shares the header/footer/nav shell with `index.html`. Contains the toolbar, global-assumptions inputs, the results table skeleton, and the comparison-bar container (rows injected by JS). |
 | `styles.css` | **All** styling for both pages. Design tokens in `:root`, then clearly-commented sections. Fully responsive; navy / ocean-blue / steel palette. |
 | `main.js` | Tiny shared progressive-enhancement script: mobile nav toggle + footer year. Loaded on every page. |
@@ -92,6 +92,10 @@ There is no test suite or linter. To verify:
 - Key spec figures (payload, deck area, storage, survival wave, delivery time,
   class approvals) and design heritage come from Seaways Engineering source material —
   keep them accurate if editing.
+- The investment section (`#invest`) contains **illustrative placeholder figures**
+  wrapped in `[brackets]` (e.g. `$[XX]M`, `[XX]%`). These are not real terms and must be
+  replaced with defensible numbers before the page is shown to investors; keep the
+  "indicative only / not an offer" disclaimer in place.
 
 ## Git workflow
 
