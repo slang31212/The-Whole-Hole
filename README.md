@@ -10,6 +10,10 @@ leaseable offshore infrastructure that compresses the timeline from FID to first
 | File | Purpose |
 |------|---------|
 | `index.html` | The full single-page site (hero, the MPSS, the Five S, specs, the model, heritage, leasing, contact). |
+| `solutions.html` | **Multi-mission sales brochure.** One hull, three configurations — MPSS-HVDC (floating converter station), MPSS-BESS (offshore storage hub) and MPSS-O&G (production topsides) — each with its parts list, value props and target buyer, plus the shared-infrastructure standardization table. |
+| `flyer-hvdc.html`, `flyer-bess.html`, `flyer-og.html` | Print-ready one-page A4 flyers for each configuration (screen view + a "Print / Save as PDF" button; a `@media print` sheet lays them out to A4). |
+| `sales-emails.md` | Editable outreach kit — cold intro, follow-up and the standardization pitch, tailored per audience (grid operators, storage developers, E&P teams). |
+| `collateral.css` | Styling for the brochure and flyers (per-mission accent colours, print layout). Loads after `styles.css` and reuses its palette tokens. |
 | `day-rates.html` + `day-rates.js` | An editable day-rate leasing model — swap tenants in/out, compare revenue, net and payback; export to CSV. |
 | `invest.html` + `invest.js` | **For Family Offices.** An investor page framing the MPSS as a hard, income-producing real asset, with an interactive equity-returns calculator: type in a check size and see ownership, cash yield, IRR, MOIC and payback compute live, plus a year-by-year distribution schedule and CSV export. |
 | `styles.css` | All styling. Navy / ocean-blue / steel palette; fully responsive. |

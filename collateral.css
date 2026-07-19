@@ -1,0 +1,347 @@
+/* =========================================================
+   Seaways MPSS — sales collateral
+   Styles for the multi-mission brochure (solutions.html)
+   and the printable one-page flyers (flyer-*.html).
+   Loads AFTER styles.css and reuses its palette tokens.
+   ========================================================= */
+
+:root {
+  /* Per-variant accents — layered on top of the house navy/ocean palette */
+  --hvdc: #2ea3d9;      /* ocean blue  — power / transmission   */
+  --hvdc-deep: #1c7fb0;
+  --bess: #27a980;      /* teal-green  — storage / clean energy */
+  --bess-deep: #1c8466;
+  --og: #e08a3c;        /* amber       — hydrocarbons           */
+  --og-deep: #b96a22;
+}
+
+/* =========================================================
+   BROCHURE — solutions.html
+   ========================================================= */
+
+/* Sub-hero intro chips */
+.mission-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+}
+.mission-chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: .92rem;
+  color: #eaf4fb;
+}
+.mission-chips .swatch {
+  width: 10px; height: 10px; border-radius: 3px; flex: none;
+}
+.swatch-hvdc { background: var(--hvdc); }
+.swatch-bess { background: var(--bess); }
+.swatch-og { background: var(--og); }
+
+/* Solution block */
+.sol {
+  scroll-margin-top: 84px;
+  padding-top: 20px;
+}
+.sol + .sol { border-top: 1px solid var(--line); }
+.sol-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+.sol-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 800;
+  font-size: .82rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 999px;
+  padding: 7px 16px 7px 12px;
+}
+.sol-badge .dotc { width: 11px; height: 11px; border-radius: 3px; background: rgba(255,255,255,.9); }
+.badge-hvdc { background: linear-gradient(120deg, var(--hvdc-deep), var(--hvdc)); }
+.badge-bess { background: linear-gradient(120deg, var(--bess-deep), var(--bess)); }
+.badge-og { background: linear-gradient(120deg, var(--og-deep), var(--og)); }
+.sol-role { font-size: .92rem; font-weight: 600; color: var(--slate-light); }
+
+.sol-title {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 800;
+  color: var(--navy-900);
+  margin: 8px 0 14px;
+}
+.sol-lead { font-size: 1.08rem; color: var(--slate); max-width: 760px; margin: 0 0 30px; }
+.sol-lead strong { color: var(--navy-900); }
+
+/* Two-column: value props (left) + components table (right) */
+.sol-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 26px;
+  align-items: start;
+}
+.sol-value h4,
+.sol-parts h4 {
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--slate);
+  margin: 0 0 14px;
+}
+
+/* Value proposition list with colored ticks */
+.prop { list-style: none; margin: 0; padding: 0; }
+.prop li {
+  position: relative;
+  padding: 11px 0 11px 30px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  font-size: .98rem;
+}
+.prop li:last-child { border-bottom: 0; }
+.prop li strong { color: var(--navy-900); }
+.prop li::before {
+  content: "";
+  position: absolute; left: 3px; top: 16px;
+  width: 8px; height: 14px;
+  border: solid var(--accent-deep);
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+.sol-hvdc .prop li::before { border-color: var(--hvdc-deep); }
+.sol-bess .prop li::before { border-color: var(--bess-deep); }
+.sol-og .prop li::before { border-color: var(--og-deep); }
+
+/* Buyer / fit callout */
+.sol-fit {
+  margin-top: 22px;
+  padding: 18px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tint);
+  border: 1px solid var(--line);
+}
+.sol-fit .fit-label {
+  display: block;
+  font-size: .74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--slate);
+  margin-bottom: 6px;
+}
+.sol-fit p { margin: 0; color: var(--slate); font-size: .95rem; }
+
+/* Components table (reuses .matrix look but tighter) */
+.parts-table { width: 100%; border-collapse: collapse; background: var(--white); font-size: .93rem; }
+.parts-table thead th {
+  text-align: left;
+  padding: 12px 16px;
+  color: #fff;
+  font-size: .74rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.sol-hvdc .parts-table thead th { background: var(--hvdc-deep); }
+.sol-bess .parts-table thead th { background: var(--bess-deep); }
+.sol-og .parts-table thead th { background: var(--og-deep); }
+.parts-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  color: var(--slate);
+}
+.parts-table td:first-child { font-weight: 700; color: var(--navy-900); width: 34%; }
+.parts-table tbody tr:nth-child(even) { background: var(--bg-alt); }
+.parts-table tbody tr:last-child td { border-bottom: 0; }
+
+/* Mini stat strip inside a solution */
+.sol-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 30px;
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+}
+.sol-stats li { display: flex; flex-direction: column; }
+.sol-stats .n { font-weight: 800; font-size: 1.15rem; color: var(--navy-900); letter-spacing: -.01em; }
+.sol-stats .l { font-size: .82rem; color: var(--slate-light); }
+
+/* Standardization / shared-infra highlight table */
+.shared-note {
+  margin: 0 0 26px;
+  font-size: 1.08rem;
+  color: var(--slate);
+  max-width: 780px;
+}
+.shared-note strong { color: var(--navy-900); }
+.shared td.yes { color: var(--accent-deep); font-weight: 700; }
+.shared td.swap { color: var(--slate-light); font-style: italic; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 16px; font-size: .9rem; color: var(--slate); }
+.legend-row span { display: inline-flex; align-items: center; gap: 8px; }
+.legend-row .k { width: 12px; height: 12px; border-radius: 3px; }
+.k-shared { background: var(--accent-deep); }
+.k-swap { background: var(--slate-light); }
+
+@media (max-width: 820px) {
+  .sol-grid { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   PRINT FLYERS — flyer-*.html
+   Screen: a centered "sheet". Print: one A4 page.
+   ========================================================= */
+.flyer-body {
+  background: var(--bg-alt);
+  margin: 0;
+  padding: 28px 16px;
+  font-family: var(--font);
+  color: var(--ink);
+}
+.sheet {
+  --edge: var(--accent-deep);
+  --edge-soft: var(--accent);
+  width: 210mm;
+  max-width: 100%;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: var(--shadow-md);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.sheet-hvdc { --edge: var(--hvdc-deep); --edge-soft: var(--hvdc); }
+.sheet-bess { --edge: var(--bess-deep); --edge-soft: var(--bess); }
+.sheet-og { --edge: var(--og-deep); --edge-soft: var(--og); }
+
+/* Flyer header band */
+.fly-head {
+  background: linear-gradient(135deg, #0a1a2f 0%, #0e2846 60%, #103356 100%);
+  color: #eaf2fb;
+  padding: 26px 32px 24px;
+  position: relative;
+}
+.fly-head::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+  background: linear-gradient(90deg, var(--edge), var(--edge-soft));
+}
+.fly-brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.fly-brand .b {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-weight: 700; font-size: 1.05rem; color: #fff;
+}
+.fly-brand .b .brand-accent { color: var(--accent-glow); }
+.fly-tag {
+  font-size: .68rem; text-transform: uppercase; letter-spacing: .14em;
+  color: #9fb6cd; font-weight: 600;
+}
+.fly-badge {
+  display: inline-block;
+  font-size: .74rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  color: #06263a; background: var(--edge-soft);
+  border-radius: 999px; padding: 6px 15px; margin-bottom: 14px;
+}
+.fly-h1 { font-size: 1.95rem; font-weight: 800; color: #fff; margin: 0 0 10px; letter-spacing: -.02em; }
+.fly-sub { font-size: 1rem; color: #c4d6e8; margin: 0; max-width: 60ch; }
+.fly-sub strong { color: #fff; }
+
+/* Flyer body */
+.fly-main { padding: 24px 32px 8px; flex: 1; }
+.fly-section-label {
+  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--edge); margin: 0 0 12px;
+}
+.fly-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+
+.fly-list { list-style: none; margin: 0 0 18px; padding: 0; }
+.fly-list li {
+  position: relative; padding: 8px 0 8px 24px; font-size: .9rem;
+  border-bottom: 1px solid var(--line); color: var(--ink);
+}
+.fly-list li:last-child { border-bottom: 0; }
+.fly-list li strong { color: var(--navy-900); }
+.fly-list li::before {
+  content: ""; position: absolute; left: 2px; top: 13px;
+  width: 6px; height: 11px; border: solid var(--edge);
+  border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+
+.fly-parts { width: 100%; border-collapse: collapse; font-size: .82rem; }
+.fly-parts td {
+  padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--slate);
+}
+.fly-parts td:first-child { font-weight: 700; color: var(--navy-900); width: 40%; }
+.fly-parts tr:last-child td { border-bottom: 0; }
+
+/* Spec strip */
+.fly-specs {
+  display: flex; flex-wrap: wrap; gap: 0;
+  margin: 4px 0 22px; border: 1px solid var(--line);
+  border-radius: 10px; overflow: hidden;
+}
+.fly-specs .s {
+  flex: 1 1 25%; min-width: 110px; padding: 14px 16px;
+  border-right: 1px solid var(--line); background: var(--bg-alt);
+}
+.fly-specs .s:last-child { border-right: 0; }
+.fly-specs .sn { display: block; font-size: 1.35rem; font-weight: 800; color: var(--navy-900); line-height: 1; letter-spacing: -.02em; }
+.fly-specs .sn small { font-size: .5em; font-weight: 700; color: var(--edge); margin-left: 2px; }
+.fly-specs .sl { display: block; margin-top: 5px; font-size: .72rem; color: var(--slate-light); }
+
+/* Flyer footer / CTA */
+.fly-foot {
+  margin-top: auto;
+  background: var(--navy-900);
+  color: #cdddec;
+  padding: 18px 32px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+}
+.fly-foot .cta-line { font-weight: 700; color: #fff; font-size: 1rem; }
+.fly-foot .cta-line span { color: var(--accent-glow); }
+.fly-foot .contact { font-size: .86rem; text-align: right; }
+.fly-foot .contact a { color: #eaf4fb; font-weight: 600; }
+.fly-fine { font-size: .68rem; color: #6f8ba6; padding: 0 32px 18px; background: var(--navy-900); margin: 0; }
+
+.print-hint {
+  max-width: 210mm; margin: 0 auto 16px; text-align: center;
+  font-size: .85rem; color: var(--slate-light);
+}
+.print-hint a { font-weight: 600; }
+.print-hint button {
+  font: inherit; font-weight: 600; font-size: .85rem;
+  color: #06263a; background: var(--accent); border: 0;
+  border-radius: 8px; padding: 8px 16px; cursor: pointer; margin-left: 8px;
+}
+
+@media (max-width: 640px) {
+  .fly-cols { grid-template-columns: 1fr; gap: 4px; }
+  .fly-specs .s { flex-basis: 50%; }
+}
+
+@media print {
+  @page { size: A4; margin: 0; }
+  .flyer-body { background: #fff; padding: 0; }
+  .print-hint { display: none; }
+  .sheet { box-shadow: none; border-radius: 0; width: 210mm; min-height: 297mm; }
+  .fly-head { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .badge-hvdc, .badge-bess, .badge-og,
+  .fly-badge, .fly-foot, .fly-fine, .fly-head { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
