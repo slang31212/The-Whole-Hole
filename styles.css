@@ -1098,3 +1098,116 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0; }
   .check-money .calc-num { min-width: 0; width: 100%; }
   .check-money { width: 100%; }
 }
+
+/* =========================================================
+   The Menu — barge fit-out configurator
+   ========================================================= */
+.menu-block { margin-bottom: 26px; }
+
+/* Discipline chips */
+.menu-chips {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.menu-chip {
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: border-color .15s ease, transform .12s ease, box-shadow .15s ease;
+}
+.menu-chip:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.menu-chip.is-on {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, #0e2846, #14507a);
+  box-shadow: var(--shadow-md);
+}
+.menu-chip-name { font-weight: 700; color: var(--navy-900); font-size: .98rem; }
+.menu-chip-tag { font-size: .78rem; color: var(--slate-light); }
+.menu-chip.is-on .menu-chip-name { color: #fff; }
+.menu-chip.is-on .menu-chip-tag { color: var(--accent-glow); }
+
+/* Basic barge / fleet cards */
+.menu-base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 34px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.menu-base-head { max-width: 460px; }
+.menu-base-desc { margin: 10px 0 0; color: var(--slate); font-size: .96rem; }
+.menu-base-fields { display: flex; flex-wrap: wrap; gap: 18px; }
+.menu-base-fields .assume-field { min-width: 0; }
+.menu-base-fields .input-money .calc-num { min-width: 150px; }
+.menu-fleet-fields .calc-num { min-width: 96px; }
+
+/* The à la carte menu list */
+.menu-list { display: grid; gap: 12px; }
+.menu-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  padding: 16px 20px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: border-color .15s ease, background .15s ease;
+}
+.menu-item.is-on { border-color: var(--accent); background: var(--bg-tint); }
+.menu-item-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1 1 340px;
+  cursor: pointer;
+}
+.menu-check {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--accent-deep);
+  flex: none;
+  cursor: pointer;
+}
+.menu-item-text { display: flex; flex-direction: column; gap: 2px; }
+.menu-item-name { font-weight: 700; color: var(--navy-900); font-size: 1.02rem; }
+.menu-item-note { color: var(--slate); font-size: .9rem; line-height: 1.45; }
+.menu-item-prices { display: flex; flex-wrap: wrap; gap: 14px; }
+.menu-price-field { display: flex; flex-direction: column; gap: 5px; }
+.menu-price-lbl {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--slate-light);
+}
+.menu-price-field .input-money { width: auto; }
+.menu-price-field .calc-num { min-width: 128px; }
+
+@media (max-width: 820px) {
+  .menu-chips { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .menu-chips { grid-template-columns: 1fr; }
+  .menu-item { flex-direction: column; align-items: stretch; }
+  .menu-item-prices { justify-content: space-between; }
+  .menu-price-field { flex: 1 1 auto; }
+  .menu-price-field .calc-num { min-width: 0; width: 100%; }
+}

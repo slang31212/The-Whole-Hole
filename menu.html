@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Menu — Seaways MPSS</title>
+  <meta name="description" content="One basic barge, fitted à la carte for 7–8 offshore-wind disciplines. Pick a discipline, add modules — turbine handling, HVDC, BESS, landing — set a fleet size, and see the per-vessel and fleet economics compute live." />
+  <meta name="theme-color" content="#0a1a2f" />
+  <meta name="robots" content="noindex" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Cpath d='M4 20h24M8 20v-6h16v6M13 14V9h6v5' stroke='%232ea3d9' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="index.html#top" class="brand" aria-label="Seaways MPSS home">
+        <svg class="brand-mark" viewBox="0 0 32 32" width="34" height="34" aria-hidden="true">
+          <rect width="32" height="32" rx="7" fill="#0a1a2f"/>
+          <path d="M4 21h24M8 21v-7h16v7M13 14V8h6v6" stroke="#2ea3d9" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand-text">Seaways<span class="brand-accent"> MPSS</span></span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="index.html#about">The MPSS</a></li>
+          <li><a href="index.html#specs">Specs</a></li>
+          <li><a href="menu.html" aria-current="page">The Menu</a></li>
+          <li><a href="day-rates.html">Day Rates</a></li>
+          <li><a href="invest.html">For Family Offices</a></li>
+          <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== INTRO ===================== -->
+    <section class="section calc-intro">
+      <div class="container">
+        <p class="section-eyebrow">Configure a barge</p>
+        <h1 class="section-title">The menu.</h1>
+        <p class="lead">
+          One <strong>basic barge</strong>, fitted out <strong>à la carte</strong>. The standardized hull
+          serves seven or eight offshore disciplines — the only thing that changes is what you bolt on.
+          Pick a discipline to load its recipe, add or drop modules — <em>turbine handling, HVDC,
+          BESS, a landing package</em> — then size the fleet. The per-vessel and fleet economics recompute
+          instantly. Every price is an editable placeholder, not a quote; your changes are saved in this
+          browser and export to a spreadsheet.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== CONFIGURATOR ===================== -->
+    <section class="section section-alt calc-section" style="padding-top:0;">
+      <div class="container">
+
+        <!-- Discipline picker -->
+        <div class="menu-block">
+          <p class="check-label" style="color:var(--accent-deep);">Choose a discipline</p>
+          <div id="discipline-chips" class="menu-chips"><!-- chips injected by JS --></div>
+          <p class="check-note" style="color:var(--slate);">
+            A discipline loads a recommended set of modules. From there, tick anything on or off à la
+            carte — go off-recipe and the build simply reads as a custom fit-out.
+          </p>
+        </div>
+
+        <!-- The basic barge -->
+        <div class="menu-base">
+          <div class="menu-base-head">
+            <span class="struct-tag">The basic barge</span>
+            <p class="menu-base-desc">The standardized hull every configuration starts from — bare deck, power and marine systems.</p>
+          </div>
+          <div class="menu-base-fields">
+            <div class="assume-field">
+              <label for="base-capex">Barge fit-out cost</label>
+              <div class="input-money">
+                <span class="prefix">$</span>
+                <input type="text" inputmode="numeric" id="base-capex" class="calc-num" />
+              </div>
+            </div>
+            <div class="assume-field">
+              <label for="base-dayrate">Base day rate</label>
+              <div class="input-money">
+                <span class="prefix">$</span>
+                <input type="text" inputmode="numeric" id="base-dayrate" class="calc-num" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="calc-toolbar">
+          <p class="check-label" style="margin:0;color:var(--accent-deep);">À la carte modules</p>
+          <div class="calc-tools">
+            <button type="button" id="export-csv" class="btn btn-ghost btn-sm">Export CSV</button>
+            <button type="button" id="reset-all" class="btn btn-ghost btn-sm calc-danger">Reset to defaults</button>
+          </div>
+        </div>
+
+        <!-- Menu of adders -->
+        <div id="adder-menu" class="menu-list"><!-- items injected by JS --></div>
+
+        <!-- Fleet controls -->
+        <div class="menu-base" style="margin-top:24px;">
+          <div class="menu-base-head">
+            <span class="struct-tag">The fleet</span>
+            <p class="menu-base-desc">Multiply the configured vessel across a fleet — the default is eight turbine vessels.</p>
+          </div>
+          <div class="menu-base-fields menu-fleet-fields">
+            <div class="assume-field">
+              <label for="fleet-qty">Vessels in fleet</label>
+              <input type="text" inputmode="numeric" id="fleet-qty" class="calc-num" />
+            </div>
+            <div class="assume-field">
+              <label for="days-year">On-hire days/yr (max)</label>
+              <input type="text" inputmode="numeric" id="days-year" class="calc-num" />
+            </div>
+            <div class="assume-field">
+              <label for="util-pct">Utilisation (%)</label>
+              <input type="text" inputmode="numeric" id="util-pct" class="calc-num" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="result-grid" style="margin-top:32px;">
+          <div class="result-card result-card-hero">
+            <span class="result-label" id="r-config">Turbine installation</span>
+            <span class="result-num" id="r-vessel-capex">—</span>
+            <span class="result-sub"><span id="r-count">—</span> · configured cost per vessel</span>
+          </div>
+          <div class="result-card">
+            <span class="result-label">Day rate / vessel</span>
+            <span class="result-num" id="r-vessel-day">—</span>
+            <span class="result-sub">base + module uplifts</span>
+          </div>
+          <div class="result-card">
+            <span class="result-label">Fleet size</span>
+            <span class="result-num" id="r-fleet-qty">—</span>
+            <span class="result-sub">identical fit-out</span>
+          </div>
+          <div class="result-card">
+            <span class="result-label">Fleet capex</span>
+            <span class="result-num" id="r-fleet-capex">—</span>
+            <span class="result-sub">per-vessel × fleet</span>
+          </div>
+          <div class="result-card">
+            <span class="result-label">Fleet day rate</span>
+            <span class="result-num" id="r-fleet-day">—</span>
+            <span class="result-sub">combined, per day</span>
+          </div>
+          <div class="result-card">
+            <span class="result-label">Fleet charter / yr</span>
+            <span class="result-num" id="r-fleet-annual">—</span>
+            <span class="result-sub">at utilisation above</span>
+          </div>
+        </div>
+
+        <p class="hull-note calc-disclaimer">
+          Illustrative menu for discussion only. Fit-out costs, day rates, uplifts, fleet size, utilisation
+          and on-hire days are placeholder defaults you can edit — they are not offers, quotes or guarantees.
+          Fleet charter per year is fleet day rate × on-hire days × utilisation, before financing, tax and
+          mobilisation.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+          <rect width="32" height="32" rx="7" fill="#13273d"/>
+          <path d="M4 21h24M8 21v-7h16v7M13 14V8h6v6" stroke="#2ea3d9" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Seaways<span class="brand-accent"> MPSS</span></span>
+      </div>
+      <p class="footer-tag">LANG's MPSS — Simple · Safe · Swift · Size · Saves.</p>
+      <p class="footer-copy">© <span id="year"></span> Seaways MPSS. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script src="menu.js"></script>
+</body>
+</html>
