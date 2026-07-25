@@ -12,6 +12,7 @@ leaseable offshore infrastructure that compresses the timeline from FID to first
 | `index.html` | The full single-page site (hero, the MPSS, the Five S, specs, the model, heritage, leasing, contact). |
 | `day-rates.html` + `day-rates.js` | An editable day-rate leasing model — swap tenants in/out, compare revenue, net and payback; export to CSV. |
 | `invest.html` + `invest.js` | **For Family Offices.** An investor page framing the MPSS as a hard, income-producing real asset, with an interactive equity-returns calculator: type in a check size and see ownership, cash yield, IRR, MOIC and payback compute live, plus a year-by-year distribution schedule and CSV export. |
+| `memo.html` + `memo.css` | **Founding Investor Memorandum.** A brochure-style, print-friendly memorandum: cover page, numbered sections (opportunity, problem, solution, market, business model, illustrative economics, heritage, founding round & use of proceeds, the ask) and a full disclaimer. Reuses `styles.css`; `memo.css` adds the brochure layer. |
 | `styles.css` | All styling. Navy / ocean-blue / steel palette; fully responsive. |
 | `main.js`   | Mobile nav toggle and footer year. The site works without JS (the calculators need JS). |
 
@@ -38,6 +39,9 @@ For the `seaways-mpss.com` domain, point the host at this repository / folder.
   defaults; every field is also editable live in the browser. The page carries a clear disclaimer that
   the model is for discussion only and is not an offer of securities.
 - **Copy** lives inline in `index.html`, grouped by clearly-commented sections.
+- **Founding-round amount** — the memorandum's "The Ask" shows a placeholder `$[__]M`
+  (marked `data-illustrative` in `memo.html`). Replace it with the real figure before sharing.
+  The use-of-proceeds percentages and milestone phases in the same section are illustrative too.
 - Specs, the Five S and the lifecycle/driver tables are hand-built in HTML/CSS (no
   third-party chart images), so they're safe to edit and reuse.
 - Key figures (15,000 t payload, 8,100 m² deck, 2M bbl SWIS storage, 37.5 m survival wave,
