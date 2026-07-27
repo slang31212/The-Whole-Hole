@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Disallow: /founding-investor-memorandum.html

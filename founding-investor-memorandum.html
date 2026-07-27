@@ -1,4 +1,13 @@
-<title>Founding Investor Memorandum — Seaways MPSS</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Founding Investor Memorandum — Seaways MPSS</title>
+  <meta name="description" content="Private & Confidential. A founding-investor memorandum for the Seaways MPSS — the early formation of a standardised, leaseable offshore-infrastructure asset class. By invitation only." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Cpath d='M4 20h24M8 20v-6h16v6M13 14V9h6v5' stroke='%232ea3d9' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
 <style>
   * { box-sizing: border-box; }
   html, body {
@@ -26,6 +35,12 @@
   }
   @page { size: Letter; margin: 0.7in 0.85in; }
   @media print { .page { border: 0; padding: 0; width: auto; min-height: 0; } }
+  @media (max-width: 850px) {
+    .page { width: 100%; min-height: 0; padding: 7vw 6vw; }
+    .grid { grid-template-columns: 1fr; }
+    .markets { columns: 1; }
+    .signoff { flex-direction: column; gap: 4pt; }
+  }
 
   .rule { border: 0; border-top: 0.75pt solid #000; margin: 7pt 0; }
   .rule-thin { border: 0; border-top: 0.5pt solid #9a9a9a; margin: 5pt 0; }
@@ -66,10 +81,6 @@
   ul.spec { list-style: none; margin: 0 0 4pt; padding: 0; }
   ul.spec li { position: relative; padding-left: 9pt; margin: 0 0 1.5pt; }
   ul.spec li::before { content: "\2013"; position: absolute; left: 0; }
-
-  .thumb { width: 1.55in; margin: 1pt 0 4pt; }
-  .thumb svg { width: 100%; height: auto; display: block; border: 0.5pt solid #000; }
-  .thumb figcaption { font-size: 7pt; color: #333; margin-top: 2pt; font-style: italic; }
 
   .markets {
     columns: 2; column-gap: 0.3in; list-style: none; margin: 2pt 0 0; padding: 0;
@@ -170,26 +181,6 @@
       <h2 class="section">The Asset We Lease</h2>
       <p class="sub">Bare-Boat Infrastructure Lease</p>
 
-      <figure class="thumb">
-        <svg viewBox="0 0 240 132" role="img" aria-label="Bare MPSS hull — reference render">
-          <!-- waterline -->
-          <line x1="6" y1="86" x2="234" y2="86" stroke="#000" stroke-width="0.6"/>
-          <!-- ring pontoon (deep, continuous) -->
-          <rect x="34" y="96" width="172" height="18" fill="none" stroke="#000" stroke-width="1"/>
-          <!-- box columns (bare, unbraced) -->
-          <rect x="48"  y="52" width="20" height="44" fill="none" stroke="#000" stroke-width="1"/>
-          <rect x="94"  y="52" width="20" height="44" fill="none" stroke="#000" stroke-width="1"/>
-          <rect x="126" y="52" width="20" height="44" fill="none" stroke="#000" stroke-width="1"/>
-          <rect x="172" y="52" width="20" height="44" fill="none" stroke="#000" stroke-width="1"/>
-          <!-- buoyant box deck (bare, no topsides) -->
-          <rect x="30" y="30" width="180" height="22" fill="none" stroke="#000" stroke-width="1"/>
-          <!-- mooring indication -->
-          <line x1="34" y1="110" x2="12" y2="122" stroke="#000" stroke-width="0.6"/>
-          <line x1="206" y1="110" x2="228" y2="122" stroke="#000" stroke-width="0.6"/>
-        </svg>
-        <figcaption>Bare MPSS hull — reference render. Topsides supplied by the customer.</figcaption>
-      </figure>
-
       <p class="provide-label">Seaways provides — the infrastructure</p>
       <ul class="spec">
         <li>Standardised MPSS hull</li>
@@ -272,3 +263,5 @@
   </div>
 
 </div>
+</body>
+</html>
