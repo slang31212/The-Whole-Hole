@@ -12,10 +12,10 @@
   /* ---- Default deal (illustrative placeholders) ---- */
   function defaultState() {
     return {
-      assetCost: 600000000,   // all-in cost of one host
+      assetCost: 180000000,   // all-in first-asset cost: hull + FOAK eng, class, commissioning, contingency
       debtPct: 55,            // debt share of the capital stack
       interestRate: 8,        // annual interest on debt (interest-only)
-      netCharter: 94000000,   // net charter cash flow per year (after opex)
+      netCharter: 36000000,   // owner's net bare-boat lease per year (after owner opex)
       holdYears: 10,          // years to exit / redeployment
       residualPct: 60,        // asset value at exit, % of cost
       yourCheck: 25000000     // the family office's equity commitment
