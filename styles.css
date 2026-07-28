@@ -529,6 +529,8 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0; }
 .matrix tbody td { color: var(--slate); }
 .matrix tbody tr:nth-child(even) { background: var(--bg-alt); }
 .matrix tbody tr:last-child td { border-bottom: 0; }
+.matrix tbody tr.row-mpss td { background: var(--bg-tint); color: var(--navy-900); font-weight: 600; }
+.matrix tbody tr.row-mpss td:first-child { color: var(--accent-deep); }
 
 .matrix-dark { background: rgba(255, 255, 255, .03); }
 .matrix-dark thead th { background: #06131f; }
