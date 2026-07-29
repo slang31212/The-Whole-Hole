@@ -9,7 +9,9 @@ window.SF_DATA = (function () {
   "use strict";
 
   // Geographic window shown on the chart (decimal degrees).
-  var BOUNDS = { lonMin: -118.66, lonMax: -117.18, latMin: 33.14, latMax: 33.96 };
+  // Centred on Huntington Beach (-118.00, 33.656) with roughly a 30 NM
+  // radius (a little wider E-W so the view fills the map panel).
+  var BOUNDS = { lonMin: -118.70, lonMax: -117.30, latMin: 33.156, latMax: 34.156 };
 
   // Harbors / launch ramps.
   var harbors = [
@@ -51,7 +53,7 @@ window.SF_DATA = (function () {
   ];
 
   // Recommended zone (the "best play"): centre + radius in nautical miles.
-  var recommendedZone = { lon: -118.03, lat: 33.47, radiusNm: 4.2,
+  var recommendedZone = { lon: -118.03, lat: 33.47, radiusNm: 1.6,
                           tempLabel: "69.1°–70.0°F", subLabel: "PRODUCTIVE EDGE" };
 
   // Recent catch markers dropped on the chart.

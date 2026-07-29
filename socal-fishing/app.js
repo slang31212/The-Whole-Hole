@@ -193,7 +193,7 @@
     c.fillStyle = isChart ? "#dcecf6" : isSat ? "#06182c" : "#0a2036";
     c.fillRect(0, 0, cssW, cssH);
 
-    var step = 7;
+    var step = 4;
     for (var y = 0; y < cssH; y += step) {
       for (var x = 0; x < cssW; x += step) {
         var g = unproject(x + step / 2, y + step / 2);
@@ -259,7 +259,7 @@
     var fn = state.base === "chlorophyll"
       ? function (lo, la) { return chlAt(lo, la) * 12 + 60; }
       : sstAt;
-    var step = 22;
+    var step = 12;
     var cols = Math.ceil(cssW / step) + 1, rows = Math.ceil(cssH / step) + 1;
     var grid = new Float32Array(cols * rows);
     for (var j = 0; j < rows; j++) {
@@ -268,9 +268,13 @@
         grid[j * cols + i] = fn(g.lon, g.lat);
       }
     }
-    c.lineWidth = isChart ? 0.8 : 0.9;
-    c.strokeStyle = isChart ? "rgba(90,120,150,.55)" : "rgba(255,255,255,.28)";
-    for (var iso = 63; iso <= 73; iso++) {
+    // Half-degree iso-lines; whole degrees drawn a touch stronger.
+    for (var iso = 62.5; iso <= 73.5; iso += 0.5) {
+      var whole = Math.abs(iso - Math.round(iso)) < 0.01;
+      c.lineWidth = isChart ? (whole ? 0.9 : 0.55) : (whole ? 1.0 : 0.6);
+      c.strokeStyle = isChart
+        ? (whole ? "rgba(80,110,140,.60)" : "rgba(90,120,150,.30)")
+        : (whole ? "rgba(255,255,255,.34)" : "rgba(255,255,255,.16)");
       c.beginPath();
       for (var jj = 0; jj < rows - 1; jj++) {
         for (var ii = 0; ii < cols - 1; ii++) {
@@ -362,13 +366,16 @@
     ctx.moveTo(q.x - 10, q.y); ctx.lineTo(q.x + 10, q.y);
     ctx.moveTo(q.x, q.y - 10); ctx.lineTo(q.x, q.y + 10);
     ctx.stroke();
-    // labels
+    // labels (lifted clear of the circle + markers, with a dark halo)
+    var off = Math.max(rpx, 14);
     ctx.textAlign = "center";
     ctx.fillStyle = "#fff";
+    ctx.shadowColor = "rgba(3,12,22,.95)";
+    ctx.shadowBlur = 6;
     ctx.font = "800 15px Inter, system-ui, sans-serif";
-    ctx.fillText(z.tempLabel, q.x, q.y - rpx - 20);
+    ctx.fillText(z.tempLabel, q.x, q.y - off - 22);
     ctx.font = "700 11px Inter, system-ui, sans-serif";
-    ctx.fillText(z.subLabel, q.x, q.y - rpx - 5);
+    ctx.fillText(z.subLabel, q.x, q.y - off - 7);
     ctx.restore();
     ctx.textAlign = "left";
   }
@@ -539,11 +546,11 @@
     // overlays
     drawCurrents();
     drawWind();
-    drawZone();
     drawCatches();
     drawBaitLogs();
     drawHarbors();
     drawLabels();
+    drawZone();       // draw the recommended zone last so its label sits on top
     drawScaleBar();
   }
 
