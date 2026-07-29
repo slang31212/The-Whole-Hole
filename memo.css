@@ -1,0 +1,312 @@
+/* =========================================================
+   Seaways MPSS — Founding Investor Memorandum
+   Brochure layer on top of styles.css.
+   Cover, numbered sections, callouts, print-friendly.
+   Palette inherited: deep navy / ocean blue / steel.
+   ========================================================= */
+
+:root {
+  --memo-maxw: 940px;
+  --gold: #c9a24b;
+  --gold-deep: #a5822f;
+}
+
+/* ---- Document shell ---- */
+.memo {
+  background: var(--bg-alt);
+}
+.memo .sheet {
+  max-width: var(--memo-maxw);
+  margin: 0 auto;
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+}
+.memo .sheet + .sheet { margin-top: 28px; }
+
+.memo-pad {
+  padding: 72px clamp(28px, 6vw, 84px);
+}
+
+/* ---- Confidential ribbon under the header ---- */
+.memo-ribbon {
+  background: var(--navy-900);
+  color: #cde3f2;
+  font-size: .78rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.memo-ribbon .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+.memo-ribbon .rib-mark { color: var(--accent-glow); font-weight: 600; }
+.memo-ribbon .rib-conf { color: #9fc3dc; }
+
+/* ============ COVER ============ */
+.memo .sheet.memo-cover {
+  position: relative;
+  overflow: hidden;
+  color: #eaf3fa;
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(46,163,217,.28), transparent 60%),
+    linear-gradient(160deg, var(--navy-900) 0%, var(--navy-700) 55%, #0e3255 100%);
+}
+.memo-cover .memo-pad { padding-top: 88px; padding-bottom: 88px; }
+.cover-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .82rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--accent-glow);
+  margin: 0 0 26px;
+}
+.cover-eyebrow::before {
+  content: ""; width: 34px; height: 1px; background: var(--accent-glow); opacity: .7;
+}
+.memo-cover h1 {
+  font-size: clamp(2.3rem, 5.2vw, 3.7rem);
+  line-height: 1.05;
+  margin: 0 0 8px;
+  color: #fff;
+}
+.memo-cover .cover-sub-title {
+  font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+  font-weight: 500;
+  color: #bcd6e8;
+  margin: 0 0 34px;
+}
+.memo-cover .cover-sub-title .grad {
+  background: linear-gradient(90deg, var(--accent-glow), #8fd6f5);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.cover-lede {
+  max-width: 60ch;
+  font-size: 1.1rem;
+  color: #d6e6f2;
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  margin: 0 0 44px;
+}
+.cover-five-s {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin: 0 0 46px; padding: 0; list-style: none;
+}
+.cover-five-s li {
+  font-size: .82rem; letter-spacing: .12em; text-transform: uppercase;
+  padding: 7px 15px; border-radius: 999px;
+  border: 1px solid rgba(143,214,245,.35);
+  color: #d6ecf7;
+}
+.cover-five-s li b { color: #fff; font-weight: 700; }
+
+.cover-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px 32px;
+  border-top: 1px solid rgba(143,214,245,.24);
+  padding-top: 28px;
+}
+.cover-meta .cm-k {
+  display: block; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+  color: #86b4d2; margin-bottom: 5px;
+}
+.cover-meta .cm-v { display: block; color: #eaf3fa; font-weight: 600; font-size: 1rem; }
+
+/* ============ SECTION NUMBERING ============ */
+.memo-section + .memo-section { border-top: 1px solid var(--line); }
+.memo-kicker {
+  display: flex; align-items: baseline; gap: 14px;
+  margin: 0 0 18px;
+}
+.memo-kicker .k-num {
+  font-size: .95rem; font-weight: 700; letter-spacing: .04em;
+  color: var(--accent-deep);
+  font-variant-numeric: tabular-nums;
+}
+.memo-kicker .k-line { flex: 1; height: 1px; background: var(--line); }
+.memo-kicker .k-tag {
+  font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--slate-light);
+}
+.memo-section h2 {
+  font-size: clamp(1.5rem, 3.2vw, 2.05rem);
+  color: var(--navy-900);
+  margin: 0 0 16px;
+  max-width: 24ch;
+}
+.memo-section > .memo-pad > p,
+.memo-lead {
+  font-size: 1.06rem; color: var(--slate); max-width: 68ch;
+}
+.memo-lead { margin-top: 0; }
+.memo-section .body-copy p { color: var(--slate); max-width: 68ch; }
+
+/* ---- Executive at-a-glance strip ---- */
+.memo-glance {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 34px 0 8px;
+}
+.memo-glance .g-cell {
+  background: var(--white);
+  padding: 22px 20px;
+}
+.memo-glance .g-num {
+  display: block; font-size: 1.7rem; font-weight: 800; color: var(--navy-900);
+  letter-spacing: -0.02em; line-height: 1.1;
+}
+.memo-glance .g-num small { font-size: .95rem; font-weight: 700; color: var(--accent-deep); margin-left: 2px; }
+.memo-glance .g-lbl { display: block; font-size: .86rem; color: var(--slate-light); margin-top: 6px; }
+
+/* ---- Numbered highlight list ---- */
+.memo-points { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 18px; }
+.memo-points li {
+  display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start;
+}
+.memo-points .mp-n {
+  width: 34px; height: 34px; border-radius: 9px;
+  display: grid; place-items: center;
+  background: var(--bg-tint); color: var(--accent-deep);
+  font-weight: 800; font-size: .95rem;
+}
+.memo-points h4 { margin: 3px 0 4px; color: var(--navy-900); font-size: 1.05rem; }
+.memo-points p { margin: 0; color: var(--slate); font-size: .98rem; }
+
+/* ---- Two-column problem/solution ---- */
+.memo-duo {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 30px;
+}
+.memo-duo .duo-col {
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 24px;
+  background: var(--bg-alt);
+}
+.memo-duo .duo-col.duo-hot {
+  background: linear-gradient(180deg, #f2f9fd, #fff);
+  border-color: #bfe1f2;
+}
+.memo-duo h4 {
+  font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 14px;
+}
+.memo-duo .duo-col h4 { color: var(--slate-light); }
+.memo-duo .duo-hot h4 { color: var(--accent-deep); }
+.memo-duo ul { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 11px; }
+.memo-duo li { position: relative; padding-left: 26px; color: var(--slate); font-size: .97rem; }
+.memo-duo li::before {
+  content: ""; position: absolute; left: 0; top: 8px;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--slate-light);
+}
+.memo-duo .duo-hot li::before { background: var(--accent); }
+
+/* ---- Pull quote ---- */
+.memo-quote {
+  margin: 40px 0 8px; padding: 30px 34px;
+  border-left: 4px solid var(--accent);
+  background: var(--navy-900);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: #eaf3fa;
+  font-size: 1.22rem; line-height: 1.45; font-weight: 500;
+}
+.memo-quote cite { display: block; margin-top: 14px; font-size: .9rem; font-style: normal; color: #8fd6f5; }
+
+/* ---- Data table ---- */
+.memo-table { width: 100%; border-collapse: collapse; margin-top: 26px; font-size: .96rem; }
+.memo-table thead th {
+  text-align: left; background: var(--navy-900); color: #eaf3fa;
+  padding: 13px 16px; font-size: .82rem; letter-spacing: .06em; text-transform: uppercase;
+}
+.memo-table thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+.memo-table thead th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+.memo-table td { padding: 13px 16px; border-bottom: 1px solid var(--line); color: var(--slate); vertical-align: top; }
+.memo-table tr:last-child td { border-bottom: 0; }
+.memo-table td:first-child { color: var(--navy-800); font-weight: 600; width: 38%; }
+.memo-table tbody tr:nth-child(even) td { background: var(--bg-alt); }
+
+/* ---- Use-of-proceeds bars ---- */
+.uop { margin-top: 28px; display: grid; gap: 16px; }
+.uop-row { display: grid; grid-template-columns: 180px 1fr 56px; gap: 16px; align-items: center; }
+.uop-label { font-weight: 600; color: var(--navy-800); font-size: .96rem; }
+.uop-track { height: 12px; border-radius: 999px; background: var(--bg-tint); overflow: hidden; }
+.uop-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent-deep), var(--accent)); }
+.uop-pct { text-align: right; font-weight: 700; color: var(--navy-900); font-variant-numeric: tabular-nums; }
+
+/* ---- Milestone timeline ---- */
+.memo-timeline { margin-top: 30px; list-style: none; padding: 0; display: grid; gap: 0; }
+.memo-timeline li {
+  position: relative; padding: 0 0 26px 34px; border-left: 2px solid var(--line);
+}
+.memo-timeline li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.memo-timeline li::before {
+  content: ""; position: absolute; left: -8px; top: 2px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--white); border: 3px solid var(--accent);
+}
+.memo-timeline .tl-phase { display: block; font-weight: 700; color: var(--navy-900); }
+.memo-timeline .tl-when { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-deep); }
+.memo-timeline .tl-body { margin: 4px 0 0; color: var(--slate); font-size: .97rem; }
+
+/* ---- The ask card ---- */
+.memo-ask {
+  margin-top: 34px;
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 0;
+  border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.memo-ask .ask-main {
+  background: linear-gradient(155deg, var(--navy-900), var(--navy-600));
+  color: #eaf3fa; padding: 32px;
+}
+.memo-ask .ask-main h3 { color: #fff; font-size: 1.3rem; margin: 0 0 10px; }
+.memo-ask .ask-main p { color: #cfe4f2; margin: 0 0 20px; font-size: .98rem; }
+.memo-ask .ask-figure { font-size: 2.4rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+.memo-ask .ask-figure small { font-size: 1rem; font-weight: 600; color: var(--accent-glow); }
+.memo-ask .ask-side { background: var(--bg-alt); padding: 32px; display: grid; gap: 16px; align-content: start; }
+.memo-ask .ask-side .as-row { display: flex; justify-content: space-between; gap: 14px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+.memo-ask .ask-side .as-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.memo-ask .ask-side .as-k { color: var(--slate-light); font-size: .92rem; }
+.memo-ask .ask-side .as-v { color: var(--navy-900); font-weight: 700; text-align: right; }
+
+/* ---- Signature / contact block ---- */
+.memo-sign {
+  margin-top: 8px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: end;
+}
+.memo-sign .sign-name { font-size: 1.15rem; font-weight: 700; color: var(--navy-900); margin: 0; }
+.memo-sign .sign-role { color: var(--slate-light); font-size: .92rem; margin: 2px 0 0; }
+.memo-sign .sign-cta { justify-self: end; }
+
+/* ---- Disclaimer ---- */
+.memo .sheet.memo-disclaimer {
+  background: var(--navy-900); color: #9fc3dc;
+}
+.memo-disclaimer .memo-pad { padding-top: 40px; padding-bottom: 48px; }
+.memo-disclaimer h3 { color: #cde3f2; font-size: .82rem; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 14px; }
+.memo-disclaimer p { font-size: .84rem; line-height: 1.7; color: #90b6d2; max-width: none; margin: 0 0 12px; }
+.memo-disclaimer p:last-child { margin-bottom: 0; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 760px) {
+  .memo-pad { padding: 46px 22px; }
+  .memo-duo { grid-template-columns: 1fr; }
+  .memo-ask { grid-template-columns: 1fr; }
+  .memo-sign { grid-template-columns: 1fr; }
+  .memo-sign .sign-cta { justify-self: start; }
+  .uop-row { grid-template-columns: 120px 1fr 48px; gap: 10px; }
+  .memo-ribbon .container { font-size: .68rem; }
+}
+
+/* ============ PRINT (brochure export) ============ */
+@media print {
+  .site-header, .memo-ribbon, .site-footer, .sign-cta { display: none !important; }
+  body, .memo { background: #fff; }
+  .memo .sheet { box-shadow: none; max-width: none; margin: 0; }
+  .memo .sheet + .sheet { margin-top: 0; }
+  .memo-section, .memo-cover { page-break-inside: avoid; break-inside: avoid; }
+  .memo-cover { page-break-after: always; }
+  .memo-quote, .memo-ask, .memo-cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .memo-pad { padding: 40px 30px; }
+}
