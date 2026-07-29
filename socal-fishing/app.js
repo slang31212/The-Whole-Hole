@@ -172,6 +172,20 @@
     c.closePath();
   }
 
+  // Smooth closed coastline through the points (midpoint quadratics) so
+  // an island reads as organic land rather than a faceted polygon.
+  function pathSmoothClosed(c, pts) {
+    var n = pts.length, P = [];
+    for (var i = 0; i < n; i++) P.push(project(pts[i].lon, pts[i].lat));
+    c.beginPath();
+    c.moveTo((P[n - 1].x + P[0].x) / 2, (P[n - 1].y + P[0].y) / 2);
+    for (var k = 0; k < n; k++) {
+      var cur = P[k], nxt = P[(k + 1) % n];
+      c.quadraticCurveTo(cur.x, cur.y, (cur.x + nxt.x) / 2, (cur.y + nxt.y) / 2);
+    }
+    c.closePath();
+  }
+
   // Render base water field into an offscreen canvas (cached by view/base/size).
   function renderField() {
     var key = [state.base, state.view.zoom.toFixed(3),
@@ -193,28 +207,42 @@
     c.fillStyle = isChart ? "#dcecf6" : isSat ? "#06182c" : "#0a2036";
     c.fillRect(0, 0, cssW, cssH);
 
-    var step = 4;
-    for (var y = 0; y < cssH; y += step) {
-      for (var x = 0; x < cssW; x += step) {
-        var g = unproject(x + step / 2, y + step / 2);
-        var col, alpha = 1;
-        if (isChl) {
-          col = rampColor(CHL_STOPS, chlAt(g.lon, g.lat));
-        } else if (isSat) {
-          // subtle SST-tinted dark satellite water
-          var s = sstColor(sstAt(g.lon, g.lat));
-          col = [Math.round(s[0] * 0.32 + 6), Math.round(s[1] * 0.34 + 14), Math.round(s[2] * 0.36 + 24)];
-        } else if (isChart) {
-          // pale depth shading from the field
-          var d = clamp((sstAt(g.lon, g.lat) - 62) / 12, 0, 1);
-          col = [Math.round(lerp(196, 236, 1 - d)), Math.round(lerp(222, 244, 1 - d)), Math.round(lerp(240, 252, 1 - d))];
-        } else {
-          col = sstColor(sstAt(g.lon, g.lat));
-        }
-        c.fillStyle = "rgba(" + col[0] + "," + col[1] + "," + col[2] + "," + alpha + ")";
-        c.fillRect(x, y, step + 1, step + 1);
+    // High-resolution water field: sample the analytic SST/chl field into a
+    // full-device-resolution ImageData so the gradient is smooth (no blocks).
+    var colorAt = function (lon, lat) {
+      if (isChl) return rampColor(CHL_STOPS, chlAt(lon, lat));
+      if (isSat) {
+        var s = sstColor(sstAt(lon, lat));
+        return [(s[0] * 0.32 + 6) | 0, (s[1] * 0.34 + 14) | 0, (s[2] * 0.36 + 24) | 0];
+      }
+      if (isChart) {
+        var d = clamp((sstAt(lon, lat) - 62) / 12, 0, 1);
+        return [lerp(196, 236, 1 - d) | 0, lerp(222, 244, 1 - d) | 0, lerp(240, 252, 1 - d) | 0];
+      }
+      return sstColor(sstAt(lon, lat));
+    };
+    var SS = 2;                                      // css px per sample
+    var lw = Math.max(1, Math.ceil(cssW / SS));
+    var lh = Math.max(1, Math.ceil(cssH / SS));
+    var lo = renderField._lo || (renderField._lo = document.createElement("canvas"));
+    lo.width = lw; lo.height = lh;
+    var lctx = lo.getContext("2d");
+    var img = lctx.createImageData(lw, lh);
+    var buf = img.data;
+    for (var py = 0; py < lh; py++) {
+      var cy = py * SS;
+      for (var px = 0; px < lw; px++) {
+        var g = unproject(px * SS, cy);
+        var col = colorAt(g.lon, g.lat);
+        var idx = (py * lw + px) * 4;
+        buf[idx] = col[0]; buf[idx + 1] = col[1]; buf[idx + 2] = col[2]; buf[idx + 3] = 255;
       }
     }
+    lctx.putImageData(img, 0, 0);
+    // Smoothly upscale to full device resolution — no visible cells.
+    c.imageSmoothingEnabled = true;
+    c.imageSmoothingQuality = "high";
+    c.drawImage(lo, 0, 0, lw, lh, 0, 0, cssW, cssH);
 
     // contour iso-lines
     drawContours(c, isChart);
@@ -222,8 +250,8 @@
     // land
     var L = landPolys();
     c.lineJoin = "round";
-    [L.main, L.island].forEach(function (poly) {
-      pathPoly(c, poly);
+    [{ poly: L.main, smooth: false }, { poly: L.island, smooth: true }].forEach(function (o) {
+      if (o.smooth) pathSmoothClosed(c, o.poly); else pathPoly(c, o.poly);
       if (isChart) {
         c.fillStyle = "#e9e4d3";
         c.fill();
@@ -536,6 +564,53 @@
     ctx.restore();
   }
 
+  // Latitude / longitude graticule, adapting its interval to the zoom.
+  function niceStep(span, target) {
+    var steps = [0.05, 0.1, 0.2, 0.25, 0.5, 1, 2];
+    var raw = span / target;
+    for (var i = 0; i < steps.length; i++) if (steps[i] >= raw) return steps[i];
+    return steps[steps.length - 1];
+  }
+  function fmtDM(v, isLat) {
+    var hemi = isLat ? (v >= 0 ? "N" : "S") : (v >= 0 ? "E" : "W");
+    v = Math.abs(v);
+    var d = Math.floor(v), m = Math.round((v - d) * 60);
+    if (m === 60) { d++; m = 0; }
+    return d + "°" + (m < 10 ? "0" : "") + m + "′" + hemi;
+  }
+  function drawGraticule() {
+    var tl = unproject(0, 0), br = unproject(cssW, cssH);
+    var latMin = Math.min(tl.lat, br.lat), latMax = Math.max(tl.lat, br.lat);
+    var lonMin = Math.min(tl.lon, br.lon), lonMax = Math.max(tl.lon, br.lon);
+    var latStep = niceStep(latMax - latMin, 5), lonStep = niceStep(lonMax - lonMin, 6);
+    ctx.save();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(255,255,255,.12)";
+    ctx.fillStyle = "rgba(255,255,255,.72)";
+    ctx.font = "700 10px Inter, system-ui, sans-serif";
+    ctx.shadowColor = "rgba(3,12,22,.9)";
+    ctx.shadowBlur = 3;
+    ctx.textBaseline = "alphabetic";
+    // parallels (constant latitude)
+    for (var kl = Math.ceil(latMin / latStep); kl * latStep <= latMax; kl++) {
+      var lat = kl * latStep;
+      var a = project(lonMin, lat), b = project(lonMax, lat);
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      // label on the left, kept out of the top/bottom legend cards
+      if (a.y > 150 && a.y < cssH - 150) { ctx.textAlign = "left"; ctx.fillText(fmtDM(lat, true), 8, a.y - 3); }
+    }
+    // meridians (constant longitude)
+    for (var kL = Math.ceil(lonMin / lonStep); kL * lonStep <= lonMax; kL++) {
+      var lon = kL * lonStep;
+      var c1 = project(lon, latMax), c2 = project(lon, latMin);
+      ctx.beginPath(); ctx.moveTo(c1.x, c1.y); ctx.lineTo(c2.x, c2.y); ctx.stroke();
+      // label along the top, clear of the SST card (left) and layer rail (right)
+      if (c1.x > 240 && c1.x < cssW - 90) { ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(fmtDM(lon, false), c1.x, 8); ctx.textBaseline = "alphabetic"; }
+    }
+    ctx.restore();
+    ctx.textAlign = "left";
+  }
+
   function render() {
     if (!ctx) return;
     computeTx(cssW, cssH);
@@ -543,6 +618,7 @@
     ctx.clearRect(0, 0, cssW, cssH);
     var field = renderField();
     ctx.drawImage(field, 0, 0, cssW, cssH);
+    drawGraticule();
     // overlays
     drawCurrents();
     drawWind();

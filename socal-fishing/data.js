@@ -40,16 +40,26 @@ window.SF_DATA = (function () {
     { lon: -117.30, lat: 33.14 }
   ];
 
+  // Santa Catalina: a long NW–SE island, widest through the middle and
+  // pinched at the Isthmus (Two Harbors). Ordered as a ring: West End,
+  // along the north shore to the East End, back along the south shore.
   var catalina = [
-    { lon: -118.505, lat: 33.443 }, // NW isthmus
-    { lon: -118.470, lat: 33.435 },
-    { lon: -118.420, lat: 33.405 },
-    { lon: -118.365, lat: 33.365 },
-    { lon: -118.320, lat: 33.335 }, // SE / east end
-    { lon: -118.345, lat: 33.322 },
-    { lon: -118.400, lat: 33.350 },
-    { lon: -118.455, lat: 33.392 },
-    { lon: -118.495, lat: 33.425 }
+    { lon: -118.605, lat: 33.468 }, // West End
+    { lon: -118.565, lat: 33.492 },
+    { lon: -118.520, lat: 33.480 },
+    { lon: -118.500, lat: 33.472 }, // Isthmus (gentle north waist)
+    { lon: -118.470, lat: 33.478 },
+    { lon: -118.430, lat: 33.462 },
+    { lon: -118.385, lat: 33.432 },
+    { lon: -118.345, lat: 33.392 },
+    { lon: -118.312, lat: 33.360 }, // East End
+    { lon: -118.360, lat: 33.352 },
+    { lon: -118.400, lat: 33.388 },
+    { lon: -118.440, lat: 33.418 },
+    { lon: -118.490, lat: 33.442 }, // Isthmus (south pinch)
+    { lon: -118.520, lat: 33.448 },
+    { lon: -118.560, lat: 33.450 },
+    { lon: -118.588, lat: 33.452 }
   ];
 
   // Recommended zone (the "best play"): centre + radius in nautical miles.
