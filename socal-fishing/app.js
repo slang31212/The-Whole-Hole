@@ -212,8 +212,10 @@
     var colorAt = function (lon, lat) {
       if (isChl) return rampColor(CHL_STOPS, chlAt(lon, lat));
       if (isSat) {
-        var s = sstColor(sstAt(lon, lat));
-        return [(s[0] * 0.32 + 6) | 0, (s[1] * 0.34 + 14) | 0, (s[2] * 0.36 + 24) | 0];
+        // True-color water reads blue-teal regardless of SST; keep a clean
+        // navy that deepens offshore (no muddy warm-water browns).
+        var v = clamp((sstAt(lon, lat) - 62) / 12, 0, 1); // 0 cool/inshore .. 1 warm/offshore
+        return [lerp(22, 7, v) | 0, lerp(74, 21, v) | 0, lerp(102, 40, v) | 0];
       }
       if (isChart) {
         var d = clamp((sstAt(lon, lat) - 62) / 12, 0, 1);
@@ -538,7 +540,8 @@
       if (targets[i] * pxPerNm <= 150) { maxNm = targets[i]; break; }
     }
     var w = maxNm * pxPerNm;
-    var x0 = cssW - w - 26, y0 = cssH - 30;
+    // centred along the bottom edge so it clears the Oceanside corner marker
+    var x0 = (cssW - (w + 46)) / 2 + 8, y0 = cssH - 30;
     ctx.save();
     ctx.fillStyle = "rgba(6,22,40,.78)";
     ctx.strokeStyle = "rgba(255,255,255,.55)";
@@ -583,12 +586,13 @@
     var latMin = Math.min(tl.lat, br.lat), latMax = Math.max(tl.lat, br.lat);
     var lonMin = Math.min(tl.lon, br.lon), lonMax = Math.max(tl.lon, br.lon);
     var latStep = niceStep(latMax - latMin, 5), lonStep = niceStep(lonMax - lonMin, 6);
+    var light = state.base === "chart";
     ctx.save();
     ctx.lineWidth = 1;
-    ctx.strokeStyle = "rgba(255,255,255,.12)";
-    ctx.fillStyle = "rgba(255,255,255,.72)";
+    ctx.strokeStyle = light ? "rgba(40,70,100,.35)" : "rgba(255,255,255,.12)";
+    ctx.fillStyle = light ? "rgba(30,55,80,.95)" : "rgba(255,255,255,.72)";
     ctx.font = "700 10px Inter, system-ui, sans-serif";
-    ctx.shadowColor = "rgba(3,12,22,.9)";
+    ctx.shadowColor = light ? "rgba(255,255,255,.85)" : "rgba(3,12,22,.9)";
     ctx.shadowBlur = 3;
     ctx.textBaseline = "alphabetic";
     // parallels (constant latitude)
