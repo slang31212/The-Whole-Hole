@@ -1,0 +1,331 @@
+{
+  "source_pdf": "/root/.claude/uploads/7ae670bf-4418-541a-b4b6-4cbccad847f2/67d83b49-19881101_Newfoundland_Offshore_IA_paper_on_MPSS_by_Lang.pdf",
+  "page_count": 36,
+  "dpi": 150,
+  "pages": [
+    {
+      "page": 1,
+      "image": "page-001.png",
+      "text_file": "page-001.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 2,
+      "image": "page-002.png",
+      "text_file": "page-002.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 3,
+      "image": "page-003.png",
+      "text_file": "page-003.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 4,
+      "image": "page-004.png",
+      "text_file": "page-004.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 5,
+      "image": "page-005.png",
+      "text_file": "page-005.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 6,
+      "image": "page-006.png",
+      "text_file": "page-006.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 7,
+      "image": "page-007.png",
+      "text_file": "page-007.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 8,
+      "image": "page-008.png",
+      "text_file": "page-008.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 9,
+      "image": "page-009.png",
+      "text_file": "page-009.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 10,
+      "image": "page-010.png",
+      "text_file": "page-010.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 11,
+      "image": "page-011.png",
+      "text_file": "page-011.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 12,
+      "image": "page-012.png",
+      "text_file": "page-012.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 13,
+      "image": "page-013.png",
+      "text_file": "page-013.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 14,
+      "image": "page-014.png",
+      "text_file": "page-014.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 15,
+      "image": "page-015.png",
+      "text_file": "page-015.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 16,
+      "image": "page-016.png",
+      "text_file": "page-016.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 17,
+      "image": "page-017.png",
+      "text_file": "page-017.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 18,
+      "image": "page-018.png",
+      "text_file": "page-018.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 19,
+      "image": "page-019.png",
+      "text_file": "page-019.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 20,
+      "image": "page-020.png",
+      "text_file": "page-020.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 21,
+      "image": "page-021.png",
+      "text_file": "page-021.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 22,
+      "image": "page-022.png",
+      "text_file": "page-022.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 23,
+      "image": "page-023.png",
+      "text_file": "page-023.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 24,
+      "image": "page-024.png",
+      "text_file": "page-024.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 25,
+      "image": "page-025.png",
+      "text_file": "page-025.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 26,
+      "image": "page-026.png",
+      "text_file": "page-026.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 27,
+      "image": "page-027.png",
+      "text_file": "page-027.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 28,
+      "image": "page-028.png",
+      "text_file": "page-028.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 29,
+      "image": "page-029.png",
+      "text_file": "page-029.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 30,
+      "image": "page-030.png",
+      "text_file": "page-030.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 31,
+      "image": "page-031.png",
+      "text_file": "page-031.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 32,
+      "image": "page-032.png",
+      "text_file": "page-032.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 33,
+      "image": "page-033.png",
+      "text_file": "page-033.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 34,
+      "image": "page-034.png",
+      "text_file": "page-034.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 35,
+      "image": "page-035.png",
+      "text_file": "page-035.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    },
+    {
+      "page": 36,
+      "image": "page-036.png",
+      "text_file": "page-036.txt",
+      "word_count": 0,
+      "has_raster_images": true,
+      "has_vector_drawings": false,
+      "likely_has_visuals": true
+    }
+  ]
+}
