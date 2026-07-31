@@ -39,9 +39,14 @@ For the `seaways-mpss.com` domain, point the host at this repository / folder.
   defaults; every field is also editable live in the browser. The page carries a clear disclaimer that
   the model is for discussion only and is not an offer of securities.
 - **Copy** lives inline in `index.html`, grouped by clearly-commented sections.
-- **Founding-round amount** — the memorandum's "The Ask" shows a placeholder `$[__]M`
-  (marked `data-illustrative` in `memo.html`). Replace it with the real figure before sharing.
-  The use-of-proceeds percentages and milestone phases in the same section are illustrative too.
+- **Founding round** — the memorandum is by **Lang Leasing** (Stewart Lang), which leases the MPSS
+  designed by **Seaways Engineering** (Craig Lang). "The Ask" shows an indicative **$4–6M** range; the
+  use-of-proceeds percentages and milestone phases in that section are illustrative. The memo carries
+  visible **DRAFT** markings (ribbon chip + cover badge) — remove them in `memo.html`/`memo.css` when final.
+- **Field envelope & storage** — the memo frames the MPSS across the full envelope (marginal shallow-water
+  ~65–150 m through deepwater) and states storage as ~300,000 bbl dry above the waterline plus up to 2M bbl
+  oil-over-water in the "Big SWIS" lower tank. Origin is credited to the early 1980s with Glasgow validation
+  in 1988–89 (Faulkner, Incecik &amp; Lang).
 - Specs, the Five S and the lifecycle/driver tables are hand-built in HTML/CSS (no
   third-party chart images), so they're safe to edit and reuse.
 - Key figures (15,000 t payload, 8,100 m² deck, 2M bbl SWIS storage, 37.5 m survival wave,
