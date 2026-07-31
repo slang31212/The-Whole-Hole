@@ -46,6 +46,22 @@
 .memo-ribbon .rib-mark { color: var(--accent-glow); font-weight: 600; }
 .memo-ribbon .rib-conf { color: #9fc3dc; }
 
+/* ---- Draft markings ---- */
+.memo-ribbon-draft { background: #6b4d12; }
+.memo-ribbon-draft .rib-conf { color: #e8cf9a; }
+.rib-draft {
+  background: var(--gold); color: #2a1f05;
+  font-weight: 800; padding: 2px 8px; border-radius: 4px; margin-right: 8px;
+  letter-spacing: .1em;
+}
+.cover-draft-badge {
+  display: inline-block; margin: 0 0 20px;
+  font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700;
+  color: #ffe6b0; background: rgba(201,162,75,.16);
+  border: 1px solid rgba(201,162,75,.55);
+  padding: 6px 13px; border-radius: 999px;
+}
+
 /* ============ COVER ============ */
 .memo .sheet.memo-cover {
   position: relative;
@@ -301,7 +317,10 @@
 
 /* ============ PRINT (brochure export) ============ */
 @media print {
-  .site-header, .memo-ribbon, .site-footer, .sign-cta { display: none !important; }
+  .site-header, .site-footer, .sign-cta { display: none !important; }
+  /* Keep the DRAFT marking visible on every printed page */
+  .memo-ribbon-draft { display: block !important; background: #6b4d12 !important; }
+  .cover-draft-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body, .memo { background: #fff; }
   .memo .sheet { box-shadow: none; max-width: none; margin: 0; }
   .memo .sheet + .sheet { margin-top: 0; }
