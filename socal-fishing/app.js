@@ -14,7 +14,7 @@
   /* ---------------- app state ---------------- */
   var state = {
     base: "sst", // chart | satellite | sst | chlorophyll
-    overlays: { currents: false, wind: false, baitlogs: false, catches: true },
+    overlays: { currents: false, wind: false, baitlogs: false, catches: true, grid: true },
     view: {
       cx: (B.lonMin + B.lonMax) / 2,
       cy: (B.latMin + B.latMax) / 2,
@@ -569,7 +569,7 @@
 
   // Latitude / longitude graticule, adapting its interval to the zoom.
   function niceStep(span, target) {
-    var steps = [0.05, 0.1, 0.2, 0.25, 0.5, 1, 2];
+    var steps = [0.02, 0.025, 0.05, 0.075, 0.1, 0.2, 0.25, 0.5, 1, 2];
     var raw = span / target;
     for (var i = 0; i < steps.length; i++) if (steps[i] >= raw) return steps[i];
     return steps[steps.length - 1];
@@ -581,36 +581,51 @@
     if (m === 60) { d++; m = 0; }
     return d + "°" + (m < 10 ? "0" : "") + m + "′" + hemi;
   }
+  // Draw parallels at latStep and meridians at lonStep; the labeled (major) tier
+  // passes `withLabels`. Meridian labels dedupe within 50px to avoid crowding.
+  function gridLines(latMin, latMax, lonMin, lonMax, latStep, lonStep, withLabels) {
+    for (var kl = Math.ceil(latMin / latStep); kl * latStep <= latMax + 1e-9; kl++) {
+      var lat = kl * latStep;
+      var a = project(lonMin, lat), b = project(lonMax, lat);
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      if (withLabels && a.y > 150 && a.y < cssH - 150) {
+        ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+        ctx.fillText(fmtDM(lat, true), 8, a.y - 3);
+      }
+    }
+    var lastX = -1e9;
+    for (var kL = Math.ceil(lonMin / lonStep); kL * lonStep <= lonMax + 1e-9; kL++) {
+      var lon = kL * lonStep;
+      var c1 = project(lon, latMax), c2 = project(lon, latMin);
+      ctx.beginPath(); ctx.moveTo(c1.x, c1.y); ctx.lineTo(c2.x, c2.y); ctx.stroke();
+      // label along the top, clear of the SST card (left) and layer rail (right),
+      // and never within 50px of the previous label so dense spacing can't crowd.
+      if (withLabels && c1.x > 240 && c1.x < cssW - 90 && c1.x - lastX > 50) {
+        ctx.textAlign = "center"; ctx.textBaseline = "top";
+        ctx.fillText(fmtDM(lon, false), c1.x, 8);
+        lastX = c1.x;
+      }
+    }
+  }
   function drawGraticule() {
     var tl = unproject(0, 0), br = unproject(cssW, cssH);
     var latMin = Math.min(tl.lat, br.lat), latMax = Math.max(tl.lat, br.lat);
     var lonMin = Math.min(tl.lon, br.lon), lonMax = Math.max(tl.lon, br.lon);
-    var latStep = niceStep(latMax - latMin, 5), lonStep = niceStep(lonMax - lonMin, 6);
+    // Major tier (~0.1° / ~6 NM) is labeled; a finer minor mesh sits between.
+    var majLat = niceStep(latMax - latMin, 10), majLon = niceStep(lonMax - lonMin, 14);
     var light = state.base === "chart";
     ctx.save();
     ctx.lineWidth = 1;
-    ctx.strokeStyle = light ? "rgba(40,70,100,.35)" : "rgba(255,255,255,.12)";
-    ctx.fillStyle = light ? "rgba(30,55,80,.95)" : "rgba(255,255,255,.72)";
     ctx.font = "700 10px Inter, system-ui, sans-serif";
     ctx.shadowColor = light ? "rgba(255,255,255,.85)" : "rgba(3,12,22,.9)";
     ctx.shadowBlur = 3;
-    ctx.textBaseline = "alphabetic";
-    // parallels (constant latitude)
-    for (var kl = Math.ceil(latMin / latStep); kl * latStep <= latMax; kl++) {
-      var lat = kl * latStep;
-      var a = project(lonMin, lat), b = project(lonMax, lat);
-      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-      // label on the left, kept out of the top/bottom legend cards
-      if (a.y > 150 && a.y < cssH - 150) { ctx.textAlign = "left"; ctx.fillText(fmtDM(lat, true), 8, a.y - 3); }
-    }
-    // meridians (constant longitude)
-    for (var kL = Math.ceil(lonMin / lonStep); kL * lonStep <= lonMax; kL++) {
-      var lon = kL * lonStep;
-      var c1 = project(lon, latMax), c2 = project(lon, latMin);
-      ctx.beginPath(); ctx.moveTo(c1.x, c1.y); ctx.lineTo(c2.x, c2.y); ctx.stroke();
-      // label along the top, clear of the SST card (left) and layer rail (right)
-      if (c1.x > 240 && c1.x < cssW - 90) { ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(fmtDM(lon, false), c1.x, 8); ctx.textBaseline = "alphabetic"; }
-    }
+    // minor mesh (half-interval), faint, unlabeled
+    ctx.strokeStyle = light ? "rgba(40,70,100,.20)" : "rgba(255,255,255,.10)";
+    gridLines(latMin, latMax, lonMin, lonMax, majLat / 2, majLon / 2, false);
+    // major lines, prominent + labeled
+    ctx.strokeStyle = light ? "rgba(40,70,100,.55)" : "rgba(255,255,255,.30)";
+    ctx.fillStyle = light ? "rgba(30,55,80,.95)" : "rgba(255,255,255,.78)";
+    gridLines(latMin, latMax, lonMin, lonMax, majLat, majLon, true);
     ctx.restore();
     ctx.textAlign = "left";
   }
@@ -622,7 +637,7 @@
     ctx.clearRect(0, 0, cssW, cssH);
     var field = renderField();
     ctx.drawImage(field, 0, 0, cssW, cssH);
-    drawGraticule();
+    if (state.overlays.grid) drawGraticule();
     // overlays
     drawCurrents();
     drawWind();
@@ -915,7 +930,8 @@
     { id: "chlorophyll", type: "base", ico: "🌿", label: "CHLOROPHYLL" },
     { id: "currents", type: "overlay", ico: "🌀", label: "CURRENTS" },
     { id: "wind", type: "overlay", ico: "🜁", label: "WIND" },
-    { id: "baitlogs", type: "overlay", ico: "🐟", label: "BAIT LOGS" }
+    { id: "baitlogs", type: "overlay", ico: "🐟", label: "BAIT LOGS" },
+    { id: "grid", type: "overlay", ico: "#", label: "GRID" }
   ];
   var BASES = [
     { id: "chart", label: "Chart" },

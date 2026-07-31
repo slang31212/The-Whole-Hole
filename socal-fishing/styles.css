@@ -383,7 +383,7 @@ body.fishing {
 .mk-ic.zone { background: transparent; border: 1.5px dashed #fff; }
 
 .zoom-ctl {
-  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  position: absolute; right: 12px; top: auto; bottom: 104px;
   display: flex; flex-direction: column; gap: 4px;
 }
 .zoom-ctl button {
