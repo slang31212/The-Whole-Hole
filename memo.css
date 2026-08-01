@@ -266,6 +266,26 @@
 .memo-timeline .tl-when { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-deep); }
 .memo-timeline .tl-body { margin: 4px 0 0; color: var(--slate); font-size: .97rem; }
 
+/* ---- Independent validation panel ---- */
+.memo-validation {
+  margin-top: 34px;
+  border: 1px solid #bfe1f2;
+  background: linear-gradient(180deg, #f2f9fd, #ffffff);
+  border-radius: var(--radius);
+  padding: 26px clamp(18px, 3vw, 30px) 22px;
+}
+.memo-validation .mv-tag {
+  display: inline-block; margin-bottom: 12px;
+  font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700;
+  color: var(--accent-deep); background: #e2f1fa; border: 1px solid #bfe1f2;
+  padding: 5px 12px; border-radius: 999px;
+}
+.memo-validation h3 { color: var(--navy-900); font-size: 1.22rem; margin: 0 0 12px; }
+.memo-validation p { color: var(--slate); max-width: 68ch; }
+.memo-validation .memo-table { margin-top: 20px; }
+.memo-validation .memo-table td.mv-up { color: var(--accent-deep); font-weight: 700; }
+.memo-validation .mv-note { font-size: .82rem; color: var(--slate-light); margin: 16px 0 0; }
+
 /* ---- Documentary record ---- */
 .memo-record-head { margin: 40px 0 4px; color: var(--navy-900); font-size: 1.12rem; letter-spacing: .01em; }
 .memo-record {
