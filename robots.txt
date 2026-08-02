@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /founding-investor-memorandum.html
+Disallow: /report.html
+Disallow: /command.html
+Disallow: /field-economics.html
+Disallow: /aupec-refresh.html
+Disallow: /aupec-north-sea-1989.pdf
