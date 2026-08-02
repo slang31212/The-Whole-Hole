@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Field Economics — MPSS vs Conventional Host (Seaways)</title>
+  <meta name="description" content="Feed in a field and an oil price; compare post-tax NPV and IRR for a conventional bespoke host versus the Seaways MPSS. A 2026 refresh of the AUPEC 1989 study — transparent, editable, illustrative." />
+  <meta name="theme-color" content="#0a1a2f" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Cpath d='M4 20h24M8 20v-6h16v6M13 14V9h6v5' stroke='%232ea3d9' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="index.html#top" class="brand" aria-label="Seaways MPSS home">
+        <svg class="brand-mark" viewBox="0 0 32 32" width="34" height="34" aria-hidden="true">
+          <rect width="32" height="32" rx="7" fill="#0a1a2f"/>
+          <path d="M4 21h24M8 21v-7h16v7M13 14V8h6v6" stroke="#2ea3d9" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand-text">Seaways<span class="brand-accent"> MPSS</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="report.html">Report</a></li>
+          <li><a href="invest.html">For Family Offices</a></li>
+          <li><a href="day-rates.html">Day Rates</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section calc-intro">
+      <div class="container">
+        <p class="section-eyebrow">Field Economics · 2026 Refresh of AUPEC (1989)</p>
+        <h1 class="section-title">Feed in a field. Compare the hosts.</h1>
+        <p class="lead">
+          The 1989 AUPEC study found the MPSS lifted post-tax investor returns across five North Sea fields.
+          This tool lets you re-run that comparison with <strong>your own inputs and today's oil price</strong>:
+          a conventional bespoke host versus the Seaways MPSS, on one field. Every field is different — change
+          any number and the economics recompute. Illustrative and transparent, not a re-run of AUPEC's
+          proprietary model.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-alt calc-section" style="padding-top:0;">
+      <div class="container">
+
+        <!-- Presets -->
+        <div class="fe-presets">
+          <span class="fe-presets-label">Start from</span>
+          <button type="button" class="chip fe-field" data-r="250" data-opex="16" data-other="1500" data-conv="1200" data-mpss="300">Robust field</button>
+          <button type="button" class="chip fe-field" data-r="65" data-opex="26" data-other="650" data-conv="650" data-mpss="160">Marginal field</button>
+          <button type="button" class="chip fe-field" data-r="35" data-opex="32" data-other="520" data-conv="520" data-mpss="150">Small / tight field</button>
+        </div>
+
+        <!-- Assumptions -->
+        <div class="calc-assumptions invest-assumptions">
+          <div class="assume-field">
+            <label for="fe-price">Oil price</label>
+            <div class="input-money"><span class="prefix">$</span><input type="text" inputmode="decimal" id="fe-price" class="calc-num" /></div>
+            <span class="assume-hint">Flat real, $/bbl. Brent ~mid-$70s–$80s in 2026.</span>
+          </div>
+          <div class="assume-field">
+            <label for="fe-reserves">Recoverable reserves</label>
+            <div class="input-pct"><input type="text" inputmode="decimal" id="fe-reserves" class="calc-num" /><span class="suffix">mmbbl</span></div>
+            <span class="assume-hint">Field size in million barrels.</span>
+          </div>
+          <div class="assume-field">
+            <label for="fe-opex">Operating cost</label>
+            <div class="input-money"><span class="prefix">$</span><input type="text" inputmode="decimal" id="fe-opex" class="calc-num" /></div>
+            <span class="assume-hint">$/bbl produced.</span>
+          </div>
+          <div class="assume-field">
+            <label for="fe-other">Other capex (wells, subsea)</label>
+            <div class="input-money"><span class="prefix">$</span><input type="text" inputmode="numeric" id="fe-other" class="calc-num" /></div>
+            <span class="assume-hint">$m — the same for both hosts.</span>
+          </div>
+          <div class="assume-field">
+            <label for="fe-conv">Conventional host cost</label>
+            <div class="input-money"><span class="prefix">$</span><input type="text" inputmode="numeric" id="fe-conv" class="calc-num" /></div>
+            <span class="assume-hint">$m — bespoke, purpose-built.</span>
+          </div>
+          <div class="assume-field">
+            <label for="fe-mpss">Seaways MPSS host cost</label>
+            <div class="input-money"><span class="prefix">$</span><input type="text" inputmode="numeric" id="fe-mpss" class="calc-num" /></div>
+            <span class="assume-hint">$m — standardised (or the capitalised lease).</span>
+          </div>
+          <div class="assume-field">
+            <label for="fe-take">Government take</label>
+            <div class="input-pct"><input type="text" inputmode="decimal" id="fe-take" class="calc-num" /><span class="suffix">%</span></div>
+            <span class="assume-hint">Post-tax, with capex relief.</span>
+          </div>
+          <div class="assume-field">
+            <label for="fe-disc">Discount rate</label>
+            <div class="input-pct"><input type="text" inputmode="decimal" id="fe-disc" class="calc-num" /><span class="suffix">%</span></div>
+            <span class="assume-hint">Real, for NPV.</span>
+          </div>
+          <div class="assume-field">
+            <label for="fe-dev">Development period</label>
+            <div class="input-pct"><input type="text" inputmode="decimal" id="fe-dev" class="calc-num" /><span class="suffix">yr</span></div>
+            <span class="assume-hint">Years of capex before first oil.</span>
+          </div>
+          <div class="assume-field">
+            <label for="fe-life">Producing life</label>
+            <div class="input-pct"><input type="text" inputmode="decimal" id="fe-life" class="calc-num" /><span class="suffix">yr</span></div>
+            <span class="assume-hint">Years of production.</span>
+          </div>
+        </div>
+
+        <!-- Take presets -->
+        <div class="fe-presets fe-presets-take">
+          <span class="fe-presets-label">Fiscal regime</span>
+          <button type="button" class="chip fe-take-preset" data-take="78">UK / Norway ~78%</button>
+          <button type="button" class="chip fe-take-preset" data-take="40">Neutral 40%</button>
+          <button type="button" class="chip fe-take-preset" data-take="0">Pre-tax 0%</button>
+          <button type="button" id="fe-reset" class="chip fe-reset">Reset</button>
+        </div>
+
+        <!-- Verdict -->
+        <div class="fe-verdict" id="fe-verdict">—</div>
+
+        <!-- Results: two hosts side by side -->
+        <div class="fe-compare">
+          <article class="fe-host">
+            <h3 class="fe-host-name">Conventional host</h3>
+            <p class="fe-host-sub">Bespoke, purpose-built</p>
+            <div class="fe-metric"><span class="fe-metric-label">Post-tax NPV@10%</span><span class="fe-metric-num" id="conv-npv">—</span></div>
+            <div class="fe-metric"><span class="fe-metric-label">Project IRR</span><span class="fe-metric-num" id="conv-irr">—</span></div>
+            <div class="fe-metric"><span class="fe-metric-label">Breakeven oil price</span><span class="fe-metric-num" id="conv-be">—</span></div>
+          </article>
+          <article class="fe-host fe-host-mpss">
+            <h3 class="fe-host-name">Seaways MPSS</h3>
+            <p class="fe-host-sub">Standardised low-motion host</p>
+            <div class="fe-metric"><span class="fe-metric-label">Post-tax NPV@10%</span><span class="fe-metric-num" id="mpss-npv">—</span></div>
+            <div class="fe-metric"><span class="fe-metric-label">Project IRR</span><span class="fe-metric-num" id="mpss-irr">—</span></div>
+            <div class="fe-metric"><span class="fe-metric-label">Breakeven oil price</span><span class="fe-metric-num" id="mpss-be">—</span></div>
+          </article>
+          <article class="fe-host fe-host-uplift">
+            <h3 class="fe-host-name">The MPSS uplift</h3>
+            <p class="fe-host-sub">MPSS minus conventional</p>
+            <div class="fe-metric"><span class="fe-metric-label">Extra NPV</span><span class="fe-metric-num" id="uplift-npv">—</span></div>
+            <div class="fe-metric"><span class="fe-metric-label">Extra IRR</span><span class="fe-metric-num" id="uplift-irr">—</span></div>
+            <div class="fe-metric"><span class="fe-metric-label">Lower breakeven</span><span class="fe-metric-num" id="uplift-be">—</span></div>
+          </article>
+        </div>
+
+        <div class="calc-toolbar invest-toolbar" style="margin-top:24px;">
+          <div class="calc-tools"><button type="button" id="fe-export" class="btn btn-ghost btn-sm">Export CSV</button></div>
+          <a href="report.html#validation" class="btn btn-primary btn-sm">See the 1989 study →</a>
+        </div>
+
+        <p class="hull-note calc-disclaimer">
+          Illustrative and transparent — not a re-run of AUPEC's proprietary model and not investment advice.
+          Method: a simplified single-field DCF. Capex is spread over the development period; production follows
+          a ramp / plateau / decline profile across the producing life; government take is applied post-tax with
+          capex relief (so it scales the prize and leaves project IRR unchanged); the only difference between the
+          two columns is host cost. Breakeven is the flat oil price at which post-tax NPV@10% = 0. Real figures
+          need an operator's actual field data, schedule and fiscal position.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#13273d"/><path d="M4 21h24M8 21v-7h16v7M13 14V8h6v6" stroke="#2ea3d9" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Seaways<span class="brand-accent"> MPSS</span></span>
+      </div>
+      <p class="footer-tag">LANG's MPSS — Simple · Safe · Swift · Size · Saves.</p>
+      <p class="footer-copy">© <span id="year"></span> Seaways MPSS. Private &amp; Confidential — illustrative, not an offer of securities.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script src="field-economics.js"></script>
+</body>
+</html>
