@@ -4,7 +4,10 @@ Research layer for rows 1–23 (IMMEDIATE + HIGH) of the SCR & Dynamic Cable tar
 Companion file: `mpss-targets-enrichment.csv` — import to Apollo / Clay / Hunter / ZoomInfo
 and let it resolve the email column against `company_domain` + `contact_name`.
 
-**Researched:** 6 August 2026 · 22 web searches · 30 named contacts across 21 live companies
+**Researched:** 6 August 2026 · 22 web searches · 31 named contacts across 20 live companies
+
+**Dropped:** Shell (rows 17 and 22) at your instruction. Corio Generation (row 21) is retained as a
+row only to record that the company no longer exists — see below.
 
 ---
 
@@ -127,11 +130,6 @@ that, wastes the strongest thing you could open with.
 
 ## What's still open
 
-- **Shell Renewables (row 22)** — no current named floating wind lead confirmed. Shell has retrenched
-  hard from offshore wind since 2024. Verify the division still holds a mandate before spending a row
-  on it.
-- **Shell O&G (row 17)** — Rich Howe is confirmed as EVP Deep Water but my most recent hard source
-  is 2024. Have the enrichment tool confirm he's still in seat.
 - **Equinor (row 3)** — Kjetil Hove runs E&P Norway, but Rosebank is a **UK** asset. If Rosebank is
   the specific hook, the correct route is Equinor UK, not Stavanger. Worth resolving before the
   first email.
