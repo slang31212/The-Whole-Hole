@@ -1,13 +1,16 @@
 # MPSS Target List — Live Contact Research
 
-Research layer for rows 1–23 (IMMEDIATE + HIGH) of the SCR & Dynamic Cable target list.
+Research layer for rows 1–33 of the SCR & Dynamic Cable target list.
 Companion file: `mpss-targets-enrichment.csv` — import to Apollo / Clay / Hunter / ZoomInfo
 and let it resolve the email column against `company_domain` + `contact_name`.
 
-**Researched:** 6 August 2026 · 22 web searches · 31 named contacts across 20 live companies
+**Researched:** 6 August 2026 · 32 web searches · 44 named contacts across 30 live companies
 
 **Dropped:** Shell (rows 17 and 22) at your instruction. Corio Generation (row 21) is retained as a
 row only to record that the company no longer exists — see below.
+
+**Rows 34–50 are not done.** They were cut off in the screenshot — the image ends part-way through
+row 34 ("multi-turbine floating platform developer… Horizon…"). Paste those rows and I'll finish them.
 
 ---
 
@@ -78,6 +81,67 @@ into the job. Wait until Q4 and you're a cold inbound to a new chief executive.
 
 ---
 
+## Rows 24–33: four more things that change the list
+
+### 7. ConocoPhillips changed CEO this morning
+
+**Announced 6 August 2026 — today.** Ryan Lance retires after 14 years; **Andy O'Brien**, currently
+CFO and EVP Strategy & Commercial, becomes President and CEO on **1 September**. Lance moves to
+executive chair; Konnie Haynes-Welsh becomes CFO.
+
+A CFO stepping up to CEO re-underwrites capital commitments in his first two quarters. Combine that
+with your row-26 note — *"Conoco sponsored MPSS wave-tank testing 1987–88 — documented"* — and you
+have a credibility opener no competitor can replicate, landing on a new chief executive who is
+professionally obliged to re-examine capital efficiency. This row is mispriced at MEDIUM.
+
+### 8. Harbour Energy is now a real deepwater operator — your row is out of date
+
+Row 27 reads *"Largest North Sea independent. Deepwater ambitions beyond current portfolio."* That
+was true until February 2026, when Harbour **closed a $3.2bn acquisition of LLOG Exploration** and
+entered the US Gulf of Mexico outright — 80+ operated leases, up to eight wells across 2026–27, and
+a new core business unit alongside Norway, the UK, Argentina and Mexico.
+
+They don't have deepwater *ambitions* anymore. They have a deepwater business, bought eight months
+ago, that now needs hosts. Your sheet values this row at $1,700K total potential — the lowest tier
+on the list. It should sit near the top of MEDIUM at minimum.
+
+### 9. Kosmos is the best-qualified listener on the whole list
+
+**Andy Inglis**, Chairman and CEO of Kosmos, was previously **CEO of Exploration & Production at BP**.
+He ran deepwater host economics at supermajor scale, then moved to an independent whose West African
+fields are — in your sheet's own words — *"underdeveloped due to host cost."*
+
+He has personally seen both sides of the exact economic argument the MPSS makes. Of the 44 names in
+this research, he needs the least explaining-to.
+
+### 10. Two competitor rows need reassessing
+
+**BW Ideol (row 32)** is stronger than *"their Damping Pool hull competes but cannot match MPSS
+motion performance"* implies. EOLMED — three 10MW turbines on Damping Pool floaters — has been
+**operating since May 2026**, and their Fos3F factory has secured **€126M in public funding** (€74M
+EU Innovation Fund, €52M French State). They are an industrialising competitor with state backing,
+not a weak incumbent. That matters most on AO10, where you'd be bidding against them on French soil.
+
+**Principle Power (row 33)** got a new CEO on 2 December 2025 — **João Amaral**, previously group
+CTO at Voltalia, succeeding Julian Arrilaga Costa. He is a technology strategist rather than a
+WindFloat lifer. Your read that they *"may partner rather than compete"* is most testable in a new
+CEO's first year, and that year is running now.
+
+### Smaller corrections in this block
+
+- **ExxonMobil (row 25)** — HQ is **Spring, Texas**, not Irving. They moved in 2023.
+- **INPEX (row 24)** — your sheet routes to "Offshore Development, Tokyo," but the Ichthys third-train
+  expansion is being driven from **Australia** by Tetsu Murayama, MD & Country Chair. Ueda in Tokyo
+  is the strategic call; Murayama is the project call.
+- **Flotation Energy (row 30)** — wholly owned by **TEPCO** since 2022, so Japanese utility capital
+  sits behind it. Both founders are still in post: Nicol Stephen (CEO) and Allan MacAskill (CTO),
+  who between them built Kincardine, the world's largest floating wind farm. MacAskill is your
+  technical target — the dynamic cable failure argument is his lived experience.
+- **Simply Blue (row 31)** — **Kansai Electric Power** took a majority stake in October 2025.
+  Cross-references row 10: Ørsted bought into their Salamander project.
+
+---
+
 ## Where your sheet was right
 
 Three of your existing entries verified cleanly against public sources:
@@ -115,12 +179,21 @@ him on row 10.
 Based on window width rather than deal size:
 
 1. **Mubadala (row 1)** — FID next month. Everything else can wait a week; this can't.
-2. **RWE (row 9)** — Keitel is CTO until 30 September, CEO after.
-3. **Woodside (row 19)** — new CEO, cost assumptions reopening.
-4. **TotalEnergies Renewables (row 11) + Navantia (row 23)** — AO10 bids close ~October 2026, award
+2. **ConocoPhillips (row 26)** — O'Brien takes over 1 September. The 1987–88 wave-tank history makes
+   this the single most differentiated opener you own, and it now lands on a brand-new CEO.
+3. **RWE (row 9)** — Keitel is CTO until 30 September, CEO after.
+4. **Woodside (row 19)** — new CEO, cost assumptions reopening.
+5. **Harbour Energy (row 27)** — bought a deepwater business eight months ago that needs hosts.
+6. **TotalEnergies Renewables (row 11) + Navantia (row 23)** — AO10 bids close ~October 2026, award
    February 2027. 5GW of the 10GW tender is floating, and the European-content requirement is what
-   makes Navantia structural rather than optional.
-5. **CIP (row 2)** — no clock, but Neubert is the best single conversation available.
+   makes Navantia structural rather than optional. Note you'd be bidding against BW Ideol (row 32)
+   on French soil, with French state money behind them.
+7. **Kosmos (row 28)** — no clock, but Inglis needs the least explaining-to of anyone on the list.
+8. **CIP (row 2)** — no clock, but Neubert is the best single conversation available.
+
+Four of the top five are timing-driven rather than value-driven. Three of those four windows
+(ConocoPhillips, RWE, Woodside) are leadership transitions that all close between 1 September and
+1 October — a four-week corridor.
 
 Two rows are cross-referenced and should be worked together: **Ocean Winds (20)** already contracts
 **Navantia Seanergies (23)** for floating platforms. Approaching either one cold, without knowing
@@ -135,6 +208,12 @@ that, wastes the strongest thing you could open with.
   first email.
 - **Samsung Heavy (row 5)** — Hae-Ki Jang is confirmed CTO, but one source also lists Young-kyu Ahn
   as EVP/CTO. Possibly a succession or parallel role. Confirm which before addressing.
+- **Nigel Hearne — Chevron or Harbour?** A 2024 Chevron source has him as EVP Oil, Products & Gas; a
+  2026 Harbour Energy source lists him on their senior team. He has probably moved to Harbour, which
+  would make him highly relevant to row 27's new deepwater business — but I'm not asserting either.
+  Resolve before using him anywhere. He is deliberately not in the CSV.
+- **Kosmos COO (row 28)** — Darrell McKenna is named COO, but the only hard source is a 2012 press
+  release. Andy Inglis as Chairman/CEO is confirmed current; treat McKenna as unverified.
 
 ---
 
