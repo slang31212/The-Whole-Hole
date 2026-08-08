@@ -121,9 +121,45 @@ The countershade breaks hard rather than fading (stops at 21% / 31%), which is w
 a real fish look metallic rather than airbrushed. `P()` takes back / flank / belly / fin /
 finlet / outline, plus an `extra` object for `sheen`, `bellyShade`, `band` and `spot`.
 
-**Ceiling note:** this is about as far as hand-authored inline SVG goes. Photographic
-realism would need raster art embedded as data URIs, which trades the self-contained,
-diff-able, recolourable vector for a binary blob.
+Anatomy does most of the work. The single change that took these from clip art to
+something readable was the **caudal peduncle** — a real fish narrows hard to a thin
+wrist before the tail fan opens, and drawing the body straight into the tail at full
+depth is what made the earlier pass look like a sticker. Snouts come to a point, dorsal
+and ventral profiles differ, and fins have curved leading edges with concave trailing
+edges rather than straight sides.
+
+## Using photos instead
+
+Drop an image into `img/` named by species slug and it replaces that species' drawing.
+Everything else keeps its plate — it's per-species, not all-or-nothing.
+
+```
+img/bluefin-tuna.jpg      img/rockfish.png       img/dorado.webp
+```
+
+Slugs: `bluefin-tuna`, `yellowfin-tuna`, `bonito`, `yellowtail`, `dorado`, `barracuda`,
+`calico-bass`, `sand-bass`, `ocean-whitefish`, `rockfish`, `california-halibut`,
+`mako-shark`. `.jpg`, `.jpeg`, `.png` and `.webp` all work.
+
+`refresh.py` base64-embeds whatever it finds, so the published page stays self-contained.
+Keep each file **under 900 KB** (about 600px wide is plenty at the tile size) — anything
+larger is skipped with a warning rather than bloating the page.
+
+Fill in `img/CREDITS.json` for each file and the credit renders under the tile:
+
+```json
+{ "photos": {
+    "bluefin-tuna": {
+      "credit": "NOAA Fisheries",
+      "license": "Public domain",
+      "source": "https://www.fisheries.noaa.gov/species/pacific-bluefin-tuna"
+    } } }
+```
+
+Free-to-use sources worth checking first: **NOAA Fisheries species directory** and the
+**USFWS National Digital Library** are US Government works and public domain (the USFWS
+library holds the Duane Raver fish plates). Wikimedia Commons is fine too but check each
+file's licence and fill in the credit.
 
 These colours are **illustration, not encoding** — they depict the fish. Chart series
 colours come from the validated categorical palette and are kept deliberately separate,

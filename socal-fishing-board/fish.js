@@ -120,244 +120,298 @@ window.FISH = (function () {
       eye(o.eye[0], o.eye[1], o.eye[2], p);
   }
 
-  /* ---------------- silhouette families ---------------- */
+  /* ---------------- silhouette families ----------------
+     Anatomy first. The tell that made the earlier pass read as clip art was
+     the body meeting the tail at full depth: a real fish narrows hard to a
+     thin caudal peduncle before the fan opens. Snouts come to a point, the
+     dorsal and ventral profiles differ, and fins have curved leading edges
+     with concave trailing edges rather than straight sides. */
 
   function tuna(o) {
     var p = o.pal;
+    /* torpedo: pointed snout, greatest depth a third back, wrist at x=156 */
+    var B = "M 8 53 C 15 40, 31 25, 56 21 C 87 17, 117 26, 139 38 " +
+            "C 147 42, 152 45, 156 48 C 152 55, 147 58, 139 62 " +
+            "C 117 74, 87 82, 56 77 C 31 73, 15 66, 8 53 Z";
     return plate({
-      id: o.id, pal: p, scale: 3.6, scaleOp: 0.32, blur: 5,
-      body: "M 13 55 C 25 36, 50 23, 80 22 C 114 22, 146 34, 162 50 C 146 66, 114 77, 80 77 C 50 76, 25 71, 13 55 Z",
-      shading: { dy: 16, dry: 21, sy: 46, srx: 56, by: 90, bry: 16 },
+      id: o.id, pal: p, scale: 3.4, scaleOp: 0.3, blur: 5,
+      body: B,
+      shading: { dx: 78, dy: 15, drx: 82, dry: 20, sx: 74, sy: 44, srx: 54, by: 92, brx: 66, bry: 18 },
       finsBehind: [
-        { d: "M 75 26 L 97 6 L 105 29 Z", base: [79, 27], tips: [[95, 8], [99, 13], [102, 20]] },
+        /* first dorsal — curved leading edge, concave trailing */
+        { d: "M 54 22 C 61 11, 71 4, 83 1 C 78 10, 74 18, 72 27 Z",
+          base: [58, 23], tips: [[80, 4], [76, 11], [73, 20]] },
         o.sickle
-          ? { d: "M 116 28 C 128 12, 139 5, 147 3 C 139 15, 132 27, 130 34 Z", fill: p.finlet,
-              base: [118, 30], tips: [[144, 5], [138, 12], [132, 21]] }
-          : { d: "M 116 29 L 132 17 L 136 33 Z" },
+          ? { d: "M 108 29 C 121 15, 134 7, 143 4 C 134 17, 126 29, 122 36 Z",
+              fill: p.finlet, base: [110, 30], tips: [[140, 7], [132, 16], [126, 26]] }
+          : { d: "M 108 29 C 115 22, 124 17, 132 15 C 126 21, 121 27, 119 34 Z",
+              base: [110, 30], tips: [[129, 17], [124, 23]] },
         o.sickle
-          ? { d: "M 116 72 C 128 88, 139 95, 147 97 C 139 85, 132 73, 130 66 Z", fill: p.finlet,
-              base: [118, 70], tips: [[144, 95], [138, 88], [132, 79]] }
-          : { d: "M 116 71 L 132 83 L 136 67 Z" },
-        { d: "M 158 45 L 195 20 C 189 30, 186 45, 195 79 L 158 55 C 166 51, 166 49, 158 45 Z",
-          base: [160, 50], tips: [[192, 24], [189, 31], [187, 41], [188, 62], [191, 71], [193, 76]] }
+          ? { d: "M 108 70 C 121 85, 134 93, 143 96 C 134 83, 126 71, 122 64 Z",
+              fill: p.finlet, base: [110, 69], tips: [[140, 93], [132, 84], [126, 74]] }
+          : { d: "M 108 70 C 115 77, 124 82, 132 84 C 126 78, 121 72, 119 66 Z",
+              base: [110, 69], tips: [[129, 82], [124, 76]] },
+        /* lunate caudal, opening from the wrist */
+        { d: "M 154 44 C 166 38, 180 24, 193 9 C 187 26, 184 39, 183 51 " +
+             "C 184 62, 187 75, 193 91 C 180 76, 166 62, 154 56 C 158 52, 158 48, 154 44 Z",
+          base: [156, 50], tips: [[189, 15], [186, 28], [184, 40], [184, 62], [187, 78], [190, 86]] }
       ],
       marks: o.marks || "",
       finsFront: [
-        { d: "M 57 57 C 70 63, 85 70, 97 75 C 82 73, 66 68, 54 61 Z", op: 0.62,
-          base: [57, 58], tips: [[94, 74], [88, 71], [80, 67]] }
+        /* pectoral — long and swept, the way a tuna carries it */
+        { d: "M 50 56 C 61 62, 77 72, 95 81 C 82 76, 65 68, 48 60 Z", op: 0.6,
+          base: [50, 57], tips: [[92, 79], [84, 73], [72, 66]] }
       ],
       details:
-        finlets(136, 158, function (x) { return 33 + (x - 136) * 0.4; }, 4, true, p) +
-        finlets(136, 158, function (x) { return 67 - (x - 136) * 0.4; }, 4, false, p) +
-        '<path d="M 38 42 C 70 46, 110 50, 158 52" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".26"/>' +
-        '<path d="M 36 28 C 44 44, 44 57, 35 72" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".36"/>' +
-        '<path d="M 14 57 C 21 60, 27 61, 32 61" fill="none" stroke="' + p.line + '" stroke-width=".7" opacity=".45"/>',
-      eye: [28, 47, 3.4]
+        finlets(134, 152, function (x) { return 32 + (x - 134) * 0.5; }, 4, true, p) +
+        finlets(134, 152, function (x) { return 68 - (x - 134) * 0.5; }, 4, false, p) +
+        /* the lateral keel on the wrist */
+        '<path d="M 146 48 L 156 49 L 146 51 Z" fill="' + p.finlet + '" opacity=".8"/>' +
+        '<path d="M 146 55 L 156 53 L 146 58 Z" fill="' + p.finlet + '" opacity=".8"/>' +
+        '<path d="M 34 41 C 70 45, 110 50, 152 51" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".24"/>' +
+        '<path d="M 33 26 C 42 40, 42 58, 32 71" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".32"/>' +
+        '<path d="M 8 53 C 15 58, 23 60, 31 60" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".5"/>',
+      eye: [24, 46, 3.3]
     });
   }
 
-  function jack(o) {
+  function jack(o) {   /* yellowtail — leaner than a tuna, forked not lunate */
     var p = o.pal;
+    var B = "M 6 52 C 14 42, 30 30, 56 27 C 90 24, 124 32, 148 44 " +
+            "C 155 47, 159 49, 162 51 C 159 54, 155 56, 148 59 " +
+            "C 124 70, 90 77, 56 74 C 30 71, 14 62, 6 52 Z";
     return plate({
-      id: o.id, pal: p, scale: 3.4, scaleOp: 0.3, blur: 4.5,
-      body: "M 11 54 C 25 41, 52 30, 84 29 C 118 29, 148 38, 165 52 C 148 66, 118 75, 84 74 C 52 73, 25 68, 11 54 Z",
-      shading: { dy: 24, dry: 18, sy: 48, srx: 60, by: 86, bry: 13 },
+      id: o.id, pal: p, scale: 3.2, scaleOp: 0.28, blur: 4.5,
+      body: B,
+      shading: { dx: 80, dy: 20, drx: 86, dry: 18, sx: 76, sy: 46, srx: 58, sry: 5, by: 88, brx: 70, bry: 14 },
       finsBehind: [
-        { d: "M 71 31 L 88 18 L 95 33 Z", base: [74, 32], tips: [[87, 20], [91, 25]] },
-        { d: "M 99 31 C 121 27, 145 35, 159 45 L 157 50 C 141 41, 119 34, 99 35 Z" },
-        { d: "M 103 69 C 123 73, 141 79, 151 85 L 149 79 C 137 71, 121 67, 103 65 Z" },
-        { d: "M 161 46 L 194 27 C 189 37, 187 50, 194 78 L 161 57 C 168 53, 168 51, 161 46 Z",
-          fill: p.finlet, base: [163, 51], tips: [[191, 31], [189, 38], [188, 64], [191, 73]] }
+        { d: "M 56 28 C 63 20, 72 15, 80 13 C 74 19, 69 25, 67 32 Z",
+          base: [59, 29], tips: [[77, 15], [72, 21]] },
+        { d: "M 84 26 C 106 24, 132 32, 152 44 L 150 48 C 132 37, 108 30, 84 30 Z" },
+        { d: "M 92 68 C 114 71, 134 77, 148 85 L 146 79 C 132 71, 114 66, 92 64 Z" },
+        { d: "M 160 47 L 192 27 C 187 38, 185 48, 185 52 C 185 57, 187 68, 192 80 " +
+             "L 160 57 C 164 54, 164 50, 160 47 Z",
+          fill: p.finlet, base: [162, 52], tips: [[189, 31], [186, 42], [186, 64], [189, 74]] }
       ],
-      marks: '<path d="M 17 53 C 42 46, 71 43, 100 44 C 128 45, 150 49, 163 52 C 150 55, 128 51, 100 50 C 71 49, 42 53, 17 55 Z" fill="' + p.band + '" opacity=".75"/>',
+      marks: '<path d="M 14 51 C 42 44, 74 41, 104 42 C 132 43, 154 47, 164 50 C 154 53, 132 50, 104 49 C 74 48, 42 52, 14 54 Z" fill="' + p.band + '" opacity=".78"/>',
       finsFront: [
-        { d: "M 55 56 C 66 62, 79 68, 91 73 C 77 71, 62 66, 52 60 Z", op: 0.6,
-          base: [55, 57], tips: [[88, 71], [82, 68], [74, 64]] }
+        { d: "M 50 54 C 60 60, 74 68, 88 75 C 76 71, 61 64, 48 58 Z", op: 0.58,
+          base: [50, 55], tips: [[85, 73], [78, 68], [68, 62]] }
       ],
       details:
-        '<path d="M 34 32 C 42 45, 42 57, 33 70" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".34"/>' +
-        '<path d="M 12 56 C 19 59, 25 60, 30 60" fill="none" stroke="' + p.line + '" stroke-width=".7" opacity=".45"/>',
-      eye: [25, 47, 3.1]
+        '<path d="M 30 31 C 38 43, 38 58, 29 69" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".3"/>' +
+        '<path d="M 6 52 C 13 57, 20 59, 27 59" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".5"/>',
+      eye: [21, 46, 3]
     });
   }
 
-  function mahi(o) {
+  function mahi(o) {   /* dorado — vertical forehead, dorsal from crest to wrist */
     var p = o.pal;
+    var B = "M 10 54 C 11 36, 22 20, 44 15 C 84 8, 130 26, 158 47 " +
+            "C 161 49, 163 50, 164 51 C 161 54, 157 57, 150 61 " +
+            "C 122 76, 76 82, 46 76 C 24 71, 10 65, 10 54 Z";
     return plate({
-      id: o.id, pal: p, scale: 3.4, scaleOp: 0.26, blur: 5,
-      body: "M 15 54 C 18 34, 31 20, 51 17 C 92 15, 139 31, 164 51 C 138 70, 96 79, 58 76 C 33 72, 16 65, 15 54 Z",
-      shading: { dy: 18, drx: 84, dry: 20, sy: 44, srx: 52, by: 88, bry: 15, bop: 0.3 },
+      id: o.id, pal: p, scale: 3.2, scaleOp: 0.24, blur: 5,
+      body: B,
+      shading: { dx: 80, dy: 16, drx: 80, dry: 20, sx: 66, sy: 42, srx: 46, by: 86, brx: 62, bry: 16, bop: 0.3 },
       finsBehind: [],
       marks:
-        '<g fill="' + p.spot + '" opacity=".34">' +
-        '<circle cx="62" cy="37" r="2"/><circle cx="80" cy="31" r="1.7"/><circle cx="98" cy="35" r="1.9"/>' +
-        '<circle cx="72" cy="52" r="1.7"/><circle cx="94" cy="50" r="2"/><circle cx="114" cy="45" r="1.7"/>' +
-        '<circle cx="114" cy="60" r="1.8"/><circle cx="132" cy="55" r="1.6"/><circle cx="54" cy="56" r="1.5"/></g>',
+        '<g fill="' + p.spot + '" opacity=".32">' +
+        '<circle cx="58" cy="34" r="2"/><circle cx="76" cy="28" r="1.7"/><circle cx="96" cy="33" r="1.9"/>' +
+        '<circle cx="68" cy="50" r="1.7"/><circle cx="90" cy="48" r="2"/><circle cx="112" cy="44" r="1.7"/>' +
+        '<circle cx="112" cy="60" r="1.8"/><circle cx="130" cy="55" r="1.6"/><circle cx="50" cy="55" r="1.5"/></g>',
       finsFront: [
-        { d: "M 43 24 C 55 5, 90 -1, 122 11 C 145 21, 160 37, 167 49 L 162 52 C 151 40, 133 26, 111 18 C 87 9, 59 13, 48 28 Z",
-          op: 0.9, base: [66, 20], tips: [[58, 10], [76, 4], [96, 4], [118, 12], [140, 27], [156, 40]] },
-        { d: "M 92 72 C 110 76, 126 82, 137 89 C 124 78, 108 72, 92 68 Z" },
-        { d: "M 162 47 L 195 22 C 189 34, 187 50, 195 81 L 162 56 C 169 52, 169 50, 162 47 Z",
-          base: [164, 51], tips: [[192, 26], [189, 35], [188, 66], [192, 76]] },
-        { d: "M 53 60 C 63 67, 75 73, 85 77 C 72 75, 58 69, 50 62 Z", op: 0.6,
-          base: [53, 61], tips: [[82, 76], [76, 72], [68, 68]] }
+        { d: "M 38 20 C 52 4, 88 0, 124 16 C 146 26, 160 40, 166 49 L 160 51 " +
+             "C 150 40, 130 27, 108 19 C 82 10, 52 12, 43 26 Z",
+          op: 0.88, base: [62, 16], tips: [[52, 6], [72, 2], [96, 7], [122, 20], [146, 36], [160, 46]] },
+        { d: "M 84 72 C 104 76, 122 82, 134 90 C 122 79, 106 72, 84 68 Z" },
+        { d: "M 162 47 L 193 24 C 188 35, 186 47, 186 52 C 186 58, 188 70, 193 84 " +
+             "L 162 56 C 166 53, 166 50, 162 47 Z",
+          base: [164, 51], tips: [[190, 28], [187, 40], [187, 66], [190, 78]] },
+        { d: "M 46 60 C 56 67, 68 73, 78 78 C 66 75, 52 69, 44 63 Z", op: 0.58,
+          base: [46, 61], tips: [[75, 76], [68, 72], [60, 67]] }
       ],
       details:
-        '<path d="M 34 32 C 41 46, 41 58, 33 70" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".32"/>' +
-        '<path d="M 16 58 C 22 61, 28 62, 33 62" fill="none" stroke="' + p.line + '" stroke-width=".7" opacity=".45"/>',
-      eye: [29, 49, 3.5]
+        '<path d="M 28 30 C 35 44, 35 58, 27 68" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".3"/>' +
+        '<path d="M 11 58 C 17 62, 23 63, 29 63" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".5"/>',
+      eye: [24, 48, 3.3]
     });
   }
 
-  function cuda(o) {
+  function cuda(o) {   /* barracuda — pike-like, jaw past the eye, forked tail */
     var p = o.pal;
+    var B = "M 2 51 C 18 45, 36 41, 62 39 C 106 36, 150 41, 172 48 " +
+            "C 175 49, 177 50, 178 51 C 175 53, 172 55, 166 57 " +
+            "C 140 62, 100 65, 62 63 C 36 61, 18 57, 2 51 Z";
     return plate({
-      id: o.id, pal: p, scale: 3, scaleOp: 0.3, blur: 3.4,
-      body: "M 5 50 C 25 43, 45 39, 70 38 C 112 37, 151 42, 173 50 C 151 59, 112 64, 70 63 C 45 62, 25 58, 5 50 Z",
-      shading: { dy: 30, drx: 96, dry: 13, sy: 47, srx: 74, sry: 4, by: 72, bry: 9, bop: 0.3 },
+      id: o.id, pal: p, scale: 2.8, scaleOp: 0.28, blur: 3.4,
+      body: B,
+      shading: { dx: 92, dy: 30, drx: 96, dry: 12, sx: 88, sy: 46, srx: 76, sry: 4, by: 72, brx: 82, bry: 9, bop: 0.28 },
       finsBehind: [
-        { d: "M 79 36 L 92 24 L 97 38 Z", base: [81, 37], tips: [[91, 26], [94, 31]] },
-        { d: "M 132 38 L 145 28 L 149 40 Z" },
-        { d: "M 132 64 L 145 75 L 149 62 Z" },
-        { d: "M 171 46 L 194 30 C 190 38, 189 52, 194 70 L 171 55 C 176 52, 176 49, 171 46 Z",
-          base: [173, 50], tips: [[191, 33], [190, 40], [190, 61], [192, 66]] }
+        { d: "M 70 38 C 77 30, 85 26, 92 25 C 87 30, 82 35, 80 40 Z",
+          base: [72, 39], tips: [[89, 27], [84, 32]] },
+        { d: "M 128 41 C 135 34, 143 30, 149 29 C 144 34, 140 39, 138 44 Z" },
+        { d: "M 128 61 C 135 68, 143 72, 149 73 C 144 68, 140 63, 138 58 Z" },
+        { d: "M 176 47 L 195 33 C 192 40, 191 48, 191 51 C 191 55, 192 63, 195 70 " +
+             "L 176 56 C 179 53, 179 50, 176 47 Z",
+          base: [178, 51], tips: [[192, 36], [191, 43], [191, 60], [192, 66]] }
       ],
       marks:
-        '<g fill="' + p.spot + '" opacity=".38">' +
-        '<path d="M 58 41 l 4 0 l -2 8 l -4 0 Z"/><path d="M 74 40 l 4 0 l -2 9 l -4 0 Z"/>' +
-        '<path d="M 90 40 l 4 0 l -2 9 l -4 0 Z"/><path d="M 106 41 l 4 0 l -2 9 l -4 0 Z"/>' +
-        '<path d="M 122 42 l 4 0 l -2 8 l -4 0 Z"/><path d="M 138 43 l 3 0 l -2 7 l -3 0 Z"/></g>',
-      finsFront: [],
+        '<g fill="' + p.spot + '" opacity=".36">' +
+        '<path d="M 54 42 l 4 0 l -2 8 l -4 0 Z"/><path d="M 70 41 l 4 0 l -2 9 l -4 0 Z"/>' +
+        '<path d="M 86 41 l 4 0 l -2 9 l -4 0 Z"/><path d="M 102 42 l 4 0 l -2 9 l -4 0 Z"/>' +
+        '<path d="M 118 43 l 4 0 l -2 8 l -4 0 Z"/><path d="M 134 44 l 3 0 l -2 7 l -3 0 Z"/></g>',
+      finsFront: [
+        { d: "M 44 54 C 52 59, 62 64, 72 68 C 61 66, 50 61, 42 57 Z", op: 0.55,
+          base: [44, 55], tips: [[69, 67], [62, 63]] }
+      ],
       details:
-        '<path d="M 7 52 C 19 55, 31 56, 43 56" fill="none" stroke="' + p.line + '" stroke-width=".75" opacity=".5"/>' +
-        '<path d="M 30 42 C 38 50, 38 53, 29 60" fill="none" stroke="' + p.line + '" stroke-width=".75" opacity=".34"/>' +
-        '<path d="M 40 48 C 80 50, 130 52, 170 51" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".26"/>',
-      eye: [27, 46, 2.9]
+        /* the jaw runs well past the eye — the fish's signature */
+        '<path d="M 3 53 C 14 57, 26 58, 38 58" fill="none" stroke="' + p.line + '" stroke-width=".85" opacity=".55"/>' +
+        '<path d="M 26 43 C 33 49, 33 53, 25 59" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".32"/>' +
+        '<path d="M 34 48 C 76 50, 128 52, 174 51" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".24"/>',
+      eye: [20, 47, 2.7]
     });
   }
 
-  function bass(o) {
+  function bass(o) {   /* calico, sand bass, whitefish — deep body, thick wrist */
     var p = o.pal, spines = "";
-    for (var i = 0; i < 8; i++) {
-      var x = 58 + i * 7.6, h = 11 + Math.abs(i - 3.5) * 0.9;
-      spines += '<path d="M ' + x + " 25 L " + (x + 3.6) + " " + (25 - h) + " L " + (x + 7.2) +
-        ' 26 Z" fill="' + p.fin + '" fill-opacity=".85" stroke="' + p.line + '" stroke-width=".45"/>';
+    var B = "M 8 51 C 13 34, 33 20, 62 18 C 96 16, 128 30, 148 46 " +
+            "C 151 48, 153 49, 154 50 C 151 53, 148 56, 142 60 " +
+            "C 120 74, 92 81, 62 79 C 33 77, 13 66, 8 51 Z";
+    for (var i = 0; i < 9; i++) {
+      var x = 50 + i * 7.4, h = 10 + Math.abs(i - 4) * 0.8;
+      spines += '<path d="M ' + x + " 23 L " + (x + 3.4) + " " + (23 - h) + " L " + (x + 7) +
+        ' 24 Z" fill="' + p.fin + '" fill-opacity=".85" stroke="' + p.line + '" stroke-width=".45"/>';
     }
     return plate({
-      id: o.id, pal: p, scale: 6.4, scaleOp: 0.34, blur: 5,
-      body: "M 13 52 C 21 34, 43 22, 72 21 C 105 20, 136 33, 156 50 C 136 69, 105 79, 72 78 C 43 77, 21 68, 13 52 Z",
-      shading: { dy: 16, drx: 84, dry: 20, sy: 44, srx: 52, by: 90, bry: 16, bop: 0.35 },
+      id: o.id, pal: p, scale: 6, scaleOp: 0.32, blur: 5,
+      body: B,
+      shading: { dx: 74, dy: 14, drx: 80, dry: 20, sx: 66, sy: 42, srx: 48, by: 90, brx: 64, bry: 17, bop: 0.34 },
       finsBehind: [
-        { d: "M 120 25 C 136 25, 149 34, 157 46 L 155 51 C 145 39, 133 31, 120 30 Z" },
-        { d: "M 155 45 L 187 32 C 183 40, 182 50, 187 70 L 155 56 C 160 52, 160 49, 155 45 Z",
-          base: [157, 50], tips: [[184, 35], [183, 42], [183, 60], [185, 66]] }
+        { d: "M 114 24 C 130 26, 142 34, 150 46 L 147 50 C 138 39, 126 31, 113 29 Z" },
+        { d: "M 152 45 L 184 31 C 180 39, 179 48, 179 51 C 179 55, 180 63, 184 71 " +
+             "L 152 57 C 156 54, 156 49, 152 45 Z",
+          base: [154, 51], tips: [[181, 34], [180, 42], [180, 61], [181, 67]] }
       ],
       marks: o.marks || "",
       finsFront: [
-        { d: "M 108 71 C 122 74, 132 79, 139 86 C 130 76, 120 71, 108 68 Z" },
-        { d: "M 52 54 C 62 62, 73 69, 82 74 C 69 71, 56 65, 49 58 Z", op: 0.58,
-          base: [52, 55], tips: [[80, 73], [74, 69], [66, 64]] }
+        { d: "M 100 72 C 114 75, 124 80, 131 87 C 122 77, 112 72, 100 69 Z" },
+        { d: "M 44 53 C 54 61, 65 68, 74 73 C 61 70, 49 64, 41 57 Z", op: 0.56,
+          base: [44, 54], tips: [[72, 72], [66, 68], [58, 63]] }
       ],
       details: spines +
-        '<path d="M 38 30 C 47 45, 47 57, 37 72" fill="none" stroke="' + p.line + '" stroke-width=".85" opacity=".36"/>' +
-        '<path d="M 40 40 C 74 43, 116 47, 154 50" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".26"/>' +
-        '<path d="M 14 54 C 21 58, 28 59, 34 59" fill="none" stroke="' + p.line + '" stroke-width=".7" opacity=".45"/>',
-      eye: [29, 43, 3.6]
+        '<path d="M 32 28 C 41 43, 41 58, 31 71" fill="none" stroke="' + p.line + '" stroke-width=".85" opacity=".34"/>' +
+        '<path d="M 34 39 C 68 42, 110 46, 148 49" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".24"/>' +
+        '<path d="M 9 54 C 16 59, 24 61, 31 61" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".5"/>',
+      eye: [24, 41, 3.5]
     });
   }
 
-  function rock(o) {
+  function rock(o) {   /* rockfish — heavy head, huge eye, hard spines */
     var p = o.pal, spines = "";
-    for (var i = 0; i < 9; i++) {
-      var x = 52 + i * 7.2, h = 12 + Math.abs(i - 4) * 1.2;
-      spines += '<path d="M ' + x + " 23 L " + (x + 3.2) + " " + (23 - h) + " L " + (x + 6.8) +
-        ' 24 Z" fill="' + p.fin + '" fill-opacity=".88" stroke="' + p.line + '" stroke-width=".45"/>';
+    var B = "M 6 47 C 12 28, 33 15, 62 14 C 95 13, 126 27, 146 45 " +
+            "C 149 47, 151 48, 152 49 C 149 52, 146 55, 140 59 " +
+            "C 118 73, 90 81, 62 80 C 33 79, 12 65, 6 47 Z";
+    for (var i = 0; i < 10; i++) {
+      var x = 44 + i * 7, h = 11 + Math.abs(i - 4.5) * 1.1;
+      spines += '<path d="M ' + x + " 21 L " + (x + 3) + " " + (21 - h) + " L " + (x + 6.6) +
+        ' 22 Z" fill="' + p.fin + '" fill-opacity=".88" stroke="' + p.line + '" stroke-width=".45"/>';
     }
     return plate({
-      id: o.id, pal: p, scale: 6.8, scaleOp: 0.32, blur: 5,
-      body: "M 11 48 C 19 29, 41 17, 70 16 C 103 15, 134 29, 154 48 C 134 69, 103 80, 70 79 C 41 78, 19 65, 11 48 Z",
-      shading: { dy: 12, drx: 82, dry: 20, sy: 40, srx: 48, by: 90, bry: 17, bop: 0.35 },
+      id: o.id, pal: p, scale: 6.4, scaleOp: 0.3, blur: 5,
+      body: B,
+      shading: { dx: 70, dy: 10, drx: 78, dry: 20, sx: 62, sy: 38, srx: 44, by: 90, brx: 62, bry: 18, bop: 0.34 },
       finsBehind: [
-        { d: "M 118 23 C 134 25, 146 34, 153 47 L 151 51 C 141 39, 129 30, 117 28 Z" },
-        { d: "M 153 43 L 187 30 C 183 39, 182 49, 187 69 L 153 55 C 158 51, 158 47, 153 43 Z",
-          base: [155, 49], tips: [[184, 33], [183, 41], [183, 58], [185, 65]] }
+        { d: "M 112 22 C 128 24, 140 33, 148 46 L 145 50 C 136 38, 124 29, 111 27 Z" },
+        { d: "M 150 43 L 183 29 C 179 38, 178 47, 178 51 C 178 55, 179 63, 183 70 " +
+             "L 150 55 C 154 52, 154 47, 150 43 Z",
+          base: [152, 49], tips: [[180, 32], [179, 41], [179, 60], [180, 66]] }
       ],
       marks: "",
       finsFront: [
-        { d: "M 104 73 C 118 76, 129 81, 136 88 C 127 78, 116 73, 104 70 Z" },
-        { d: "M 48 52 C 58 61, 69 68, 78 73 C 65 70, 53 64, 45 56 Z", op: 0.58,
-          base: [48, 53], tips: [[76, 72], [70, 68], [62, 63]] }
+        { d: "M 96 74 C 110 77, 120 82, 127 89 C 118 79, 108 74, 96 71 Z" },
+        { d: "M 40 51 C 50 60, 61 67, 70 72 C 57 69, 45 63, 37 55 Z", op: 0.56,
+          base: [40, 52], tips: [[68, 71], [62, 67], [54, 62]] }
       ],
       details: spines +
-        '<path d="M 40 27 C 49 43, 49 58, 38 74" fill="none" stroke="' + p.line + '" stroke-width=".95" opacity=".38"/>' +
-        '<path d="M 38 43 L 49 39 L 47 47 Z" fill="' + p.fin + '" stroke="' + p.line + '" stroke-width=".4"/>' +
-        '<path d="M 38 38 C 72 41, 114 45, 152 48" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".24"/>' +
-        '<path d="M 12 51 C 19 56, 26 58, 32 58" fill="none" stroke="' + p.line + '" stroke-width=".7" opacity=".45"/>',
-      eye: [28, 40, 4.6]
+        '<path d="M 34 25 C 43 41, 43 58, 32 73" fill="none" stroke="' + p.line + '" stroke-width=".95" opacity=".36"/>' +
+        '<path d="M 32 42 L 43 38 L 41 46 Z" fill="' + p.fin + '" stroke="' + p.line + '" stroke-width=".4"/>' +
+        '<path d="M 32 37 C 66 40, 108 44, 146 47" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".22"/>' +
+        '<path d="M 7 50 C 14 56, 22 58, 29 58" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".5"/>',
+      eye: [23, 38, 4.6]
     });
   }
 
-  function flat(o) {
-    var p = o.pal, fringe = "", i, t, cx = 104, cy = 51, rx = 79, ry = 37;
-    for (i = 0; i < 62; i++) {
-      t = (i / 62) * Math.PI * 2;
+  function flat(o) {   /* halibut — eyed side up, fins fringing the whole disc */
+    var p = o.pal, fringe = "", i, t, cx = 100, cy = 51, rx = 78, ry = 36;
+    for (i = 0; i < 66; i++) {
+      t = (i / 66) * Math.PI * 2;
       fringe += '<line x1="' + (cx + Math.cos(t) * rx * 0.96).toFixed(1) + '" y1="' + (cy + Math.sin(t) * ry * 0.96).toFixed(1) +
         '" x2="' + (cx + Math.cos(t) * (rx + 6)).toFixed(1) + '" y2="' + (cy + Math.sin(t) * (ry + 6)).toFixed(1) +
         '" stroke="' + p.line + '" stroke-width=".55" opacity=".3"/>';
     }
     return plate({
-      id: o.id, pal: p, scale: 5.4, scaleOp: 0.26, blur: 6,
-      body: "M 27 51 C 39 24, 77 13, 114 18 C 148 23, 172 38, 178 52 C 170 70, 142 82, 106 84 C 68 86, 36 74, 27 51 Z",
-      shading: { dy: 20, drx: 80, dry: 24, dop: 0.4, sx: 92, sy: 44, srx: 46, sry: 9, sop: 0.35, by: 92, bry: 18, bop: 0.3 },
+      id: o.id, pal: p, scale: 5, scaleOp: 0.24, blur: 6,
+      /* the disc narrows to a real wrist before the tail, like any other fish */
+      body: "M 24 52 C 34 24, 70 12, 108 16 C 142 20, 164 34, 172 48 " +
+            "C 174 50, 175 51, 176 51 C 174 53, 171 55, 166 57 " +
+            "C 150 71, 112 84, 78 84 C 44 84, 28 72, 24 52 Z",
+      shading: { dx: 96, dy: 20, drx: 76, dry: 24, dop: 0.4, sx: 88, sy: 42, srx: 44, sry: 9, sop: 0.34, by: 92, brx: 66, bry: 18, bop: 0.3 },
       finsBehind: [
-        { d: "M 22 51 C 34 19, 76 8, 117 13 C 156 18, 182 35, 188 52 C 180 72, 147 88, 108 90 C 65 92, 32 78, 22 51 Z",
-          op: 0.5 }
+        { d: "M 19 52 C 30 19, 68 6, 110 11 C 148 16, 170 32, 179 49 " +
+             "C 172 66, 150 78, 110 89 C 66 92, 24 78, 19 52 Z", op: 0.5 }
       ],
       marks:
         '<g fill="' + p.spot + '" opacity=".3">' +
-        '<circle cx="74" cy="37" r="2.6"/><circle cx="102" cy="31" r="2.2"/><circle cx="130" cy="41" r="2.4"/>' +
-        '<circle cx="88" cy="58" r="2.2"/><circle cx="118" cy="62" r="2.6"/><circle cx="148" cy="52" r="2"/>' +
-        '<circle cx="62" cy="60" r="1.9"/><circle cx="96" cy="46" r="1.8"/></g>',
+        '<circle cx="70" cy="37" r="2.6"/><circle cx="98" cy="31" r="2.2"/><circle cx="126" cy="41" r="2.4"/>' +
+        '<circle cx="84" cy="58" r="2.2"/><circle cx="114" cy="62" r="2.6"/><circle cx="144" cy="50" r="2"/>' +
+        '<circle cx="58" cy="60" r="1.9"/><circle cx="92" cy="46" r="1.8"/></g>',
       finsFront: [
-        { d: "M 178 45 L 196 32 C 193 40, 192 54, 196 71 L 178 58 Z",
-          base: [179, 51], tips: [[194, 35], [193, 43], [193, 62], [194, 68]] }
+        { d: "M 174 46 L 195 31 C 191 40, 190 49, 190 52 C 190 56, 191 64, 195 72 " +
+             "L 174 57 C 178 54, 178 49, 174 46 Z",
+          base: [176, 51], tips: [[192, 34], [191, 43], [191, 61], [192, 68]] }
       ],
       details: fringe +
-        '<path d="M 32 46 C 40 40, 46 38, 52 38" fill="none" stroke="' + p.line + '" stroke-width=".75" opacity=".42"/>' +
-        eye(46, 49, 3.2, p),
-      eye: [48, 34, 3.4]
+        '<path d="M 29 46 C 37 40, 43 38, 49 38" fill="none" stroke="' + p.line + '" stroke-width=".75" opacity=".42"/>' +
+        eye(43, 49, 3.1, p),
+      eye: [45, 34, 3.3]
     });
   }
 
-  function shark(o) {
+  function shark(o) {   /* mako — conical snout, tall dorsal, longer upper lobe */
     var p = o.pal, gills = "";
+    var B = "M 4 51 C 18 42, 44 33, 78 32 C 112 32, 142 38, 158 45 " +
+            "C 161 46, 163 47, 164 48 C 161 51, 157 54, 150 57 " +
+            "C 126 64, 96 68, 70 67 C 40 65, 16 58, 4 51 Z";
     for (var i = 0; i < 5; i++) {
-      gills += '<path d="M ' + (38 + i * 4.6) + " 42 C " + (36 + i * 4.6) + " 49, " + (36 + i * 4.6) +
-        " 55, " + (39 + i * 4.6) + ' 60" fill="none" stroke="' + p.line + '" stroke-width=".7" opacity=".38"/>';
+      gills += '<path d="M ' + (34 + i * 4.4) + " 41 C " + (32 + i * 4.4) + " 47, " + (32 + i * 4.4) +
+        " 53, " + (35 + i * 4.4) + ' 58" fill="none" stroke="' + p.line + '" stroke-width=".7" opacity=".36"/>';
     }
     return plate({
-      id: o.id, pal: p, scale: 2.8, scaleOp: 0.2, blur: 5,
-      body: "M 6 52 C 24 41, 50 32, 82 31 C 115 31, 145 37, 163 46 C 149 57, 119 65, 84 66 C 50 65, 22 60, 6 52 Z",
-      shading: { dy: 26, drx: 92, dry: 16, sy: 46, srx: 62, sry: 5, by: 76, bry: 11, bop: 0.3 },
+      id: o.id, pal: p, scale: 2.6, scaleOp: 0.18, blur: 5,
+      body: B,
+      shading: { dx: 86, dy: 26, drx: 90, dry: 15, sx: 80, sy: 44, srx: 62, sry: 5, by: 74, brx: 74, bry: 11, bop: 0.28 },
       finsBehind: [
-        { d: "M 79 34 L 97 8 L 110 37 Z", base: [83, 34], tips: [[95, 11], [100, 18], [105, 27]] },
-        { d: "M 128 61 L 138 72 L 142 59 Z" },
-        { d: "M 132 37 L 142 30 L 145 40 Z" },
-        { d: "M 161 43 L 189 11 C 186 26, 185 43, 192 55 C 183 60, 175 68, 171 77 L 161 56 C 167 52, 167 47, 161 43 Z",
-          base: [163, 49], tips: [[186, 17], [185, 30], [178, 66]] }
+        { d: "M 72 34 C 80 18, 90 8, 98 5 C 100 17, 103 28, 108 37 Z",
+          base: [76, 34], tips: [[96, 8], [99, 17], [104, 28]] },
+        { d: "M 120 62 C 128 70, 135 74, 140 75 C 135 69, 131 63, 130 59 Z" },
+        { d: "M 126 39 C 133 33, 139 30, 143 30 C 139 34, 136 38, 135 42 Z" },
+        { d: "M 162 43 L 190 6 C 187 22, 186 38, 191 50 C 184 55, 176 63, 171 74 " +
+             "L 162 55 C 166 52, 166 47, 162 43 Z",
+          base: [164, 49], tips: [[188, 12], [187, 28], [178, 62], [173, 70]] }
       ],
       marks: "",
       finsFront: [
-        { d: "M 60 58 C 74 67, 91 76, 106 82 C 88 77, 69 69, 58 61 Z", op: 0.68,
-          base: [60, 59], tips: [[103, 81], [96, 77], [86, 72]] }
+        { d: "M 56 57 C 70 66, 88 76, 104 83 C 86 78, 66 69, 54 60 Z", op: 0.66,
+          base: [56, 58], tips: [[101, 82], [93, 77], [82, 71]] }
       ],
       details: gills +
-        '<path d="M 9 53 C 17 60, 27 63, 37 62" fill="none" stroke="' + p.line + '" stroke-width=".85" opacity=".5"/>' +
-        '<path d="M 40 50 C 80 53, 125 55, 160 52" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".24"/>',
-      eye: [25, 46, 2.8]
+        '<path d="M 6 52 C 14 59, 24 62, 34 61" fill="none" stroke="' + p.line + '" stroke-width=".85" opacity=".5"/>' +
+        '<path d="M 36 49 C 76 52, 122 54, 158 51" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".22"/>',
+      eye: [21, 45, 2.6]
     });
   }
-
   /* ---------------- palettes ----------------
      back / flank / belly countershade the body; sheen is the specular band,
      bellyShade the underside bounce, fin and finlet the membranes,
@@ -395,7 +449,7 @@ window.FISH = (function () {
         { band: "#b08c22", bellyShade: "#a2a69f" }) });
     },
     "Dorado": function (id) {
-      return mahi({ id: id, pal: P("#186626", "#79a82f", "#e8ce3c", "#237a2c", "#2b8a33", "#0d3a15",
+      return mahi({ id: id, pal: P("#186626", "#79a82f", "#e8ce3c", "#12706b", "#158079", "#0d3a15",
         { spot: "#2a5f95", bellyShade: "#c2a72e", sheen: "#f7f0c2" }) });
     },
     "Barracuda": function (id) {

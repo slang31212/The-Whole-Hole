@@ -1,0 +1,24 @@
+{
+  "_README": "Drop one image per species here, named by the slug below. Any of .jpg .jpeg .png .webp works. refresh.py base64-embeds whatever it finds, so the published page stays self-contained; species with no file fall back to the drawn plate. Fill in credit/license/source for each file you add \u2014 the board renders the credit under the tile and lists it in Notes.",
+  "_slugs": [
+    "bluefin-tuna",
+    "yellowfin-tuna",
+    "bonito",
+    "yellowtail",
+    "dorado",
+    "barracuda",
+    "calico-bass",
+    "sand-bass",
+    "ocean-whitefish",
+    "rockfish",
+    "california-halibut",
+    "mako-shark"
+  ],
+  "_sources_that_are_free_to_use": {
+    "NOAA Fisheries species directory": "https://www.fisheries.noaa.gov/species-directory \u2014 US Government work, public domain",
+    "USFWS National Digital Library": "https://digitalmedia.fws.gov \u2014 public domain, includes the Duane Raver fish plates",
+    "Wikimedia Commons": "https://commons.wikimedia.org \u2014 check each file's licence; CC-BY needs the credit filled in below",
+    "CA Dept of Fish and Wildlife": "https://wildlife.ca.gov \u2014 marine species photos"
+  },
+  "photos": {}
+}

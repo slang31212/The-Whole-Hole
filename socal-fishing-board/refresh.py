@@ -20,6 +20,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import base64
 import datetime as dt
 import json
 import pathlib
@@ -32,6 +33,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 REPORT = HERE / "report.json"
 TEMPLATE = HERE / "template.html"
 FISH = HERE / "fish.js"
+IMG = HERE / "img"
 INDEX = HERE / "index.html"
 ARTIFACT = HERE / "artifact.html"
 
@@ -361,12 +363,60 @@ def restamp(data: dict, today: str, changed: list[str]) -> None:
 # render
 # --------------------------------------------------------------------------
 
+PHOTO_EXT = {".jpg": "jpeg", ".jpeg": "jpeg", ".png": "png", ".webp": "webp"}
+MAX_PHOTO_BYTES = 900_000     # keeps the whole page comfortably under the 16 MB cap
+
+
+def load_photos() -> dict:
+    """
+    Base64-embed any species photo dropped into img/, keyed by slug.
+
+    A species with a photo renders the photo; a species without falls back to
+    its drawn plate. Nothing here fails the build — a missing, oversized or
+    unreadable file just means that species keeps its plate.
+    """
+    if not IMG.is_dir():
+        return {}
+
+    credits = {}
+    manifest = IMG / "CREDITS.json"
+    if manifest.is_file():
+        try:
+            credits = json.loads(manifest.read_text(encoding="utf-8")).get("photos", {})
+        except json.JSONDecodeError as e:
+            print(f"  ! img/CREDITS.json is not valid JSON ({e}); credits skipped", file=sys.stderr)
+
+    out = {}
+    for f in sorted(IMG.iterdir()):
+        mime = PHOTO_EXT.get(f.suffix.lower())
+        if not mime or not f.is_file():
+            continue
+        size = f.stat().st_size
+        if size > MAX_PHOTO_BYTES:
+            print(f"  ! {f.name} is {size // 1024} KB, over the {MAX_PHOTO_BYTES // 1024} KB "
+                  f"budget — skipped. Resize it to about 600px wide.", file=sys.stderr)
+            continue
+        slug = f.stem.lower()
+        out[slug] = {
+            "src": f"data:image/{mime};base64," + base64.b64encode(f.read_bytes()).decode(),
+            "credit": (credits.get(slug) or {}).get("credit", ""),
+            "license": (credits.get(slug) or {}).get("license", ""),
+            "source": (credits.get(slug) or {}).get("source", ""),
+        }
+        print(f"  + photo {slug} ({size // 1024} KB)")
+    return out
+
+
 def render(data: dict) -> None:
-    # The fish illustrations are inlined rather than linked, so a published
+    # Illustrations and photos are inlined rather than linked, so a published
     # page stays self-contained and works offline and from file://.
+    photos = load_photos()
+    if photos:
+        print(f"Embedded {len(photos)} species photo(s)")
     body = (
         TEMPLATE.read_text(encoding="utf-8")
         .replace("__FISH_JS__", FISH.read_text(encoding="utf-8"))
+        .replace("__FISH_PHOTOS__", json.dumps(photos).replace("</", "<\\/"))
         .replace(
             "__BOARD_DATA__",
             json.dumps(data, ensure_ascii=False).replace("</", "<\\/"),
