@@ -105,6 +105,12 @@ Each is built from one of eight silhouette families (tuna, jack, mahi, barracuda
 rockfish, flatfish, shark) with per-species proportions, palette and markings, then
 inlined into the page at render time so a published board stays self-contained.
 
+They are drawn as **field-guide plates, not cartoons**: muted naturalistic colour,
+countershaded bodies (dark dorsal grading through a flank break to a pale belly), fins
+carried on visible rays rather than solid wedges, fine darker outlines, lateral lines and
+gill covers, and eyes at true scale. If you edit a palette, keep it desaturated — the
+`P()` helper takes back / mid / belly / fin / finlet / outline in that order.
+
 These colours are **illustration, not encoding** — they depict the fish. Chart series
 colours come from the validated categorical palette and are kept deliberately separate,
 so a fish never reads as a data series.
