@@ -1,0 +1,56 @@
+name: Refresh SoCal Fishing Board
+
+# Once a day at 06:15 Pacific, before anyone would leave the dock. Landings post
+# the previous day's counts through the evening, so a morning run picks up a
+# complete day rather than a half-reported one.
+on:
+  schedule:
+    - cron: "15 13 * * *"   # 13:15 UTC = 06:15 PDT
+  workflow_dispatch:         # manual run, for validating the parser
+    inputs:
+      dry_run:
+        description: "Fetch and report without committing"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fishing-board
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Refresh the board
+        working-directory: socal-fishing-board
+        run: |
+          python3 refresh.py ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      # A landing that posts nothing leaves the file untouched, so "no changes"
+      # is the expected quiet outcome, not a failure.
+      - name: Commit if the data moved
+        if: ${{ !inputs.dry_run }}
+        run: |
+          if [[ -z "$(git status --porcelain socal-fishing-board)" ]]; then
+            echo "No new counts — previous report held. Nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add socal-fishing-board
+          git commit -m "Refresh fishing board — $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4; do
+            git push && break
+            echo "push failed, retry $i"
+            git pull --rebase || true
+            sleep $((2 ** i))
+          done

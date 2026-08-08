@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Daily dock intelligence for private-boat fishing between Los Angeles Harbor and Oceanside, California.">
+<title>SoCal Fishing Operations Board — Alpha</title>
+<style>
+/* ============================================================
+   SoCal Fishing Operations Board
+   Palette: nautical chart paper (light) / harbor navy (dark).
+   Chrome accent is bronze-brass and is never used as a data mark.
+   Data marks come from the validated categorical palette.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* --- grounds & ink --- */
+  --ground:      #f2f0e9;
+  --surface:     #fcfbf7;
+  --surface-2:   #eceadf;
+  --masthead:    #0a1620;
+  --masthead-ink:#eef3f6;
+  --ink:         #0d1a24;
+  --ink-soft:    #4d5c66;
+  --ink-mute:    #77858e;
+  --rule:        #dcd8cb;
+  --rule-strong: #c2bdad;
+
+  /* --- chrome accent (never a data mark) --- */
+  --accent:      #8a6a1f;
+  --accent-soft: #efe6cd;
+
+  /* --- status (icon + label always accompany colour) --- */
+  --good:     #0ca30c;
+  --warning:  #fab219;
+  --serious:  #ec835a;
+  --critical: #d03b3b;
+  --good-ink:     #0a6b0a;
+  --warning-ink:  #7a5400;
+  --serious-ink:  #9a4720;
+  --critical-ink: #a52727;
+
+  /* --- categorical data slots (validated, light) --- */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+
+  /* --- chart chrome --- */
+  --grid:     #e3e0d5;
+  --baseline: #c2bdad;
+
+  --shadow: 0 1px 2px rgba(13,26,36,.06), 0 4px 16px rgba(13,26,36,.05);
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground:      #0a1620;
+    --surface:     #10202d;
+    --surface-2:   #16293a;
+    --masthead:    #061019;
+    --masthead-ink:#eef3f6;
+    --ink:         #eef3f6;
+    --ink-soft:    #a8bcc9;
+    --ink-mute:    #7d919e;
+    --rule:        #1e3243;
+    --rule-strong: #2b465c;
+
+    --accent:      #d9bd83;
+    --accent-soft: #21354a;
+
+    --good-ink:     #4fd04f;
+    --warning-ink:  #fabf4a;
+    --serious-ink:  #f0a082;
+    --critical-ink: #ee7373;
+
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+
+    --grid:     #1b2d3d;
+    --baseline: #2b465c;
+
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 4px 18px rgba(0,0,0,.3);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground:      #0a1620;
+  --surface:     #10202d;
+  --surface-2:   #16293a;
+  --masthead:    #061019;
+  --masthead-ink:#eef3f6;
+  --ink:         #eef3f6;
+  --ink-soft:    #a8bcc9;
+  --ink-mute:    #7d919e;
+  --rule:        #1e3243;
+  --rule-strong: #2b465c;
+
+  --accent:      #d9bd83;
+  --accent-soft: #21354a;
+
+  --good-ink:     #4fd04f;
+  --warning-ink:  #fabf4a;
+  --serious-ink:  #f0a082;
+  --critical-ink: #ee7373;
+
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+
+  --grid:     #1b2d3d;
+  --baseline: #2b465c;
+
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 4px 18px rgba(0,0,0,.3);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px 72px; }
+
+a { color: inherit; }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+  background: var(--masthead);
+  color: var(--masthead-ink);
+  border-bottom: 3px solid var(--accent);
+}
+.masthead-inner {
+  max-width: 1240px; margin: 0 auto; padding: 26px 20px 22px;
+  display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;
+  justify-content: space-between;
+}
+.brand { display: flex; flex-direction: column; gap: 6px; min-width: 280px; }
+.brand h1 {
+  margin: 0; font-size: clamp(26px, 4vw, 40px); line-height: 1.02;
+  font-weight: 800; letter-spacing: -.02em; text-transform: uppercase;
+  text-wrap: balance;
+}
+.brand h1 span { display: block; font-weight: 300; color: #9fb3c0; }
+.brand .corridor {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: #8fa6b4; margin-top: 4px;
+}
+.stamp {
+  display: inline-flex; align-items: center; gap: 7px; align-self: flex-start;
+  border: 1.5px solid var(--accent); color: var(--accent);
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px; margin-bottom: 2px;
+}
+.masthead-meta { display: flex; flex-wrap: wrap; gap: 26px 34px; }
+.mm { display: flex; flex-direction: column; gap: 2px; }
+.mm .k {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: #8fa6b4;
+}
+.mm .v { font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.mm .v small { display:block; font-weight: 400; font-size: 12px; color:#9fb3c0; }
+
+/* ---------- conditions rail ---------- */
+.rail {
+  background: var(--surface); border-bottom: 1px solid var(--rule);
+}
+.rail-inner {
+  max-width: 1240px; margin: 0 auto; padding: 0 20px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(122px, 1fr));
+}
+.cond {
+  padding: 13px 14px 13px 0; border-right: 1px solid var(--rule);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.cond:last-child { border-right: 0; }
+.cond .k {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink-mute);
+}
+.cond .v {
+  font-family: var(--font-mono); font-size: 19px; font-weight: 600;
+  letter-spacing: -.01em; line-height: 1.2;
+}
+.cond .v em { font-style: normal; font-size: 11px; color: var(--ink-soft); font-weight: 500; }
+.cond.absent .v { color: var(--ink-mute); font-size: 13px; font-weight: 500; letter-spacing: .04em; }
+
+/* ---------- generic section ---------- */
+section { margin-top: 34px; }
+.sec-head {
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  margin-bottom: 14px; padding-bottom: 9px; border-bottom: 1px solid var(--rule-strong);
+}
+.sec-head h2 {
+  margin: 0; font-size: 13px; font-weight: 750; letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.sec-head .sub { font-size: 12.5px; color: var(--ink-soft); }
+
+/* ---------- carry-forward banner ---------- */
+.carry {
+  margin-top: 22px; background: var(--surface); border: 1px solid var(--rule);
+  border-left: 4px solid var(--warning); border-radius: 4px;
+  padding: 15px 18px; display: flex; gap: 14px; align-items: flex-start;
+  box-shadow: var(--shadow);
+}
+.carry .icon {
+  font-family: var(--font-mono); font-size: 15px; font-weight: 700;
+  color: var(--warning-ink); flex: none; line-height: 1.5;
+}
+.carry h3 {
+  margin: 0 0 3px; font-size: 12px; font-weight: 750;
+  letter-spacing: .11em; text-transform: uppercase; color: var(--warning-ink);
+}
+.carry p { margin: 0; font-size: 14px; color: var(--ink-soft); max-width: 88ch; }
+
+/* ---------- verdict + kpi ---------- */
+.verdict-grid {
+  display: grid; grid-template-columns: minmax(280px, 340px) 1fr;
+  gap: 18px; align-items: stretch;
+}
+@media (max-width: 860px) { .verdict-grid { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 5px; box-shadow: var(--shadow);
+}
+.verdict { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.verdict .eyebrow {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--ink-mute);
+}
+.gauge-row { display: flex; align-items: center; gap: 16px; }
+.gauge { flex: none; }
+.gauge-read { display: flex; flex-direction: column; gap: 1px; }
+.gauge-read .score { font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+.gauge-read .score sup { font-size: 15px; font-weight: 500; color: var(--ink-mute); letter-spacing: 0; }
+.gauge-read .band {
+  font-size: 13px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 6px;
+}
+.verdict .headline { font-size: 15px; font-weight: 620; margin: 0; }
+
+/* The briefing sits below the summary band so the KPI tiles stay short. */
+.briefing {
+  margin-top: 18px; padding: 18px 22px;
+  display: grid; grid-template-columns: 2.1fr 1fr 1.15fr; gap: 10px 30px;
+}
+@media (max-width: 900px) { .briefing { grid-template-columns: 1fr; gap: 18px; } }
+.briefing .detail { font-size: 13.5px; color: var(--ink-soft); margin: 0; max-width: 62ch; }
+.briefing .col-k {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-mute); margin-bottom: 8px;
+}
+.verdict-facts { display: grid; gap: 11px; }
+.verdict-facts div { display: flex; flex-direction: column; }
+.verdict-facts .k {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-mute);
+}
+.verdict-facts .v { font-size: 13.5px; font-weight: 600; }
+
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px;
+}
+.kpi { padding: 18px 20px; display: flex; flex-direction: column; gap: 3px; justify-content: center; }
+.kpi .k {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink-mute);
+}
+.kpi .v { font-size: 34px; font-weight: 780; line-height: 1.08; letter-spacing: -.025em; }
+.kpi .n { font-size: 12px; color: var(--ink-soft); }
+
+/* ---------- freshness chip ---------- */
+.chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 2px; border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.chip .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: none; }
+.chip.good     { color: var(--good-ink); }
+.chip.warning  { color: var(--warning-ink); }
+.chip.serious  { color: var(--serious-ink); }
+.chip.critical { color: var(--critical-ink); }
+.chip.none     { color: var(--ink-mute); }
+
+/* ---------- species tiles ---------- */
+.species-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: 14px;
+}
+.sp {
+  padding: 14px 15px 13px; display: flex; flex-direction: column; gap: 7px;
+  border-top: 3px solid var(--rule-strong);
+}
+.sp.counted { border-top-color: var(--series-1); }
+.sp .name { font-size: 14.5px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
+.sp .alias { font-size: 11.5px; color: var(--ink-mute); margin-top: -4px; }
+.sp .count {
+  font-size: 34px; font-weight: 780; line-height: 1; letter-spacing: -.025em;
+}
+.sp .nocount {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--ink-mute); padding: 9px 0 8px; line-height: 1.35;
+}
+.sp .meta { font-size: 11.5px; color: var(--ink-soft); margin-top: auto; padding-top: 2px; }
+.sp .water {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-mute);
+}
+
+/* ---------- tables ---------- */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 620px; }
+thead th {
+  text-align: left; font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute);
+  padding: 0 12px 8px 0; border-bottom: 1px solid var(--rule-strong); white-space: nowrap;
+}
+tbody td { padding: 11px 12px 11px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+tbody tr:last-child td { border-bottom: 0; }
+.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+thead th.num { text-align: right; }
+.landing-name { font-weight: 650; display: flex; align-items: center; gap: 8px; }
+.swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+.port-sub { font-size: 11.5px; color: var(--ink-mute); font-weight: 400; }
+tfoot td {
+  padding: 11px 12px 0 0; border-top: 2px solid var(--rule-strong);
+  font-weight: 700; font-size: 13.5px;
+}
+
+/* ---------- chart ---------- */
+.chart-card { padding: 18px 20px 16px; }
+.chart-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 4px; }
+.chart-head h3 { margin: 0; font-size: 13.5px; font-weight: 700; }
+.chart-head .axis-note { font-size: 11.5px; color: var(--ink-mute); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 10px 0 4px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-soft); }
+.legend i { width: 11px; height: 3px; border-radius: 2px; display: inline-block; flex: none; }
+.chart-holder { position: relative; }
+svg.chart { display: block; width: 100%; height: auto; overflow: visible; }
+.tip {
+  position: absolute; pointer-events: none; opacity: 0; transition: opacity .12s;
+  background: var(--masthead); color: var(--masthead-ink); border-radius: 4px;
+  padding: 9px 11px; font-size: 12px; box-shadow: 0 6px 22px rgba(0,0,0,.3);
+  min-width: 168px; z-index: 5;
+}
+.tip.on { opacity: 1; }
+.tip .t-date {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: #9fb3c0; margin-bottom: 6px;
+}
+.tip .t-row { display: flex; align-items: center; gap: 7px; justify-content: space-between; padding: 2px 0; }
+.tip .t-row .l { display: flex; align-items: center; gap: 6px; }
+.tip .t-row i { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+.tip .t-row .n { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* ---------- disclosure ---------- */
+details.disc {
+  margin-top: 14px; border: 1px solid var(--rule); border-radius: 5px;
+  background: var(--surface); box-shadow: var(--shadow);
+}
+details.disc > summary {
+  cursor: pointer; padding: 12px 16px; list-style: none;
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft);
+  display: flex; align-items: center; gap: 9px;
+}
+details.disc > summary::-webkit-details-marker { display: none; }
+details.disc > summary::before { content: "▸"; color: var(--accent); font-size: 11px; }
+details.disc[open] > summary::before { content: "▾"; }
+details.disc > .disc-body { padding: 0 16px 16px; }
+
+/* ---------- sources ---------- */
+.src-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.src {
+  padding: 13px 15px; display: flex; flex-direction: column; gap: 5px;
+  text-decoration: none; transition: border-color .15s, transform .15s;
+}
+.src:hover { border-color: var(--accent); transform: translateY(-1px); }
+.src .n { font-size: 13.5px; font-weight: 680; }
+.src .p {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-mute);
+}
+.src .d { font-size: 11.5px; color: var(--ink-soft); }
+
+/* ---------- open questions ---------- */
+.q-list { display: flex; flex-direction: column; gap: 0; }
+.q {
+  display: grid; grid-template-columns: 30px 1fr; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid var(--rule);
+}
+.q:last-child { border-bottom: 0; }
+.q .n {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--accent);
+  padding-top: 1px;
+}
+.q h4 { margin: 0 0 3px; font-size: 14px; font-weight: 680; }
+.q p { margin: 0; font-size: 13px; color: var(--ink-soft); max-width: 82ch; }
+
+/* ---------- footer ---------- */
+footer {
+  margin-top: 44px; padding-top: 20px; border-top: 2px solid var(--rule-strong);
+  font-size: 12.5px; color: var(--ink-soft);
+}
+footer h4 {
+  margin: 0 0 6px; font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--ink-mute);
+}
+footer p { margin: 0 0 16px; max-width: 96ch; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.foot-links a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule-strong); }
+.foot-links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<script type="application/json" id="board-data">{"meta": {"board": "SoCal Fishing Operations Board", "corridor": "Los Angeles Harbor to Oceanside, California", "version": "alpha.1", "today": "2026-08-08", "renderedAt": "2026-08-08T07:00:00-07:00", "newDataToday": false, "carryForward": "No nightly report has arrived for August 8. The August 7 report is being held on the board unchanged, per the carry-forward rule.", "lastReport": {"title": "Nightly Fishing Report — August 7, 2026", "targetDate": "2026-08-07", "receivedAt": "2026-08-06T18:02:00-07:00", "receivedLabel": "received Aug 6, 6:02 PM PT", "source": "Gmail — nightly pipeline from stewart.lang@seaways-mpss.com"}, "archiveDates": ["2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06"], "trendStatus": "The rolling archive holds five verified report dates. The 7-day view is partial; a valid 30-day trend is not yet available."}, "verdict": {"score": 61, "band": "MAYBE", "status": "warning", "headline": "Go only for an early, short nearshore run.", "detail": "No selected landing posted an August 7 numerical count. Oceanside is the freshest regional signal at one day old, showing yellowtail, calico bass and sand bass activity. From Laguna Niguel, Dana Point remains the practical launch, but Dana Wharf's report is four days old — do not treat its older volume as today's bite.", "homeBase": "Laguna Niguel", "launch": "Dana Point", "freshestSignal": "Oceanside Sea Center", "asOf": "2026-08-07"}, "scoreHistory": [{"runDate": "2026-08-04", "targetDate": "2026-08-05", "score": 68, "band": "GO EARLY, NEARSHORE, MODERATE-LOW CONFIDENCE"}, {"runDate": "2026-08-05", "targetDate": "2026-08-06", "score": 78, "band": "GO EARLY, NEARSHORE FAVORED"}, {"runDate": "2026-08-06", "targetDate": "2026-08-07", "score": 61, "band": "MAYBE"}], "conditions": [{"key": "wind", "label": "WIND", "value": "W 10", "unit": "KT EARLY", "state": "reported", "note": "Becoming variable under 10 kt"}, {"key": "seas", "label": "SEAS", "value": "3–4", "unit": "FT", "state": "reported", "note": "NWS coastal waters forecast"}, {"key": "water", "label": "WATER TEMP", "value": null, "unit": "°F", "state": "not-reported", "note": "Buoy feed not yet wired"}, {"key": "air", "label": "AIR TEMP", "value": null, "unit": "°F", "state": "not-reported", "note": "Buoy feed not yet wired"}, {"key": "swell", "label": "SWELL", "value": null, "unit": "FT", "state": "not-reported", "note": "Buoy feed not yet wired"}, {"key": "vis", "label": "VISIBILITY", "value": null, "unit": "NM", "state": "not-reported", "note": "Not reported in source"}, {"key": "tide", "label": "TIDE", "value": null, "unit": "FT", "state": "not-reported", "note": "NOAA tide feed not yet wired"}, {"key": "moon", "label": "MOON", "value": null, "unit": "", "state": "not-reported", "note": "Almanac feed not yet wired"}], "conditionsSource": {"asOf": "2026-08-07", "text": "Wind and seas are from the NWS coastal-waters forecast quoted in the August 7 nightly report. Water temperature, air temperature, swell, visibility, tide and moon were listed as unavailable in the source and have not been inferred."}, "landings": [{"id": "pierpoint", "name": "Pierpoint Landing", "port": "Long Beach", "url": "https://www.pierpoint.net", "source": "https://www.sportfishingreport.com/landings/pierpoint-landing.php", "latest": {"date": "2026-08-05", "anglers": 27, "kept": 95, "released": null, "adjScore": 1.58}, "history": [{"date": "2026-08-02", "anglers": 20, "kept": 378, "released": null, "flag": "multi-day trip"}, {"date": "2026-08-04", "anglers": 55, "kept": 383, "released": null, "flag": null}, {"date": "2026-08-05", "anglers": 27, "kept": 95, "released": null, "flag": null}]}, {"id": "oceanside", "name": "Oceanside Sea Center", "port": "Oceanside", "url": "https://www.oceansideseacenter.com", "source": "https://www.sportfishingreport.com/landings/oceanside-sea-center.php", "latest": {"date": "2026-08-06", "anglers": 72, "kept": 86, "released": 75, "adjScore": 0.83}, "history": [{"date": "2026-08-04", "anglers": 14, "kept": 83, "released": 60, "flag": null}, {"date": "2026-08-05", "anglers": 45, "kept": 83, "released": 50, "flag": "species breakdown posted"}, {"date": "2026-08-06", "anglers": 72, "kept": 86, "released": 75, "flag": null}]}, {"id": "danawharf", "name": "Dana Wharf Sportfishing", "port": "Dana Point", "url": "https://danawharf.com", "source": "https://www.sportfishingreport.com/landings/dana-wharf-sportfishing.php", "latest": {"date": "2026-08-03", "anglers": 139, "kept": 520, "released": 695, "adjScore": 0.75}, "history": [{"date": "2026-08-03", "anglers": 139, "kept": 520, "released": 695, "flag": null}]}, {"id": "daveys", "name": "Davey's Locker", "port": "Newport Beach", "url": "https://daveyslocker.com", "source": "https://www.sportfishingreport.com/landings/daveys-locker.php", "latest": {"date": "2026-08-05", "anglers": 147, "kept": 217, "released": null, "adjScore": 0.67}, "history": [{"date": "2026-08-03", "anglers": 99, "kept": 124, "released": null, "flag": null}, {"date": "2026-08-05", "anglers": 147, "kept": 217, "released": null, "flag": null}]}, {"id": "newport", "name": "Newport Landing", "port": "Newport Beach", "url": "https://www.newportlanding.com", "source": "https://www.sportfishingreport.com/landings/newport-landing.php", "latest": {"date": "2026-08-04", "anglers": 152, "kept": 335, "released": null, "adjScore": 0.66}, "history": [{"date": "2026-08-02", "anglers": 131, "kept": 401, "released": null, "flag": null}, {"date": "2026-08-04", "anglers": 152, "kept": 335, "released": null, "flag": null}]}], "pendingLandings": [{"name": "22nd Street Landing", "port": "San Pedro / LA Harbor", "url": "https://www.22ndstreetlanding.com"}, {"name": "LA Waterfront Sportfishing", "port": "San Pedro / LA Harbor", "url": "https://lawaterfrontsportfishing.com"}, {"name": "Long Beach Sportfishing", "port": "Long Beach", "url": "https://longbeachsportfishing.com"}, {"name": "Huntington Beach Sportfishing", "port": "Huntington Beach", "url": "https://hbsportfishing.com"}, {"name": "Helgren's Sportfishing", "port": "Oceanside", "url": "https://helgrensportfishing.com"}], "speciesReportDate": "2026-08-05", "speciesReportLanding": "Oceanside Sea Center", "speciesNote": "Oceanside Sea Center's August 5 report is the only landing in the archive that posted a species-level breakdown. Its seven species sum to its 83 kept fish. Every other species below is tracked by the board but has no verified count in the archive yet.", "species": [{"name": "Calico Bass", "alias": "Kelp Bass", "count": 25, "water": "inshore", "season": "Year-round, peaks Jul–Sep", "inSeason": true}, {"name": "Yellowtail", "alias": "California Yellowtail", "count": 23, "water": "pelagic", "season": "Apr–Oct, big run in Aug", "inSeason": true}, {"name": "Bonito", "alias": "Pacific Bonito", "count": 21, "water": "pelagic", "season": "Jun–Nov", "inSeason": true}, {"name": "Sand Bass", "alias": "Barred Sand Bass", "count": 9, "water": "inshore", "season": "Jun–Aug spawn aggregation", "inSeason": true}, {"name": "Ocean Whitefish", "alias": null, "count": 3, "water": "inshore", "season": "Year-round", "inSeason": true}, {"name": "California Halibut", "alias": null, "count": 1, "water": "inshore", "season": "May–Jul peak, year-round", "inSeason": true}, {"name": "Mako Shark", "alias": "Shortfin Mako", "count": 1, "water": "pelagic", "season": "Jun–Sep", "inSeason": true}, {"name": "Bluefin Tuna", "alias": null, "count": null, "water": "pelagic", "season": "Jun–Sep, biggest Jul–Aug", "inSeason": true}, {"name": "Yellowfin Tuna", "alias": null, "count": null, "water": "pelagic", "season": "Jul–Nov", "inSeason": true}, {"name": "Dorado", "alias": "Mahi Mahi", "count": null, "water": "pelagic", "season": "Jul–Oct, warm-water years", "inSeason": true}, {"name": "Barracuda", "alias": "California Barracuda", "count": null, "water": "pelagic", "season": "Peaks Jul", "inSeason": true}, {"name": "Rockfish", "alias": "Vermilion, copper, starry", "count": null, "water": "bottom", "season": "Season opens Mar", "inSeason": true}], "speciesReference": [{"name": "Calico Bass", "alias": "Kelp Bass", "water": "Inshore kelp / structure", "season": "Year-round, peaks Jul–Sep"}, {"name": "Barred Sand Bass", "alias": "Sand Bass", "water": "Inshore flats", "season": "Jun–Aug spawn aggregation"}, {"name": "Spotted Bay Bass", "alias": "Spottie", "water": "Bays / harbors", "season": "Year-round"}, {"name": "California Halibut", "alias": null, "water": "Sand flats", "season": "May–Jul peak"}, {"name": "White Seabass", "alias": null, "water": "Kelp edges", "season": "Mar–Jun peak"}, {"name": "California Sheephead", "alias": null, "water": "Reef / structure", "season": "Spring–fall"}, {"name": "Ocean Whitefish", "alias": null, "water": "Hard bottom", "season": "Year-round"}, {"name": "Sculpin", "alias": "California Scorpionfish", "water": "Reef / wrecks", "season": "Year-round, seasonal closure"}, {"name": "Rockfish", "alias": "Vermilion, copper, starry, bocaccio", "water": "Deep reef", "season": "Season opens Mar"}, {"name": "Lingcod", "alias": null, "water": "Deep reef", "season": "Spring–fall"}, {"name": "Cabezon", "alias": null, "water": "Shallow reef", "season": "Year-round"}, {"name": "Pacific Mackerel", "alias": "Greenback", "water": "Nearshore / bait", "season": "Year-round"}, {"name": "California Barracuda", "alias": null, "water": "Nearshore pelagic", "season": "Peaks Jul"}, {"name": "Pacific Bonito", "alias": null, "water": "Nearshore pelagic", "season": "Jun–Nov"}, {"name": "California Yellowtail", "alias": null, "water": "Kelp / offshore banks", "season": "Apr–Oct, big run in Aug"}, {"name": "Bluefin Tuna", "alias": null, "water": "Offshore", "season": "Jun–Sep, biggest Jul–Aug"}, {"name": "Yellowfin Tuna", "alias": null, "water": "Offshore", "season": "Jul–Nov"}, {"name": "Albacore", "alias": "Longfin", "water": "Far offshore", "season": "Jul–Oct, variable years"}, {"name": "Skipjack Tuna", "alias": null, "water": "Offshore", "season": "Jul–Oct"}, {"name": "Dorado", "alias": "Mahi Mahi / Dolphinfish", "water": "Offshore kelp paddies", "season": "Jul–Oct, warm-water years"}, {"name": "Striped Marlin", "alias": null, "water": "Offshore", "season": "Aug–Oct"}, {"name": "Swordfish", "alias": "Broadbill", "water": "Deep offshore", "season": "Aug–Nov, deep-drop"}, {"name": "Shortfin Mako", "alias": "Mako Shark", "water": "Offshore", "season": "Jun–Sep"}, {"name": "Thresher Shark", "alias": null, "water": "Nearshore pelagic", "season": "Apr–Aug"}, {"name": "Blue Shark", "alias": null, "water": "Offshore", "season": "Jun–Sep"}, {"name": "White Croaker", "alias": "Tomcod", "water": "Surf / bays", "season": "Year-round"}, {"name": "Sargo", "alias": null, "water": "Bays / jetties", "season": "Year-round"}, {"name": "Opaleye", "alias": null, "water": "Shallow reef", "season": "Year-round"}, {"name": "Halfmoon", "alias": "Blue Perch", "water": "Kelp", "season": "Year-round"}], "marineSources": [{"label": "NWS San Diego coastal waters", "url": "https://www.ndbc.noaa.gov/data/Forecasts/FZUS56.KSGX.html"}, {"label": "NWS Los Angeles coastal waters", "url": "https://www.ndbc.noaa.gov/data/Forecasts/FZUS56.KLOX.html"}, {"label": "NDBC 46222 San Pedro", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46222"}, {"label": "NDBC 46256 Long Beach Channel", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46256"}, {"label": "NDBC 46224 Oceanside Offshore", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46224"}, {"label": "NOAA Tides & Currents", "url": "https://tidesandcurrents.noaa.gov/"}], "dataLimits": "Exact catch locations, harbor entrance conditions, route-specific visibility, current, water temperature, unreported captains and individual fish weights were unavailable in the source reports and have not been inferred. Landing counts are party-boat dock totals, not private-boat results, and multi-day trips inflate kept-per-angler on the day they land."}</script>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">
+      <span class="stamp">Alpha · for comment</span>
+      <h1>SoCal Fishing<span>Operations Board</span></h1>
+      <div class="corridor" id="corridor"></div>
+    </div>
+    <div class="masthead-meta" id="masthead-meta"></div>
+  </div>
+</header>
+
+<div class="rail"><div class="rail-inner" id="rail"></div></div>
+
+<div class="wrap">
+
+  <div class="carry" id="carry"></div>
+
+  <section>
+    <div class="sec-head">
+      <h2>Today's call</h2>
+      <span class="sub" id="verdict-sub"></span>
+    </div>
+    <div class="verdict-grid">
+      <div class="card verdict" id="verdict"></div>
+      <div class="kpi-grid" id="kpis"></div>
+    </div>
+    <div class="card briefing" id="briefing"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Target species signals</h2>
+      <span class="sub" id="species-sub"></span>
+    </div>
+    <div class="species-grid" id="species"></div>
+    <details class="disc">
+      <summary>Why most tiles show no count</summary>
+      <div class="disc-body"><p style="margin:0;font-size:13.5px;color:var(--ink-soft);max-width:92ch" id="species-note"></p></div>
+    </details>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Port performance</h2>
+      <span class="sub">Each landing's most recent posted count. Report dates differ — read the age chip on every row.</span>
+    </div>
+    <div class="card" style="padding:18px 20px">
+      <div class="table-scroll"><table id="ports"></table></div>
+    </div>
+    <details class="disc">
+      <summary>Landings in the corridor with no report yet</summary>
+      <div class="disc-body"><div class="src-grid" id="pending"></div></div>
+    </details>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Archive trend</h2>
+      <span class="sub" id="trend-sub"></span>
+    </div>
+    <div class="card chart-card">
+      <div class="chart-head">
+        <h3>Kept fish per angler, by landing</h3>
+        <span class="axis-note" id="axis-note"></span>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="chart-holder">
+        <svg class="chart" id="trend" viewBox="0 0 900 340" role="img" aria-label="Kept fish per angler by landing, August 2 to August 6, 2026"></svg>
+        <div class="tip" id="tip"></div>
+      </div>
+    </div>
+    <details class="disc">
+      <summary>Table view — full report archive</summary>
+      <div class="disc-body"><div class="table-scroll"><table id="archive"></table></div></div>
+    </details>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Landing reports</h2>
+      <span class="sub">Straight to each landing's own count page.</span>
+    </div>
+    <div class="src-grid" id="sources"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Species reference</h2>
+      <span class="sub">What actually gets reported between LA Harbor and Oceanside, and when it shows.</span>
+    </div>
+    <div class="card" style="padding:18px 20px">
+      <div class="table-scroll"><table id="reference"></table></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Open for your sign-off</h2>
+      <span class="sub">Calls I made building the alpha. Each one is a one-line change.</span>
+    </div>
+    <div class="card" style="padding:6px 20px 14px">
+      <div class="q-list" id="questions"></div>
+    </div>
+  </section>
+
+  <footer>
+    <h4>Refresh</h4>
+    <p id="foot-refresh"></p>
+    <h4>Data limits</h4>
+    <p id="foot-limits"></p>
+    <h4>Marine sources</h4>
+    <div class="foot-links" id="foot-sources"></div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var D = JSON.parse(document.getElementById("board-data").textContent);
+  var SERIES = ["--series-1", "--series-2", "--series-3", "--series-4", "--series-5"];
+  var cssVar = function (n) {
+    return getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  };
+  var el = function (tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  };
+  var esc = function (s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  };
+
+  /* ---- dates ---- */
+  function parseISO(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function daysOld(dateStr) {
+    return Math.round((parseISO(D.meta.today) - parseISO(dateStr)) / 86400000);
+  }
+  var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function fmtShort(s) { var d = parseISO(s); return MON[d.getMonth()] + " " + d.getDate(); }
+  function fmtLong(s) {
+    var d = parseISO(s);
+    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    return days[d.getDay()] + ", " + MON[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+  }
+
+  /* Freshness is the whole point of this board: every number carries its age. */
+  function freshness(dateStr) {
+    var n = daysOld(dateStr);
+    if (n <= 0) return { n: n, label: "Today", cls: "good" };
+    if (n === 1) return { n: n, label: "1 day old", cls: "good" };
+    if (n === 2) return { n: n, label: "2 days old", cls: "warning" };
+    if (n <= 4)  return { n: n, label: n + " days old", cls: "serious" };
+    return { n: n, label: n + " days old", cls: "critical" };
+  }
+  function chip(f) {
+    return '<span class="chip ' + f.cls + '"><span class="dot"></span>' + f.label + "</span>";
+  }
+
+  /* ---- masthead ---- */
+  document.getElementById("corridor").textContent = D.meta.corridor;
+  var mm = document.getElementById("masthead-meta");
+  [
+    { k: "Board date", v: fmtLong(D.meta.today), s: "" },
+    { k: "Last report", v: fmtShort(D.meta.lastReport.targetDate), s: D.meta.lastReport.receivedLabel || "" },
+    { k: "New data today", v: D.meta.newDataToday ? "Yes" : "None", s: D.meta.newDataToday ? "" : "holding last report" },
+    { k: "Refresh", v: "Daily", s: "06:15 PT" }
+  ].forEach(function (r) {
+    var d = el("div", "mm");
+    d.innerHTML = '<span class="k">' + esc(r.k) + '</span><span class="v">' + esc(r.v) +
+      (r.s ? '<small>' + esc(r.s) + "</small>" : "") + "</span>";
+    mm.appendChild(d);
+  });
+
+  /* ---- conditions rail ---- */
+  var rail = document.getElementById("rail");
+  D.conditions.forEach(function (c) {
+    var absent = c.state !== "reported";
+    var d = el("div", "cond" + (absent ? " absent" : ""));
+    var val = absent
+      ? "Not reported"
+      : esc(c.value) + (c.unit ? ' <em>' + esc(c.unit) + "</em>" : "");
+    d.innerHTML = '<span class="k">' + esc(c.label) + '</span><span class="v">' + val + "</span>";
+    d.title = c.note || "";
+    rail.appendChild(d);
+  });
+
+  /* ---- carry-forward banner ---- */
+  var carry = document.getElementById("carry");
+  carry.innerHTML =
+    '<span class="icon">‼</span><div><h3>' +
+    (D.meta.newDataToday ? "Refreshed today" : "No new report today — last report held") +
+    "</h3><p>" + esc(D.meta.carryForward) + "</p></div>";
+
+  /* ---- verdict ---- */
+  var v = D.verdict;
+  document.getElementById("verdict-sub").textContent =
+    "Carried from the " + fmtShort(v.asOf) + " report — " + freshness(v.asOf).label.toLowerCase() + ".";
+
+  /* The arc carries the vivid status colour; the number and band label carry
+     the accessible ink. Colour never states the verdict on its own — the score
+     and the word beside it do. */
+  var statusInk = { good: "--good-ink", warning: "--warning-ink", serious: "--serious-ink", critical: "--critical-ink" };
+  var statusFill = { good: "--good", warning: "--warning", serious: "--serious", critical: "--critical" };
+  var vInk = cssVar(statusInk[v.status] || "--warning-ink");
+  var vFill = cssVar(statusFill[v.status] || "--warning");
+  var frac = Math.max(0, Math.min(1, v.score / 100));
+  var ARC = Math.PI * 70;
+
+  document.getElementById("verdict").innerHTML =
+    '<span class="eyebrow">Should I go?</span>' +
+    '<div class="gauge-row">' +
+      '<svg class="gauge" width="176" height="100" viewBox="0 0 180 100" role="img" aria-label="Score ' + v.score + ' out of 100, ' + esc(v.band) + '">' +
+        '<path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="' + cssVar("--grid") + '" stroke-width="14" stroke-linecap="round"/>' +
+        '<path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="' + vFill + '" stroke-width="14" stroke-linecap="round" ' +
+          'stroke-dasharray="' + (frac * ARC).toFixed(1) + " " + ARC.toFixed(1) + '"/>' +
+      "</svg>" +
+      '<div class="gauge-read">' +
+        '<span class="score">' + v.score + "<sup>/100</sup></span>" +
+        '<span class="band" style="color:' + vInk + '"><span class="chip ' + v.status +
+          '" style="border:0;padding:0"><span class="dot"></span></span>' + esc(v.band) + "</span>" +
+      "</div>" +
+    "</div>" +
+    '<p class="headline">' + esc(v.headline) + "</p>";
+
+  document.getElementById("briefing").innerHTML =
+    '<div><div class="col-k">Why</div><p class="detail">' + esc(v.detail) + "</p></div>" +
+    '<div><div class="col-k">Run plan</div><div class="verdict-facts">' +
+      '<div><span class="k">Home base</span><span class="v">' + esc(v.homeBase) + "</span></div>" +
+      '<div><span class="k">Practical launch</span><span class="v">' + esc(v.launch) + "</span></div>" +
+      '<div><span class="k">Freshest signal</span><span class="v">' + esc(v.freshestSignal) + "</span></div>" +
+    "</div></div>" +
+    '<div><div class="col-k">Score, last ' + D.scoreHistory.length + " runs</div>" + sparkline() + "</div>";
+
+  function sparkline() {
+    var h = D.scoreHistory, W = 300, H = 54, pad = 14;
+    if (h.length < 2) return "";
+    var max = 100, min = 0;
+    var pts = h.map(function (p, i) {
+      return {
+        x: pad + (i / (h.length - 1)) * (W - pad * 2),
+        y: H - 8 - ((p.score - min) / (max - min)) * (H - 20),
+        s: p.score, d: p.runDate
+      };
+    });
+    var path = pts.map(function (p, i) { return (i ? "L" : "M") + p.x.toFixed(1) + " " + p.y.toFixed(1); }).join(" ");
+    var dots = pts.map(function (p, i) {
+      var last = i === pts.length - 1;
+      return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + (last ? 5 : 3.5) + '" ' +
+        'fill="' + (last ? vInk : cssVar("--surface")) + '" stroke="' + vInk + '" stroke-width="2"/>';
+    }).join("");
+    var labels = pts.map(function (p, i) {
+      if (i !== 0 && i !== pts.length - 1) return "";
+      return '<text x="' + p.x.toFixed(1) + '" y="' + (H - 1) + '" text-anchor="' + (i ? "end" : "start") + '" ' +
+        'font-size="9" font-family="' + "ui-monospace, monospace" + '" fill="' + cssVar("--ink-mute") + '">' +
+        fmtShort(p.d) + " · " + p.s + "</text>";
+    }).join("");
+    return '<svg width="100%" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none" role="img" aria-label="Score history">' +
+      '<path d="' + path + '" fill="none" stroke="' + vInk + '" stroke-width="2" stroke-linejoin="round"/>' + dots + labels + "</svg>";
+  }
+
+  /* ---- KPIs (composite of each landing's latest report) ---- */
+  var L = D.landings;
+  var totAnglers = L.reduce(function (a, x) { return a + x.latest.anglers; }, 0);
+  var totKept    = L.reduce(function (a, x) { return a + x.latest.kept; }, 0);
+  var relLandings = L.filter(function (x) { return x.latest.released != null; });
+  var totRel     = relLandings.reduce(function (a, x) { return a + x.latest.released; }, 0);
+  var per100     = Math.round((totKept / totAnglers) * 100);
+  var oldest     = Math.max.apply(null, L.map(function (x) { return daysOld(x.latest.date); }));
+
+  var kg = document.getElementById("kpis");
+  [
+    { k: "Landings reporting", v: L.length, n: "of " + (L.length + D.pendingLandings.length) + " in the corridor" },
+    { k: "Anglers", v: totAnglers.toLocaleString(), n: "across latest reports" },
+    { k: "Fish kept", v: totKept.toLocaleString(), n: "released: " + totRel.toLocaleString() + " (" + relLandings.length + " landings report it)" },
+    { k: "Kept / 100 anglers", v: per100, n: "composite across mixed dates" },
+    { k: "Oldest report", v: oldest + "d", n: "spread spans " + oldest + " days" }
+  ].forEach(function (r) {
+    var c = el("div", "card kpi");
+    c.innerHTML = '<span class="k">' + esc(r.k) + '</span><span class="v">' + esc(r.v) + '</span><span class="n">' + esc(r.n) + "</span>";
+    kg.appendChild(c);
+  });
+
+  /* ---- species tiles ---- */
+  document.getElementById("species-sub").textContent =
+    "Counts from " + D.speciesReportLanding + ", " + fmtShort(D.speciesReportDate) +
+    " — the only species breakdown in the archive.";
+  document.getElementById("species-note").textContent = D.speciesNote;
+
+  var sg = document.getElementById("species");
+  D.species.forEach(function (s) {
+    var c = el("div", "card sp" + (s.count != null ? " counted" : ""));
+    var body = s.count != null
+      ? '<span class="count">' + s.count + "</span>"
+      : '<span class="nocount">No count<br>posted</span>';
+    c.innerHTML =
+      '<span class="water">' + esc(s.water) + "</span>" +
+      '<span class="name">' + esc(s.name) + "</span>" +
+      (s.alias ? '<span class="alias">' + esc(s.alias) + "</span>" : "") +
+      body +
+      '<span class="meta">' + esc(s.season) + "</span>";
+    sg.appendChild(c);
+  });
+
+  /* ---- port performance table ---- */
+  var ports = document.getElementById("ports");
+  var rows = L.slice().sort(function (a, b) { return b.latest.adjScore - a.latest.adjScore; });
+  ports.innerHTML =
+    "<thead><tr><th>Landing</th><th>Report date</th><th>Freshness</th>" +
+    '<th class="num">Anglers</th><th class="num">Kept</th><th class="num">Released</th>' +
+    '<th class="num">Kept / 100</th><th class="num">Adj. score</th></tr></thead><tbody>' +
+    rows.map(function (x, i) {
+      var slot = cssVar(SERIES[L.indexOf(x) % SERIES.length]);
+      var f = freshness(x.latest.date);
+      return "<tr>" +
+        '<td><span class="landing-name"><span class="swatch" style="background:' + slot + '"></span>' + esc(x.name) + "</span>" +
+        '<span class="port-sub">' + esc(x.port) + "</span></td>" +
+        '<td class="num" style="text-align:left">' + fmtShort(x.latest.date) + "</td>" +
+        "<td>" + chip(f) + "</td>" +
+        '<td class="num">' + x.latest.anglers + "</td>" +
+        '<td class="num">' + x.latest.kept + "</td>" +
+        '<td class="num">' + (x.latest.released == null ? '<span style="color:var(--ink-mute)">—</span>' : x.latest.released) + "</td>" +
+        '<td class="num">' + Math.round((x.latest.kept / x.latest.anglers) * 100) + "</td>" +
+        '<td class="num">' + x.latest.adjScore.toFixed(2) + "</td>" +
+        "</tr>";
+    }).join("") +
+    "</tbody><tfoot><tr><td>Composite</td><td></td><td></td>" +
+    '<td class="num">' + totAnglers + '</td><td class="num">' + totKept + '</td>' +
+    '<td class="num">' + totRel + '</td><td class="num">' + per100 + '</td><td class="num">—</td></tr></tfoot>';
+
+  /* ---- pending landings ---- */
+  var pend = document.getElementById("pending");
+  D.pendingLandings.forEach(function (p) {
+    var a = el("a", "card src");
+    a.href = p.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.innerHTML = '<span class="p">' + esc(p.port) + '</span><span class="n">' + esc(p.name) +
+      '</span><span class="d">No count in the archive yet</span>';
+    pend.appendChild(a);
+  });
+
+  /* ---- trend chart ---- */
+  document.getElementById("trend-sub").textContent = D.meta.trendStatus;
+
+  var dates = D.meta.archiveDates;
+  var W = 900, H = 340, m = { t: 34, r: 146, b: 42, l: 46 };
+  var pw = W - m.l - m.r, ph = H - m.t - m.b;
+
+  var isMultiDay = function (f) { return !!f && /multi-day/i.test(f); };
+
+  var series = L.map(function (x, i) {
+    var pts = x.history.map(function (h) {
+      return {
+        di: dates.indexOf(h.date), date: h.date, v: h.kept / h.anglers,
+        flag: h.flag, kept: h.kept, anglers: h.anglers, off: isMultiDay(h.flag)
+      };
+    }).filter(function (p) { return p.di >= 0; });
+    return {
+      id: x.id, name: x.name, color: cssVar(SERIES[i % SERIES.length]), pts: pts,
+      line: pts.filter(function (p) { return !p.off; }),
+      offs: pts.filter(function (p) { return p.off; })
+    };
+  });
+
+  /* A multi-day trip lands several days of fishing on the date it returns, so
+     its kept-per-angler is not comparable to a half-day boat's. Letting it set
+     the scale would flatten every other landing into the baseline, so the axis
+     is fitted to single-day trips and the multi-day point is drawn above the
+     break with its real number spelled out — never rescaled away, never
+     silently dropped. The table view carries every value either way. */
+  var peak = 0;
+  series.forEach(function (s) { s.line.forEach(function (p) { if (p.v > peak) peak = p.v; }); });
+  var yMax = Math.max(4, Math.ceil(peak / 2) * 2);
+  var ticks = [], step = yMax / 4;
+  for (var ti = 0; ti <= 4; ti++) ticks.push(+(ti * step).toFixed(2));
+
+  var X = function (i) { return m.l + (i / (dates.length - 1)) * pw; };
+  var Y = function (v) { return m.t + ph - (v / yMax) * ph; };
+
+  var svg = document.getElementById("trend");
+  var g = "";
+
+  /* gridlines — solid hairlines, one shade off the surface */
+  ticks.forEach(function (t) {
+    g += '<line x1="' + m.l + '" y1="' + Y(t) + '" x2="' + (m.l + pw) + '" y2="' + Y(t) +
+      '" stroke="' + cssVar(t === 0 ? "--baseline" : "--grid") + '" stroke-width="1"/>';
+    g += '<text x="' + (m.l - 9) + '" y="' + (Y(t) + 4) + '" text-anchor="end" font-size="11" ' +
+      'font-family="ui-monospace, monospace" fill="' + cssVar("--ink-mute") + '">' + t + "</text>";
+  });
+  dates.forEach(function (d, i) {
+    g += '<text x="' + X(i) + '" y="' + (m.t + ph + 22) + '" text-anchor="middle" font-size="11.5" ' +
+      'font-family="ui-monospace, monospace" fill="' + cssVar("--ink-mute") + '">' + fmtShort(d) + "</text>";
+  });
+
+  var offCount = series.reduce(function (a, s) { return a + s.offs.length; }, 0);
+  var breakY = m.t - 14;
+  if (offCount) {
+    g += '<line x1="' + m.l + '" y1="' + breakY + '" x2="' + (m.l + pw) + '" y2="' + breakY +
+      '" stroke="' + cssVar("--rule-strong") + '" stroke-width="1"/>';
+  }
+
+  /* series: 2px lines, markers with a 2px surface ring */
+  series.forEach(function (s) {
+    if (s.line.length > 1) {
+      g += '<path d="' + s.line.map(function (p, i) {
+        return (i ? "L" : "M") + X(p.di).toFixed(1) + " " + Y(p.v).toFixed(1);
+      }).join(" ") + '" fill="none" stroke="' + s.color +
+        '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+    }
+    s.line.forEach(function (p) {
+      g += '<circle cx="' + X(p.di).toFixed(1) + '" cy="' + Y(p.v).toFixed(1) + '" r="5" fill="' + s.color +
+        '" stroke="' + cssVar("--surface") + '" stroke-width="2"/>';
+    });
+    /* off-scale points: a different mark, so shape says "not on this axis" */
+    s.offs.forEach(function (p) {
+      var x = X(p.di);
+      g += '<path d="M ' + x + " " + (breakY - 15) + " L " + (x + 7) + " " + (breakY - 3) +
+        " L " + (x - 7) + " " + (breakY - 3) + ' Z" fill="' + cssVar("--surface") +
+        '" stroke="' + s.color + '" stroke-width="2" stroke-linejoin="round"/>';
+      g += '<text x="' + (x + 12) + '" y="' + (breakY - 4) + '" font-size="11" fill="' +
+        cssVar("--ink-soft") + '">' + p.v.toFixed(1) + " · " + esc(s.name.split(" ")[0]) +
+        ", " + esc(p.flag) + " (off scale)</text>";
+    });
+  });
+
+  /* Endpoint labels, de-collided vertically. These are the relief the palette
+     validator requires in light mode, where three slots sit under 3:1 — series
+     identity never rests on hue alone. */
+  var labels = series.map(function (s) {
+    var last = s.line[s.line.length - 1];
+    return last ? {
+      x: X(last.di) + 12, y: Y(last.v) + 4,
+      text: s.name.replace(" Sportfishing", "").replace(" Sea Center", "")
+    } : null;
+  }).filter(Boolean).sort(function (a, b) { return a.y - b.y; });
+
+  for (var li = 1; li < labels.length; li++) {
+    if (labels[li].y - labels[li - 1].y < 15) labels[li].y = labels[li - 1].y + 15;
+  }
+  var spill = labels.length ? labels[labels.length - 1].y - (m.t + ph) : 0;
+  if (spill > 0) labels.forEach(function (l) { l.y -= spill; });
+
+  labels.forEach(function (l) {
+    g += '<text x="' + l.x.toFixed(1) + '" y="' + l.y.toFixed(1) + '" font-size="11.5" ' +
+      'font-weight="600" fill="' + cssVar("--ink") + '">' + esc(l.text) + "</text>";
+  });
+
+  document.getElementById("axis-note").textContent =
+    "Vertical axis: kept fish ÷ anglers, fitted to single-day trips." +
+    (offCount ? " " + offCount + " multi-day trip" + (offCount > 1 ? "s are" : " is") +
+      " plotted above the break with the true value." : "");
+
+  /* hover layer */
+  g += '<g id="cross" style="opacity:0"><line y1="' + m.t + '" y2="' + (m.t + ph) +
+    '" stroke="' + cssVar("--rule-strong") + '" stroke-width="1"/></g>';
+  g += '<rect id="hit" x="' + m.l + '" y="' + m.t + '" width="' + pw + '" height="' + ph + '" fill="transparent" style="cursor:crosshair"/>';
+  svg.innerHTML = g;
+
+  var legend = document.getElementById("legend");
+  series.forEach(function (s) {
+    var sp = el("span", null, '<i style="background:' + s.color + '"></i>' + esc(s.name));
+    legend.appendChild(sp);
+  });
+
+  var tip = document.getElementById("tip"), cross = svg.querySelector("#cross"),
+      crossLine = cross.querySelector("line"), hit = svg.querySelector("#hit");
+
+  function showAt(di, clientX) {
+    var rect = svg.getBoundingClientRect(), scale = rect.width / W;
+    crossLine.setAttribute("x1", X(di)); crossLine.setAttribute("x2", X(di));
+    cross.style.opacity = "1";
+    var rowsHtml = series.map(function (s) {
+      var p = s.pts.filter(function (q) { return q.di === di; })[0];
+      if (!p) return "";
+      return '<div class="t-row"><span class="l"><i style="background:' + s.color + '"></i>' +
+        esc(s.name) + '</span><span class="n">' + p.v.toFixed(2) + "</span></div>";
+    }).join("");
+    tip.innerHTML = '<div class="t-date">' + fmtShort(dates[di]) + " · kept per angler</div>" +
+      (rowsHtml || '<div class="t-row"><span class="l">No landing posted</span></div>');
+    tip.classList.add("on");
+    var tx = X(di) * scale + 16;
+    if (tx + tip.offsetWidth > rect.width) tx = X(di) * scale - tip.offsetWidth - 16;
+    tip.style.left = Math.max(0, tx) + "px";
+    tip.style.top = (m.t * scale + 8) + "px";
+  }
+  function hide() { cross.style.opacity = "0"; tip.classList.remove("on"); }
+
+  hit.addEventListener("mousemove", function (e) {
+    var rect = svg.getBoundingClientRect(), scale = rect.width / W;
+    var x = (e.clientX - rect.left) / scale;
+    var di = Math.round(((x - m.l) / pw) * (dates.length - 1));
+    di = Math.max(0, Math.min(dates.length - 1, di));
+    showAt(di, e.clientX);
+  });
+  hit.addEventListener("mouseleave", hide);
+
+  /* ---- archive table (the table-view twin) ---- */
+  var arch = document.getElementById("archive");
+  var all = [];
+  L.forEach(function (x) {
+    x.history.forEach(function (h) {
+      all.push({ name: x.name, port: x.port, h: h, idx: L.indexOf(x) });
+    });
+  });
+  all.sort(function (a, b) { return a.h.date === b.h.date ? a.name.localeCompare(b.name) : (a.h.date < b.h.date ? 1 : -1); });
+  arch.innerHTML =
+    "<thead><tr><th>Date</th><th>Landing</th><th class='num'>Anglers</th><th class='num'>Kept</th>" +
+    "<th class='num'>Released</th><th class='num'>Kept / angler</th><th>Note</th></tr></thead><tbody>" +
+    all.map(function (r) {
+      return "<tr><td class='num' style='text-align:left'>" + fmtShort(r.h.date) + "</td>" +
+        '<td><span class="landing-name"><span class="swatch" style="background:' + cssVar(SERIES[r.idx % SERIES.length]) + '"></span>' + esc(r.name) + "</span></td>" +
+        "<td class='num'>" + r.h.anglers + "</td><td class='num'>" + r.h.kept + "</td>" +
+        "<td class='num'>" + (r.h.released == null ? "—" : r.h.released) + "</td>" +
+        "<td class='num'>" + (r.h.kept / r.h.anglers).toFixed(2) + "</td>" +
+        '<td style="font-size:12.5px;color:var(--ink-soft)">' + (r.h.flag ? esc(r.h.flag) : "") + "</td></tr>";
+    }).join("") + "</tbody>";
+
+  /* ---- landing sources ---- */
+  var sg2 = document.getElementById("sources");
+  L.forEach(function (x) {
+    var f = freshness(x.latest.date);
+    var a = el("a", "card src");
+    a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.innerHTML = '<span class="p">' + esc(x.port) + '</span><span class="n">' + esc(x.name) +
+      "</span><span class='d'>Last posted " + fmtShort(x.latest.date) + " · " + f.label.toLowerCase() + "</span>";
+    sg2.appendChild(a);
+  });
+
+  /* ---- species reference ---- */
+  var ref = document.getElementById("reference");
+  ref.innerHTML =
+    "<thead><tr><th>Species</th><th>Also called</th><th>Where</th><th>When it shows</th></tr></thead><tbody>" +
+    D.speciesReference.map(function (s) {
+      return "<tr><td style='font-weight:650'>" + esc(s.name) + "</td>" +
+        "<td style='color:var(--ink-soft)'>" + (s.alias ? esc(s.alias) : "—") + "</td>" +
+        "<td style='color:var(--ink-soft)'>" + esc(s.water) + "</td>" +
+        "<td style='color:var(--ink-soft)'>" + esc(s.season) + "</td></tr>";
+    }).join("") + "</tbody>";
+
+  /* ---- open questions ---- */
+  var qs = [
+    { h: "Empty tiles instead of invented numbers",
+      p: "Bluefin, yellowfin, dorado, barracuda and rockfish have no verified count anywhere in the archive, so their tiles read “no count posted” rather than showing a number. The reference infographic showed a figure on every tile. Tell me if you'd rather hide uncounted species than show the gap." },
+    { h: "Boat counts are not published",
+      p: "Landings post anglers, not boat counts, so the “total boats” tile from your reference has no honest source. I replaced it with landings reporting. If you want boats, it has to come from somewhere else." },
+    { h: "The composite mixes report dates",
+      p: "Kept per 100 anglers pools five landings whose reports span August 3 to August 6. It's the only way to get a regional number, but it is not a single day's fishing. Every row carries its own age chip so the spread is visible." },
+    { h: "Conditions are mostly unwired",
+      p: "Wind and seas come from the forecast quoted in the nightly report. Water temp, air temp, swell, tide and moon show “not reported” because the source explicitly listed them as unavailable. The daily job can pull them from NDBC buoys 46222, 46256 and 46224 — say the word and I'll wire it." },
+    { h: "Five landings now, ten in the corridor",
+      p: "The archive only covers Pierpoint, Davey's Locker, Newport Landing, Dana Wharf and Oceanside Sea Center. I've listed the other five between LA Harbor and Oceanside so the scraper can pick them up on the first live run." },
+    { h: "Upstream subject lines disagree with their contents",
+      p: "Two nightly emails were both titled “August 5”, though one carried August 4 data and the other August 5. The board keys everything off the report dates inside the body, not the subject line. Worth fixing upstream." }
+  ];
+  var ql = document.getElementById("questions");
+  qs.forEach(function (q, i) {
+    var d = el("div", "q");
+    d.innerHTML = '<span class="n">' + String(i + 1).padStart(2, "0") + "</span><div><h4>" +
+      esc(q.h) + "</h4><p>" + esc(q.p) + "</p></div>";
+    ql.appendChild(d);
+  });
+
+  /* ---- footer ---- */
+  document.getElementById("foot-refresh").textContent =
+    "The board refreshes once a day at 06:15 Pacific. Each landing is merged independently: a landing that posts a new count is updated, " +
+    "and one that posts nothing keeps its previous report and its age chip advances. Nothing is ever blanked out for want of fresh data, " +
+    "and no number is carried forward without its date attached.";
+  document.getElementById("foot-limits").textContent = D.dataLimits;
+  var fs = document.getElementById("foot-sources");
+  D.marineSources.forEach(function (s) {
+    var a = el("a", null, esc(s.label));
+    a.href = s.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+    fs.appendChild(a);
+  });
+})();
+</script>
+
+</body>
+</html>

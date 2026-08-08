@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "board": "SoCal Fishing Operations Board",
+    "corridor": "Los Angeles Harbor to Oceanside, California",
+    "version": "alpha.1",
+    "today": "2026-08-08",
+    "renderedAt": "2026-08-08T07:00:00-07:00",
+    "newDataToday": false,
+    "carryForward": "No nightly report has arrived for August 8. The August 7 report is being held on the board unchanged, per the carry-forward rule.",
+    "lastReport": {
+      "title": "Nightly Fishing Report — August 7, 2026",
+      "targetDate": "2026-08-07",
+      "receivedAt": "2026-08-06T18:02:00-07:00",
+      "receivedLabel": "received Aug 6, 6:02 PM PT",
+      "source": "Gmail — nightly pipeline from stewart.lang@seaways-mpss.com"
+    },
+    "archiveDates": ["2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06"],
+    "trendStatus": "The rolling archive holds five verified report dates. The 7-day view is partial; a valid 30-day trend is not yet available."
+  },
+
+  "verdict": {
+    "score": 61,
+    "band": "MAYBE",
+    "status": "warning",
+    "headline": "Go only for an early, short nearshore run.",
+    "detail": "No selected landing posted an August 7 numerical count. Oceanside is the freshest regional signal at one day old, showing yellowtail, calico bass and sand bass activity. From Laguna Niguel, Dana Point remains the practical launch, but Dana Wharf's report is four days old — do not treat its older volume as today's bite.",
+    "homeBase": "Laguna Niguel",
+    "launch": "Dana Point",
+    "freshestSignal": "Oceanside Sea Center",
+    "asOf": "2026-08-07"
+  },
+
+  "scoreHistory": [
+    { "runDate": "2026-08-04", "targetDate": "2026-08-05", "score": 68, "band": "GO EARLY, NEARSHORE, MODERATE-LOW CONFIDENCE" },
+    { "runDate": "2026-08-05", "targetDate": "2026-08-06", "score": 78, "band": "GO EARLY, NEARSHORE FAVORED" },
+    { "runDate": "2026-08-06", "targetDate": "2026-08-07", "score": 61, "band": "MAYBE" }
+  ],
+
+  "conditions": [
+    { "key": "wind",     "label": "WIND",        "value": "W 10",   "unit": "KT EARLY",  "state": "reported",     "note": "Becoming variable under 10 kt" },
+    { "key": "seas",     "label": "SEAS",        "value": "3–4", "unit": "FT",      "state": "reported",     "note": "NWS coastal waters forecast" },
+    { "key": "water",    "label": "WATER TEMP",  "value": null,     "unit": "°F",   "state": "not-reported", "note": "Buoy feed not yet wired" },
+    { "key": "air",      "label": "AIR TEMP",    "value": null,     "unit": "°F",   "state": "not-reported", "note": "Buoy feed not yet wired" },
+    { "key": "swell",    "label": "SWELL",       "value": null,     "unit": "FT",        "state": "not-reported", "note": "Buoy feed not yet wired" },
+    { "key": "vis",      "label": "VISIBILITY",  "value": null,     "unit": "NM",        "state": "not-reported", "note": "Not reported in source" },
+    { "key": "tide",     "label": "TIDE",        "value": null,     "unit": "FT",        "state": "not-reported", "note": "NOAA tide feed not yet wired" },
+    { "key": "moon",     "label": "MOON",        "value": null,     "unit": "",          "state": "not-reported", "note": "Almanac feed not yet wired" }
+  ],
+  "conditionsSource": {
+    "asOf": "2026-08-07",
+    "text": "Wind and seas are from the NWS coastal-waters forecast quoted in the August 7 nightly report. Water temperature, air temperature, swell, visibility, tide and moon were listed as unavailable in the source and have not been inferred."
+  },
+
+  "landings": [
+    {
+      "id": "pierpoint",
+      "name": "Pierpoint Landing",
+      "port": "Long Beach",
+      "url": "https://www.pierpoint.net",
+      "source": "https://www.sportfishingreport.com/landings/pierpoint-landing.php",
+      "latest": { "date": "2026-08-05", "anglers": 27, "kept": 95, "released": null, "adjScore": 1.58 },
+      "history": [
+        { "date": "2026-08-02", "anglers": 20, "kept": 378, "released": null, "flag": "multi-day trip" },
+        { "date": "2026-08-04", "anglers": 55, "kept": 383, "released": null, "flag": null },
+        { "date": "2026-08-05", "anglers": 27, "kept": 95,  "released": null, "flag": null }
+      ]
+    },
+    {
+      "id": "oceanside",
+      "name": "Oceanside Sea Center",
+      "port": "Oceanside",
+      "url": "https://www.oceansideseacenter.com",
+      "source": "https://www.sportfishingreport.com/landings/oceanside-sea-center.php",
+      "latest": { "date": "2026-08-06", "anglers": 72, "kept": 86, "released": 75, "adjScore": 0.83 },
+      "history": [
+        { "date": "2026-08-04", "anglers": 14, "kept": 83, "released": 60, "flag": null },
+        { "date": "2026-08-05", "anglers": 45, "kept": 83, "released": 50, "flag": "species breakdown posted" },
+        { "date": "2026-08-06", "anglers": 72, "kept": 86, "released": 75, "flag": null }
+      ]
+    },
+    {
+      "id": "danawharf",
+      "name": "Dana Wharf Sportfishing",
+      "port": "Dana Point",
+      "url": "https://danawharf.com",
+      "source": "https://www.sportfishingreport.com/landings/dana-wharf-sportfishing.php",
+      "latest": { "date": "2026-08-03", "anglers": 139, "kept": 520, "released": 695, "adjScore": 0.75 },
+      "history": [
+        { "date": "2026-08-03", "anglers": 139, "kept": 520, "released": 695, "flag": null }
+      ]
+    },
+    {
+      "id": "daveys",
+      "name": "Davey's Locker",
+      "port": "Newport Beach",
+      "url": "https://daveyslocker.com",
+      "source": "https://www.sportfishingreport.com/landings/daveys-locker.php",
+      "latest": { "date": "2026-08-05", "anglers": 147, "kept": 217, "released": null, "adjScore": 0.67 },
+      "history": [
+        { "date": "2026-08-03", "anglers": 99,  "kept": 124, "released": null, "flag": null },
+        { "date": "2026-08-05", "anglers": 147, "kept": 217, "released": null, "flag": null }
+      ]
+    },
+    {
+      "id": "newport",
+      "name": "Newport Landing",
+      "port": "Newport Beach",
+      "url": "https://www.newportlanding.com",
+      "source": "https://www.sportfishingreport.com/landings/newport-landing.php",
+      "latest": { "date": "2026-08-04", "anglers": 152, "kept": 335, "released": null, "adjScore": 0.66 },
+      "history": [
+        { "date": "2026-08-02", "anglers": 131, "kept": 401, "released": null, "flag": null },
+        { "date": "2026-08-04", "anglers": 152, "kept": 335, "released": null, "flag": null }
+      ]
+    }
+  ],
+
+  "pendingLandings": [
+    { "name": "22nd Street Landing",       "port": "San Pedro / LA Harbor", "url": "https://www.22ndstreetlanding.com" },
+    { "name": "LA Waterfront Sportfishing", "port": "San Pedro / LA Harbor", "url": "https://lawaterfrontsportfishing.com" },
+    { "name": "Long Beach Sportfishing",    "port": "Long Beach",            "url": "https://longbeachsportfishing.com" },
+    { "name": "Huntington Beach Sportfishing", "port": "Huntington Beach",   "url": "https://hbsportfishing.com" },
+    { "name": "Helgren's Sportfishing",     "port": "Oceanside",             "url": "https://helgrensportfishing.com" }
+  ],
+
+  "speciesReportDate": "2026-08-05",
+  "speciesReportLanding": "Oceanside Sea Center",
+  "speciesNote": "Oceanside Sea Center's August 5 report is the only landing in the archive that posted a species-level breakdown. Its seven species sum to its 83 kept fish. Every other species below is tracked by the board but has no verified count in the archive yet.",
+
+  "species": [
+    { "name": "Calico Bass",       "alias": "Kelp Bass",             "count": 25,   "water": "inshore",  "season": "Year-round, peaks Jul–Sep", "inSeason": true },
+    { "name": "Yellowtail",        "alias": "California Yellowtail", "count": 23,   "water": "pelagic",  "season": "Apr–Oct, big run in Aug",   "inSeason": true },
+    { "name": "Bonito",            "alias": "Pacific Bonito",        "count": 21,   "water": "pelagic",  "season": "Jun–Nov",                   "inSeason": true },
+    { "name": "Sand Bass",         "alias": "Barred Sand Bass",      "count": 9,    "water": "inshore",  "season": "Jun–Aug spawn aggregation", "inSeason": true },
+    { "name": "Ocean Whitefish",   "alias": null,                    "count": 3,    "water": "inshore",  "season": "Year-round",                     "inSeason": true },
+    { "name": "California Halibut","alias": null,                    "count": 1,    "water": "inshore",  "season": "May–Jul peak, year-round",  "inSeason": true },
+    { "name": "Mako Shark",        "alias": "Shortfin Mako",         "count": 1,    "water": "pelagic",  "season": "Jun–Sep",                   "inSeason": true },
+    { "name": "Bluefin Tuna",      "alias": null,                    "count": null, "water": "pelagic",  "season": "Jun–Sep, biggest Jul–Aug", "inSeason": true },
+    { "name": "Yellowfin Tuna",    "alias": null,                    "count": null, "water": "pelagic",  "season": "Jul–Nov",                   "inSeason": true },
+    { "name": "Dorado",            "alias": "Mahi Mahi",             "count": null, "water": "pelagic",  "season": "Jul–Oct, warm-water years", "inSeason": true },
+    { "name": "Barracuda",         "alias": "California Barracuda",  "count": null, "water": "pelagic",  "season": "Peaks Jul",                      "inSeason": true },
+    { "name": "Rockfish",          "alias": "Vermilion, copper, starry", "count": null, "water": "bottom", "season": "Season opens Mar",             "inSeason": true }
+  ],
+
+  "speciesReference": [
+    { "name": "Calico Bass",        "alias": "Kelp Bass",              "water": "Inshore kelp / structure", "season": "Year-round, peaks Jul–Sep" },
+    { "name": "Barred Sand Bass",   "alias": "Sand Bass",              "water": "Inshore flats",            "season": "Jun–Aug spawn aggregation" },
+    { "name": "Spotted Bay Bass",   "alias": "Spottie",                "water": "Bays / harbors",           "season": "Year-round" },
+    { "name": "California Halibut", "alias": null,                     "water": "Sand flats",               "season": "May–Jul peak" },
+    { "name": "White Seabass",      "alias": null,                     "water": "Kelp edges",               "season": "Mar–Jun peak" },
+    { "name": "California Sheephead","alias": null,                    "water": "Reef / structure",         "season": "Spring–fall" },
+    { "name": "Ocean Whitefish",    "alias": null,                     "water": "Hard bottom",              "season": "Year-round" },
+    { "name": "Sculpin",            "alias": "California Scorpionfish", "water": "Reef / wrecks",           "season": "Year-round, seasonal closure" },
+    { "name": "Rockfish",           "alias": "Vermilion, copper, starry, bocaccio", "water": "Deep reef",   "season": "Season opens Mar" },
+    { "name": "Lingcod",            "alias": null,                     "water": "Deep reef",                "season": "Spring–fall" },
+    { "name": "Cabezon",            "alias": null,                     "water": "Shallow reef",             "season": "Year-round" },
+    { "name": "Pacific Mackerel",   "alias": "Greenback",              "water": "Nearshore / bait",         "season": "Year-round" },
+    { "name": "California Barracuda","alias": null,                    "water": "Nearshore pelagic",        "season": "Peaks Jul" },
+    { "name": "Pacific Bonito",     "alias": null,                     "water": "Nearshore pelagic",        "season": "Jun–Nov" },
+    { "name": "California Yellowtail","alias": null,                   "water": "Kelp / offshore banks",    "season": "Apr–Oct, big run in Aug" },
+    { "name": "Bluefin Tuna",       "alias": null,                     "water": "Offshore",                 "season": "Jun–Sep, biggest Jul–Aug" },
+    { "name": "Yellowfin Tuna",     "alias": null,                     "water": "Offshore",                 "season": "Jul–Nov" },
+    { "name": "Albacore",           "alias": "Longfin",                "water": "Far offshore",             "season": "Jul–Oct, variable years" },
+    { "name": "Skipjack Tuna",      "alias": null,                     "water": "Offshore",                 "season": "Jul–Oct" },
+    { "name": "Dorado",             "alias": "Mahi Mahi / Dolphinfish", "water": "Offshore kelp paddies",   "season": "Jul–Oct, warm-water years" },
+    { "name": "Striped Marlin",     "alias": null,                     "water": "Offshore",                 "season": "Aug–Oct" },
+    { "name": "Swordfish",          "alias": "Broadbill",              "water": "Deep offshore",            "season": "Aug–Nov, deep-drop" },
+    { "name": "Shortfin Mako",      "alias": "Mako Shark",             "water": "Offshore",                 "season": "Jun–Sep" },
+    { "name": "Thresher Shark",     "alias": null,                     "water": "Nearshore pelagic",        "season": "Apr–Aug" },
+    { "name": "Blue Shark",         "alias": null,                     "water": "Offshore",                 "season": "Jun–Sep" },
+    { "name": "White Croaker",      "alias": "Tomcod",                 "water": "Surf / bays",              "season": "Year-round" },
+    { "name": "Sargo",              "alias": null,                     "water": "Bays / jetties",           "season": "Year-round" },
+    { "name": "Opaleye",            "alias": null,                     "water": "Shallow reef",             "season": "Year-round" },
+    { "name": "Halfmoon",           "alias": "Blue Perch",             "water": "Kelp",                     "season": "Year-round" }
+  ],
+
+  "marineSources": [
+    { "label": "NWS San Diego coastal waters", "url": "https://www.ndbc.noaa.gov/data/Forecasts/FZUS56.KSGX.html" },
+    { "label": "NWS Los Angeles coastal waters", "url": "https://www.ndbc.noaa.gov/data/Forecasts/FZUS56.KLOX.html" },
+    { "label": "NDBC 46222 San Pedro", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46222" },
+    { "label": "NDBC 46256 Long Beach Channel", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46256" },
+    { "label": "NDBC 46224 Oceanside Offshore", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46224" },
+    { "label": "NOAA Tides & Currents", "url": "https://tidesandcurrents.noaa.gov/" }
+  ],
+
+  "dataLimits": "Exact catch locations, harbor entrance conditions, route-specific visibility, current, water temperature, unreported captains and individual fish weights were unavailable in the source reports and have not been inferred. Landing counts are party-boat dock totals, not private-boat results, and multi-day trips inflate kept-per-angler on the day they land."
+}
