@@ -149,13 +149,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   border-bottom: 3px solid var(--accent);
 }
 .masthead-inner {
-  max-width: 1240px; margin: 0 auto; padding: 26px 20px 22px;
+  max-width: 1240px; margin: 0 auto; padding: 18px 20px 16px;
   display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;
   justify-content: space-between;
 }
 .brand { display: flex; flex-direction: column; gap: 6px; min-width: 280px; }
 .brand h1 {
-  margin: 0; font-size: clamp(26px, 4vw, 40px); line-height: 1.02;
+  margin: 0; font-size: clamp(23px, 3.2vw, 32px); line-height: 1.04;
   font-weight: 800; letter-spacing: -.02em; text-transform: uppercase;
   text-wrap: balance;
 }
@@ -189,7 +189,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(122px, 1fr));
 }
 .cond {
-  padding: 13px 14px 13px 0; border-right: 1px solid var(--rule);
+  padding: 10px 12px 10px 0; border-right: 1px solid var(--rule);
   display: flex; flex-direction: column; gap: 2px;
 }
 .cond:last-child { border-right: 0; }
@@ -205,10 +205,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .cond.absent .v { color: var(--ink-mute); font-size: 13px; font-weight: 500; letter-spacing: .04em; }
 
 /* ---------- generic section ---------- */
-section { margin-top: 34px; }
+section { margin-top: 20px; }
 .sec-head {
-  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
-  margin-bottom: 14px; padding-bottom: 9px; border-bottom: 1px solid var(--rule-strong);
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid var(--rule-strong);
 }
 .sec-head h2 {
   margin: 0; font-size: 13px; font-weight: 750; letter-spacing: .13em;
@@ -235,8 +235,8 @@ section { margin-top: 34px; }
 
 /* ---------- verdict + kpi ---------- */
 .verdict-grid {
-  display: grid; grid-template-columns: minmax(280px, 340px) 1fr;
-  gap: 18px; align-items: stretch;
+  display: grid; grid-template-columns: minmax(260px, 310px) 1fr;
+  gap: 12px; align-items: stretch;
 }
 @media (max-width: 860px) { .verdict-grid { grid-template-columns: 1fr; } }
 
@@ -244,7 +244,7 @@ section { margin-top: 34px; }
   background: var(--surface); border: 1px solid var(--rule);
   border-radius: 5px; box-shadow: var(--shadow); min-width: 0;
 }
-.verdict { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.verdict { padding: 15px 16px; display: flex; flex-direction: column; gap: 9px; }
 .verdict .eyebrow {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: .15em;
   text-transform: uppercase; color: var(--ink-mute);
@@ -252,13 +252,26 @@ section { margin-top: 34px; }
 .gauge-row { display: flex; align-items: center; gap: 16px; }
 .gauge { flex: none; }
 .gauge-read { display: flex; flex-direction: column; gap: 1px; }
-.gauge-read .score { font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+.gauge-read .score { font-size: 33px; font-weight: 800; line-height: 1; letter-spacing: -.03em; }
 .gauge-read .score sup { font-size: 15px; font-weight: 500; color: var(--ink-mute); letter-spacing: 0; }
 .gauge-read .band {
   font-size: 13px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase;
   display: flex; align-items: center; gap: 6px;
 }
-.verdict .headline { font-size: 15px; font-weight: 620; margin: 0; }
+.verdict .headline { font-size: 14px; font-weight: 640; margin: 0; }
+.verdict .vs {
+  border-top: 1px solid var(--rule); padding-top: 9px; margin-top: 2px;
+  display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap;
+}
+.verdict .vs span {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--ink-mute);
+}
+.verdict .vs b { font-family: var(--font-sans); font-size: 13px; font-weight: 700; letter-spacing: 0; }
+.read-strip {
+  margin: 12px 0 0; font-size: 13px; color: var(--ink-soft); max-width: 118ch;
+  padding-left: 11px; border-left: 3px solid var(--rule-strong);
+}
 
 /* The briefing sits below the summary band so the KPI tiles stay short. */
 .briefing {
@@ -280,14 +293,14 @@ section { margin-top: 34px; }
 .verdict-facts .v { font-size: 13.5px; font-weight: 600; }
 
 .kpi-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px;
 }
-.kpi { padding: 18px 20px; display: flex; flex-direction: column; gap: 3px; justify-content: center; }
+.kpi { padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; justify-content: center; }
 .kpi .k {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: .13em;
   text-transform: uppercase; color: var(--ink-mute);
 }
-.kpi .v { font-size: 34px; font-weight: 780; line-height: 1.08; letter-spacing: -.025em; }
+.kpi .v { font-size: 28px; font-weight: 780; line-height: 1.08; letter-spacing: -.025em; }
 .kpi .n { font-size: 12px; color: var(--ink-soft); }
 
 /* ---------- freshness chip ---------- */
@@ -398,38 +411,72 @@ section { margin-top: 34px; }
 .panel.on { display: block; }
 .panel > section:first-child { margin-top: 26px; }
 
-/* ---------- species tiles — the fish lead ---------- */
+/* ---------- species tiles — the fish lead ----------
+   Sized so the whole target list sits in two rows at desk width: one glance,
+   not a scroll. */
 .species-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(206px, 1fr)); gap: 14px;
+  display: grid; gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(min(186px, 100%), 1fr));
 }
 .sp {
-  padding: 12px 15px 13px; display: flex; flex-direction: column; gap: 4px;
+  padding: 9px 11px 10px; display: flex; flex-direction: column; gap: 2px;
   border-top: 3px solid var(--rule-strong); min-width: 0;
 }
 .sp.counted { border-top-color: var(--series-1); }
-.sp .name { font-size: 15px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
-.sp .alias { font-size: 11.5px; color: var(--ink-mute); }
-svg.fish, img.fish { display: block; width: 100%; height: 82px; margin: 2px 0 4px; }
+.sp .name { font-size: 13px; font-weight: 700; letter-spacing: -.01em; line-height: 1.18; }
+.sp .alias { font-size: 10px; color: var(--ink-mute); line-height: 1.25; }
+svg.fish, img.fish { display: block; width: 100%; height: 68px; margin: 4px 0 2px; }
 img.fish { object-fit: contain; }
 /* No verified count is stated in words and shown in form: the fish goes flat. */
 .sp.uncounted svg.fish, .sp.uncounted img.fish { filter: saturate(.12) opacity(.5); }
-.sp .credit {
-  font-size: 9.5px; color: var(--ink-mute); line-height: 1.3; margin-top: -2px;
-}
+.sp .credit { font-size: 9px; color: var(--ink-mute); line-height: 1.25; }
 .sp .credit a { color: inherit; }
-.sp .count { font-size: 38px; font-weight: 780; line-height: 1; letter-spacing: -.03em; }
+.sp .count { font-size: 27px; font-weight: 780; line-height: 1.05; letter-spacing: -.03em; }
 .sp .count small {
-  font-size: 12px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; margin-left: 5px;
+  font-size: 10px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; margin-left: 4px;
 }
 .sp .nocount {
-  font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .07em;
-  text-transform: uppercase; color: var(--ink-mute); padding: 8px 0 7px; line-height: 1.35;
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink-mute); padding: 6px 0 5px; line-height: 1.3;
 }
-.sp .meta { font-size: 11.5px; color: var(--ink-soft); margin-top: auto; padding-top: 5px; }
+.sp .meta { font-size: 10.5px; color: var(--ink-soft); margin-top: auto; padding-top: 4px; line-height: 1.35; }
 .sp .water {
-  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .12em;
+  font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .11em;
   text-transform: uppercase; color: var(--ink-mute);
 }
+
+/* ---------- the board's bottom band: totals | trend | links ---------- */
+.bottom-row {
+  display: grid; gap: 16px; align-items: start;
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, 1.46fr) minmax(0, 0.75fr);
+}
+@media (max-width: 1180px) { .bottom-row { grid-template-columns: minmax(0, 1fr); } }
+.table-scroll.compact table { min-width: 0; font-size: 12px; }
+.table-scroll.compact thead th { font-size: 8.5px; padding: 0 7px 7px 0; white-space: nowrap; }
+.table-scroll.compact tbody td { padding: 8px 7px 8px 0; white-space: nowrap; }
+.table-scroll.compact tbody td:first-child { white-space: normal; }
+.table-scroll.compact .port-sub { font-size: 10px; }
+.table-scroll.compact tfoot td { font-size: 12px; padding: 9px 7px 0 0; white-space: nowrap; }
+.chip.tiny { padding: 1px 5px; font-size: 9px; letter-spacing: .06em; }
+.chip.tiny .dot { width: 5px; height: 5px; }
+
+/* Landing links become a rail, not a card grid — nine of them fit the column. */
+.src-rail {
+  display: flex; flex-direction: column; gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 5px; overflow: hidden;
+}
+.src-rail a {
+  background: var(--surface); padding: 7px 11px; text-decoration: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  transition: background .14s;
+}
+.src-rail a:hover { background: var(--surface-2); }
+.src-rail .n { font-size: 12px; font-weight: 640; line-height: 1.2; }
+.src-rail .p {
+  font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-mute); display: block;
+}
+.src-rail .age { font-family: var(--font-mono); font-size: 9px; color: var(--ink-mute); white-space: nowrap; }
 /* minmax(0,…) + min-width:0 so the 620px-floor data table scrolls inside its
    own wrapper instead of forcing the track — and the page — wider */
 .two-col {
@@ -590,6 +637,7 @@ footer p { margin: 0 0 16px; max-width: 96ch; }
         <div class="card verdict" id="verdict"></div>
         <div class="kpi-grid" id="kpis"></div>
       </div>
+      <p class="read-strip" id="read-strip"></p>
     </section>
 
     <section>
@@ -604,47 +652,39 @@ footer p { margin: 0 0 16px; max-width: 96ch; }
       </details>
     </section>
 
-    <section>
-      <div class="sec-head">
-        <h2>The read</h2>
-        <span class="sub">Where the number comes from, and what it is worth.</span>
-      </div>
-      <div class="card briefing" id="briefing"></div>
-    </section>
-
-    <section>
-      <div class="sec-head">
-        <h2>Landing dock totals</h2>
-        <span class="sub">Every trip that came back that day, rolled into one line. Report dates differ — read the age chip on every row.</span>
-      </div>
-      <div class="card" style="padding:18px 20px">
-        <div class="table-scroll"><table id="ports"></table></div>
-      </div>
-    </section>
-
-    <section>
-      <div class="sec-head">
-        <h2>Landing reports</h2>
-        <span class="sub">Straight to each landing's own count page.</span>
-      </div>
-      <div class="src-grid" id="sources"></div>
-    </section>
-
-    <section>
-      <div class="sec-head">
-        <h2>Archive trend</h2>
-        <span class="sub" id="trend-sub"></span>
-      </div>
-      <div class="card chart-card">
-        <div class="chart-head">
-          <h3>Kept fish per angler, by landing</h3>
-          <span class="axis-note" id="axis-note"></span>
+    <section class="bottom-row">
+      <div>
+        <div class="sec-head">
+          <h2>Dock totals</h2>
         </div>
-        <div class="legend" id="legend"></div>
-        <div class="chart-holder">
-          <svg class="chart" id="trend" viewBox="0 0 900 340" role="img" aria-label="Kept fish per angler by landing, August 2 to August 6, 2026"></svg>
-          <div class="tip" id="tip"></div>
+        <div class="card" style="padding:14px 16px">
+          <div class="table-scroll compact"><table id="ports"></table></div>
         </div>
+      </div>
+
+      <div>
+        <div class="sec-head">
+          <h2>Archive trend</h2>
+          <span class="sub" id="trend-sub"></span>
+        </div>
+        <div class="card chart-card" style="padding:14px 16px 12px">
+          <div class="chart-head">
+            <h3>Kept fish per angler, by landing</h3>
+          </div>
+          <div class="legend" id="legend"></div>
+          <div class="chart-holder">
+            <svg class="chart" id="trend" viewBox="0 0 620 300" role="img" aria-label="Kept fish per angler by landing, August 2 to August 6, 2026"></svg>
+            <div class="tip" id="tip"></div>
+          </div>
+          <div class="axis-note" id="axis-note" style="margin-top:6px;display:block"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-head">
+          <h2>Landings</h2>
+        </div>
+        <div class="src-rail" id="sources"></div>
       </div>
     </section>
   </div>
@@ -1267,6 +1307,10 @@ window.FISH = (function () {
   function chip(f) {
     return '<span class="chip ' + f.cls + '"><span class="dot"></span>' + f.label + "</span>";
   }
+  function chipTiny(f) {
+    return '<span class="chip tiny ' + f.cls + '" title="' + f.label + '"><span class="dot"></span>' +
+      (f.n <= 0 ? "today" : f.n + "d") + "</span>";
+  }
 
   /* ---- masthead ---- */
   document.getElementById("corridor").textContent = D.meta.subtitle;
@@ -1352,7 +1396,7 @@ window.FISH = (function () {
   document.getElementById("verdict").innerHTML =
     '<span class="eyebrow">Fleet bite — kept per angler</span>' +
     '<div class="gauge-row">' +
-      '<svg class="gauge" width="176" height="100" viewBox="0 0 180 100" role="img" aria-label="' +
+      '<svg class="gauge" width="140" height="79" viewBox="0 0 180 100" role="img" aria-label="' +
         fpa.toFixed(2) + ' kept fish per angler, ' + esc(band.label) + '">' +
         '<path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="' + cssVar("--grid") + '" stroke-width="14" stroke-linecap="round"/>' +
         '<path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="' + vFill + '" stroke-width="14" stroke-linecap="round" ' +
@@ -1366,19 +1410,7 @@ window.FISH = (function () {
     "</div>" +
     '<p class="headline">' + esc(v.headline) + "</p>";
 
-  var arrow = delta >= 0 ? "▲" : "▼";
-  document.getElementById("briefing").innerHTML =
-    '<div><div class="col-k">Read</div><p class="detail">' + esc(v.detail) + "</p></div>" +
-    '<div><div class="col-k">Against the archive</div><div class="verdict-facts">' +
-      '<div><span class="k">Archive baseline</span><span class="v">' + baseline.toFixed(2) +
-        " fish/angler</span></div>" +
-      '<div><span class="k">Today vs baseline</span><span class="v" style="color:' +
-        (delta >= 0 ? cssVar("--good-ink") : cssVar("--serious-ink")) + '">' + arrow + " " +
-        Math.abs(delta).toFixed(2) + "</span></div>" +
-      '<div><span class="k">Baseline drawn from</span><span class="v">' + singleDay.length +
-        " single-day reports</span></div>" +
-    "</div></div>" +
-    '<div><div class="col-k">Kept per angler, by report</div>' + sparkline() + "</div>";
+  document.getElementById("read-strip").textContent = v.detail;
 
   /* Sparkline of the corridor's kept-per-angler, one point per report date. */
   function sparkline() {
@@ -1428,11 +1460,16 @@ window.FISH = (function () {
     { k: "Boats in fleet", v: allBoats, n: "across " + rosterLandings + " landings" },
     { k: "Landings reporting", v: L.length, n: "of " + (L.length + D.pendingLandings.length) + " in the corridor" },
     { k: "Anglers", v: totAnglers.toLocaleString(), n: "across latest reports" },
-    { k: "Fish kept", v: totKept.toLocaleString(), n: "released: " + totRel.toLocaleString() + " (" + relLandings.length + " landings report it)" },
+    { k: "Fish kept", v: totKept.toLocaleString(), n: totRel.toLocaleString() + " released (" + relLandings.length + " landings)" },
+    { k: "vs baseline", v: (delta >= 0 ? "▲" : "▼") + Math.abs(delta).toFixed(2),
+      n: "archive runs " + baseline.toFixed(2) + " over " + singleDay.length + " reports",
+      color: delta >= 0 ? "--good-ink" : "--serious-ink" },
     { k: "Oldest report", v: oldest + "d", n: "spread spans " + oldest + " days" }
   ].forEach(function (r) {
     var c = el("div", "card kpi");
-    c.innerHTML = '<span class="k">' + esc(r.k) + '</span><span class="v">' + esc(r.v) + '</span><span class="n">' + esc(r.n) + "</span>";
+    c.innerHTML = '<span class="k">' + esc(r.k) + '</span><span class="v"' +
+      (r.color ? ' style="color:' + cssVar(r.color) + '"' : "") + ">" + esc(r.v) +
+      '</span><span class="n">' + esc(r.n) + "</span>";
     kg.appendChild(c);
   });
 
@@ -1519,9 +1556,9 @@ window.FISH = (function () {
   var ports = document.getElementById("ports");
   var rows = L.slice().sort(function (a, b) { return b.latest.adjScore - a.latest.adjScore; });
   ports.innerHTML =
-    "<thead><tr><th>Landing</th><th>Report date</th><th>Freshness</th>" +
-    '<th class="num">Anglers</th><th class="num">Kept</th><th class="num">Released</th>' +
-    '<th class="num">Kept / 100</th><th class="num">Adj. score</th></tr></thead><tbody>' +
+    "<thead><tr><th>Landing</th><th>Date</th><th>Age</th>" +
+    '<th class="num">Anglers</th><th class="num">Kept</th>' +
+    '<th class="num">Kept / 100</th></tr></thead><tbody>' +
     rows.map(function (x, i) {
       var slot = cssVar(SERIES[L.indexOf(x) % SERIES.length]);
       var f = freshness(x.latest.date);
@@ -1529,23 +1566,21 @@ window.FISH = (function () {
         '<td><span class="landing-name"><span class="swatch" style="background:' + slot + '"></span>' + esc(x.name) + "</span>" +
         '<span class="port-sub">' + esc(x.port) + "</span></td>" +
         '<td class="num" style="text-align:left">' + fmtShort(x.latest.date) + "</td>" +
-        "<td>" + chip(f) + "</td>" +
+        "<td>" + chipTiny(f) + "</td>" +
         '<td class="num">' + x.latest.anglers + "</td>" +
         '<td class="num">' + x.latest.kept + "</td>" +
-        '<td class="num">' + (x.latest.released == null ? '<span style="color:var(--ink-mute)">—</span>' : x.latest.released) + "</td>" +
         '<td class="num">' + Math.round((x.latest.kept / x.latest.anglers) * 100) + "</td>" +
-        '<td class="num">' + x.latest.adjScore.toFixed(2) + "</td>" +
         "</tr>";
     }).join("") +
     "</tbody><tfoot><tr><td>Composite</td><td></td><td></td>" +
-    '<td class="num">' + totAnglers + '</td><td class="num">' + totKept + '</td>' +
-    '<td class="num">' + totRel + '</td><td class="num">' + per100 + '</td><td class="num">—</td></tr></tfoot>';
+    '<td class="num">' + totAnglers + '</td><td class="num">' + totKept +
+    '</td><td class="num">' + per100 + "</td></tr></tfoot>";
 
   /* ---- trend chart ---- */
   document.getElementById("trend-sub").textContent = D.meta.trendStatus;
 
   var dates = D.meta.archiveDates;
-  var W = 900, H = 340, m = { t: 34, r: 146, b: 42, l: 46 };
+  var W = 620, H = 300, m = { t: 30, r: 96, b: 34, l: 32 };
   var pw = W - m.l - m.r, ph = H - m.t - m.b;
 
   var isMultiDay = function (f) { return !!f && /multi-day/i.test(f); };
@@ -1586,11 +1621,11 @@ window.FISH = (function () {
   ticks.forEach(function (t) {
     g += '<line x1="' + m.l + '" y1="' + Y(t) + '" x2="' + (m.l + pw) + '" y2="' + Y(t) +
       '" stroke="' + cssVar(t === 0 ? "--baseline" : "--grid") + '" stroke-width="1"/>';
-    g += '<text x="' + (m.l - 9) + '" y="' + (Y(t) + 4) + '" text-anchor="end" font-size="11" ' +
+    g += '<text x="' + (m.l - 7) + '" y="' + (Y(t) + 4) + '" text-anchor="end" font-size="13" ' +
       'font-family="ui-monospace, monospace" fill="' + cssVar("--ink-mute") + '">' + t + "</text>";
   });
   dates.forEach(function (d, i) {
-    g += '<text x="' + X(i) + '" y="' + (m.t + ph + 22) + '" text-anchor="middle" font-size="11.5" ' +
+    g += '<text x="' + X(i) + '" y="' + (m.t + ph + 21) + '" text-anchor="middle" font-size="13" ' +
       'font-family="ui-monospace, monospace" fill="' + cssVar("--ink-mute") + '">' + fmtShort(d) + "</text>";
   });
 
@@ -1619,9 +1654,8 @@ window.FISH = (function () {
       g += '<path d="M ' + x + " " + (breakY - 15) + " L " + (x + 7) + " " + (breakY - 3) +
         " L " + (x - 7) + " " + (breakY - 3) + ' Z" fill="' + cssVar("--surface") +
         '" stroke="' + s.color + '" stroke-width="2" stroke-linejoin="round"/>';
-      g += '<text x="' + (x + 12) + '" y="' + (breakY - 4) + '" font-size="11" fill="' +
-        cssVar("--ink-soft") + '">' + p.v.toFixed(1) + " · " + esc(s.name.split(" ")[0]) +
-        ", " + esc(p.flag) + " (off scale)</text>";
+      g += '<text x="' + (x + 10) + '" y="' + (breakY - 4) + '" font-size="12" fill="' +
+        cssVar("--ink-soft") + '">' + p.v.toFixed(1) + " · " + esc(p.flag) + ", off scale</text>";
     });
   });
 
@@ -1631,19 +1665,19 @@ window.FISH = (function () {
   var labels = series.map(function (s) {
     var last = s.line[s.line.length - 1];
     return last ? {
-      x: X(last.di) + 12, y: Y(last.v) + 4,
-      text: s.name.replace(" Sportfishing", "").replace(" Sea Center", "")
+      x: X(last.di) + 9, y: Y(last.v) + 4,
+      text: s.name.replace(/ (Landing|Sportfishing|Sea Center|Locker)$/, "")
     } : null;
   }).filter(Boolean).sort(function (a, b) { return a.y - b.y; });
 
   for (var li = 1; li < labels.length; li++) {
-    if (labels[li].y - labels[li - 1].y < 15) labels[li].y = labels[li - 1].y + 15;
+    if (labels[li].y - labels[li - 1].y < 14) labels[li].y = labels[li - 1].y + 14;
   }
   var spill = labels.length ? labels[labels.length - 1].y - (m.t + ph) : 0;
   if (spill > 0) labels.forEach(function (l) { l.y -= spill; });
 
   labels.forEach(function (l) {
-    g += '<text x="' + l.x.toFixed(1) + '" y="' + l.y.toFixed(1) + '" font-size="11.5" ' +
+    g += '<text x="' + l.x.toFixed(1) + '" y="' + l.y.toFixed(1) + '" font-size="12.5" ' +
       'font-weight="600" fill="' + cssVar("--ink") + '">' + esc(l.text) + "</text>";
   });
 
@@ -1720,12 +1754,12 @@ window.FISH = (function () {
   /* ---- landing sources ---- */
   var sg2 = document.getElementById("sources");
   L.concat(D.pendingLandings).forEach(function (x) {
-    var a = el("a", "card src");
+    var a = el("a");
     a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer";
-    a.innerHTML = '<span class="p">' + esc(x.port) + '</span><span class="n">' + esc(x.name) +
-      "</span><span class='d'>" + (x.latest
-        ? "Last posted " + fmtShort(x.latest.date) + " · " + freshness(x.latest.date).label.toLowerCase()
-        : (x.boats || []).length + " boats · no count in archive") + "</span>";
+    a.innerHTML = '<span><span class="p">' + esc(x.port) + '</span><span class="n">' +
+      esc(x.name) + '</span></span><span class="age">' +
+      (x.latest ? fmtShort(x.latest.date) + " · " + freshness(x.latest.date).n + "d"
+                : (x.boats || []).length + " boats") + "</span>";
     sg2.appendChild(a);
   });
 
