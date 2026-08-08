@@ -11,20 +11,24 @@
   color-scheme: light;
 
   /* --- grounds & ink --- */
-  --ground:      #f2f0e9;
-  --surface:     #fcfbf7;
-  --surface-2:   #eceadf;
-  --masthead:    #0a1620;
-  --masthead-ink:#eef3f6;
-  --ink:         #0d1a24;
-  --ink-soft:    #4d5c66;
-  --ink-mute:    #77858e;
-  --rule:        #dcd8cb;
-  --rule-strong: #c2bdad;
+  --ground:      #cae2f5;
+  --ground-2:    #eaf5fd;
+  --surface:     #ffffff;
+  --surface-2:   #e4f0fb;
+  --panel:       #0e2b4d;
+  --panel-2:     #163d67;
+  --panel-ink:   #ffffff;
+  --panel-soft:  #9dbedb;
+  --masthead-ink:#0c2340;
+  --ink:         #0c2340;
+  --ink-soft:    #3d6288;
+  --ink-mute:    #6c8cab;
+  --rule:        #cfe1f0;
+  --rule-strong: #a5c5e0;
 
   /* --- chrome accent (never a data mark) --- */
-  --accent:      #8a6a1f;
-  --accent-soft: #efe6cd;
+  --accent:      #1663ab;
+  --accent-soft: #d7e8f8;
 
   /* --- status (icon + label always accompany colour) --- */
   --good:     #0ca30c;
@@ -44,10 +48,10 @@
   --series-5: #e87ba4;
 
   /* --- chart chrome --- */
-  --grid:     #e3e0d5;
-  --baseline: #c2bdad;
+  --grid:     #dceaf6;
+  --baseline: #a5c5e0;
 
-  --shadow: 0 1px 2px rgba(13,26,36,.06), 0 4px 16px rgba(13,26,36,.05);
+  --shadow: 0 1px 2px rgba(12,35,64,.07), 0 4px 14px rgba(12,35,64,.07);
 
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
@@ -56,19 +60,23 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --ground:      #0a1620;
-    --surface:     #10202d;
-    --surface-2:   #16293a;
-    --masthead:    #061019;
-    --masthead-ink:#eef3f6;
-    --ink:         #eef3f6;
-    --ink-soft:    #a8bcc9;
-    --ink-mute:    #7d919e;
-    --rule:        #1e3243;
-    --rule-strong: #2b465c;
+    --ground:      #071827;
+    --ground-2:    #0b2440;
+    --surface:     #102c48;
+    --surface-2:   #16375a;
+    --panel:       #16395f;
+    --panel-2:     #1d4a78;
+    --panel-ink:   #eaf3fb;
+    --panel-soft:  #9dc0dd;
+    --masthead-ink:#eaf3fb;
+    --ink:         #eaf3fb;
+    --ink-soft:    #a9c7e2;
+    --ink-mute:    #7794b3;
+    --rule:        #1c3c5d;
+    --rule-strong: #2b5682;
 
-    --accent:      #d9bd83;
-    --accent-soft: #21354a;
+    --accent:      #7fc0f5;
+    --accent-soft: #12314f
 
     --good-ink:     #4fd04f;
     --warning-ink:  #fabf4a;
@@ -81,8 +89,8 @@
     --series-4: #c98500;
     --series-5: #d55181;
 
-    --grid:     #1b2d3d;
-    --baseline: #2b465c;
+    --grid:     #17334f;
+    --baseline: #2b5682;
 
     --shadow: 0 1px 2px rgba(0,0,0,.4), 0 4px 18px rgba(0,0,0,.3);
   }
@@ -90,19 +98,23 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --ground:      #0a1620;
-  --surface:     #10202d;
-  --surface-2:   #16293a;
-  --masthead:    #061019;
-  --masthead-ink:#eef3f6;
-  --ink:         #eef3f6;
-  --ink-soft:    #a8bcc9;
-  --ink-mute:    #7d919e;
-  --rule:        #1e3243;
-  --rule-strong: #2b465c;
+  --ground:      #071827;
+  --ground-2:    #0b2440;
+  --surface:     #102c48;
+  --surface-2:   #16375a;
+  --panel:       #16395f;
+  --panel-2:     #1d4a78;
+  --panel-ink:   #eaf3fb;
+  --panel-soft:  #9dc0dd;
+  --masthead-ink:#eaf3fb;
+  --ink:         #eaf3fb;
+  --ink-soft:    #a9c7e2;
+  --ink-mute:    #7794b3;
+  --rule:        #1c3c5d;
+  --rule-strong: #2b5682;
 
-  --accent:      #d9bd83;
-  --accent-soft: #21354a;
+  --accent:      #7fc0f5;
+  --accent-soft: #12314f
 
   --good-ink:     #4fd04f;
   --warning-ink:  #fabf4a;
@@ -115,8 +127,8 @@
   --series-4: #c98500;
   --series-5: #d55181;
 
-  --grid:     #1b2d3d;
-  --baseline: #2b465c;
+  --grid:     #17334f;
+  --baseline: #2b5682;
 
   --shadow: 0 1px 2px rgba(0,0,0,.4), 0 4px 18px rgba(0,0,0,.3);
 }
@@ -125,7 +137,12 @@
 
 body {
   margin: 0;
-  background: var(--ground);
+  /* sky grading into water, the way the reference board sits.
+     No background-attachment: fixed — that re-anchors the gradient to the
+     viewport and leaves a visible seam partway down a long page. */
+  background-color: var(--ground);
+  background-image: linear-gradient(180deg, var(--ground-2) 0, var(--ground) 430px);
+  background-repeat: no-repeat;
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 15px;
@@ -144,9 +161,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 
 /* ---------- masthead ---------- */
 .masthead {
-  background: var(--masthead);
+  background: transparent;
   color: var(--masthead-ink);
-  border-bottom: 3px solid var(--accent);
+  border-bottom: 1px solid var(--rule-strong);
 }
 .masthead-inner {
   max-width: 1240px; margin: 0 auto; padding: 18px 20px 16px;
@@ -159,10 +176,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   font-weight: 800; letter-spacing: -.02em; text-transform: uppercase;
   text-wrap: balance;
 }
-.brand h1 span { display: block; font-weight: 300; color: #9fb3c0; }
+.brand h1 span { display: block; font-weight: 300; color: var(--ink-soft); }
 .brand .corridor {
   font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em;
-  text-transform: uppercase; color: #8fa6b4; margin-top: 4px;
+  text-transform: uppercase; color: var(--ink-soft); margin-top: 4px;
 }
 .stamp {
   display: inline-flex; align-items: center; gap: 7px; align-self: flex-start;
@@ -175,14 +192,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .mm { display: flex; flex-direction: column; gap: 2px; }
 .mm .k {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
-  text-transform: uppercase; color: #8fa6b4;
+  text-transform: uppercase; color: var(--ink-mute);
 }
 .mm .v { font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
-.mm .v small { display:block; font-weight: 400; font-size: 12px; color:#9fb3c0; }
+.mm .v small { display:block; font-weight: 400; font-size: 12px; color: var(--ink-soft); }
 
 /* ---------- conditions rail ---------- */
 .rail {
-  background: var(--surface); border-bottom: 1px solid var(--rule);
+  background: transparent; border-bottom: 1px solid var(--rule-strong);
 }
 .rail-inner {
   max-width: 1240px; margin: 0 auto; padding: 0 20px;
@@ -207,12 +224,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* ---------- generic section ---------- */
 section { margin-top: 20px; }
 .sec-head {
-  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
-  margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid var(--rule-strong);
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;
 }
 .sec-head h2 {
-  margin: 0; font-size: 13px; font-weight: 750; letter-spacing: .13em;
-  text-transform: uppercase;
+  margin: 0; font-size: 11px; font-weight: 750; letter-spacing: .13em;
+  text-transform: uppercase; background: var(--panel); color: var(--panel-ink);
+  padding: 6px 13px; border-radius: 4px;
 }
 .sec-head .sub { font-size: 12.5px; color: var(--ink-soft); }
 
@@ -244,7 +261,11 @@ section { margin-top: 20px; }
   background: var(--surface); border: 1px solid var(--rule);
   border-radius: 5px; box-shadow: var(--shadow); min-width: 0;
 }
-.verdict { padding: 15px 16px; display: flex; flex-direction: column; gap: 9px; }
+.verdict {
+  padding: 15px 16px; display: flex; flex-direction: column; gap: 9px;
+  background: var(--panel); border-color: var(--panel); color: var(--panel-ink);
+}
+.verdict .eyebrow, .verdict .gauge-read .score sup { color: var(--panel-soft); }
 .verdict .eyebrow {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: .15em;
   text-transform: uppercase; color: var(--ink-mute);
@@ -295,7 +316,11 @@ section { margin-top: 20px; }
 .kpi-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px;
 }
-.kpi { padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; justify-content: center; }
+.kpi {
+  padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; justify-content: center;
+  background: var(--panel); border-color: var(--panel); color: var(--panel-ink);
+}
+.kpi .k, .kpi .n { color: var(--panel-soft); }
 .kpi .k {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: .13em;
   text-transform: uppercase; color: var(--ink-mute);
@@ -420,7 +445,8 @@ section { margin-top: 20px; }
 }
 .sp {
   padding: 9px 11px 10px; display: flex; flex-direction: column; gap: 2px;
-  border-top: 3px solid var(--rule-strong); min-width: 0;
+  border: 1px solid var(--rule); border-top: 3px solid var(--rule-strong);
+  background: var(--surface-2); min-width: 0;
 }
 .sp.counted { border-top-color: var(--series-1); }
 .sp .name { font-size: 13px; font-weight: 700; letter-spacing: -.01em; line-height: 1.18; }
