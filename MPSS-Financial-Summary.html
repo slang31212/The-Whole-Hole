@@ -1,0 +1,377 @@
+<title>MILC — The Investment Case · Standardized Floating Offshore Infrastructure</title>
+<style>
+  :root{
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --paper:#eef1f3;--card:#fff;--text:#17242e;--muted:#5a6975;--heading:#12293b;--ink:#12293b;
+    --line:#c9d2d8;--line-soft:#e0e6ea;--amber:#c1651b;--amber-ink:#a8551a;--sea:#0e2130;--wash:#f4f6f7;--good:#2f7d55;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --paper:#0c161e;--card:#13232e;--text:#dce6ec;--muted:#93a6b2;--heading:#dbe8f0;--ink:#cfe0ec;
+    --line:#294050;--line-soft:#1d3340;--amber:#e08a3c;--amber-ink:#e79a52;--sea:#081119;--wash:#0f1e28;--good:#5cbd86;}}
+  :root[data-theme="light"]{--paper:#eef1f3;--card:#fff;--text:#17242e;--muted:#5a6975;--heading:#12293b;--ink:#12293b;--line:#c9d2d8;--line-soft:#e0e6ea;--amber:#c1651b;--amber-ink:#a8551a;--sea:#0e2130;--wash:#f4f6f7;--good:#2f7d55;}
+  :root[data-theme="dark"]{--paper:#0c161e;--card:#13232e;--text:#dce6ec;--muted:#93a6b2;--heading:#dbe8f0;--ink:#cfe0ec;--line:#294050;--line-soft:#1d3340;--amber:#e08a3c;--amber-ink:#e79a52;--sea:#081119;--wash:#0f1e28;--good:#5cbd86;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--text);font-family:var(--serif);font-size:16px;line-height:1.62}
+  .doc{max-width:840px;margin:0 auto;padding:0 24px 70px}
+  h1,h2,h3,h4,.eyebrow,th,.n,.tag,.label,.kpi,.chart,.step{font-family:var(--sans)}
+  .cover{background:radial-gradient(120% 100% at 82% -10%,rgba(193,101,27,.17),transparent 55%),linear-gradient(172deg,var(--sea),#123047 92%);color:#eaf1f5;border-radius:13px;margin:22px 0 20px;padding:40px 36px 32px;position:relative;overflow:hidden}
+  .cover::after{content:"";position:absolute;left:0;right:0;bottom:22px;height:2px;background:linear-gradient(90deg,transparent,var(--amber) 12%,var(--amber) 88%,transparent)}
+  .eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.7rem;font-weight:700;color:#e9a765}
+  .cover h1{font-family:var(--sans);font-size:2rem;line-height:1.06;margin:.4rem 0 .4rem;font-weight:800;color:#fff;letter-spacing:-.02em;text-wrap:balance}
+  .cover .thesis{color:#f4c48a;font-family:var(--sans);font-size:1.05rem;font-weight:700;margin:.2rem 0 .1rem}
+  .cover p{color:#c2d4df;margin:.5rem 0 0;font-size:1.02rem;max-width:64ch}
+  .cover .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .cover .tag{font-size:.72rem;color:#dfeaf0;border:1px solid rgba(233,167,101,.5);border-radius:999px;padding:4px 11px}
+  h2{font-size:1.32rem;color:var(--heading);margin:0 0 .1rem;letter-spacing:-.01em;text-wrap:balance}
+  h3{font-family:var(--sans);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--amber-ink);margin:1.4rem 0 .4rem;font-weight:700}
+  p{margin:.55rem 0}
+  strong{color:var(--heading)}
+  .section{margin:26px 0 0;padding-top:18px}
+  .sechead{display:flex;align-items:baseline;gap:14px;border-top:2px solid var(--ink);padding-top:11px;margin-bottom:8px}
+  .secnum{font-family:var(--sans);font-size:1.5rem;font-weight:800;color:var(--amber);line-height:.9;font-variant-numeric:tabular-nums;min-width:1.4em}
+  .lede{font-size:1.07rem}
+  .pull{font-family:var(--sans);font-size:1.15rem;font-weight:700;color:var(--heading);border-left:3px solid var(--amber);padding:2px 0 2px 16px;margin:14px 0}
+
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+  .kpi{background:var(--card);border:1px solid var(--line-soft);border-radius:11px;padding:15px 17px}
+  .kpi .n{font-size:1.4rem;font-weight:800;color:var(--heading);font-variant-numeric:tabular-nums;letter-spacing:-.01em;line-height:1.05}
+  .kpi .l{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:5px}
+  .kpi .s{font-size:.76rem;color:var(--amber-ink);margin-top:3px;font-weight:600}
+
+  .askbox{background:var(--ink);color:#eef4f8;border-radius:12px;padding:20px 24px;margin:16px 0;display:flex;flex-wrap:wrap;gap:14px 30px;align-items:center}
+  .askbox .big{font-family:var(--sans);font-size:1.8rem;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;line-height:1}
+  .askbox .big span{color:#f4c48a}
+  .askbox .t{flex:1;min-width:240px}
+  .askbox .t .lab{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-size:.68rem;color:#e9a765;font-weight:700}
+  .askbox .t p{margin:.25rem 0 0;color:#cfe0ea;font-size:.95rem}
+
+  .tablewrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line-soft);border-radius:10px}
+  table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.85rem;background:var(--card)}
+  th{background:var(--ink);color:#eaf1f5;text-align:left;padding:9px 13px;font-size:.72rem;text-transform:uppercase;letter-spacing:.03em}
+  th.n,td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  td{padding:9px 13px;border-top:1px solid var(--line-soft);vertical-align:top}
+  td.n{color:var(--heading);font-weight:600}
+  tbody tr:nth-child(even) td{background:var(--wash)}
+  tfoot td{border-top:2px solid var(--line);font-weight:800;color:var(--heading);background:var(--wash)}
+  .hl td{background:rgba(193,101,27,.10) !important}
+  .pos{color:var(--good);font-weight:700}
+
+  .note{background:var(--wash);border:1px solid var(--line-soft);border-left:3px solid var(--amber);border-radius:0 9px 9px 0;padding:13px 17px;margin:12px 0;font-size:.95rem}
+  ul.clean{margin:.4rem 0;padding-left:1.15rem}
+  ul.clean li{margin:.3rem 0}
+  ul.clean li::marker{color:var(--amber)}
+  .foot{font-size:.8rem;color:var(--muted);margin-top:8px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .panel{background:var(--card);border:1px solid var(--line-soft);border-radius:11px;padding:15px 18px}
+  .panel h4{font-family:var(--sans);margin:0 0 .4rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--amber-ink)}
+
+  .lifecycle{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0;font-family:var(--sans)}
+  .step{background:var(--card);border:1px solid var(--line-soft);border-radius:8px;padding:8px 13px;font-size:.82rem;font-weight:700;color:var(--heading)}
+  .step.loop{background:var(--ink);color:#f4c48a;border-color:var(--ink)}
+  .arrow{color:var(--amber);font-weight:800}
+
+  .chart{background:var(--card);border:1px solid var(--line-soft);border-radius:11px;padding:18px 20px 12px;margin:14px 0}
+  .chart .cap{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:14px}
+  .bars{display:flex;align-items:flex-end;gap:16px;height:200px;border-bottom:1.5px solid var(--line)}
+  .bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+  .bar .val{font-size:.8rem;font-weight:800;color:var(--heading);font-variant-numeric:tabular-nums;margin-bottom:5px}
+  .bar .fill{width:100%;max-width:70px;background:linear-gradient(180deg,var(--amber),var(--amber-ink));border-radius:5px 5px 0 0}
+  .bar.ghost .fill{background:repeating-linear-gradient(135deg,var(--line-soft),var(--line-soft) 5px,transparent 5px,transparent 10px);border:1px solid var(--line)}
+  .bar.ghost .val{color:var(--muted)}
+  .xlab{display:flex;gap:16px;margin-top:8px}
+  .xlab div{flex:1;text-align:center;font-size:.73rem;color:var(--muted)}
+  .xlab div b{display:block;color:var(--text);font-size:.78rem}
+
+  .toggle{position:fixed;top:12px;right:12px;font-family:var(--sans);font-size:.72rem;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;z-index:5}
+  @media print{
+    :root,:root[data-theme="dark"]{--paper:#fff;--card:#fff;--text:#111;--muted:#444;--heading:#0e2130;--ink:#0e2130;--line:#999;--line-soft:#ccc;--amber:#9a4e12;--amber-ink:#8a460f;--sea:#0e2130;--wash:#f3f4f5;--good:#2f7d55;}
+    @page{margin:15mm}
+    body{background:#fff;font-size:10.4pt}
+    .toggle{display:none}
+    .cover,.askbox,th,.kpi .n,.bar .fill,.step.loop{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .section{page-break-inside:avoid}
+    .kpis,.askbox,.tablewrap,table,.chart,.note,.cols,.lifecycle{page-break-inside:avoid}
+    tr,td,th{page-break-inside:avoid}
+  }
+  @media (max-width:640px){.kpis{grid-template-columns:1fr 1fr}.cols{grid-template-columns:1fr}.cover h1{font-size:1.6rem}}
+</style>
+<button class="toggle" id="t" aria-label="Toggle theme">◐ Theme</button>
+<div class="doc">
+
+  <header class="cover">
+    <div class="eyebrow">Seaways Engineering · MILC — MPSS Infrastructure Leasing Company</div>
+    <h1>Standardizing floating offshore infrastructure</h1>
+    <div class="thesis">The product is time and capital efficiency. The hull is the mechanism that delivers them.</div>
+    <p>Customers replace hundreds of millions — often billions — of bespoke offshore capital with a standardized hull they lease. MILC owns that infrastructure for decades and captures a fraction of the savings it creates.</p>
+    <div class="tags"><span class="tag">Own the asset · lease the capacity</span><span class="tag">FPSO financing template</span><span class="tag">Confidential — Working Draft</span><span class="tag">11 July 2026</span></div>
+  </header>
+
+  <!-- AT A GLANCE — customer first -->
+  <section class="section" style="border-top:none;padding-top:0">
+    <div class="sechead" style="border-top:none;padding-top:0"><span class="secnum">—</span><div><div class="eyebrow">At a glance</div><h2>The customer wins first</h2></div></div>
+    <p class="lede">Offshore developments have always meant committing enormous capital to a bespoke floating asset, years before first production. MILC breaks that model: the operator <strong>leases</strong> a standardized, proven hull instead of building one — freeing capital, accelerating first production, and shedding long-term asset ownership. <strong>MILC captures only a portion of the value it creates for the customer.</strong></p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="n">$0.7–1.3B+</div><div class="l">Bespoke floater CAPEX avoided</div><div class="s">per development, redeployed elsewhere</div></div>
+      <div class="kpi"><div class="n">Months → years</div><div class="l">Earlier to first production</div><div class="s">standardized vs. bespoke build</div></div>
+      <div class="kpi"><div class="n">Own → lease</div><div class="l">No end-of-life asset</div><div class="s">hull returns to MILC</div></div>
+      <div class="kpi"><div class="n">$200–500k</div><div class="l">Day-rate the customer pays</div><div class="s">10–15-yr firm, dry lease</div></div>
+      <div class="kpi"><div class="n">50–70 yr</div><div class="l">Hull life MILC owns</div><div class="s">re-let 3–5× over its life</div></div>
+      <div class="kpi"><div class="n">~$50M</div><div class="l">MILC first-unit capital</div><div class="s">financed against the anchor lease</div></div>
+    </div>
+    <p class="foot">Comparative CAPEX and timelines reflect public offshore-market observations and comparable floating assets; MILC hull figures are internal estimates pending independent shipyard confirmation. Detail and sources in §6–§9.</p>
+  </section>
+
+  <!-- 1 CUSTOMER VALUE -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">01</span><div><div class="eyebrow">The value created</div><h2>Avoided capital and time — the two things that matter</h2></div></div>
+
+    <h3>Avoided CAPEX</h3>
+    <p>A conventional deepwater production floater — FPSO, production semi, spar or TLP — commits <strong>hundreds of millions to well over a billion dollars</strong> of capital, tied up in a single field for its life. MILC aims to deliver equivalent hull capability from a <strong>standardized asset costing a fraction of that</strong>, provided on a lease. The customer's benefit is not a cheaper hull — it is <strong>not having to commit the capital at all</strong>, and being free to deploy it into drilling, reserves, or other projects that earn far more than a steel platform.</p>
+
+    <h3>Time to first production</h3>
+    <p>Bespoke floaters take years from concept selection through engineering, fabrication and installation. A standardized hull, available when needed, has the potential to compress that schedule substantially.</p>
+    <div class="pull">For a field flowing 150,000–200,000 bbl/day, every month of earlier start-up brings forward roughly $300M+ of gross production. Time creates value. Steel does not.</div>
+    <p class="foot">Illustrative: ~175,000 bbl/day × ~$60/bbl × 30 days ≈ $315M of gross production value per month advanced — a customer-side, order-of-magnitude figure, not MILC revenue, and dependent on field, price and schedule.</p>
+
+    <h3>The full customer proposition</h3>
+    <ul class="clean">
+      <li>Lower upfront capital commitment</li>
+      <li>Earlier production and cash flow</li>
+      <li>Reduced financing burden and balance-sheet exposure</li>
+      <li>Standardized, proven infrastructure — with potential fleet availability</li>
+      <li>Reduced end-of-life ownership and decommissioning liability</li>
+      <li>Capital freed to redeploy where it earns more</li>
+    </ul>
+  </section>
+
+  <!-- 2 WHY LEASING -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">02</span><div><div class="eyebrow">The model</div><h2>Why leasing — customers buy production, not steel</h2></div></div>
+    <p>Owning the physical asset is rarely the point. Airlines don't need to own aircraft; they need seats flying. Operators don't need to own a floater; they need production capacity on station. Leasing lets them pay for the capability and keep their capital working.</p>
+    <p class="pull">MILC owns the infrastructure. Customers buy production.</p>
+    <p>This is not a novel financial experiment — it is the established model of the most capital-intensive industries on earth:</p>
+    <ul class="clean">
+      <li><strong>Aircraft leasing</strong> — roughly half the world's commercial fleet is leased, not owned.</li>
+      <li><strong>FPSO financing</strong> — offshore operators already lease floating production on long-term day-rate charters (the direct precedent for MILC's structure).</li>
+      <li><strong>Rail leasing</strong> — locomotives and rolling stock, owned by lessors, operated by railroads.</li>
+      <li><strong>Commercial shipping</strong> — bareboat and time charters underpin global trade.</li>
+    </ul>
+  </section>
+
+  <!-- 3 EVIDENCE FIRST -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">03</span><div><div class="eyebrow">Before the economics — the evidence</div><h2>A mature engineering concept, independently validated</h2></div></div>
+    <p>This is not a paper design. Over 35 years the MPSS has been examined, tested, priced and class-reviewed by independent authorities. The economics that follow rest on that foundation.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Independent party</th><th>What they did</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Lloyd's Register — Dept. of Safety Technology</strong></td><td>Formal risk analysis (Dr David S. Aldwinckle): "no inherent weaknesses"; design "can be approved for the intended service"; main scantlings approved.</td></tr>
+        <tr><td><strong>University of Glasgow</strong></td><td>9-month model tank-test programme (Professors Faulkner &amp; Incecik) — seaworthiness and motion confirmed.</td></tr>
+        <tr><td><strong>W.S. Atkins Oil &amp; Gas</strong></td><td>Independent structural / hydrodynamic analysis.</td></tr>
+        <tr><td><strong>IMT Offshore Engineering (1995)</strong></td><td>Independent commercial study for an Enterprise Oil field — "technically feasible and commercially viable"; full cost &amp; schedule.</td></tr>
+        <tr><td><strong>International shipyards</strong></td><td>12 yards approached for fabrication pricing; per-tonne quotes obtained.</td></tr>
+        <tr><td><strong>Class &amp; finance history</strong></td><td>ABS / DNV engagement on record; Lloyd's Bank Canada previously prepared to finance MPSS builds (1989).</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 4 WHY NOW -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">04</span><div><div class="eyebrow">Timing</div><h2>Why now</h2></div></div>
+    <p>Demand for large, stable, deployable offshore decks is broadening at exactly the moment the industry is under pressure to cut capital cost and standardize.</p>
+    <div class="cols">
+      <div class="panel"><h4>Demand pull</h4><ul class="clean"><li>Floating offshore wind at industrial scale</li><li>Floating substations &amp; offshore power hubs</li><li>Offshore electrification and hydrogen</li><li>Offshore data centres / AI power demand</li></ul></div>
+      <div class="panel"><h4>Structural pressure</h4><ul class="clean"><li>Pressure to reduce upfront CAPEX</li><li>Push for lower-carbon offshore infrastructure</li><li>Need for standardized, repeatable assets</li><li>Constrained yard slots for bespoke builds</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 5 WHY NOBODY -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">05</span><div><div class="eyebrow">The obvious question</div><h2>Why hasn't this been done already?</h2></div></div>
+    <p>Because today's semi-submersibles were never designed for it. They <strong>evolved from drilling rigs</strong> — bespoke, bracing-heavy structures optimized for a drilling programme, not for repeatable production or serial fabrication. The MPSS was conceived from the outset as a <strong>standardized production platform</strong>, engineered around a different set of priorities:</p>
+    <ul class="clean">
+      <li><strong>Simplicity</strong> — closed flat-panel box-girder construction, no delicate bracing</li>
+      <li><strong>Fabrication efficiency</strong> — ~18 man-hours/tonne vs. 150–180 for a conventional semi</li>
+      <li><strong>Low motion</strong> — natural periods (~24 s heave, ~42 s pitch/roll) outside the swell-resonance band</li>
+      <li><strong>Repeatability</strong> — standardized blocks built for a production run, not a one-off</li>
+      <li><strong>Long service life</strong> — 50–70-year hull, designed to be re-used</li>
+    </ul>
+  </section>
+
+  <!-- 6 LIFECYCLE / BUSINESS -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">06</span><div><div class="eyebrow">The business</div><h2>An infrastructure platform, not a construction company</h2></div></div>
+    <p>MILC is not in the business of selling hulls. It <strong>owns long-life assets and monetizes them repeatedly over decades.</strong> Each hull moves through a lifecycle:</p>
+    <div class="lifecycle">
+      <span class="step">Build</span><span class="arrow">→</span>
+      <span class="step">Lease</span><span class="arrow">→</span>
+      <span class="step">Return</span><span class="arrow">→</span>
+      <span class="step">Refurbish</span><span class="arrow">→</span>
+      <span class="step loop">Re-lease ↺</span>
+    </div>
+    <h3>End-of-life becomes a beginning</h3>
+    <p>Conventional offshore projects end in expensive decommissioning. Under MILC's model the operator <strong>returns the hull</strong> rather than scrapping it; MILC refurbishes and redeploys it where commercially appropriate. Field-specific topsides may or may not carry over — that depends on engineering, remaining life and the next project — but <strong>the hull itself retains value.</strong> The customer sheds a decommissioning liability; MILC keeps a long-life asset.</p>
+  </section>
+
+  <!-- 7 ECONOMICS -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">07</span><div><div class="eyebrow">The economics</div><h2>What the asset earns</h2></div></div>
+    <p>With the concept validated and the model established, the economics follow. Figures below are per hull, at 95% availability, across the target day-rate band.</p>
+
+    <h3>Build cost</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Item</th><th class="n">Figure</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><td>Hull steel</td><td class="n">~$21M</td><td>~10,000 t × ~$2,100/t</td></tr>
+        <tr><td>Outfitting, mooring interface, certification</td><td class="n">~$24M</td><td>balance to delivered</td></tr>
+      </tbody>
+      <tfoot><tr><td>All-in delivered unit (first of class)</td><td class="n">~$45M</td><td>internal estimate</td></tr>
+      <tr><td>Serial-fabrication target (at scale)</td><td class="n">$25–35M</td><td>pending Hanwha Ocean confirmation</td></tr></tfoot>
+    </table></div>
+
+    <h3>Operating lease cash flow per hull</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Line</th><th class="n">Low · $200k/day</th><th class="n">Mid · $350k/day</th><th class="n">High · $500k/day</th></tr></thead>
+      <tbody>
+        <tr><td>Annual lease revenue (95% availability)</td><td class="n">$69.4M</td><td class="n">$121.4M</td><td class="n">$173.4M</td></tr>
+        <tr><td>Lessor holding costs</td><td class="n">($1.0M)</td><td class="n">($0.85M)</td><td class="n">($0.7M)</td></tr>
+      </tbody>
+      <tfoot>
+        <tr class="hl"><td>Operating lease cash flow</td><td class="n">$68.4M</td><td class="n">$120.5M</td><td class="n">$172.7M</td></tr>
+      </tfoot>
+    </table></div>
+    <p class="note"><strong>What these figures are.</strong> Operating lease cash flow = lease revenue less MILC's narrow lessor obligations (hull integrity, class maintenance, insurance); the lessee bears topsides, crew and operations under the dry lease. It is stated <em>before</em> financing, tax and depreciation — an operating-cash measure, not net income. Illustrations draw on public market observations, comparable offshore assets, industry day-rate ranges, and internal fabrication estimates pending independent shipyard confirmation.</p>
+  </section>
+
+  <!-- 8 CAPITAL EFFICIENCY & COMPETITIVE SET -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">08</span><div><div class="eyebrow">Why it compounds</div><h2>Capital efficiency &amp; the real competitive set</h2></div></div>
+    <p>The customer's alternative is not a cheaper hull from a rival — it is building one of the bespoke floaters below. Against every one of them, the MPSS delivers a comparable deck at a small fraction of the capital:</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>The alternative the customer would otherwise build</th><th class="n">Typical hull capital</th></tr></thead>
+      <tbody>
+        <tr><td>FPSO (lease-and-operate class)</td><td class="n">~$0.7–1.3B</td></tr>
+        <tr><td>Ultra-deepwater drillship (context)</td><td class="n">~$875M</td></tr>
+        <tr><td>Production semi / spar / TLP</td><td class="n">several hundred $M – $1B+</td></tr>
+        <tr><td>Harsh-environment semisub (CAT-D class)</td><td class="n">~$440M</td></tr>
+        <tr class="hl"><td><strong>MPSS standardized leased hull</strong></td><td class="n pos">~$25–45M</td></tr>
+      </tbody>
+    </table></div>
+    <p>Only <em>after</em> that context is the return worth stating. Because hull cost is the denominator of every yield, the advantage is structural, not optimistic — and it <strong>improves with each hull</strong> through repeatability, the fabrication learning curve, standardization, fleet utilization, and a serial cost target of $25–35M.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Per hull, mid case</th><th class="n">Operating cash yield on hull capital*</th><th class="n">Cash payback (pre-financing)</th></tr></thead>
+      <tbody>
+        <tr><td>Comparable large offshore tonnage</td><td class="n">~16–33% / yr</td><td class="n">3–6 yr</td></tr>
+        <tr class="hl"><td><strong>MPSS (~$45M hull, ~$350k/day)</strong></td><td class="n pos">~270% / yr</td><td class="n pos">~4–5 months</td></tr>
+      </tbody>
+    </table></div>
+    <p class="foot">*Operating cash yield on hull capital = day-rate × 365 × utilization ÷ hull cost — a capital-efficiency ratio, not a profit margin; excludes operating cost, financing and topsides. Comparable figures are sourced 2025–26 class averages. To match a drillship's yield, an MPSS need charge only ~$22k/day — a fraction of its target rate; the balance is pure capital-cost advantage, available as margin or as a price cut to the customer.</p>
+  </section>
+
+  <!-- 9 FLEET RAMP -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">09</span><div><div class="eyebrow">Scale-up</div><h2>The fleet — repeatable by design</h2></div></div>
+    <p>The model scales one hull at a time, each financed against its own signed lease. No speculative construction: steel is cut only after an anchor lease is in hand.</p>
+    <div class="chart">
+      <div class="cap">Steady-state fleet operating lease cash flow by phase — mid case (≈$350k/day, 95% availability)</div>
+      <div class="bars" role="img" aria-label="Fleet operating lease cash flow grows from zero during the first build to about $120M with one unit in Year 3, $241M with two units in Year 4, $361M with three units in Year 5, and about $603M with five units by Years 6-7.">
+        <div class="bar ghost"><div class="val">—</div><div class="fill" style="height:8px"></div></div>
+        <div class="bar"><div class="val">$120M</div><div class="fill" style="height:40px"></div></div>
+        <div class="bar"><div class="val">$241M</div><div class="fill" style="height:80px"></div></div>
+        <div class="bar"><div class="val">$361M</div><div class="fill" style="height:120px"></div></div>
+        <div class="bar"><div class="val">$603M</div><div class="fill" style="height:200px"></div></div>
+      </div>
+      <div class="xlab">
+        <div><b>Yr 1–2</b>hull building</div>
+        <div><b>Yr 3</b>1 unit</div>
+        <div><b>Yr 4</b>2 units</div>
+        <div><b>Yr 5</b>3 units</div>
+        <div><b>Yr 6–7</b>5 units</div>
+      </div>
+    </div>
+    <p class="foot">Operating-cash level, pre-financing and pre-tax. Range at five units: $341.8M–$863.4M depending on realized day-rate. Phase-2 mooring-package adders are additive and excluded.</p>
+  </section>
+
+  <!-- 10 MOAT & HANWHA & RESIDUAL -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">10</span><div><div class="eyebrow">Defensibility</div><h2>The moat, the yard, and long-term value</h2></div></div>
+    <div class="cols">
+      <div class="panel"><h4>Why it's hard to copy</h4><ul class="clean">
+        <li>35 years of validated, class-reviewed design and accumulated know-how, held under disclosure control</li>
+        <li>A fabrication method (standardized flat-panel blocks) that few have engineered for production hulls</li>
+        <li>A demand-aggregating leasing model that makes a serial run bankable — hard to assemble from a standing start</li>
+        <li>First-mover fleet, yard relationship and class lineage</li>
+      </ul></div>
+      <div class="panel"><h4>Why Hanwha Ocean</h4><ul class="clean">
+        <li>One of the world's largest, most capable shipbuilders</li>
+        <li>Modular, high-automation serial fabrication capacity</li>
+        <li>Access to export-credit (ECA) financing that lowers cost of capital</li>
+        <li>Confidence in repeatable production at fleet scale</li>
+      </ul></div>
+    </div>
+    <h3>What "50–70-year hull life" actually means</h3>
+    <div class="lifecycle">
+      <span class="step">1st lease</span><span class="arrow">→</span>
+      <span class="step">2nd lease</span><span class="arrow">→</span>
+      <span class="step">3rd lease</span><span class="arrow">→</span>
+      <span class="step">4th lease</span><span class="arrow">→</span>
+      <span class="step loop">Residual asset</span>
+    </div>
+    <p>A hull amortized over ~20 years is substantially deleveraged by the end of its first 10–15-year lease, then re-let again and again. Terminal value is not scrap — it is a class-maintained infrastructure asset with decades of remaining life. Ownership, not construction, is where the long-term value sits.</p>
+  </section>
+
+  <!-- 11 BEYOND OIL -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">11</span><div><div class="eyebrow">Optionality</div><h2>Beyond the first deck</h2></div></div>
+    <p>The first application will be chosen and executed on its own merits. But the same standardized hull is an <strong>infrastructure platform</strong>, and the addressable market extends well beyond a single sector:</p>
+    <div class="cols">
+      <div class="panel"><h4>Energy &amp; production</h4><ul class="clean"><li>Floating production</li><li>Floating substations &amp; offshore power hubs</li><li>Hydrogen &amp; carbon-capture support</li></ul></div>
+      <div class="panel"><h4>New industrial demand</h4><ul class="clean"><li>Offshore AI / data centres</li><li>Desalination</li><li>Defence logistics &amp; heavy offshore facilities</li></ul></div>
+    </div>
+    <p class="foot">Shown to indicate market breadth, not to dilute the first deck. Each application is a separate, staged commercial decision.</p>
+  </section>
+
+  <!-- 12 THE ASK -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">12</span><div><div class="eyebrow">The capital</div><h2>The ask &amp; use of funds</h2></div></div>
+    <div class="askbox">
+      <div><div class="big">~$50<span>M</span></div></div>
+      <div class="t"><div class="lab">First unit</div><p>~$45M hull + ~$5M development. Sign the anchor lease first, then finance the hull against that contract — the FPSO template, where the lender underwrites the charter, not the concept.</p></div>
+    </div>
+    <div class="cols">
+      <div class="panel"><h4>Use of funds</h4><ul class="clean"><li><strong>~$45M</strong> hull fabrication (Hanwha Ocean), financed against the anchor lease</li><li><strong>~$5M</strong> development: FEED, class re-engagement (LR/ABS/DNV), fabrication-cost confirmation, business development</li></ul></div>
+      <div class="panel"><h4>Financing approach</h4><ul class="clean"><li><strong>Hull:</strong> offshore project / asset-finance debt against the signed charter, typically 60–80% of cost; ECA support via the Korean yard lowers the coupon</li><li><strong>Development tranche:</strong> founder / strategic equity or grant</li><li><strong>Balance &amp; growth:</strong> strategic and infrastructure equity</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 13 ASSUMPTIONS & RISKS -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">13</span><div><div class="eyebrow">Integrity of the numbers</div><h2>Assumptions, caveats &amp; key risks</h2></div></div>
+    <div class="cols">
+      <div class="panel"><h4>Assumptions &amp; caveats</h4><ul class="clean">
+        <li>Figures are <strong>operating-cash level</strong> — before financing, tax and depreciation; payback is unlevered cash.</li>
+        <li>Day-rate is a <strong>target band, not a signed rate</strong>; the first LOI converts it to contracted revenue.</li>
+        <li>Hull cost is an <strong>estimate pending Hanwha Ocean</strong>; serial target $25–35M.</li>
+        <li>Customer-value figures (avoided CAPEX, time) are illustrative, drawn from public offshore-market observation.</li>
+        <li><strong>95% availability</strong> assumed (industry-typical 85–95%).</li>
+      </ul></div>
+      <div class="panel"><h4>Key risks &amp; mitigants</h4><ul class="clean">
+        <li><strong>Fabrication cost</strong> unconfirmed → Hanwha engagement is the gating action.</li>
+        <li><strong>No anchor lessee yet</strong> → no speculative build; traction campaign underway.</li>
+        <li><strong>Class approval is historic (1989)</strong> → full LR/ABS/DNV re-engagement budgeted.</li>
+        <li><strong>First-of-class discount</strong> → accepted on unit 1 if term ≥ 10 yr; recovered on units 2–5.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- CLOSE: THESIS -->
+  <section class="section">
+    <div class="sechead"><span class="secnum">→</span><div><div class="eyebrow">The investment thesis</div><h2>In one paragraph</h2></div></div>
+    <p class="lede">MILC is not attempting to build another offshore platform. It is <strong>standardizing floating offshore infrastructure and applying a proven long-term leasing model</strong> to an industry that has historically relied on bespoke capital projects. If successful, customers reduce capital commitments, accelerate project delivery, and avoid long-term asset ownership — while MILC builds a fleet of long-life infrastructure assets that can be leased repeatedly over multiple decades. The hull is simply the mechanism; <strong>the product is time and capital efficiency.</strong></p>
+    <p class="foot">Seaways Engineering (U.K.) Ltd · MILC — MPSS Infrastructure Leasing Company · Confidential working draft · 11 July 2026. Prepared for discussion; not an offer of securities. All figures are internal estimates subject to fabrication-cost confirmation, class re-engagement, and a signed anchor lease.</p>
+  </section>
+
+</div>
+<script>document.getElementById('t').addEventListener('click',function(){var r=document.documentElement,c=r.getAttribute('data-theme');if(!c)c=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';r.setAttribute('data-theme',c==='dark'?'light':'dark');});</script>

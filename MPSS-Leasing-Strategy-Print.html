@@ -1,0 +1,640 @@
+<title>MPSS Leasing — Marketing &amp; Fundraising Strategy</title>
+<style>
+  :root{
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --paper:#eef1f3;
+    --card:#ffffff;
+    --text:#17242e;
+    --muted:#5a6975;
+    --heading:#12293b;
+    --ink:#12293b;
+    --steel:#5b6b78;
+    --line:#c9d2d8;
+    --line-soft:#e0e6ea;
+    --amber:#c1651b;
+    --amber-ink:#a8551a;
+    --sea:#0e2130;
+    --wash:#f4f6f7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0c161e;
+      --card:#13232e;
+      --text:#dce6ec;
+      --muted:#93a6b2;
+      --heading:#dbe8f0;
+      --ink:#cfe0ec;
+      --steel:#8598a4;
+      --line:#294050;
+      --line-soft:#1d3340;
+      --amber:#e08a3c;
+      --amber-ink:#e79a52;
+      --sea:#081119;
+      --wash:#0f1e28;
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#eef1f3;--card:#ffffff;--text:#17242e;--muted:#5a6975;--heading:#12293b;--ink:#12293b;
+    --steel:#5b6b78;--line:#c9d2d8;--line-soft:#e0e6ea;--amber:#c1651b;--amber-ink:#a8551a;--sea:#0e2130;--wash:#f4f6f7;
+  }
+  :root[data-theme="dark"]{
+    --paper:#0c161e;--card:#13232e;--text:#dce6ec;--muted:#93a6b2;--heading:#dbe8f0;--ink:#cfe0ec;
+    --steel:#8598a4;--line:#294050;--line-soft:#1d3340;--amber:#e08a3c;--amber-ink:#e79a52;--sea:#081119;--wash:#0f1e28;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--text);
+    font-family:var(--serif);font-size:16.5px;line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .doc{max-width:820px;margin:0 auto;padding:0 26px 80px}
+
+  /* ---- typography ---- */
+  h1,h2,h3,h4,.eyebrow,.partnum,th,.label,.tag,.toc,.rate,.metric{font-family:var(--sans)}
+  h2{font-size:1.5rem;line-height:1.15;color:var(--heading);margin:0 0 .1rem;text-wrap:balance;letter-spacing:-.01em}
+  h3{font-size:1.06rem;line-height:1.25;color:var(--heading);margin:1.7rem 0 .5rem;letter-spacing:-.005em}
+  h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.09em;color:var(--amber-ink);margin:1.4rem 0 .35rem;font-weight:700}
+  p{margin:.55rem 0}
+  a{color:var(--amber-ink);text-decoration:none;border-bottom:1px solid var(--line)}
+  strong{color:var(--heading);font-weight:700}
+  .eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.7rem;font-weight:700;color:var(--amber-ink)}
+  .lede{font-size:1.08rem;color:var(--text)}
+  .muted{color:var(--muted)}
+  small{font-size:.8rem}
+
+  /* ---- cover ---- */
+  .cover{
+    background:
+      radial-gradient(120% 90% at 78% -8%, rgba(193,101,27,.16), transparent 55%),
+      linear-gradient(174deg, var(--sea), #123047 88%);
+    color:#eaf1f5;border-radius:14px;margin:22px 0 30px;padding:52px 44px 40px;position:relative;overflow:hidden;
+  }
+  .cover::after{content:"";position:absolute;left:0;right:0;bottom:74px;height:2px;
+    background:linear-gradient(90deg,transparent,var(--amber) 12%,var(--amber) 88%,transparent)}
+  .cover .eyebrow{color:#e9a765}
+  .cover h1{font-family:var(--sans);font-size:2.5rem;line-height:1.04;margin:.5rem 0 .3rem;letter-spacing:-.02em;font-weight:800;color:#fff;text-wrap:balance}
+  .cover .sub{font-family:var(--sans);font-size:1.02rem;color:#b9cdd9;max-width:56ch;margin:.2rem 0 0}
+  .covermeta{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:118px;position:relative;z-index:1}
+  .covermeta .tag{font-family:var(--sans);font-size:.72rem;letter-spacing:.04em;color:#dfeaf0;border:1px solid rgba(233,167,101,.5);
+    border-radius:999px;padding:5px 12px}
+  .hull{position:absolute;right:-40px;top:38px;width:260px;height:150px;opacity:.9;z-index:0}
+
+  /* ---- contents ---- */
+  .toc{font-family:var(--sans);background:var(--card);border:1px solid var(--line-soft);border-radius:12px;padding:22px 26px;margin:0 0 26px}
+  .toc h4{margin-top:0}
+  .toc ol{margin:.3rem 0 0;padding:0;list-style:none;counter-reset:t;
+    columns:2;column-gap:34px}
+  .toc li{counter-increment:t;font-size:.9rem;padding:5px 0;break-inside:avoid;display:flex;gap:10px;color:var(--text)}
+  .toc li::before{content:counter(t,decimal-leading-zero);color:var(--amber-ink);font-weight:700;font-variant-numeric:tabular-nums;min-width:1.8em}
+  .toc li.apx::before{content:"A"}
+  .toc a{border:none;color:inherit}
+
+  /* ---- parts ---- */
+  .part{margin:30px 0 0;padding-top:22px}
+  .parthead{display:flex;align-items:baseline;gap:16px;border-top:2px solid var(--ink);padding-top:12px;margin-bottom:10px}
+  .partnum{font-size:2.1rem;font-weight:800;color:var(--amber);line-height:.9;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .parthead .t{flex:1}
+  .part > p:first-of-type{margin-top:.4rem}
+
+  /* ---- callouts ---- */
+  .thesis{background:var(--ink);color:#eef4f8;border-radius:12px;padding:24px 26px;margin:18px 0;break-inside:avoid}
+  .thesis .eyebrow{color:#e9a765}
+  .thesis p{margin:.4rem 0}
+  .thesis .big{font-family:var(--sans);font-size:1.15rem;line-height:1.35;color:#fff;font-weight:600}
+  .thesis strong{color:#f4c48a}
+
+  .pitch{border-left:3px solid var(--amber);background:var(--wash);padding:14px 18px;margin:14px 0;border-radius:0 8px 8px 0;
+    font-style:italic;color:var(--heading);break-inside:avoid}
+
+  .callout{background:var(--wash);border:1px solid var(--line-soft);border-radius:10px;padding:16px 20px;margin:14px 0;break-inside:avoid}
+  .callout h4{margin-top:0}
+
+  /* ---- metric row ---- */
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;font-family:var(--sans)}
+  .metric{background:var(--card);border:1px solid var(--line-soft);border-radius:10px;padding:14px 16px}
+  .metric .n{font-size:1.35rem;font-weight:800;color:var(--heading);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .metric .l{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:2px}
+
+  /* ---- tables ---- */
+  .tablewrap{overflow-x:auto;margin:14px 0;border-radius:10px;border:1px solid var(--line-soft)}
+  table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.86rem;background:var(--card)}
+  th{background:var(--ink);color:#eaf1f5;text-align:left;font-weight:600;padding:9px 12px;font-size:.76rem;
+    letter-spacing:.03em;text-transform:uppercase}
+  td{padding:9px 12px;border-top:1px solid var(--line-soft);vertical-align:top;color:var(--text)}
+  tbody tr:nth-child(even) td{background:var(--wash)}
+  td.num{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--heading);font-weight:600}
+  .pri{display:inline-block;font-weight:800;color:var(--amber-ink)}
+
+  /* ---- lists ---- */
+  ul.clean{margin:.5rem 0;padding-left:1.15rem}
+  ul.clean li{margin:.3rem 0}
+  ul.clean li::marker{color:var(--amber)}
+  .pillars{display:grid;gap:10px;margin:14px 0}
+  .pillar{display:flex;gap:14px;background:var(--card);border:1px solid var(--line-soft);border-radius:10px;padding:13px 16px;break-inside:avoid}
+  .pillar .k{font-family:var(--sans);font-weight:800;color:var(--amber);font-size:1.05rem;font-variant-numeric:tabular-nums;min-width:1.2em}
+  .pillar .b{font-family:var(--serif)}
+  .pillar .b b{font-family:var(--sans);color:var(--heading)}
+
+  .angle{background:var(--card);border:1px solid var(--line-soft);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;
+    padding:15px 18px;margin:12px 0;break-inside:avoid}
+  .angle .tag{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#fff;
+    background:var(--amber);border-radius:5px;padding:2px 8px;margin-right:8px}
+
+  hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+  .foot{font-size:.82rem;color:var(--muted);margin-top:8px}
+  .divider-note{font-family:var(--sans);font-size:.8rem;color:var(--muted);text-align:center;margin:34px 0 0}
+
+  /* ---- theme toggle ---- */
+  .toggle{position:fixed;top:14px;right:14px;font-family:var(--sans);font-size:.74rem;background:var(--card);
+    color:var(--text);border:1px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;z-index:20}
+  .toggle:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+  /* ---- print ---- */
+  @media print{
+    :root, :root[data-theme="dark"]{
+      --paper:#fff;--card:#fff;--text:#111;--muted:#444;--heading:#0e2130;--ink:#0e2130;
+      --steel:#333;--line:#999;--line-soft:#ccc;--amber:#9a4e12;--amber-ink:#8a460f;--sea:#0e2130;--wash:#f3f4f5;
+    }
+    @page{margin:16mm 15mm}
+    body{background:#fff;font-size:10.5pt;line-height:1.5}
+    .doc{max-width:none;padding:0}
+    .toggle{display:none}
+    .cover{margin:0 0 14pt;border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:34pt 30pt}
+    .cover h1{font-size:26pt}
+    .covermeta{margin-top:60pt}
+    .part{page-break-before:always;padding-top:0}
+    .part:first-of-type{page-break-before:avoid}
+    .toc{page-break-after:always}
+    h2,h3,h4{page-break-after:avoid}
+    .thesis,.pitch,.callout,.angle,.pillar,.metric,.tablewrap,table{page-break-inside:avoid}
+    tr,td,th{page-break-inside:avoid}
+    thead{display:table-header-group}
+    .thesis,th,.cover,.angle .tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    a{color:var(--heading);border:none}
+  }
+  @media (max-width:640px){
+    .metrics{grid-template-columns:1fr}
+    .toc ol{columns:1}
+    .cover{padding:38px 26px 30px}
+    .cover h1{font-size:2rem}
+    .hull{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<button class="toggle" id="themeBtn" aria-label="Toggle light or dark theme">◐ Theme</button>
+
+<div class="doc">
+
+  <!-- COVER -->
+  <header class="cover">
+    <svg class="hull" viewBox="0 0 260 150" aria-hidden="true">
+      <g fill="none" stroke="#e9a765" stroke-width="2" opacity="0.75">
+        <rect x="40" y="42" width="180" height="30" rx="3"/>
+        <rect x="58" y="72" width="16" height="52"/><rect x="186" y="72" width="16" height="52"/>
+        <rect x="40" y="118" width="180" height="12" rx="2"/>
+        <line x1="10" y1="100" x2="250" y2="100" stroke-dasharray="5 6" opacity="0.5"/>
+      </g>
+    </svg>
+    <div class="eyebrow">Seaways Engineering (U.K.) Ltd · MILC</div>
+    <h1>MPSS Leasing</h1>
+    <p class="sub">Marketing &amp; fundraising strategy for leasing the Multi-Purpose Semi-Submersible — soup to nuts.</p>
+    <div class="covermeta">
+      <span class="tag">Multi-Purpose Semi-Submersible</span>
+      <span class="tag">Dry-hull lease · $200–500k/day</span>
+      <span class="tag">Confidential — Working Draft</span>
+      <span class="tag">11 July 2026</span>
+    </div>
+  </header>
+
+  <!-- CONTENTS -->
+  <nav class="toc">
+    <h4>Contents</h4>
+    <ol>
+      <li><a href="#p1">The core thesis &amp; executive summary</a></li>
+      <li><a href="#p2">The asset &amp; its credibility</a></li>
+      <li><a href="#p3">Positioning &amp; messaging</a></li>
+      <li><a href="#p4">Target lessee segments</a></li>
+      <li><a href="#p5">The offer &amp; commercial model</a></li>
+      <li><a href="#p6">Go-to-market</a></li>
+      <li><a href="#p7">Sales process &amp; enablement</a></li>
+      <li><a href="#p8">Operations, team &amp; budget</a></li>
+      <li><a href="#p9">KPIs</a></li>
+      <li><a href="#p10">12-month roadmap</a></li>
+      <li><a href="#p11">Risks &amp; mitigations</a></li>
+      <li><a href="#p12">Raising funds</a></li>
+      <li><a href="#p13">Next 30 / 60 / 90 days</a></li>
+      <li class="apx"><a href="#a1">Appendix — Funder shortlist</a></li>
+    </ol>
+  </nav>
+
+  <!-- PART 1 -->
+  <section class="part" id="p1">
+    <div class="parthead"><span class="partnum">01</span><div class="t"><div class="eyebrow">Foundation</div><h2>The core thesis &amp; executive summary</h2></div></div>
+
+    <div class="thesis">
+      <div class="eyebrow">The one thing to internalize</div>
+      <p class="big">We are not selling a data center, a wind platform, or an oil rig. We are selling a standardized, class-approved, low-motion floating deck — leased by the day — whose unrivaled advantage is capital cost.</p>
+      <p>An MPSS hull costs <strong>~$25–45M all-in</strong> (serial target $25–35M). The large semisubmersible and drillship hulls it competes against cost <strong>$425M–$1.2B — 10× to 40× more</strong>. Because hull cost is the denominator of every return calculation, MPSS can charge a day-rate far below the market and still earn a dramatically higher yield on hull capital than any comparable vessel. <strong>The edge is in the CAPEX, not the day-rate.</strong></p>
+    </div>
+
+    <p class="lede"><strong>The business (MILC).</strong> Own standardized MPSS hulls and dry-lease them to operators on 10–15 year firm terms at a target of <strong>$200,000–$500,000/day</strong>, delivered 30–36 months from signature. MILC's obligations are narrow — hull integrity, class maintenance, insurance structure — <em>not</em> operations. That contracted-cash-flow structure is exactly what offshore lenders already underwrite: the FPSO financing template.</p>
+
+    <p><strong>Why it works, in one breath.</strong> A ~$45M hull earning $200–500k/day pays back in 3–8 months (pre-financing) and throws off $68–173M/yr in unit EBITDA. A 50–70-year hull is re-let 3–5 times over its life. Five units at the midpoint rate ≈ <strong>$602.6M/yr fleet EBITDA</strong>.</p>
+
+    <div class="metrics">
+      <div class="metric"><div class="n">~$45M</div><div class="l">All-in hull cost</div></div>
+      <div class="metric"><div class="n">10–40×</div><div class="l">Cheaper than comparables</div></div>
+      <div class="metric"><div class="n">3–8 mo</div><div class="l">Payback (pre-financing)</div></div>
+      <div class="metric"><div class="n">$200–500k</div><div class="l">Target day-rate</div></div>
+      <div class="metric"><div class="n">$68–173M</div><div class="l">Unit EBITDA / yr</div></div>
+      <div class="metric"><div class="n">~$603M</div><div class="l">5-unit fleet EBITDA / yr</div></div>
+    </div>
+
+    <h4>Marketing's three jobs</h4>
+    <div class="pillars">
+      <div class="pillar"><span class="k">1</span><span class="b"><b>Make the capital-efficiency case undeniable.</b> Arm every buyer and lender with the CAPEX-advantage math and the independent validation behind it.</span></div>
+      <div class="pillar"><span class="k">2</span><span class="b"><b>Land the anchor lessee.</b> The single signature that lets us finance and cut steel. No speculative construction — the lease comes first.</span></div>
+      <div class="pillar"><span class="k">3</span><span class="b"><b>Aggregate demand across markets.</b> One standardized hull serves grid/HVDC, floating wind, hydrogen, data/compute and (Phase 3) production. Marketing is the demand aggregator that makes a serial fabrication run bankable.</span></div>
+    </div>
+
+    <div class="callout"><h4>The 12-month prize</h4><p style="margin:0">A <strong>signed anchor-lease LOI</strong> from a Priority-1 segment (grid operator or diversified-energy major), a <strong>confirmed serial fabrication cost</strong> from Hanwha Ocean, and a <strong>current class engagement</strong> — the three gating items that turn the plan from concept into a financeable project.</p></div>
+  </section>
+
+  <!-- PART 2 -->
+  <section class="part" id="p2">
+    <div class="parthead"><span class="partnum">02</span><div class="t"><div class="eyebrow">The asset</div><h2>The asset &amp; its credibility</h2></div></div>
+    <p>The MPSS is a four-column, ring-pontoon semi-submersible built from <strong>standardized flat-panel box-girder blocks</strong> — no delicate bracing — using high-automation welding at <strong>~18 man-hours/tonne vs. 150–180 for conventional semis</strong>. Reference specs (1988 Seaways data; Lloyd's pre-certification file 00/OA/89001; Glasgow University tests):</p>
+
+    <div class="tablewrap"><table>
+      <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Main deck area</td><td class="num">8,100 m²</td></tr>
+        <tr><td>Deck payload</td><td class="num">10,000 t (design 12,500 t; up to 30,000 t studied)</td></tr>
+        <tr><td>Displacement</td><td class="num">~53,000 t</td></tr>
+        <tr><td>Operating draft</td><td class="num">27.5 m constant; ~6 m deballasted for port</td></tr>
+        <tr><td>Motion</td><td class="num">Heave ~24 s, pitch/roll ~42 s; heave ±2.5 m in 15 m seas</td></tr>
+        <tr><td>Hull fatigue life</td><td class="num">50–70 years (Faulkner)</td></tr>
+        <tr><td>Storage variant (SWIS)</td><td class="num">up to 1,750,000 bbl in-hull</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>The 35-year independent-validation spine</h4>
+    <p>This kills the "can it really work?" objection — the #1 barrier to a novel offshore lease.</p>
+    <ul class="clean">
+      <li><strong>Lloyd's Register — Department of Safety Technology</strong> risk analysis (Dr David S. Aldwinckle, Dept. Head): <em>"there are no inherent weaknesses in the MPSS design concepts."</em> Lloyd's <em>"fully accept all of the design principles"</em> and confirmed it <em>"can be approved for the intended service"</em>; main scantlings approved.</li>
+      <li><strong>University of Glasgow</strong> — 9-month model tank-test programme (Professors Faulkner &amp; Incecik).</li>
+      <li><strong>W.S. Atkins Oil &amp; Gas Ltd.</strong> — independent structural/hydrodynamic analysis. <strong>ABS</strong> and <strong>DNV</strong> pre-qualification/review on record.</li>
+      <li><strong>1995 IMT / Enterprise Oil study</strong> — independent <em>commercial</em> validation; 12 shipyards priced it; <em>"technically feasible and commercially viable."</em></li>
+    </ul>
+
+    <div class="callout"><p style="margin:0"><strong>Finance &amp; leasing were always native to this design.</strong> Seaways' historical services included <em>"Finance and MPSS leasing"</em>; in 1989 Lloyds Bank Canada (Tim Plumtre) was ready to finance MPSS builds in Brazil and Newfoundland. We are re-activating a proven, bankable model — not inventing one.</p></div>
+
+    <h4>Disclosure control (protect the moat)</h4>
+    <p>General Arrangement behind NDA only; full technical package only under a formal engineering partnership or licence; <strong>GVA-lineage yards are the highest disclosure risk</strong>; lease documentation transfers no design rights.</p>
+  </section>
+
+  <!-- PART 3 -->
+  <section class="part" id="p3">
+    <div class="parthead"><span class="partnum">03</span><div class="t"><div class="eyebrow">Story</div><h2>Positioning &amp; messaging</h2></div></div>
+    <h4>Positioning statement</h4>
+    <p>For <strong>grid operators, energy majors, and offshore developers</strong> who need a large, stable, class-approved floating deck but cannot justify — or wait for — a $400M–$1B+ purpose-built hull, <strong>MILC</strong> leases the <strong>MPSS</strong>: a standardized, independently-validated, low-motion semi-submersible delivered in 30–36 months at $200–500k/day, with no construction risk, no residual risk, and redeployability at term end — because our hull costs a fraction of the alternatives and we finance it against your lease, not our balance sheet.</p>
+
+    <div class="pitch">"Lease a class-approved, low-motion 8,100 m² offshore deck with 10,000 t payload on a 10–15 year term at $200,000–$500,000/day, delivered 30–36 months from signature. No construction risk, no residual risk, redeployable at term end."</div>
+
+    <h4>Message pillars</h4>
+    <div class="pillars">
+      <div class="pillar"><span class="k">1</span><span class="b"><b>Capital efficiency you can't get anywhere else.</b> 10–40× lower hull cost → underprice the market and still beat every comparable's return.</span></div>
+      <div class="pillar"><span class="k">2</span><span class="b"><b>De-risked and proven.</b> Lloyd's, ABS, DNV, W.S. Atkins, Glasgow — 35 years of independent validation. Not a concept.</span></div>
+      <div class="pillar"><span class="k">3</span><span class="b"><b>Fast and standardized.</b> 30–36 months to delivery; serial fabrication; a demand-aggregated production run, not a one-off.</span></div>
+      <div class="pillar"><span class="k">4</span><span class="b"><b>You bring the business, we bring the deck.</b> Dry lease, narrow lessor obligations — you keep control of topsides, operations, and margin.</span></div>
+    </div>
+
+    <h4>Two flagship angles that generate demand on their own</h4>
+    <div class="angle"><p style="margin:.1rem 0"><span class="tag">A</span><strong>The substation / export gap</strong> → grid operators (TenneT) &amp; energy majors (RWE). Floating wind farms routinely exclude the offshore substation, export cable, and grid-tie from headline floater CAPEX — a <strong>~$1.1B gap on a 1 GW farm</strong> (~$17.0M per 15 MW position) developers must fund separately. <em>The MPSS deck exists to close a gap they already have to pay for.</em> This is the Cooper / ORE-Catapult "floating HVDC / power-island" track.</p></div>
+    <div class="angle"><p style="margin:.1rem 0"><span class="tag">B</span><strong>The cable-failure crisis</strong> → floating-wind operators, funders &amp; insurers. Cable failures are <strong>83% of offshore-wind insurance claims</strong> and a projected <strong>€61.5B over 2024–2035</strong> (~3,600 failures; ~€29M each — the cost is the downtime, not the cable). Root cause is <strong>platform motion</strong>. MPSS's low-motion geometry (heave ~24 s, pitch/roll ~42 s — out of the 8–16 s swell-resonance band) cuts cable fatigue an estimated <strong>40–50%</strong>: €2.8–5.8M per vessel over 25 years, a <strong>fleet NPV of €420–900M by Year 25</strong>. <em>Operators buy cable performance, not complexity.</em> Proof path: a 1–2 vessel instrumented pilot in the Celtic or North Sea.</p></div>
+
+    <h4>Message-to-buyer mapping</h4>
+    <ul class="clean">
+      <li><strong>Grid operator / developer (economic buyer):</strong> $/day vs. buying a hull; the substation gap they must fund anyway; delivery date vs. their COD.</li>
+      <li><strong>Asset finance / CFO:</strong> dry-lease = clean, financeable cash flow; anchor-lease-financed, off balance sheet; payback &amp; yield math.</li>
+      <li><strong>Insurer / risk / lender:</strong> cable-fatigue reduction, class approval, hull fatigue life, low-motion data — lower loss ratios and premiums.</li>
+      <li><strong>Sovereign / utility:</strong> buildable in-country (local content, jobs, tech transfer); resilience, desalination, defence.</li>
+    </ul>
+  </section>
+
+  <!-- PART 4 -->
+  <section class="part" id="p4">
+    <div class="parthead"><span class="partnum">04</span><div class="t"><div class="eyebrow">Demand</div><h2>Target lessee segments</h2></div></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Priority</th><th>Segment</th><th>Leased for</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pri">1</span></td><td>Grid operators (TenneT et al.)</td><td>Floating HVDC substation / power-island host</td><td>Cooper (ORE Catapult) letter pending send</td></tr>
+        <tr><td><span class="pri">1</span></td><td>Diversified energy (RWE et al.)</td><td>Multi-turbine hub, hydrogen platform, power conditioning</td><td>Traction target for the Lynch prerequisite</td></tr>
+        <tr><td><span class="pri">2</span></td><td>Hydrogen consortia</td><td>Electrolyzer host with power import/export</td><td>Warm-intro build</td></tr>
+        <tr><td><span class="pri">2</span></td><td>Data / compute operators</td><td>Offshore AI/HPC platform, seawater cooling</td><td>Concept engineered w/ Samsung; secondary</td></tr>
+        <tr><td>Phase 3</td><td>Oil &amp; gas operators</td><td>Production host with SCRs, extended well test</td><td>Ties to LANG System IP; after base matures</td></tr>
+        <tr><td>Opp.</td><td>Governments / utilities</td><td>Desalination, resilience, defence</td><td>Reactive</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Ideal anchor lessee:</strong> investment- or sovereign-grade credit (their signature is the collateral); an acute, near-term need they can't solve fast alone; appetite for a 10–15 yr firm term; sophisticated enough to own and operate their own topsides.</p>
+    <div class="callout"><p style="margin:0"><strong>Sequencing.</strong> Lead commercially with Priority-1 grid/energy — biggest, most bankable, clearest pain via the substation gap and cable crisis. Data/compute is real and on-trend but Priority 2. Production/SCR is the strategic destination (Phase 3), not the entry point.</p></div>
+  </section>
+
+  <!-- PART 5 -->
+  <section class="part" id="p5">
+    <div class="parthead"><span class="partnum">05</span><div class="t"><div class="eyebrow">Commercial</div><h2>The offer &amp; commercial model</h2></div></div>
+    <h4>Phase 1 — Bare-hull dry lease</h4>
+    <p>MILC owns the hull; lessee fits and operates topsides. Obligations limited to hull integrity, class, insurance structure. <strong>$200–500k/day, 10–15 yr firm.</strong> This is the whole near-term business.</p>
+    <h4>Phase 2 — Mooring package (Years 3–6)</h4>
+    <p>Hull + installed station-keeping leased as one asset. Priced as an adder at the same lessor yield on mooring capex (~$10–20M site-dependent → roughly <strong>$4,000–8,000/day adder</strong>; firm only after site-specific design). Entry route: partner with a mooring contractor on the first two packages, internalize from unit three.</p>
+    <h4>Phase 3 — SCR-integrated production host (Years 5+)</h4>
+    <p>The coupled low-motion-host + Steel Catenary Riser architecture — the LANG System's original invention scope. Rates built line-item against field economics; reference is FPSO leasing ($540–780k/day on $0.7–1.3B capex). Begins once the leasing base generates recurring cash.</p>
+    <h4>Commercial principles</h4>
+    <ul class="clean">
+      <li><strong>Anchor lease first, then finance, then steel.</strong> No speculative construction — the signed lease is the key.</li>
+      <li><strong>Sell yield, not sticker.</strong> Sit below market day-rates and still win on return. A first-of-class discount is acceptable on unit one if term ≥ 10 yr; recover on units 2–5.</li>
+      <li><strong>Two rate cards:</strong> an internal cost basis (never external) and a two-page lessee-facing card in market-value framing only.</li>
+      <li><strong>Redeployability &amp; residual are part of the pitch</strong> — a class-maintained hull with 35+ years of remaining fatigue life at first-term end is real terminal value, not scrap.</li>
+    </ul>
+  </section>
+
+  <!-- PART 6 -->
+  <section class="part" id="p6">
+    <div class="parthead"><span class="partnum">06</span><div class="t"><div class="eyebrow">Motion</div><h2>Go-to-market</h2></div></div>
+    <p>Small-N, high-value, relationship-led — a named-account campaign, not a volume funnel, sitting under a category-creation layer.</p>
+    <h4>Layer 1 — Credibility &amp; category air cover</h4>
+    <ul class="clean">
+      <li><strong>Capital-efficiency one-pager + day-rate/yield generator</strong> (built) — the highest-leverage asset; makes the CAPEX argument from either direction.</li>
+      <li><strong>Two issue-defining briefs</strong> — the substation/export-gap brief and the cable-failure brief (both drafted) — turned into signature assets.</li>
+      <li><strong>Validation dossier</strong> — Lloyd's/ABS/DNV/W.S. Atkins/Glasgow, packaged behind NDA discipline.</li>
+      <li>Selective PR / thought leadership in offshore-wind, transmission and marine-energy channels.</li>
+    </ul>
+    <h4>Layer 2 — Named-account ABM (the live pipeline)</h4>
+    <ul class="clean">
+      <li><strong>Send the Cooper letter (ORE Catapult)</strong> — floating HVDC / power-island track. Drafted, pending send.</li>
+      <li><strong>Execute the Lynch reply</strong> — obtain named warm introductions before any cold outreach; energy-company traction is Lynch's stated prerequisite before RINA credibility is committed.</li>
+      <li><strong>Generate Priority-1 traction — TenneT and RWE</strong> via warm routes, leading with the substation/export gap; then hydrogen consortia.</li>
+      <li><strong>Aker sequencing unresolved</strong> — no Aker outreach until decided.</li>
+    </ul>
+    <h4>Layer 3 — Enablers that gate the campaign</h4>
+    <ul class="clean">
+      <li><strong>Confirm serial fabrication cost with Paul McStay (Hanwha Ocean)</strong> — the single gating action behind the serialized-fabricator argument and the unit economics.</li>
+      <li><strong>Scope class re-engagement (LR / ABS / DNV, selection TBD)</strong> into the development budget — 1989 pre-certification doesn't classify a 2027 hull.</li>
+    </ul>
+  </section>
+
+  <!-- PART 7 -->
+  <section class="part" id="p7">
+    <div class="parthead"><span class="partnum">07</span><div class="t"><div class="eyebrow">Sales</div><h2>Sales process &amp; enablement</h2></div></div>
+    <h4>Pipeline stages &amp; exit criteria</h4>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Stage</th><th>Exit criterion</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Identified</td><td>Named account, committee mapped, trigger (grid gap / cable risk / capacity) confirmed</td></tr>
+        <tr><td>2 · Engaged</td><td>NDA signed; GA-level technical deep-dive</td></tr>
+        <tr><td>3 · Validated</td><td>Lessee's engineers/risk accept feasibility; site, depth, jurisdiction viable</td></tr>
+        <tr><td>4 · LOI</td><td>Day-rate and term framed (first LOI converts target range to a contracted rate)</td></tr>
+        <tr><td>5 · Lease signed</td><td>10–15 yr firm — the collateral for financing</td></tr>
+        <tr><td>6 · Financial close</td><td>Hull financed against the lease; steel cut; 30–36 mo delivery clock starts</td></tr>
+      </tbody>
+    </table></div>
+    <h4>Enablement kit (marketing ships)</h4>
+    <p>Capital-efficiency one-pager + day-rate generator; substation-gap brief; cable-failure brief; validation dossier; lessee-facing two-page rate card; anchor-lease pitch; standard dry-lease term sheet; NDA + disclosure-control protocol; GA-safe renderings.</p>
+    <h4>Objection-handling priorities</h4>
+    <p>"Is it proven/safe/classable?" → validation spine. "Why not buy?" → capital efficiency + no residual/construction risk. "Can you deliver?" → Hanwha serial fabrication, 30–36 mo. "Is the rate real?" → comparables + first LOI.</p>
+  </section>
+
+  <!-- PART 8 -->
+  <section class="part" id="p8">
+    <div class="parthead"><span class="partnum">08</span><div class="t"><div class="eyebrow">Engine</div><h2>Operations, team &amp; budget</h2></div></div>
+    <h4>Team — lean and senior</h4>
+    <p>A handful of high-stakes relationships, not a lead-gen machine.</p>
+    <ul class="clean">
+      <li><strong>Now:</strong> Marketing Director + senior technical writer/proposals lead (briefs, dossier, rate card) + fractional design/renders + fractional PR. Commercial lead (Stewart Lang) owns the named accounts.</li>
+      <li><strong>On anchor traction:</strong> add BD capacity per region, partner/analyst relations, and a bid/proposal manager for the FEED and financing packages.</li>
+    </ul>
+    <h4>Budget shape</h4>
+    <p>Percentages of plan; small in absolute terms against ~$45M units and $100M+ EBITDA — the ROI bar is simply "did it help land the anchor lease."</p>
+    <ul class="clean">
+      <li>~30% technical content &amp; the two issue briefs</li>
+      <li>~25% ABM &amp; executive engagement / travel</li>
+      <li>~20% validation / renders / rate-card production</li>
+      <li>~15% PR / category</li>
+      <li>~10% fundraising materials</li>
+    </ul>
+    <h4>Stack</h4>
+    <p>A light CRM tuned for ~a dozen named accounts; a secure data room with strict access control (disclosure discipline is business-critical); the day-rate generator as a live sales tool.</p>
+  </section>
+
+  <!-- PART 9 -->
+  <section class="part" id="p9">
+    <div class="parthead"><span class="partnum">09</span><div class="t"><div class="eyebrow">Measurement</div><h2>KPIs</h2></div></div>
+    <p><strong>North star:</strong> a signed anchor lease and the contracted lease value (day-rate × firm days) it creates — the collateral the whole business is financed against.</p>
+    <ul class="clean">
+      <li><strong>Gating milestones (binary, top priority):</strong> Hanwha fabrication cost confirmed · first Priority-1 traction signal · class society engaged.</li>
+      <li><strong>Pipeline:</strong> identified → engaged → validated → LOI → signed; conversion &amp; cycle time per stage.</li>
+      <li><strong>Commercial:</strong> contracted day-rate vs. $200–500k target; firm term; total contracted lease value; Phase-2 mooring adders attached.</li>
+      <li><strong>Capital:</strong> term sheets sourced; cost of capital; time-to-financial-close.</li>
+      <li><strong>Category:</strong> substation-gap and cable-brief engagement by target logos; pilot commitments; inbound from Priority-1 accounts.</li>
+    </ul>
+  </section>
+
+  <!-- PART 10 -->
+  <section class="part" id="p10">
+    <div class="parthead"><span class="partnum">10</span><div class="t"><div class="eyebrow">Sequence</div><h2>12-month roadmap</h2></div></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Quarter</th><th>Focus &amp; goal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Q1</strong><br>Arsenal &amp; gating</td><td>Finalize one-pager + generator, both briefs, validation dossier. Send Cooper letter; execute Lynch reply; open McStay/Hanwha on cost; scope class. Build named-account list; produce the two-page rate card.</td></tr>
+        <tr><td><strong>Q2</strong><br>Priority-1 traction</td><td>Warm-route conversations with TenneT and RWE (substation gap); hydrogen next. Convert Hanwha cost into the serialized-fabricator proof. Stand up data room. Line up a cable-risk pilot.</td></tr>
+        <tr><td><strong>Q3</strong><br>Anchor + capital</td><td>Drive the leading account to LOI; run the fundraise on that LOI; target a hull-financing term sheet against the lease. Lock class engagement.</td></tr>
+        <tr><td><strong>Q4</strong><br>Toward close</td><td>LOI → signed 10–15 yr lease → financial close → steel. Begin unit-2 demand and Phase-2 mooring positioning.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- PART 11 -->
+  <section class="part" id="p11">
+    <div class="parthead"><span class="partnum">11</span><div class="t"><div class="eyebrow">Exposure</div><h2>Risks &amp; mitigations</h2></div></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Risk</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Fabrication cost unconfirmed</td><td><strong>McStay/Hanwha engagement is the single gating action</strong></td></tr>
+        <tr><td>No anchor lessee → no financing</td><td>Traction campaign (TenneT/RWE/hydrogen); no speculative construction</td></tr>
+        <tr><td>Class approval is historic (1989), not current</td><td>Budget full LR/ABS/DNV engagement in development costs</td></tr>
+        <tr><td>First-of-class discount</td><td>Accept on unit 1 if term ≥ 10 yr; recover on units 2–5</td></tr>
+        <tr><td>Rate realization (target ≠ signed)</td><td>First LOI converts the range to a contracted rate</td></tr>
+        <tr><td>IP position open (no confirmed live patent)</td><td>Leasing doesn't depend on patent enforcement; disclosure control protects know-how</td></tr>
+        <tr><td>Key-person concentration (Craig Lang)</td><td>Documentation programme running; class engagement institutionalizes the design basis</td></tr>
+        <tr><td>Technical disclosure to rival yards</td><td>GA behind NDA; full package only under licence; GVA-lineage yards highest risk</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- PART 12 -->
+  <section class="part" id="p12">
+    <div class="parthead"><span class="partnum">12</span><div class="t"><div class="eyebrow">Capital</div><h2>Raising funds</h2></div></div>
+    <div class="thesis">
+      <div class="eyebrow">The financing thesis</div>
+      <p class="big">The anchor lease is signed first, and the hull is financed against the lease — the lender underwrites the charter, not the concept.</p>
+      <p>A dry-lease income stream with narrow lessor obligations is precisely what offshore lenders already know how to underwrite. Marketing/BD's job is to manufacture that anchor lease; the capital follows the contract. <strong>The marketing plan and the fundraising plan are the same plan.</strong></p>
+    </div>
+
+    <h4>What we're funding — and how small the first ask really is</h4>
+    <ul class="clean">
+      <li><strong>First unit: ~$45M hull + ~$5M development ≈ $50M</strong> — trivially small against the $68–173M/yr one unit produces and the $425M–$1.2B cost of every competing hull.</li>
+      <li><strong>Development capital (now, pre-lease):</strong> ~$5M for FEED, class re-engagement, fabrication confirmation, and the traction campaign → founder/strategic equity or grant.</li>
+      <li><strong>Hull capex (post-anchor-lease):</strong> financed against the signed lease → offshore project / asset-finance debt.</li>
+      <li><strong>Fleet growth:</strong> each 50–70-yr hull, re-let 3–5×, deleverages after ~20-yr amortization — strong recurring collateral to scale the fleet.</li>
+    </ul>
+
+    <h4>The capital stack (cheapest → most expensive)</h4>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Source</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>Offshore asset / project-finance debt</td><td>Lent against the anchor lease's cash flows (FPSO model). Priority once the LOI/lease exists.</td></tr>
+        <tr><td>Export credit agency (ECA)</td><td>Build ties to a major yard (Hanwha Ocean, Korea) → guarantees lower financing cost. Structural advantage.</td></tr>
+        <tr><td>Anchor-lessee / strategic co-investment</td><td>A grid operator or energy major co-funds "their" hull for priority access.</td></tr>
+        <tr><td>Infrastructure &amp; energy-transition equity</td><td>Appetite for contracted, asset-backed, ESG-aligned cash flows.</td></tr>
+        <tr><td>Green / sustainability-linked finance</td><td>Wind enablement, hydrogen, cable-integrity, Crystal Sea water/clean-power → cheaper tranches.</td></tr>
+        <tr><td>Development finance / DFIs</td><td>Sovereign / emerging-market siting and the in-country-build local-content story.</td></tr>
+        <tr><td>Grants / non-dilutive</td><td>Realistic for the cable-risk pilot and the Crystal Sea variant (see appendix).</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Recommended path:</strong> small founder/strategic development tranche now → anchor lease → project-finance debt + ECA for the hull → strategic/infra-equity for the balance and next units; green tranches and grant/DFI money where the profiles qualify. <em>Precedent:</em> Lloyds Bank Canada was ready to finance MPSS builds in 1989.</p>
+
+    <h4>The investor / lender narrative (marketing owns it)</h4>
+    <div class="pillars">
+      <div class="pillar"><span class="k">1</span><span class="b"><b>Quantified, urgent problem</b> — the €61.5B cable crisis and the ~$1.1B/GW substation gap developers must fund anyway.</span></div>
+      <div class="pillar"><span class="k">2</span><span class="b"><b>A proven, not speculative, asset</b> — Lloyd's/ABS/DNV/Atkins/Glasgow; 35 years of validation.</span></div>
+      <div class="pillar"><span class="k">3</span><span class="b"><b>An unbeatable capital structure</b> — 10–40× lower hull cost; underprice the market, out-yield every comparable.</span></div>
+      <div class="pillar"><span class="k">4</span><span class="b"><b>A financeable model</b> — dry lease, narrow obligations, anchor-lease-first, FPSO template.</span></div>
+      <div class="pillar"><span class="k">5</span><span class="b"><b>Anchor demand</b> — the signed/near-signed Priority-1 lease (the linchpin).</span></div>
+      <div class="pillar"><span class="k">6</span><span class="b"><b>Unit economics</b> — ~$45M hull, 3–8 mo payback, $68–173M/yr unit EBITDA, ~$603M/yr at five units.</span></div>
+      <div class="pillar"><span class="k">7</span><span class="b"><b>The flywheel</b> — lease → hull finance → build → cash flow → re-let 3–5× → finance the next unit.</span></div>
+    </div>
+
+    <h4>Fundraising funnel — run it like the named-account sale</h4>
+    <p>Target list (offshore project-finance banks; infra debt funds; ECAs tied to Hanwha/Korea; infra &amp; energy-transition equity; strategic/anchor co-investors; green desks; DFIs) → warm intros first → teaser → deck → model/data room → due diligence → term sheet → close. Run debt and equity tracks in parallel; drive toward competing term sheets. Keep ~10–15× targets at the top of the funnel per close.</p>
+
+    <h4>Sequencing (capital tied to milestones)</h4>
+    <ul class="clean">
+      <li><strong>Now → Q2:</strong> raise the ~$5M development tranche; clear the three gating items. You raise the hull money far cheaper once a lease exists.</li>
+      <li><strong>Q3:</strong> with LOI in hand, open project-finance + ECA and anchor-lessee co-investment.</li>
+      <li><strong>Q4 → close:</strong> LOI → signed lease → financial close → cut steel.</li>
+      <li><strong>Ongoing:</strong> replicate per hull; each lease expands borrowing capacity — the flywheel.</li>
+    </ul>
+  </section>
+
+  <!-- PART 13 -->
+  <section class="part" id="p13">
+    <div class="parthead"><span class="partnum">13</span><div class="t"><div class="eyebrow">Action</div><h2>Next 30 / 60 / 90 days</h2></div></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Window</th><th>Actions</th></tr></thead>
+      <tbody>
+        <tr><td class="num"><strong>30</strong></td><td>Finalize the capital-efficiency one-pager + day-rate generator, substation-gap brief, cable brief, validation dossier, and the two-page lessee rate card. <strong>Send the Cooper letter. Execute the Lynch reply and extract named warm introductions. Open McStay/Hanwha on fabrication cost. Scope LR/ABS/DNV re-engagement.</strong></td></tr>
+        <tr><td class="num"><strong>60</strong></td><td>Warm-route conversations opened with TenneT and RWE (lead: substation/export gap); hydrogen next. Stand up the access-controlled data room. Frame a cable-risk pilot. Draft investor deck + financial model v1.</td></tr>
+        <tr><td class="num"><strong>90</strong></td><td>First technical deep-dives (GA under NDA) → toward LOI. Hanwha serial-fabrication cost closed. Class society selected and engaged. Capital target list built, warm intros mapped, development tranche in motion.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- APPENDIX -->
+  <section class="part" id="a1">
+    <div class="parthead"><span class="partnum">A</span><div class="t"><div class="eyebrow">Appendix</div><h2>Funder &amp; grant shortlist</h2></div></div>
+    <div class="callout"><h4>The strategic unlock — two entities, two grant tracks</h4><p style="margin:.2rem 0 .4rem">You have a <strong>US company</strong> and <strong>UK-citizen founders</strong> (so a UK company is available too). Use both: file the <strong>cable-risk pilot, HVDC and systems-engineering work through the US entity</strong> — it opens the deep DOE / ARPA-E / Navy pool (SBIR/STTR needs a US-based, &gt;50% US-owned small business — you qualify) — and file the <strong>European wind-market work through a UK entity</strong> (Horizon Europe / ORE Catapult), native to your live TenneT/RWE/Celtic-Sea pipeline. Grants stay a supporting act — aimed at the <strong>pilot</strong> and the <strong>Crystal Sea narrative</strong>, not the ~$45M hull capex.</p></div>
+
+    <h3>Track A1 — Cable-risk pilot &amp; floating wind (US federal — deepest pool)</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Program (funder)</th><th>Amount</th><th>Why it fits</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Floating Offshore Wind Shot</strong> (DOE)</td><td class="num">Initiative / FOAs</td><td><strong>Bullseye</strong> — explicitly targets <em>subsea power-cable reliability</em>, your exact thesis.</td></tr>
+        <tr><td><strong>ATLANTIS — Phase Two</strong> (ARPA-E)</td><td class="num">~$31M</td><td>Systems engineering of floating offshore wind <em>to drive down cost</em> — literally the MPSS thesis.</td></tr>
+        <tr><td>Innovations in Floating Offshore Wind (DOE / CEC / NOWRDC)</td><td class="num">up to $10.6M</td><td>Ports &amp; vessels, transmission, UUVs — platform + substation fit.</td></tr>
+        <tr><td>Hydropower &amp; Marine Energy SBIR/STTR (DOE EERE/WPTO)</td><td class="num">$200k → $1.1–1.6M</td><td>Bread-and-butter non-dilutive R&amp;D to fund the instrumented pilot.</td></tr>
+        <tr><td>HAEJO SBIR/STTR (ARPA-E)</td><td class="num">$314k–$4.5M</td><td>Offshore-energy joint-venture structures.</td></tr>
+        <tr><td>Reliable Moorings for Offshore Wind (DOE WETO/WPTO)</td><td class="num">FOA</td><td>Aligns with the Phase-2 mooring package.</td></tr>
+        <tr><td>Energy Technologies / SBIR (NSF)</td><td class="num">up to $2M</td><td>Novel energy tech incl. floating offshore wind.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Track A2 — Grid / HVDC / substation power-island (US — the TenneT/RWE angle)</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Program (funder)</th><th>Amount</th><th>Why it fits</th></tr></thead>
+      <tbody>
+        <tr><td><strong>IDEAL HVDC / HVDC CORE Initiative</strong> (DOE)</td><td class="num">~$11M; −35% cost goal</td><td>Directly supports a floating HVDC substation / power-island — the Cooper track.</td></tr>
+        <tr><td>i2X — iCRS-T (DOE IESO)</td><td class="num">n/a</td><td>Interconnection-cost reduction — the substation/export-gap problem. Deadline ~Jul 23.</td></tr>
+        <tr><td>SPARK — Grid Resilience (DOE OE)</td><td class="num">$10–100M</td><td>Advanced transmission technology upgrades.</td></tr>
+        <tr><td>GRIP (DOE)</td><td class="num">&gt;$6B announced</td><td>Grid resilience &amp; innovation partnerships; maritime applications.</td></tr>
+        <tr><td>Prop 4 OSW Port Development (California)</td><td class="num">up to $475M</td><td>If you fabricate/stage on a US port.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Track A3 — Defence / resilience (US — the "power-island" use case)</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Program (funder)</th><th>Amount</th><th>Why it fits</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Innovative Energy Resilience Solutions</strong> (US Navy)</td><td class="num">Varies</td><td><em>Deployable</em> energy for installations — MPSS as a floating power island. </td></tr>
+        <tr><td>ONR Long-Range BAA (Office of Naval Research)</td><td class="num">Varies</td><td>Broad S&amp;T; small-business eligible.</td></tr>
+        <tr><td>Navy SBIR/STTR</td><td class="num">$175–250k → &gt;$1M</td><td>Marine/undersea systems R&amp;D. Deadline ~Jul 22.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Track A4 — UK / EU (file through a UK entity — native to your pipeline)</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Program</th><th>Amount</th><th>Why it fits</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Horizon Europe</strong> (EU R&amp;I)</td><td class="num">Large (consortium)</td><td>Top EU pick; renewable energy / climate; pairs with ORE Catapult.</td></tr>
+        <tr><td>Innovate UK (Smart / Energy Catalyst)</td><td class="num">Varies</td><td>For-profit R&amp;D grants for UK companies.</td></tr>
+        <tr><td>ORE Catapult</td><td class="num">Programme + test infra</td><td>Already in motion via the Cooper letter; route to UK funding + testing.</td></tr>
+        <tr><td>Crown Estate / Crown Estate Scotland</td><td class="num">Supply-chain funds</td><td>Floating-wind leasing authority; innovation programmes.</td></tr>
+        <tr><td>Blue Action Accelerator</td><td class="num">$150k + accel.</td><td>Global for-profit ocean/climate-tech; names offshore wind.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Track B — Crystal Sea (ocean-water reclamation + clean power)</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Program (funder)</th><th>Amount</th><th>Why it fits &amp; eligibility</th></tr></thead>
+      <tbody>
+        <tr><td><strong>WaterSMART Desalination Construction</strong> (US Bureau of Reclamation)</td><td class="num">$1k–$120M</td><td>Planning/design/construction of seawater desal. Deadline Aug 26. Often needs a public-entity partner.</td></tr>
+        <tr><td><strong>Water Desalination Grant Program</strong> (California DWR)</td><td class="num">up to $10M</td><td>Funds <em>pilot / demonstration / research</em> desal — ideal for a Crystal Sea demo. Small-business eligible.</td></tr>
+        <tr><td>EPA SBIR — water reuse</td><td class="num">up to $100k</td><td>Water-reuse innovation. US small business.</td></tr>
+        <tr><td>NOAA Ocean-Based Climate Resilience Accelerators</td><td class="num">up to $250k</td><td>Ocean-climate commercialization. US small business.</td></tr>
+        <tr><td>Schmidt Marine Technology Partners</td><td class="num">$1–3M pools</td><td>Ocean health / pollution — the "cleaner oceans" story. Foundation.</td></tr>
+        <tr><td>ocean tribute Award (boot Düsseldorf, DE)</td><td class="num">€20,000</td><td>Ocean-protection innovation incl. waste/nutrient reduction. Deadline ~Aug 31. International.</td></tr>
+        <tr><td>HighShip Material Science Research Foundation (DE)</td><td class="num">Rolling</td><td>Wastewater/water research + composite materials (hull-relevant too).</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>Recommendation &amp; sequencing</h4>
+    <ul class="clean">
+      <li><strong>File the cable-risk pilot through the US entity</strong> — your biggest non-dilutive pool. Anchor on the <strong>DOE Floating Offshore Wind Shot</strong> (cable reliability) + a <strong>DOE Marine-Energy SBIR</strong> ($200k → $1.6M); add <strong>ARPA-E ATLANTIS</strong> as the marquee cost-reduction bid.</li>
+      <li><strong>Run the HVDC grants (IDEAL HVDC, i2X, SPARK) alongside TenneT/RWE</strong> — the grant and the commercial pitch are the same "close the substation gap" story.</li>
+      <li><strong>File European wind work through a UK entity</strong> — Horizon Europe + ORE Catapult (already in motion via Cooper).</li>
+      <li><strong>Use small awards for narrative, fast</strong> — ocean tribute, Blue Action, Schmidt Marine.</li>
+      <li><strong>Near-term deadlines:</strong> Navy SBIR ~Jul 22 · i2X ~Jul 23 · Reclamation Desalination Aug 26 · ocean tribute ~Aug 31.</li>
+    </ul>
+    <p class="foot">Source: live queries against the Granted and Kindora funder databases, 11 July 2026. Confirm amounts, deadlines and eligibility on each funder's page before applying. SBIR/STTR requires a US-based, &gt;50% US-owned small business.</p>
+  </section>
+
+  <p class="divider-note">Seaways Engineering (U.K.) Ltd · MILC — MPSS Infrastructure Leasing Company · Confidential working draft · 11 July 2026</p>
+
+</div>
+
+<script>
+  (function(){
+    var btn=document.getElementById('themeBtn');
+    var root=document.documentElement;
+    btn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      if(!cur){cur=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+      root.setAttribute('data-theme',cur==='dark'?'light':'dark');
+    });
+  })();
+</script>
