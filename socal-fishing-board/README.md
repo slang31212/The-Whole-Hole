@@ -105,11 +105,25 @@ Each is built from one of eight silhouette families (tuna, jack, mahi, barracuda
 rockfish, flatfish, shark) with per-species proportions, palette and markings, then
 inlined into the page at render time so a published board stays self-contained.
 
-They are drawn as **field-guide plates, not cartoons**: muted naturalistic colour,
-countershaded bodies (dark dorsal grading through a flank break to a pale belly), fins
-carried on visible rays rather than solid wedges, fine darker outlines, lateral lines and
-gill covers, and eyes at true scale. If you edit a palette, keep it desaturated — the
-`P()` helper takes back / mid / belly / fin / finlet / outline in that order.
+They are drawn as **layered plates, not flat shapes**. `plate()` assembles each fish in
+a fixed order:
+
+| Layer | What it does |
+|---|---|
+| `defs` | countershade gradient, scale `<pattern>`, body `clipPath`, blur filter |
+| behind | far-side and median fins — translucent membrane carried on rays |
+| base | body filled with the countershade gradient |
+| clipped | scale field, species markings, dorsal shadow, specular flank band, belly bounce — blurred and clipped to the silhouette, so shading reads as volume |
+| outline | fine ink edge |
+| front | near pectoral, gill, jaw, eye |
+
+The countershade breaks hard rather than fading (stops at 21% / 31%), which is what makes
+a real fish look metallic rather than airbrushed. `P()` takes back / flank / belly / fin /
+finlet / outline, plus an `extra` object for `sheen`, `bellyShade`, `band` and `spot`.
+
+**Ceiling note:** this is about as far as hand-authored inline SVG goes. Photographic
+realism would need raster art embedded as data URIs, which trades the self-contained,
+diff-able, recolourable vector for a binary blob.
 
 These colours are **illustration, not encoding** — they depict the fish. Chart series
 colours come from the validated categorical palette and are kept deliberately separate,
