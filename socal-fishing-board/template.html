@@ -242,7 +242,7 @@ section { margin-top: 34px; }
 
 .card {
   background: var(--surface); border: 1px solid var(--rule);
-  border-radius: 5px; box-shadow: var(--shadow);
+  border-radius: 5px; box-shadow: var(--shadow); min-width: 0;
 }
 .verdict { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
 .verdict .eyebrow {
@@ -375,29 +375,64 @@ section { margin-top: 34px; }
 .tchip.long { background: var(--accent-soft); color: var(--accent); }
 .lcard-empty { padding: 14px 17px; font-size: 12.5px; color: var(--ink-mute); }
 
-/* ---------- species tiles ---------- */
+/* ---------- tabs ---------- */
+.tabs {
+  display: flex; gap: 2px; margin-top: 22px; flex-wrap: wrap;
+  border-bottom: 2px solid var(--rule-strong);
+}
+.tabs button {
+  appearance: none; border: 0; background: transparent; cursor: pointer;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--ink-mute);
+  padding: 11px 17px; border-radius: 4px 4px 0 0; margin-bottom: -2px;
+  border-bottom: 2px solid transparent; transition: color .15s, border-color .15s;
+}
+.tabs button:hover { color: var(--ink); background: var(--surface); }
+.tabs button[aria-selected="true"] {
+  color: var(--ink); border-bottom-color: var(--accent); background: var(--surface);
+}
+.tabs button .n {
+  font-size: 10px; color: var(--ink-mute); margin-left: 7px; font-weight: 600;
+}
+.panel { display: none; }
+.panel.on { display: block; }
+.panel > section:first-child { margin-top: 26px; }
+
+/* ---------- species tiles — the fish lead ---------- */
 .species-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: 14px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(206px, 1fr)); gap: 14px;
 }
 .sp {
-  padding: 14px 15px 13px; display: flex; flex-direction: column; gap: 7px;
-  border-top: 3px solid var(--rule-strong);
+  padding: 12px 15px 13px; display: flex; flex-direction: column; gap: 4px;
+  border-top: 3px solid var(--rule-strong); min-width: 0;
 }
 .sp.counted { border-top-color: var(--series-1); }
-.sp .name { font-size: 14.5px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
-.sp .alias { font-size: 11.5px; color: var(--ink-mute); margin-top: -4px; }
-.sp .count {
-  font-size: 34px; font-weight: 780; line-height: 1; letter-spacing: -.025em;
+.sp .name { font-size: 15px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
+.sp .alias { font-size: 11.5px; color: var(--ink-mute); }
+svg.fish { display: block; width: 100%; height: 82px; margin: 2px 0 4px; }
+/* No verified count is stated in words and shown in form: the fish goes flat. */
+.sp.uncounted svg.fish { filter: saturate(.12) opacity(.5); }
+.sp .count { font-size: 38px; font-weight: 780; line-height: 1; letter-spacing: -.03em; }
+.sp .count small {
+  font-size: 12px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; margin-left: 5px;
 }
 .sp .nocount {
   font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .07em;
-  text-transform: uppercase; color: var(--ink-mute); padding: 9px 0 8px; line-height: 1.35;
+  text-transform: uppercase; color: var(--ink-mute); padding: 8px 0 7px; line-height: 1.35;
 }
-.sp .meta { font-size: 11.5px; color: var(--ink-soft); margin-top: auto; padding-top: 2px; }
+.sp .meta { font-size: 11.5px; color: var(--ink-soft); margin-top: auto; padding-top: 5px; }
 .sp .water {
   font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .12em;
   text-transform: uppercase; color: var(--ink-mute);
 }
+/* minmax(0,…) + min-width:0 so the 620px-floor data table scrolls inside its
+   own wrapper instead of forcing the track — and the page — wider */
+.two-col {
+  display: grid; gap: 18px; align-items: start;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+}
+.two-col > * { min-width: 0; }
+@media (max-width: 900px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------- tables ---------- */
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -529,120 +564,157 @@ footer p { margin: 0 0 16px; max-width: 96ch; }
 
 <div class="wrap">
 
-  <div class="carry" id="carry"></div>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Board sections">
+    <button role="tab" aria-selected="true"  data-panel="p-board">Board</button>
+    <button role="tab" aria-selected="false" data-panel="p-fleet">Fleet<span class="n" id="tab-n-fleet"></span></button>
+    <button role="tab" aria-selected="false" data-panel="p-guide">Species guide<span class="n" id="tab-n-guide"></span></button>
+    <button role="tab" aria-selected="false" data-panel="p-notes">Notes</button>
+  </nav>
 
-  <section>
-    <div class="sec-head">
-      <h2>Fleet read</h2>
-      <span class="sub" id="verdict-sub"></span>
-    </div>
-    <div class="verdict-grid">
-      <div class="card verdict" id="verdict"></div>
-      <div class="kpi-grid" id="kpis"></div>
-    </div>
-    <div class="card briefing" id="briefing"></div>
-  </section>
+  <!-- ============ BOARD ============ -->
+  <div class="panel on" id="p-board" role="tabpanel">
+    <div class="carry" id="carry"></div>
 
-  <section>
-    <div class="sec-head">
-      <h2>The fleet</h2>
-      <span class="sub" id="fleet-sub"></span>
-    </div>
-    <div class="trip-warn" id="trip-warn"></div>
-    <div class="fleet-grid" id="fleet"></div>
-    <details class="disc">
-      <summary>Trip classes — what each one reaches</summary>
-      <div class="disc-body"><div class="trip-legend" id="trip-legend"></div></div>
-    </details>
-  </section>
-
-  <section>
-    <div class="sec-head">
-      <h2>Target species signals</h2>
-      <span class="sub" id="species-sub"></span>
-    </div>
-    <div class="species-grid" id="species"></div>
-    <details class="disc">
-      <summary>Why most tiles show no count</summary>
-      <div class="disc-body"><p style="margin:0;font-size:13.5px;color:var(--ink-soft);max-width:92ch" id="species-note"></p></div>
-    </details>
-  </section>
-
-  <section>
-    <div class="sec-head">
-      <h2>Landing dock totals</h2>
-      <span class="sub">Every trip that came back that day, rolled into one line. Report dates differ — read the age chip on every row.</span>
-    </div>
-    <div class="card" style="padding:18px 20px">
-      <div class="table-scroll"><table id="ports"></table></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-head">
-      <h2>Archive trend</h2>
-      <span class="sub" id="trend-sub"></span>
-    </div>
-    <div class="card chart-card">
-      <div class="chart-head">
-        <h3>Kept fish per angler, by landing</h3>
-        <span class="axis-note" id="axis-note"></span>
+    <section>
+      <div class="sec-head">
+        <h2>Fleet read</h2>
+        <span class="sub" id="verdict-sub"></span>
       </div>
-      <div class="legend" id="legend"></div>
-      <div class="chart-holder">
-        <svg class="chart" id="trend" viewBox="0 0 900 340" role="img" aria-label="Kept fish per angler by landing, August 2 to August 6, 2026"></svg>
-        <div class="tip" id="tip"></div>
+      <div class="verdict-grid">
+        <div class="card verdict" id="verdict"></div>
+        <div class="kpi-grid" id="kpis"></div>
       </div>
-    </div>
-    <details class="disc">
-      <summary>Table view — full report archive</summary>
-      <div class="disc-body"><div class="table-scroll"><table id="archive"></table></div></div>
-    </details>
-  </section>
+    </section>
 
-  <section>
-    <div class="sec-head">
-      <h2>Landing reports</h2>
-      <span class="sub">Straight to each landing's own count page.</span>
-    </div>
-    <div class="src-grid" id="sources"></div>
-  </section>
+    <section>
+      <div class="sec-head">
+        <h2>Today's fish</h2>
+        <span class="sub" id="species-sub"></span>
+      </div>
+      <div class="species-grid" id="species"></div>
+      <details class="disc">
+        <summary>Why most tiles show no count</summary>
+        <div class="disc-body"><p style="margin:0;font-size:13.5px;color:var(--ink-soft);max-width:92ch" id="species-note"></p></div>
+      </details>
+    </section>
 
-  <section>
-    <div class="sec-head">
-      <h2>Species reference</h2>
-      <span class="sub">What actually gets reported between LA Harbor and Oceanside, and when it shows.</span>
-    </div>
-    <div class="card" style="padding:18px 20px">
-      <div class="table-scroll"><table id="reference"></table></div>
-    </div>
-  </section>
+    <section>
+      <div class="sec-head">
+        <h2>The read</h2>
+        <span class="sub">Where the number comes from, and what it is worth.</span>
+      </div>
+      <div class="card briefing" id="briefing"></div>
+    </section>
 
-  <section>
-    <div class="sec-head">
-      <h2>Open for your sign-off</h2>
-      <span class="sub">Calls I made building the alpha. Each one is a one-line change.</span>
-    </div>
-    <div class="card" style="padding:6px 20px 14px">
-      <div class="q-list" id="questions"></div>
-    </div>
-  </section>
+    <section>
+      <div class="sec-head">
+        <h2>Landing dock totals</h2>
+        <span class="sub">Every trip that came back that day, rolled into one line. Report dates differ — read the age chip on every row.</span>
+      </div>
+      <div class="card" style="padding:18px 20px">
+        <div class="table-scroll"><table id="ports"></table></div>
+      </div>
+    </section>
 
-  <footer>
-    <h4>Refresh</h4>
-    <p id="foot-refresh"></p>
-    <h4>Data limits</h4>
-    <p id="foot-limits"></p>
-    <h4>Marine sources</h4>
-    <div class="foot-links" id="foot-sources"></div>
-  </footer>
+    <section>
+      <div class="sec-head">
+        <h2>Landing reports</h2>
+        <span class="sub">Straight to each landing's own count page.</span>
+      </div>
+      <div class="src-grid" id="sources"></div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>Archive trend</h2>
+        <span class="sub" id="trend-sub"></span>
+      </div>
+      <div class="card chart-card">
+        <div class="chart-head">
+          <h3>Kept fish per angler, by landing</h3>
+          <span class="axis-note" id="axis-note"></span>
+        </div>
+        <div class="legend" id="legend"></div>
+        <div class="chart-holder">
+          <svg class="chart" id="trend" viewBox="0 0 900 340" role="img" aria-label="Kept fish per angler by landing, August 2 to August 6, 2026"></svg>
+          <div class="tip" id="tip"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ FLEET ============ -->
+  <div class="panel" id="p-fleet" role="tabpanel">
+    <section>
+      <div class="sec-head">
+        <h2>The fleet</h2>
+        <span class="sub" id="fleet-sub"></span>
+      </div>
+      <div class="trip-warn" id="trip-warn"></div>
+      <div class="fleet-grid" id="fleet"></div>
+      <details class="disc" open>
+        <summary>Trip classes — what each one reaches</summary>
+        <div class="disc-body"><div class="trip-legend" id="trip-legend"></div></div>
+      </details>
+    </section>
+  </div>
+
+  <!-- ============ SPECIES GUIDE ============ -->
+  <div class="panel" id="p-guide" role="tabpanel">
+    <section>
+      <div class="sec-head">
+        <h2>Species guide</h2>
+        <span class="sub">What actually gets reported between LA Harbor and Oceanside, and which trip gets you to it.</span>
+      </div>
+      <div class="card" style="padding:18px 20px">
+        <div class="table-scroll"><table id="reference"></table></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ NOTES ============ -->
+  <div class="panel" id="p-notes" role="tabpanel">
+    <section>
+      <div class="sec-head">
+        <h2>Open for your sign-off</h2>
+        <span class="sub">Calls I made building the alpha. Each one is a one-line change.</span>
+      </div>
+      <div class="card" style="padding:6px 20px 14px">
+        <div class="q-list" id="questions"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>Full report archive</h2>
+        <span class="sub">Every posted count in the rolling archive — the table view of the trend chart.</span>
+      </div>
+      <div class="card" style="padding:18px 20px">
+        <div class="table-scroll"><table id="archive"></table></div>
+      </div>
+    </section>
+
+    <footer>
+      <h4>Refresh</h4>
+      <p id="foot-refresh"></p>
+      <h4>Data limits</h4>
+      <p id="foot-limits"></p>
+      <h4>Marine sources</h4>
+      <div class="foot-links" id="foot-sources"></div>
+    </footer>
+  </div>
 </div>
+
+<script>
+__FISH_JS__
+</script>
 
 <script>
 (function () {
   "use strict";
 
   var D = JSON.parse(document.getElementById("board-data").textContent);
+  var FISH = window.FISH;
   var SERIES = ["--series-1", "--series-2", "--series-3", "--series-4", "--series-5"];
   var cssVar = function (n) {
     return getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -905,16 +977,18 @@ footer p { margin: 0 0 16px; max-width: 96ch; }
   document.getElementById("species-note").textContent = D.speciesNote;
 
   var sg = document.getElementById("species");
-  D.species.forEach(function (s) {
-    var c = el("div", "card sp" + (s.count != null ? " counted" : ""));
-    var body = s.count != null
-      ? '<span class="count">' + s.count + "</span>"
-      : '<span class="nocount">No count<br>posted</span>';
+  D.species.forEach(function (s, i) {
+    var counted = s.count != null;
+    var c = el("div", "card sp" + (counted ? " counted" : " uncounted"));
     c.innerHTML =
       '<span class="water">' + esc(s.water) + "</span>" +
       '<span class="name">' + esc(s.name) + "</span>" +
-      (s.alias ? '<span class="alias">' + esc(s.alias) + "</span>" : "") +
-      body +
+      '<span class="alias">' + (s.alias ? esc(s.alias) : "&nbsp;") + "</span>" +
+      (FISH && FISH.has(s.name) ? FISH.svg(s.name, "fx" + i) : "") +
+      (counted
+        ? '<span class="count">' + s.count +
+          "<small>kept " + fmtShort(D.speciesReportDate) + "</small></span>"
+        : '<span class="nocount">No count posted</span>') +
       '<span class="meta">' + esc(s.season) +
         (TRIP[s.trip] ? '<br><b style="font-weight:650;color:var(--ink)">' +
           esc(TRIP[s.trip].label) + "</b> boats reach it" : "") + "</span>";
@@ -1183,5 +1257,38 @@ footer p { margin: 0 0 16px; max-width: 96ch; }
     a.href = s.url; a.target = "_blank"; a.rel = "noopener noreferrer";
     fs.appendChild(a);
   });
+
+  /* ---- tabs ----
+     The board is the first page; the roster, the guide and the working notes
+     sit behind it rather than scrolling past it. */
+  var tabs = document.getElementById("tabs");
+  var btns = [].slice.call(tabs.querySelectorAll("button[data-panel]"));
+
+  function selectTab(btn) {
+    btns.forEach(function (b) {
+      var on = b === btn;
+      b.setAttribute("aria-selected", on ? "true" : "false");
+      document.getElementById(b.getAttribute("data-panel")).classList.toggle("on", on);
+    });
+    if (tabs.getBoundingClientRect().top < 0) tabs.scrollIntoView({ block: "start" });
+  }
+
+  tabs.addEventListener("click", function (e) {
+    var b = e.target;
+    while (b && b !== tabs && !b.getAttribute("data-panel")) b = b.parentNode;
+    if (b && b !== tabs) selectTab(b);
+  });
+  tabs.addEventListener("keydown", function (e) {
+    var i = btns.indexOf(document.activeElement);
+    if (i < 0) return;
+    var n = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : -1;
+    if (n < 0) return;
+    e.preventDefault();
+    var t = btns[(n + btns.length) % btns.length];
+    t.focus(); selectTab(t);
+  });
+
+  document.getElementById("tab-n-fleet").textContent = allBoats;
+  document.getElementById("tab-n-guide").textContent = D.speciesReference.length;
 })();
 </script>

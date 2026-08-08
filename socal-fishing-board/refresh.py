@@ -31,6 +31,7 @@ import urllib.request
 HERE = pathlib.Path(__file__).resolve().parent
 REPORT = HERE / "report.json"
 TEMPLATE = HERE / "template.html"
+FISH = HERE / "fish.js"
 INDEX = HERE / "index.html"
 ARTIFACT = HERE / "artifact.html"
 
@@ -361,9 +362,15 @@ def restamp(data: dict, today: str, changed: list[str]) -> None:
 # --------------------------------------------------------------------------
 
 def render(data: dict) -> None:
-    body = TEMPLATE.read_text(encoding="utf-8").replace(
-        "__BOARD_DATA__",
-        json.dumps(data, ensure_ascii=False).replace("</", "<\\/"),
+    # The fish illustrations are inlined rather than linked, so a published
+    # page stays self-contained and works offline and from file://.
+    body = (
+        TEMPLATE.read_text(encoding="utf-8")
+        .replace("__FISH_JS__", FISH.read_text(encoding="utf-8"))
+        .replace(
+            "__BOARD_DATA__",
+            json.dumps(data, ensure_ascii=False).replace("</", "<\\/"),
+        )
     )
     ARTIFACT.write_text(body, encoding="utf-8")
     INDEX.write_text(

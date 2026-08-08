@@ -52,7 +52,8 @@ glance.
 | File | Purpose |
 |------|---------|
 | `report.json` | The dataset — the single source of truth. Rewritten by the daily job. |
-| `template.html` | Page markup, styles and the renderer. `__BOARD_DATA__` is the injection point. |
+| `template.html` | Page markup, styles and the renderer. `__BOARD_DATA__` and `__FISH_JS__` are the injection points. |
+| `fish.js` | The twelve species illustrations, as inline SVG. Inlined at render time. |
 | `refresh.py` | Fetch → merge → re-render. The whole pipeline. |
 | `index.html` | **Generated.** Self-contained standalone page for GitHub Pages. |
 | `artifact.html` | **Generated.** Same page as body-content only, for publishing as an Artifact. |
@@ -72,20 +73,41 @@ python3 refresh.py --today 2026-08-09
 `.github/workflows/fishing-board.yml` runs it daily at **06:15 Pacific** and commits
 only when the data actually moved. It also accepts a manual `workflow_dispatch` run.
 
-## What's on the board
+## Four tabs, board first
 
+Everything you need at a glance is on **Board**. The reference material sits behind it
+rather than scrolling past it.
+
+**Board**
+- **Today's fish** — a tile per species, each with its own illustration and its verified
+  count. A species with no verified count says so in words *and* in form: the fish goes
+  flat grey. Every tile also names the trip class that reaches that fish.
 - **Fleet read** — kept fish per angler across the corridor, banded (excellent / good /
-  fair / slow) and compared against an archive baseline computed from single-day
-  reports only. Both numbers are derived from the posted counts, not assigned.
-- **The fleet** — 36 boats across 7 landings, each with length, capacity where known,
-  and the trip classes it runs. This is the roster the per-boat counts will hang off.
+  fair / slow) against an archive baseline computed from single-day reports only. Both
+  numbers are derived from the posted counts, not assigned.
+- **The read** — where that number comes from and what it's worth.
 - **Landing dock totals** — each landing's most recent count with a freshness chip.
-- **Target species signals** — verified counts where a landing posted a species
-  breakdown, an explicit "no count posted" everywhere else, and the trip class that
-  reaches each species.
-- **Archive trend** — kept per angler over the rolling archive, with a table-view twin.
-- **Species reference** — 29 species reported in this corridor, with where they hold,
-  when they show, and which trip gets you to them.
+- **Archive trend** — kept per angler over the rolling archive.
+
+**Fleet** — 36 boats across 7 landings, each with length, capacity where known, and the
+trip classes it runs. This is the roster the per-boat counts will hang off.
+
+**Species guide** — 29 species reported in this corridor, with where they hold, when
+they show, and which trip gets you to them.
+
+**Notes** — the open questions, the full report archive (the table view of the trend),
+the refresh contract, data limits and marine sources.
+
+## The fish
+
+`fish.js` draws all twelve species as inline SVG — no image files, no external requests.
+Each is built from one of eight silhouette families (tuna, jack, mahi, barracuda, bass,
+rockfish, flatfish, shark) with per-species proportions, palette and markings, then
+inlined into the page at render time so a published board stays self-contained.
+
+These colours are **illustration, not encoding** — they depict the fish. Chart series
+colours come from the validated categorical palette and are kept deliberately separate,
+so a fish never reads as a data series.
 
 ## Data sources
 
