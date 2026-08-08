@@ -58,6 +58,7 @@
   --baseline: #a5c5e0;
 
   --shadow: 0 1px 2px rgba(12,35,64,.07), 0 4px 14px rgba(12,35,64,.07);
+  --fish-halo: rgba(12,35,64,.30);
 
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
@@ -81,6 +82,7 @@
     --rule:        #1c3c5d;
     --rule-strong: #2b5682;
 
+    --fish-halo:   rgba(228,242,255,.34);
     --accent:      #7fc0f5;
     --accent-soft: #12314f
 
@@ -119,6 +121,7 @@
   --rule:        #1c3c5d;
   --rule-strong: #2b5682;
 
+  --fish-halo:   rgba(228,242,255,.34);
   --accent:      #7fc0f5;
   --accent-soft: #12314f
 
@@ -299,6 +302,10 @@ section { margin-top: 20px; }
   margin: 12px 0 0; font-size: 13px; color: var(--ink-soft); max-width: 118ch;
   padding-left: 11px; border-left: 3px solid var(--rule-strong);
 }
+.read-strip .coverage {
+  display: block; margin-top: 7px; padding-top: 7px; font-size: 12px;
+  color: var(--ink-mute); border-top: 1px solid var(--rule);
+}
 
 /* The briefing sits below the summary band so the KPI tiles stay short. */
 .briefing {
@@ -447,7 +454,7 @@ section { margin-top: 20px; }
    not a scroll. */
 .species-grid {
   display: grid; gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(min(186px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(152px, 100%), 1fr));
 }
 .sp {
   padding: 9px 11px 10px; display: flex; flex-direction: column; gap: 2px;
@@ -458,6 +465,7 @@ section { margin-top: 20px; }
 .sp .name { font-size: 13px; font-weight: 700; letter-spacing: -.01em; line-height: 1.18; }
 .sp .alias { font-size: 10px; color: var(--ink-mute); line-height: 1.25; }
 svg.fish, img.fish { display: block; width: 100%; height: 68px; margin: 4px 0 2px; }
+svg.fish { filter: drop-shadow(0 0 1.4px var(--fish-halo)); }
 img.fish { object-fit: contain; }
 /* No verified count is stated in words and shown in form: the fish goes flat. */
 .sp.uncounted svg.fish, .sp.uncounted img.fish { filter: saturate(.12) opacity(.5); }
@@ -630,7 +638,7 @@ footer p { margin: 0 0 16px; max-width: 96ch; }
 }
 </style>
 
-<script type="application/json" id="board-data">{"meta": {"board": "SoCal Charter Fleet Board", "subtitle": "Open-party and charter dock totals", "corridor": "Los Angeles Harbor to Oceanside, California", "version": "alpha.2", "today": "2026-08-08", "renderedAt": "2026-08-08T07:00:00-07:00", "newDataToday": false, "carryForward": "No nightly report has arrived for August 8. The August 7 report is being held on the board unchanged, per the carry-forward rule.", "lastReport": {"title": "Nightly Fishing Report — August 7, 2026", "targetDate": "2026-08-07", "receivedAt": "2026-08-06T18:02:00-07:00", "receivedLabel": "received Aug 6, 6:02 PM PT", "source": "Gmail — nightly pipeline from stewart.lang@seaways-mpss.com"}, "archiveDates": ["2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06"], "trendStatus": "The rolling archive holds five verified report dates. The 7-day view is partial; a valid 30-day trend is not yet available.", "boatCountsPending": true, "boatCountsNote": "Dock totals in the archive are reported at the landing level — the whole fleet's day rolled into one line. The per-boat split (which boat, which trip, how many anglers, what it caught) comes from the by-boat counts page and lands on the first live scraper run. The roster below is real and current; the count column is the slot waiting to be filled."}, "fleetRead": {"metric": "Kept fish per angler", "bands": [{"min": 5.0, "label": "EXCELLENT", "status": "good"}, {"min": 3.0, "label": "GOOD", "status": "good"}, {"min": 1.5, "label": "FAIR", "status": "warning"}, {"min": 0.0, "label": "SLOW", "status": "serious"}], "gaugeMax": 6, "headline": "Fleet is working, but the volume boats are carrying it.", "detail": "Dana Wharf and Pierpoint are turning the best kept-per-angler in the corridor, but both of those reports are the oldest on the board. The two freshest lines — Oceanside on August 6 and Davey's Locker on August 5 — are the two softest. Read the age chip before you read the number, and remember these totals mix half-day boats with overnight runs.", "asOf": "2026-08-07"}, "conditions": [{"key": "wind", "label": "WIND", "value": "W 10", "unit": "KT EARLY", "state": "reported", "note": "Becoming variable under 10 kt"}, {"key": "seas", "label": "SEAS", "value": "3–4", "unit": "FT", "state": "reported", "note": "NWS coastal waters forecast"}, {"key": "water", "label": "WATER TEMP", "value": null, "unit": "°F", "state": "not-reported", "note": "Buoy feed not yet wired"}, {"key": "air", "label": "AIR TEMP", "value": null, "unit": "°F", "state": "not-reported", "note": "Buoy feed not yet wired"}, {"key": "swell", "label": "SWELL", "value": null, "unit": "FT", "state": "not-reported", "note": "Buoy feed not yet wired"}, {"key": "vis", "label": "VISIBILITY", "value": null, "unit": "NM", "state": "not-reported", "note": "Not reported in source"}, {"key": "tide", "label": "TIDE", "value": null, "unit": "FT", "state": "not-reported", "note": "NOAA tide feed not yet wired"}, {"key": "moon", "label": "MOON", "value": null, "unit": "", "state": "not-reported", "note": "Almanac feed not yet wired"}], "conditionsSource": {"asOf": "2026-08-07", "text": "Wind and seas are from the NWS coastal-waters forecast quoted in the August 7 nightly report. Water temperature, air temperature, swell, visibility, tide and moon were listed as unavailable in the source and have not been inferred."}, "tripClasses": [{"id": "half", "label": "Half day", "hours": "5 hr", "note": "Local kelp, flats and breakwater. Calico, sand bass, barracuda, bonito, halibut."}, {"id": "twilight", "label": "Twilight", "hours": "5–6 hr", "note": "Evening half day, same local grounds."}, {"id": "threeq", "label": "¾ day", "hours": "9 hr", "note": "6 AM–3 PM. The workhorse local trip."}, {"id": "full", "label": "Full day", "hours": "12 hr", "note": "Catalina, the local banks, further structure."}, {"id": "overnight", "label": "Overnight", "hours": "~18 hr", "note": "Catalina and San Clemente. Yellowtail, tuna, rockfish."}, {"id": "multi", "label": "1.5–2.5 day", "hours": "36–60 hr", "note": "Offshore and Baja. Where the bluefin counts come from."}], "tripClassWarning": "Kept per angler is only comparable inside a trip class. A 2.5-day boat lands several days of fishing on the date it returns, so it will always out-score a 5-hour half-day boat. Compare half day to half day.", "landings": [{"id": "pierpoint", "name": "Pierpoint Landing", "port": "Long Beach", "url": "https://www.pierpoint.net", "source": "https://www.sportfishingreport.com/landings/pierpoint-landing.php", "rosterVerified": true, "boats": [{"name": "City of Long Beach", "ft": 65, "trips": ["half", "threeq"]}, {"name": "Toronado", "ft": 75, "trips": ["full", "overnight"]}, {"name": "Enterprise", "ft": 85, "trips": ["full", "overnight", "multi"]}], "latest": {"date": "2026-08-05", "anglers": 27, "kept": 95, "released": null, "adjScore": 1.58}, "history": [{"date": "2026-08-02", "anglers": 20, "kept": 378, "released": null, "flag": "multi-day trip"}, {"date": "2026-08-04", "anglers": 55, "kept": 383, "released": null, "flag": null}, {"date": "2026-08-05", "anglers": 27, "kept": 95, "released": null, "flag": null}]}, {"id": "oceanside", "name": "Oceanside Sea Center", "port": "Oceanside", "url": "https://www.oceansideseacenter.com", "source": "https://www.sportfishingreport.com/landings/oceanside-sea-center.php", "rosterVerified": false, "boats": [], "latest": {"date": "2026-08-06", "anglers": 72, "kept": 86, "released": 75, "adjScore": 0.83}, "history": [{"date": "2026-08-04", "anglers": 14, "kept": 83, "released": 60, "flag": null}, {"date": "2026-08-05", "anglers": 45, "kept": 83, "released": 50, "flag": "species breakdown posted"}, {"date": "2026-08-06", "anglers": 72, "kept": 86, "released": 75, "flag": null}]}, {"id": "danawharf", "name": "Dana Wharf Sportfishing", "port": "Dana Point", "url": "https://danawharf.com", "source": "https://www.sportfishingreport.com/landings/dana-wharf-sportfishing.php", "rosterVerified": true, "boats": [{"name": "Dana Pride", "ft": 95, "trips": ["threeq", "full"]}, {"name": "Sum Fun", "ft": 65, "cap": 60, "trips": ["half", "threeq"]}, {"name": "Clemente", "ft": 65, "trips": ["half", "threeq"]}, {"name": "Fury", "ft": null, "trips": ["half", "threeq"]}, {"name": "Reel Fun", "ft": null, "trips": ["half"]}], "latest": {"date": "2026-08-03", "anglers": 139, "kept": 520, "released": 695, "adjScore": 0.75}, "history": [{"date": "2026-08-03", "anglers": 139, "kept": 520, "released": 695, "flag": null}]}, {"id": "daveys", "name": "Davey's Locker", "port": "Newport Beach", "url": "https://daveyslocker.com", "source": "https://www.sportfishingreport.com/landings/daveys-locker.php", "rosterVerified": true, "boats": [{"name": "Western Pride", "ft": null, "trips": ["half", "twilight"]}, {"name": "Freelance", "ft": null, "trips": ["half", "threeq"]}, {"name": "Nautilus", "ft": null, "trips": ["half", "twilight"]}, {"name": "Thunderbird", "ft": null, "trips": ["overnight", "multi"]}, {"name": "Aggressor", "ft": null, "trips": ["overnight", "multi"]}, {"name": "Patriot", "ft": null, "trips": ["half", "threeq"]}, {"name": "Blackfish", "ft": null, "trips": ["half"]}, {"name": "Bongos", "ft": null, "trips": ["half"]}], "latest": {"date": "2026-08-05", "anglers": 147, "kept": 217, "released": null, "adjScore": 0.67}, "history": [{"date": "2026-08-03", "anglers": 99, "kept": 124, "released": null, "flag": null}, {"date": "2026-08-05", "anglers": 147, "kept": 217, "released": null, "flag": null}]}, {"id": "newport", "name": "Newport Landing", "port": "Newport Beach", "url": "https://www.newportlanding.com", "source": "https://www.sportfishingreport.com/landings/newport-landing.php", "rosterVerified": false, "boats": [], "latest": {"date": "2026-08-04", "anglers": 152, "kept": 335, "released": null, "adjScore": 0.66}, "history": [{"date": "2026-08-02", "anglers": 131, "kept": 401, "released": null, "flag": null}, {"date": "2026-08-04", "anglers": 152, "kept": 335, "released": null, "flag": null}]}], "pendingLandings": [{"name": "22nd Street Landing", "port": "San Pedro / LA Harbor", "url": "https://www.22ndstreet.com", "rosterVerified": true, "boats": [{"name": "Freedom", "trips": []}, {"name": "Native Sun", "trips": []}, {"name": "Pursuit", "trips": []}, {"name": "Monte Carlo", "trips": []}, {"name": "Amigo", "trips": []}, {"name": "Ghost", "trips": []}, {"name": "Pride", "trips": []}, {"name": "Truline", "trips": []}, {"name": "Kamryn Dawson", "trips": []}]}, {"name": "LA Waterfront Sportfishing", "port": "San Pedro / LA Harbor", "url": "https://www.laharbor.net", "rosterVerified": true, "boats": [{"name": "Sport King", "trips": []}, {"name": "Triton", "trips": []}, {"name": "Gail Force", "trips": []}]}, {"name": "Long Beach Sportfishing", "port": "Long Beach", "url": "https://www.longbeachsportfishing.org", "rosterVerified": true, "boats": [{"name": "Eldorado", "trips": []}, {"name": "Victory", "trips": []}, {"name": "El Patron", "trips": []}, {"name": "Ahra Ahn", "trips": []}, {"name": "Cee Ray", "trips": []}]}, {"name": "Helgren's Sportfishing", "port": "Oceanside", "url": "https://www.helgrensportfishing.com", "rosterVerified": true, "boats": [{"name": "Oceanside 95", "ft": 95, "trips": ["full", "overnight", "multi"]}, {"name": "Electra", "ft": 75, "trips": ["threeq", "full"]}, {"name": "Sea Trek", "ft": 60, "trips": ["half", "threeq"]}]}], "speciesReportDate": "2026-08-05", "speciesReportLanding": "Oceanside Sea Center", "speciesNote": "Oceanside Sea Center's August 5 report is the only landing in the archive that posted a species-level breakdown. Its seven species sum to its 83 kept fish. Every other species below is tracked by the board but has no verified count in the archive yet — including the offshore fish that only the overnight and multi-day boats reach.", "species": [{"name": "Calico Bass", "alias": "Kelp Bass", "count": 25, "water": "inshore", "season": "Year-round, peaks Jul–Sep", "trip": "half"}, {"name": "Yellowtail", "alias": "California Yellowtail", "count": 23, "water": "pelagic", "season": "Apr–Oct, big run in Aug", "trip": "threeq"}, {"name": "Bonito", "alias": "Pacific Bonito", "count": 21, "water": "pelagic", "season": "Jun–Nov", "trip": "half"}, {"name": "Sand Bass", "alias": "Barred Sand Bass", "count": 9, "water": "inshore", "season": "Jun–Aug spawn aggregation", "trip": "half"}, {"name": "Ocean Whitefish", "alias": null, "count": 3, "water": "inshore", "season": "Year-round", "trip": "threeq"}, {"name": "California Halibut", "alias": null, "count": 1, "water": "inshore", "season": "May–Jul peak, year-round", "trip": "half"}, {"name": "Mako Shark", "alias": "Shortfin Mako", "count": 1, "water": "pelagic", "season": "Jun–Sep", "trip": "full"}, {"name": "Bluefin Tuna", "alias": null, "count": null, "water": "pelagic", "season": "Jun–Sep, biggest Jul–Aug", "trip": "multi"}, {"name": "Yellowfin Tuna", "alias": null, "count": null, "water": "pelagic", "season": "Jul–Nov", "trip": "multi"}, {"name": "Dorado", "alias": "Mahi Mahi", "count": null, "water": "pelagic", "season": "Jul–Oct, warm-water years", "trip": "multi"}, {"name": "Barracuda", "alias": "California Barracuda", "count": null, "water": "pelagic", "season": "Peaks Jul", "trip": "half"}, {"name": "Rockfish", "alias": "Vermilion, copper, starry", "count": null, "water": "bottom", "season": "Season opens Mar", "trip": "threeq"}], "speciesReference": [{"name": "Calico Bass", "alias": "Kelp Bass", "water": "Inshore kelp / structure", "season": "Year-round, peaks Jul–Sep", "trip": "Half day"}, {"name": "Barred Sand Bass", "alias": "Sand Bass", "water": "Inshore flats", "season": "Jun–Aug spawn aggregation", "trip": "Half day"}, {"name": "Spotted Bay Bass", "alias": "Spottie", "water": "Bays / harbors", "season": "Year-round", "trip": "Half day"}, {"name": "California Halibut", "alias": null, "water": "Sand flats", "season": "May–Jul peak", "trip": "Half day"}, {"name": "White Seabass", "alias": null, "water": "Kelp edges", "season": "Mar–Jun peak", "trip": "¾ day / overnight"}, {"name": "California Sheephead", "alias": null, "water": "Reef / structure", "season": "Spring–fall", "trip": "¾ day"}, {"name": "Ocean Whitefish", "alias": null, "water": "Hard bottom", "season": "Year-round", "trip": "¾ day"}, {"name": "Sculpin", "alias": "California Scorpionfish", "water": "Reef / wrecks", "season": "Year-round, seasonal closure", "trip": "¾ day"}, {"name": "Rockfish", "alias": "Vermilion, copper, starry, bocaccio", "water": "Deep reef", "season": "Season opens Mar", "trip": "¾ day / full day"}, {"name": "Lingcod", "alias": null, "water": "Deep reef", "season": "Spring–fall", "trip": "Full day"}, {"name": "Cabezon", "alias": null, "water": "Shallow reef", "season": "Year-round", "trip": "¾ day"}, {"name": "Pacific Mackerel", "alias": "Greenback", "water": "Nearshore / bait", "season": "Year-round", "trip": "Half day"}, {"name": "California Barracuda", "alias": null, "water": "Nearshore pelagic", "season": "Peaks Jul", "trip": "Half day"}, {"name": "Pacific Bonito", "alias": null, "water": "Nearshore pelagic", "season": "Jun–Nov", "trip": "Half day"}, {"name": "California Yellowtail", "alias": null, "water": "Kelp / offshore banks", "season": "Apr–Oct, big run in Aug", "trip": "¾ day / overnight"}, {"name": "Bluefin Tuna", "alias": null, "water": "Offshore", "season": "Jun–Sep, biggest Jul–Aug", "trip": "1.5–2.5 day"}, {"name": "Yellowfin Tuna", "alias": null, "water": "Offshore", "season": "Jul–Nov", "trip": "1.5–2.5 day"}, {"name": "Albacore", "alias": "Longfin", "water": "Far offshore", "season": "Jul–Oct, variable years", "trip": "1.5–2.5 day"}, {"name": "Skipjack Tuna", "alias": null, "water": "Offshore", "season": "Jul–Oct", "trip": "Overnight / multi"}, {"name": "Dorado", "alias": "Mahi Mahi / Dolphinfish", "water": "Offshore kelp paddies", "season": "Jul–Oct, warm-water years", "trip": "Overnight / multi"}, {"name": "Striped Marlin", "alias": null, "water": "Offshore", "season": "Aug–Oct", "trip": "Multi-day"}, {"name": "Swordfish", "alias": "Broadbill", "water": "Deep offshore", "season": "Aug–Nov, deep-drop", "trip": "Multi-day"}, {"name": "Shortfin Mako", "alias": "Mako Shark", "water": "Offshore", "season": "Jun–Sep", "trip": "Full day / overnight"}, {"name": "Thresher Shark", "alias": null, "water": "Nearshore pelagic", "season": "Apr–Aug", "trip": "Full day"}, {"name": "Blue Shark", "alias": null, "water": "Offshore", "season": "Jun–Sep", "trip": "Full day"}, {"name": "White Croaker", "alias": "Tomcod", "water": "Surf / bays", "season": "Year-round", "trip": "Half day"}, {"name": "Sargo", "alias": null, "water": "Bays / jetties", "season": "Year-round", "trip": "Half day"}, {"name": "Opaleye", "alias": null, "water": "Shallow reef", "season": "Year-round", "trip": "Half day"}, {"name": "Halfmoon", "alias": "Blue Perch", "water": "Kelp", "season": "Year-round", "trip": "Half day"}], "marineSources": [{"label": "NWS San Diego coastal waters", "url": "https://www.ndbc.noaa.gov/data/Forecasts/FZUS56.KSGX.html"}, {"label": "NWS Los Angeles coastal waters", "url": "https://www.ndbc.noaa.gov/data/Forecasts/FZUS56.KLOX.html"}, {"label": "NDBC 46222 San Pedro", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46222"}, {"label": "NDBC 46256 Long Beach Channel", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46256"}, {"label": "NDBC 46224 Oceanside Offshore", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46224"}, {"label": "NOAA Tides & Currents", "url": "https://tidesandcurrents.noaa.gov/"}], "dataLimits": "These are open-party and charter dock totals — the fleet's counts, not private-boat results. Exact catch locations, harbor entrance conditions, route-specific visibility, current, water temperature, unreported captains and individual fish weights were unavailable in the source reports and have not been inferred. Landing totals pool every trip class that returned that day, so a single line can mix a 5-hour half day with a 2.5-day offshore run."}</script>
+<script type="application/json" id="board-data">{"meta": {"board": "SoCal Charter Fleet Board", "subtitle": "Open-party and charter dock totals", "corridor": "Los Angeles Harbor to Oceanside, California", "version": "alpha.2", "today": "2026-08-08", "renderedAt": "2026-08-08T07:00:00-07:00", "newDataToday": true, "carryForward": "The August 8 report is in and four landings posted newer counts. No landing has posted an August 8 same-day count yet, so every row below still carries the date it was actually posted.", "lastReport": {"title": "Nightly Local Fishing Report — August 8, 2026", "targetDate": "2026-08-08", "receivedAt": "2026-08-07T18:05:00-07:00", "receivedLabel": "received Aug 7, 6:05 PM PT", "source": "Gmail — nightly pipeline from stewart.lang@seaways-mpss.com"}, "archiveDates": ["2026-08-02", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07"], "trendStatus": "The rolling archive holds 6 verified report dates. A valid 30-day trend is not yet available.", "boatCountsPending": true, "boatCountsNote": "Dock totals in the archive are reported at the landing level — the whole fleet's day rolled into one line. The per-boat split (which boat, which trip, how many anglers, what it caught) comes from the by-boat counts page and lands on the first live scraper run. The roster below is real and current; the count column is the slot waiting to be filled.", "coverageNote": "This board watches five nearshore landings. Their boats run half-day and ¾-day trips, so an offshore tuna bite does not show up here at all — that is why every offshore species reads no count posted. Per-boat counts from the overnight and multi-day boats are what would close the gap."}, "fleetRead": {"metric": "Kept fish per angler", "bands": [{"min": 5.0, "label": "EXCELLENT", "status": "good"}, {"min": 3.0, "label": "GOOD", "status": "good"}, {"min": 1.5, "label": "FAIR", "status": "warning"}, {"min": 0.0, "label": "SLOW", "status": "serious"}], "gaugeMax": 6, "headline": "Bite firmed up — the freshest lines are the strongest.", "detail": "Davey's Locker and Oceanside are the freshest signals at one day old, and both moved up: Davey's on heavy sculpin and bonito with some yellowtail, Oceanside on calico, whitefish and yellowtail with substantial calico released. Pierpoint turns the best rate in the corridor at 4.02 kept per angler. Dana Point is still the practical launch, but Dana Wharf's count is two days old and is not today's bite.", "asOf": "2026-08-08"}, "conditions": [{"key": "wind", "label": "WIND", "value": "W 10", "unit": "KT EARLY", "state": "reported", "note": "Becoming variable under 10 kt"}, {"key": "seas", "label": "SEAS", "value": "3–4", "unit": "FT", "state": "reported", "note": "NWS coastal waters forecast"}, {"key": "water", "label": "WATER TEMP", "value": null, "unit": "°F", "state": "not-reported", "note": "Buoy feed not yet wired"}, {"key": "air", "label": "AIR TEMP", "value": null, "unit": "°F", "state": "not-reported", "note": "Buoy feed not yet wired"}, {"key": "swell", "label": "SWELL", "value": null, "unit": "FT", "state": "not-reported", "note": "Buoy feed not yet wired"}, {"key": "vis", "label": "VISIBILITY", "value": null, "unit": "NM", "state": "not-reported", "note": "Not reported in source"}, {"key": "tide", "label": "TIDE", "value": null, "unit": "FT", "state": "not-reported", "note": "NOAA tide feed not yet wired"}, {"key": "moon", "label": "MOON", "value": null, "unit": "", "state": "not-reported", "note": "Almanac feed not yet wired"}], "conditionsSource": {"asOf": "2026-08-07", "text": "Wind and seas are from the NWS coastal-waters forecast quoted in the August 7 nightly report. Water temperature, air temperature, swell, visibility, tide and moon were listed as unavailable in the source and have not been inferred."}, "tripClasses": [{"id": "half", "label": "Half day", "hours": "5 hr", "note": "Local kelp, flats and breakwater. Calico, sand bass, barracuda, bonito, halibut."}, {"id": "twilight", "label": "Twilight", "hours": "5–6 hr", "note": "Evening half day, same local grounds."}, {"id": "threeq", "label": "¾ day", "hours": "9 hr", "note": "6 AM–3 PM. The workhorse local trip."}, {"id": "full", "label": "Full day", "hours": "12 hr", "note": "Catalina, the local banks, further structure."}, {"id": "overnight", "label": "Overnight", "hours": "~18 hr", "note": "Catalina and San Clemente. Yellowtail, tuna, rockfish."}, {"id": "multi", "label": "1.5–2.5 day", "hours": "36–60 hr", "note": "Offshore and Baja. Where the bluefin counts come from."}], "tripClassWarning": "Kept per angler is only comparable inside a trip class. A 2.5-day boat lands several days of fishing on the date it returns, so it will always out-score a 5-hour half-day boat. Compare half day to half day.", "landings": [{"id": "pierpoint", "name": "Pierpoint Landing", "port": "Long Beach", "url": "https://www.pierpoint.net", "source": "https://www.sportfishingreport.com/landings/pierpoint-landing.php", "rosterVerified": true, "boats": [{"name": "City of Long Beach", "ft": 65, "trips": ["half", "threeq"]}, {"name": "Toronado", "ft": 75, "trips": ["full", "overnight"]}, {"name": "Enterprise", "ft": 85, "trips": ["full", "overnight", "multi"]}], "latest": {"date": "2026-08-06", "anglers": 49, "kept": 197, "released": null, "adjScore": 1.93}, "history": [{"date": "2026-08-02", "anglers": 20, "kept": 378, "released": null, "flag": "multi-day trip"}, {"date": "2026-08-04", "anglers": 55, "kept": 383, "released": null, "flag": null}, {"date": "2026-08-05", "anglers": 27, "kept": 95, "released": null, "flag": null}, {"date": "2026-08-06", "anglers": 49, "kept": 197, "released": null, "flag": null}]}, {"id": "oceanside", "name": "Oceanside Sea Center", "port": "Oceanside", "url": "https://www.oceansideseacenter.com", "source": "https://www.sportfishingreport.com/landings/oceanside-sea-center.php", "rosterVerified": false, "boats": [], "latest": {"date": "2026-08-07", "anglers": 67, "kept": 169, "released": 153, "adjScore": 1.81}, "history": [{"date": "2026-08-04", "anglers": 14, "kept": 83, "released": 60, "flag": null}, {"date": "2026-08-05", "anglers": 45, "kept": 83, "released": 50, "flag": "species breakdown posted"}, {"date": "2026-08-06", "anglers": 72, "kept": 86, "released": 75, "flag": null}, {"date": "2026-08-07", "anglers": 67, "kept": 169, "released": 153, "flag": null}]}, {"id": "danawharf", "name": "Dana Wharf Sportfishing", "port": "Dana Point", "url": "https://danawharf.com", "source": "https://www.sportfishingreport.com/landings/dana-wharf-sportfishing.php", "rosterVerified": true, "boats": [{"name": "Dana Pride", "ft": 95, "trips": ["threeq", "full"]}, {"name": "Sum Fun", "ft": 65, "cap": 60, "trips": ["half", "threeq"]}, {"name": "Clemente", "ft": 65, "trips": ["half", "threeq"]}, {"name": "Fury", "ft": null, "trips": ["half", "threeq"]}, {"name": "Reel Fun", "ft": null, "trips": ["half"]}], "latest": {"date": "2026-08-06", "anglers": 175, "kept": 535, "released": 465, "adjScore": 1.47}, "history": [{"date": "2026-08-03", "anglers": 139, "kept": 520, "released": 695, "flag": null}, {"date": "2026-08-06", "anglers": 175, "kept": 535, "released": 465, "flag": null}]}, {"id": "daveys", "name": "Davey's Locker", "port": "Newport Beach", "url": "https://daveyslocker.com", "source": "https://www.sportfishingreport.com/landings/daveys-locker.php", "rosterVerified": true, "boats": [{"name": "Western Pride", "ft": null, "trips": ["half", "twilight"]}, {"name": "Freelance", "ft": null, "trips": ["half", "threeq"]}, {"name": "Nautilus", "ft": null, "trips": ["half", "twilight"]}, {"name": "Thunderbird", "ft": null, "trips": ["overnight", "multi"]}, {"name": "Aggressor", "ft": null, "trips": ["overnight", "multi"]}, {"name": "Patriot", "ft": null, "trips": ["half", "threeq"]}, {"name": "Blackfish", "ft": null, "trips": ["half"]}, {"name": "Bongos", "ft": null, "trips": ["half"]}], "latest": {"date": "2026-08-07", "anglers": 146, "kept": 457, "released": null, "adjScore": 2.25}, "history": [{"date": "2026-08-03", "anglers": 99, "kept": 124, "released": null, "flag": null}, {"date": "2026-08-05", "anglers": 147, "kept": 217, "released": null, "flag": null}, {"date": "2026-08-07", "anglers": 146, "kept": 457, "released": null, "flag": null}]}, {"id": "newport", "name": "Newport Landing", "port": "Newport Beach", "url": "https://www.newportlanding.com", "source": "https://www.sportfishingreport.com/landings/newport-landing.php", "rosterVerified": false, "boats": [], "latest": {"date": "2026-08-04", "anglers": 152, "kept": 335, "released": null, "adjScore": 0.44}, "history": [{"date": "2026-08-02", "anglers": 131, "kept": 401, "released": null, "flag": null}, {"date": "2026-08-04", "anglers": 152, "kept": 335, "released": null, "flag": null}]}], "pendingLandings": [{"name": "22nd Street Landing", "port": "San Pedro / LA Harbor", "url": "https://www.22ndstreet.com", "rosterVerified": true, "boats": [{"name": "Freedom", "trips": []}, {"name": "Native Sun", "trips": []}, {"name": "Pursuit", "trips": []}, {"name": "Monte Carlo", "trips": []}, {"name": "Amigo", "trips": []}, {"name": "Ghost", "trips": []}, {"name": "Pride", "trips": []}, {"name": "Truline", "trips": []}, {"name": "Kamryn Dawson", "trips": []}]}, {"name": "LA Waterfront Sportfishing", "port": "San Pedro / LA Harbor", "url": "https://www.laharbor.net", "rosterVerified": true, "boats": [{"name": "Sport King", "trips": []}, {"name": "Triton", "trips": []}, {"name": "Gail Force", "trips": []}]}, {"name": "Long Beach Sportfishing", "port": "Long Beach", "url": "https://www.longbeachsportfishing.org", "rosterVerified": true, "boats": [{"name": "Eldorado", "trips": []}, {"name": "Victory", "trips": []}, {"name": "El Patron", "trips": []}, {"name": "Ahra Ahn", "trips": []}, {"name": "Cee Ray", "trips": []}]}, {"name": "Helgren's Sportfishing", "port": "Oceanside", "url": "https://www.helgrensportfishing.com", "rosterVerified": true, "boats": [{"name": "Oceanside 95", "ft": 95, "trips": ["full", "overnight", "multi"]}, {"name": "Electra", "ft": 75, "trips": ["threeq", "full"]}, {"name": "Sea Trek", "ft": 60, "trips": ["half", "threeq"]}]}], "speciesReportDate": "2026-08-05", "speciesReportLanding": "Oceanside Sea Center", "speciesNote": "Oceanside Sea Center's August 5 report is the only landing in the archive that posted a species-level breakdown. Its seven species sum to its 83 kept fish. Every other species below is tracked by the board but has no verified count in the archive yet — including the offshore fish that only the overnight and multi-day boats reach.", "species": [{"name": "Calico Bass", "alias": "Kelp Bass", "count": 25, "water": "inshore", "season": "Year-round, peaks Jul–Sep", "trip": "half"}, {"name": "Yellowtail", "alias": "California Yellowtail", "count": 23, "water": "pelagic", "season": "Apr–Oct, big run in Aug", "trip": "threeq"}, {"name": "Bonito", "alias": "Pacific Bonito", "count": 21, "water": "pelagic", "season": "Jun–Nov", "trip": "half"}, {"name": "Sand Bass", "alias": "Barred Sand Bass", "count": 9, "water": "inshore", "season": "Jun–Aug spawn aggregation", "trip": "half"}, {"name": "Ocean Whitefish", "alias": null, "count": 3, "water": "inshore", "season": "Year-round", "trip": "threeq"}, {"name": "California Halibut", "alias": null, "count": 1, "water": "inshore", "season": "May–Jul peak, year-round", "trip": "half"}, {"name": "Mako Shark", "alias": "Shortfin Mako", "count": 1, "water": "pelagic", "season": "Jun–Sep", "trip": "full"}, {"name": "Sculpin", "alias": "California Scorpionfish", "count": null, "water": "bottom", "season": "Year-round, seasonal closure", "trip": "threeq"}, {"name": "Bluefin Tuna", "alias": null, "count": null, "water": "pelagic", "season": "Jun–Sep, biggest Jul–Aug", "trip": "multi"}, {"name": "Yellowfin Tuna", "alias": null, "count": null, "water": "pelagic", "season": "Jul–Nov", "trip": "multi"}, {"name": "Dorado", "alias": "Mahi Mahi", "count": null, "water": "pelagic", "season": "Jul–Oct, warm-water years", "trip": "multi"}, {"name": "Barracuda", "alias": "California Barracuda", "count": null, "water": "pelagic", "season": "Peaks Jul", "trip": "half"}, {"name": "Rockfish", "alias": "Vermilion, copper, starry", "count": null, "water": "bottom", "season": "Season opens Mar", "trip": "threeq"}], "speciesReference": [{"name": "Calico Bass", "alias": "Kelp Bass", "water": "Inshore kelp / structure", "season": "Year-round, peaks Jul–Sep", "trip": "Half day"}, {"name": "Barred Sand Bass", "alias": "Sand Bass", "water": "Inshore flats", "season": "Jun–Aug spawn aggregation", "trip": "Half day"}, {"name": "Spotted Bay Bass", "alias": "Spottie", "water": "Bays / harbors", "season": "Year-round", "trip": "Half day"}, {"name": "California Halibut", "alias": null, "water": "Sand flats", "season": "May–Jul peak", "trip": "Half day"}, {"name": "White Seabass", "alias": null, "water": "Kelp edges", "season": "Mar–Jun peak", "trip": "¾ day / overnight"}, {"name": "California Sheephead", "alias": null, "water": "Reef / structure", "season": "Spring–fall", "trip": "¾ day"}, {"name": "Ocean Whitefish", "alias": null, "water": "Hard bottom", "season": "Year-round", "trip": "¾ day"}, {"name": "Sculpin", "alias": "California Scorpionfish", "water": "Reef / wrecks", "season": "Year-round, seasonal closure", "trip": "¾ day"}, {"name": "Rockfish", "alias": "Vermilion, copper, starry, bocaccio", "water": "Deep reef", "season": "Season opens Mar", "trip": "¾ day / full day"}, {"name": "Lingcod", "alias": null, "water": "Deep reef", "season": "Spring–fall", "trip": "Full day"}, {"name": "Cabezon", "alias": null, "water": "Shallow reef", "season": "Year-round", "trip": "¾ day"}, {"name": "Pacific Mackerel", "alias": "Greenback", "water": "Nearshore / bait", "season": "Year-round", "trip": "Half day"}, {"name": "California Barracuda", "alias": null, "water": "Nearshore pelagic", "season": "Peaks Jul", "trip": "Half day"}, {"name": "Pacific Bonito", "alias": null, "water": "Nearshore pelagic", "season": "Jun–Nov", "trip": "Half day"}, {"name": "California Yellowtail", "alias": null, "water": "Kelp / offshore banks", "season": "Apr–Oct, big run in Aug", "trip": "¾ day / overnight"}, {"name": "Bluefin Tuna", "alias": null, "water": "Offshore", "season": "Jun–Sep, biggest Jul–Aug", "trip": "1.5–2.5 day"}, {"name": "Yellowfin Tuna", "alias": null, "water": "Offshore", "season": "Jul–Nov", "trip": "1.5–2.5 day"}, {"name": "Albacore", "alias": "Longfin", "water": "Far offshore", "season": "Jul–Oct, variable years", "trip": "1.5–2.5 day"}, {"name": "Skipjack Tuna", "alias": null, "water": "Offshore", "season": "Jul–Oct", "trip": "Overnight / multi"}, {"name": "Dorado", "alias": "Mahi Mahi / Dolphinfish", "water": "Offshore kelp paddies", "season": "Jul–Oct, warm-water years", "trip": "Overnight / multi"}, {"name": "Striped Marlin", "alias": null, "water": "Offshore", "season": "Aug–Oct", "trip": "Multi-day"}, {"name": "Swordfish", "alias": "Broadbill", "water": "Deep offshore", "season": "Aug–Nov, deep-drop", "trip": "Multi-day"}, {"name": "Shortfin Mako", "alias": "Mako Shark", "water": "Offshore", "season": "Jun–Sep", "trip": "Full day / overnight"}, {"name": "Thresher Shark", "alias": null, "water": "Nearshore pelagic", "season": "Apr–Aug", "trip": "Full day"}, {"name": "Blue Shark", "alias": null, "water": "Offshore", "season": "Jun–Sep", "trip": "Full day"}, {"name": "White Croaker", "alias": "Tomcod", "water": "Surf / bays", "season": "Year-round", "trip": "Half day"}, {"name": "Sargo", "alias": null, "water": "Bays / jetties", "season": "Year-round", "trip": "Half day"}, {"name": "Opaleye", "alias": null, "water": "Shallow reef", "season": "Year-round", "trip": "Half day"}, {"name": "Halfmoon", "alias": "Blue Perch", "water": "Kelp", "season": "Year-round", "trip": "Half day"}], "marineSources": [{"label": "NWS San Diego coastal waters", "url": "https://www.ndbc.noaa.gov/data/Forecasts/FZUS56.KSGX.html"}, {"label": "NWS Los Angeles coastal waters", "url": "https://www.ndbc.noaa.gov/data/Forecasts/FZUS56.KLOX.html"}, {"label": "NDBC 46222 San Pedro", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46222"}, {"label": "NDBC 46256 Long Beach Channel", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46256"}, {"label": "NDBC 46224 Oceanside Offshore", "url": "https://www.ndbc.noaa.gov/station_page.php?station=46224"}, {"label": "NOAA Tides & Currents", "url": "https://tidesandcurrents.noaa.gov/"}], "dataLimits": "These are open-party and charter dock totals — the fleet's counts, not private-boat results. Exact catch locations, harbor entrance conditions, route-specific visibility, current, water temperature, unreported captains and individual fish weights were unavailable in the source reports and have not been inferred. Landing totals pool every trip class that returned that day, so a single line can mix a 5-hour half day with a 2.5-day offshore run."}</script>
 <script type="application/json" id="fish-photos">{}</script>
 
 <header class="masthead">
@@ -818,7 +826,9 @@ window.FISH = (function () {
       '<stop offset="1" stop-color="' + p.bellyShade + '"/></linearGradient>';
   }
 
-  /* Staggered arcs read as scales at tile size without turning to noise. */
+  /* Staggered arcs read as scales at tile size without turning to noise.
+     Paired with scaleMask() so the field is densest on the mid-flank and dies
+     out at the head, belly and peduncle — a flat tiled grid reads as wallpaper. */
   function scales(id, color, s, op) {
     var r = (s * 0.62).toFixed(2), h = (s / 2).toFixed(2);
     return '<pattern id="' + id + '" width="' + s + '" height="' + s +
@@ -830,24 +840,27 @@ window.FISH = (function () {
       '" opacity="' + (op || 0.5) + '"/></pattern>';
   }
 
-  function eye(x, y, r, p) {
-    return '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + p.iris + '"/>' +
-      '<circle cx="' + x + '" cy="' + y + '" r="' + (r * 0.92) + '" fill="none" stroke="' +
-        p.line + '" stroke-width="' + (r * 0.16).toFixed(2) + '" opacity=".8"/>' +
-      '<circle cx="' + x + '" cy="' + y + '" r="' + (r * 0.5) + '" fill="' + p.pupil + '"/>' +
-      '<circle cx="' + (x - r * 0.3) + '" cy="' + (y - r * 0.32) + '" r="' + (r * 0.16) +
-        '" fill="#ffffff" opacity=".5"/>';
+  function eye(x, y, r, p, blurId) {
+    return '<circle cx="' + x + '" cy="' + y + '" r="' + (r * 1.5) + '" fill="' + p.line +
+        '" opacity=".5" filter="url(#' + blurId + ')"/>' +
+      '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + p.iris + '"/>' +
+      '<circle cx="' + x + '" cy="' + y + '" r="' + (r * 0.58) + '" fill="' + p.pupil + '"/>' +
+      '<circle cx="' + (x - r * 0.28) + '" cy="' + (y - r * 0.3) + '" r="' + (r * 0.3) +
+        '" fill="#ffffff" opacity=".22" filter="url(#' + blurId + ')"/>';
   }
 
-  /* A fin is a translucent membrane carried on rays that fan from its base. */
+  /* A fin is a membrane carried on rays that fan from its base. Median fins sit
+     over the tile, not over the body, so translucency there just composites them
+     into the background — they stay near-opaque. Only the near pectoral, which
+     lies across the flank, passes a low `op`. */
   function fin(f, p) {
     var s = '<path d="' + f.d + '" fill="' + (f.fill || p.fin) + '" fill-opacity="' +
-      (f.op || 0.82) + '" stroke="' + p.line + '" stroke-width=".55" stroke-linejoin="round"/>';
+      (f.op || 0.94) + '"/>';
     if (f.base && f.tips) {
       for (var i = 0; i < f.tips.length; i++) {
         s += '<line x1="' + f.base[0] + '" y1="' + f.base[1] + '" x2="' + f.tips[i][0] +
           '" y2="' + f.tips[i][1] + '" stroke="' + p.line +
-          '" stroke-width=".45" opacity=".38" stroke-linecap="round"/>';
+          '" stroke-width=".4" opacity=".2" stroke-linecap="round"/>';
       }
     }
     return s;
@@ -859,7 +872,7 @@ window.FISH = (function () {
       var x = x0 + i * step, y = yFn(x), h = up ? -4.2 : 4.2;
       s += '<path d="M ' + x.toFixed(1) + " " + y.toFixed(1) + " L " + (x + step * 0.58).toFixed(1) +
         " " + (y + h).toFixed(1) + " L " + (x + step * 0.7).toFixed(1) + " " + y.toFixed(1) +
-        ' Z" fill="' + p.finlet + '" fill-opacity=".9" stroke="' + p.line + '" stroke-width=".4"/>';
+        ' Z" fill="' + p.finlet + '" fill-opacity=".82"/>';
     }
     return s;
   }
@@ -868,13 +881,31 @@ window.FISH = (function () {
   function plate(o) {
     var id = o.id, p = o.pal;
     var G = id + "g", S = id + "s", C = id + "c", F = id + "f";
+    var M = id + "m", T = id + "t", I = id + "i", E = id + "e";
+    var sh = o.shading || {};
 
     var defs = "<defs>" +
       grad(G, p) +
       scales(S, p.line, o.scale || 5, o.scaleOp || 0.4) +
       '<clipPath id="' + C + '"><path d="' + o.body + '"/></clipPath>' +
+      /* scale field is masked to the mid-flank so it fades out at the extremities */
+      '<radialGradient id="' + M + '" cx="' + ((sh.sx != null ? sh.sx : 84) / 200) +
+        '" cy="0.5" r="0.62">' +
+        '<stop offset="0" stop-color="#fff" stop-opacity="1"/>' +
+        '<stop offset="0.55" stop-color="#fff" stop-opacity=".75"/>' +
+        '<stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>' +
+      '<mask id="' + T + '"><rect x="-10" y="-10" width="220" height="120" fill="url(#' + M + ')"/></mask>' +
+      /* faint iridescence — what keeps a gradient from reading as plastic */
+      '<linearGradient id="' + I + '" x1="0" y1="0" x2="0.15" y2="1">' +
+        '<stop offset="0" stop-color="#5ad7ff" stop-opacity=".10"/>' +
+        '<stop offset="0.45" stop-color="#b98cff" stop-opacity=".05"/>' +
+        '<stop offset="0.75" stop-color="#ffd88a" stop-opacity=".07"/>' +
+        '<stop offset="1" stop-color="#ffb27a" stop-opacity=".04"/></linearGradient>' +
       '<filter id="' + F + '" x="-40%" y="-40%" width="180%" height="180%">' +
         '<feGaussianBlur stdDeviation="' + (o.blur || 4.5) + '"/>' +
+      "</filter>" +
+      '<filter id="' + E + '" x="-70%" y="-70%" width="240%" height="240%">' +
+        '<feGaussianBlur stdDeviation="1.1"/>' +
       "</filter>" +
       "</defs>";
 
@@ -882,11 +913,18 @@ window.FISH = (function () {
     var front = (o.finsFront || []).map(function (f) { return fin(f, p); }).join("");
 
     /* Volume: a dark wash along the dorsal, a specular band on the flank, a
-       bounce along the belly — all blurred, all clipped to the silhouette. */
-    var sh = o.shading || {};
+       bounce along the belly, ambient occlusion where fins insert, and a soft
+       inner rim standing in for the outline — all blurred, all clipped. */
+    var ao = (o.ao || []).map(function (a) {
+      return '<ellipse cx="' + a[0] + '" cy="' + a[1] + '" rx="' + (a[2] || 9) +
+        '" ry="' + (a[3] || 6) + '" fill="' + p.line + '" opacity="' + (a[4] || 0.3) +
+        '" filter="url(#' + F + ')"/>';
+    }).join("");
+
     var volume =
-      '<rect x="-10" y="-10" width="220" height="120" fill="url(#' + S + ')"/>' +
+      '<rect x="-10" y="-10" width="220" height="120" fill="url(#' + S + ')" mask="url(#' + T + ')"/>' +
       (o.marks || "") +
+      '<rect x="-10" y="-10" width="220" height="120" fill="url(#' + I + ')"/>' +
       '<ellipse cx="' + (sh.dx != null ? sh.dx : 92) + '" cy="' + (sh.dy != null ? sh.dy : 14) +
         '" rx="' + (sh.drx || 92) + '" ry="' + (sh.dry || 20) + '" fill="' + p.back +
         '" opacity="' + (sh.dop || 0.7) + '" filter="url(#' + F + ')"/>' +
@@ -895,15 +933,21 @@ window.FISH = (function () {
         '" opacity="' + (sh.sop || 0.5) + '" filter="url(#' + F + ')"/>' +
       '<ellipse cx="' + (sh.bx != null ? sh.bx : 84) + '" cy="' + (sh.by != null ? sh.by : 92) +
         '" rx="' + (sh.brx || 74) + '" ry="' + (sh.bry || 15) + '" fill="' + p.bellyShade +
-        '" opacity="' + (sh.bop || 0.4) + '" filter="url(#' + F + ')"/>';
+        '" opacity="' + (sh.bop || 0.4) + '" filter="url(#' + F + ')"/>' +
+      ao +
+      /* rim light catching the dorsal contour */
+      (o.rim ? '<path d="' + o.rim + '" fill="none" stroke="' + p.sheen +
+        '" stroke-width="3.5" opacity=".3" filter="url(#' + F + ')"/>' : "") +
+      /* the inner rim shadow that replaces the keyline: a wide dark stroke on the
+         silhouette, blurred, clipped — the body falling away from the light */
+      '<path d="' + o.body + '" fill="none" stroke="' + p.line + '" stroke-width="8" ' +
+        'opacity="' + (o.rimOp || 0.42) + '" filter="url(#' + F + ')"/>';
 
     return defs + behind +
       '<path d="' + o.body + '" fill="url(#' + G + ')"/>' +
       '<g clip-path="url(#' + C + ')">' + volume + "</g>" +
-      '<path d="' + o.body + '" fill="none" stroke="' + p.line +
-        '" stroke-width="1" stroke-linejoin="round"/>' +
       front + (o.details || "") +
-      eye(o.eye[0], o.eye[1], o.eye[2], p);
+      eye(o.eye[0], o.eye[1], o.eye[2], p, E);
   }
 
   /* ---------------- silhouette families ----------------
@@ -922,6 +966,8 @@ window.FISH = (function () {
     return plate({
       id: o.id, pal: p, scale: 3.4, scaleOp: 0.3, blur: 5,
       body: B,
+      rim: "M 18 44 C 28 32, 46 24, 70 21 C 100 18, 128 26, 150 39",
+      ao: [[60, 27, 12, 5, .3], [116, 31, 10, 5, .26], [116, 68, 10, 5, .22], [56, 58, 13, 6, .26]],
       shading: { dx: 78, dy: 15, drx: 82, dry: 20, sx: 74, sy: 44, srx: 54, by: 92, brx: 66, bry: 18 },
       finsBehind: [
         /* first dorsal — curved leading edge, concave trailing */
@@ -969,6 +1015,8 @@ window.FISH = (function () {
     return plate({
       id: o.id, pal: p, scale: 3.2, scaleOp: 0.28, blur: 4.5,
       body: B,
+      rim: "M 16 46 C 28 37, 48 31, 74 28 C 106 26, 134 33, 156 45",
+      ao: [[62, 31, 11, 5, .26], [56, 57, 12, 5, .22]],
       shading: { dx: 80, dy: 20, drx: 86, dry: 18, sx: 76, sy: 46, srx: 58, sry: 5, by: 88, brx: 70, bry: 14 },
       finsBehind: [
         { d: "M 56 28 C 63 20, 72 15, 80 13 C 74 19, 69 25, 67 32 Z",
@@ -999,6 +1047,8 @@ window.FISH = (function () {
     return plate({
       id: o.id, pal: p, scale: 3.2, scaleOp: 0.24, blur: 5,
       body: B,
+      rim: "M 14 47 C 16 33, 26 22, 46 18 C 84 12, 128 29, 153 46",
+      ao: [[70, 20, 22, 6, .24], [52, 61, 11, 5, .22]],
       shading: { dx: 80, dy: 16, drx: 80, dry: 20, sx: 66, sy: 42, srx: 46, by: 86, brx: 62, bry: 16, bop: 0.3 },
       finsBehind: [],
       marks:
@@ -1032,6 +1082,8 @@ window.FISH = (function () {
     return plate({
       id: o.id, pal: p, scale: 2.8, scaleOp: 0.28, blur: 3.4,
       body: B,
+      rim: "M 12 47 C 30 42, 50 39, 76 38 C 116 37, 150 41, 170 47",
+      ao: [[76, 39, 10, 4, .22], [134, 42, 9, 4, .2]],
       shading: { dx: 92, dy: 30, drx: 96, dry: 12, sx: 88, sy: 46, srx: 76, sry: 4, by: 72, brx: 82, bry: 9, bop: 0.28 },
       finsBehind: [
         { d: "M 70 38 C 77 30, 85 26, 92 25 C 87 30, 82 35, 80 40 Z",
@@ -1068,11 +1120,13 @@ window.FISH = (function () {
     for (var i = 0; i < 9; i++) {
       var x = 50 + i * 7.4, h = 10 + Math.abs(i - 4) * 0.8;
       spines += '<path d="M ' + x + " 23 L " + (x + 3.4) + " " + (23 - h) + " L " + (x + 7) +
-        ' 24 Z" fill="' + p.fin + '" fill-opacity=".85" stroke="' + p.line + '" stroke-width=".45"/>';
+        ' 24 Z" fill="' + p.fin + '" fill-opacity=".72"/>';
     }
     return plate({
       id: o.id, pal: p, scale: 6, scaleOp: 0.32, blur: 5,
       body: B,
+      rim: "M 14 44 C 20 31, 38 21, 64 19 C 94 18, 124 30, 144 45",
+      ao: [[84, 24, 30, 6, .26], [48, 55, 12, 5, .22], [106, 70, 10, 4, .2]],
       shading: { dx: 74, dy: 14, drx: 80, dry: 20, sx: 66, sy: 42, srx: 48, by: 90, brx: 64, bry: 17, bop: 0.34 },
       finsBehind: [
         { d: "M 114 24 C 130 26, 142 34, 150 46 L 147 50 C 138 39, 126 31, 113 29 Z" },
@@ -1102,19 +1156,21 @@ window.FISH = (function () {
     for (var i = 0; i < 10; i++) {
       var x = 44 + i * 7, h = 11 + Math.abs(i - 4.5) * 1.1;
       spines += '<path d="M ' + x + " 21 L " + (x + 3) + " " + (21 - h) + " L " + (x + 6.6) +
-        ' 22 Z" fill="' + p.fin + '" fill-opacity=".88" stroke="' + p.line + '" stroke-width=".45"/>';
+        ' 22 Z" fill="' + p.fin + '" fill-opacity=".75"/>';
     }
     return plate({
       id: o.id, pal: p, scale: 6.4, scaleOp: 0.3, blur: 5,
       body: B,
+      rim: "M 12 41 C 18 27, 38 17, 64 15 C 94 14, 122 27, 142 44",
+      ao: [[80, 22, 32, 6, .26], [44, 53, 12, 5, .22], [102, 72, 10, 4, .2]],
       shading: { dx: 70, dy: 10, drx: 78, dry: 20, sx: 62, sy: 38, srx: 44, by: 90, brx: 62, bry: 18, bop: 0.34 },
+      marks: o.marks || "",
       finsBehind: [
         { d: "M 112 22 C 128 24, 140 33, 148 46 L 145 50 C 136 38, 124 29, 111 27 Z" },
         { d: "M 150 43 L 183 29 C 179 38, 178 47, 178 51 C 178 55, 179 63, 183 70 " +
              "L 150 55 C 154 52, 154 47, 150 43 Z",
           base: [152, 49], tips: [[180, 32], [179, 41], [179, 60], [180, 66]] }
       ],
-      marks: "",
       finsFront: [
         { d: "M 96 74 C 110 77, 120 82, 127 89 C 118 79, 108 74, 96 71 Z" },
         { d: "M 40 51 C 50 60, 61 67, 70 72 C 57 69, 45 63, 37 55 Z", op: 0.56,
@@ -1122,7 +1178,7 @@ window.FISH = (function () {
       ],
       details: spines +
         '<path d="M 34 25 C 43 41, 43 58, 32 73" fill="none" stroke="' + p.line + '" stroke-width=".95" opacity=".36"/>' +
-        '<path d="M 32 42 L 43 38 L 41 46 Z" fill="' + p.fin + '" stroke="' + p.line + '" stroke-width=".4"/>' +
+        '<path d="M 32 42 L 43 38 L 41 46 Z" fill="' + p.fin + '" fill-opacity=".8"/>' +
         '<path d="M 32 37 C 66 40, 108 44, 146 47" fill="none" stroke="' + p.line + '" stroke-width=".5" opacity=".22"/>' +
         '<path d="M 7 50 C 14 56, 22 58, 29 58" fill="none" stroke="' + p.line + '" stroke-width=".8" opacity=".5"/>',
       eye: [23, 38, 4.6]
@@ -1131,6 +1187,7 @@ window.FISH = (function () {
 
   function flat(o) {   /* halibut — eyed side up, fins fringing the whole disc */
     var p = o.pal, fringe = "", i, t, cx = 100, cy = 51, rx = 78, ry = 36;
+    var EB = o.id + "e";   /* same blur filter plate() defines, for the second eye */
     for (i = 0; i < 66; i++) {
       t = (i / 66) * Math.PI * 2;
       fringe += '<line x1="' + (cx + Math.cos(t) * rx * 0.96).toFixed(1) + '" y1="' + (cy + Math.sin(t) * ry * 0.96).toFixed(1) +
@@ -1139,6 +1196,8 @@ window.FISH = (function () {
     }
     return plate({
       id: o.id, pal: p, scale: 5, scaleOp: 0.24, blur: 6,
+      rim: "M 32 44 C 44 26, 78 17, 112 21 C 142 25, 162 37, 172 49",
+      ao: [[100, 18, 34, 6, .2], [100, 84, 32, 6, .18]],
       /* the disc narrows to a real wrist before the tail, like any other fish */
       body: "M 24 52 C 34 24, 70 12, 108 16 C 142 20, 164 34, 172 48 " +
             "C 174 50, 175 51, 176 51 C 174 53, 171 55, 166 57 " +
@@ -1160,7 +1219,7 @@ window.FISH = (function () {
       ],
       details: fringe +
         '<path d="M 29 46 C 37 40, 43 38, 49 38" fill="none" stroke="' + p.line + '" stroke-width=".75" opacity=".42"/>' +
-        eye(43, 49, 3.1, p),
+        eye(43, 49, 3.1, p, EB),
       eye: [45, 34, 3.3]
     });
   }
@@ -1177,6 +1236,8 @@ window.FISH = (function () {
     return plate({
       id: o.id, pal: p, scale: 2.6, scaleOp: 0.18, blur: 5,
       body: B,
+      rim: "M 12 47 C 28 39, 52 34, 82 33 C 112 33, 140 38, 158 45",
+      ao: [[88, 34, 14, 5, .26], [58, 58, 13, 5, .24]],
       shading: { dx: 86, dy: 26, drx: 90, dry: 15, sx: 80, sy: 44, srx: 62, sry: 5, by: 74, brx: 74, bry: 11, bop: 0.28 },
       finsBehind: [
         { d: "M 72 34 C 80 18, 90 8, 98 5 C 100 17, 103 28, 108 37 Z",
@@ -1212,12 +1273,12 @@ window.FISH = (function () {
 
   var SPECIES = {
     "Bluefin Tuna": function (id) {
-      return tuna({ id: id, pal: P("#132434", "#8ea3b4", "#f4f6f6", "#1e3a54", "#a8913f", "#0c1520",
+      return tuna({ id: id, pal: P("#132434", "#8ea3b4", "#f4f6f6", "#33587c", "#a8913f", "#0c1520",
         { bellyShade: "#9aa4a8" }) });
     },
     "Yellowfin Tuna": function (id) {
       return tuna({ id: id, sickle: true,
-        pal: P("#16304a", "#8fa4b4", "#f2f4f4", "#20455f", "#d9ad2a", "#0d1c2b",
+        pal: P("#16304a", "#8fa4b4", "#f2f4f4", "#36638a", "#d9ad2a", "#0d1c2b",
           { bellyShade: "#9da7ab" }),
         marks: '<path d="M 22 52 C 64 46, 114 48, 159 53 C 114 58, 64 59, 22 57 Z" fill="#c9a63f" opacity=".5"/>' });
     },
@@ -1227,7 +1288,7 @@ window.FISH = (function () {
         s += '<path d="M ' + (44 + i * 19) + " 25 C " + (55 + i * 19) + " 30, " + (63 + i * 19) +
           " 34, " + (72 + i * 19) + ' 36" fill="none" stroke="#152430" stroke-width="1.6" opacity=".4"/>';
       }
-      return tuna({ id: id, pal: P("#173347", "#93a7b6", "#f2f4f4", "#20415c", "#20415c", "#0d1c29",
+      return tuna({ id: id, pal: P("#173347", "#93a7b6", "#f2f4f4", "#356187", "#356187", "#0d1c29",
         { bellyShade: "#9ea8ac" }), marks: s });
     },
     "Yellowtail": function (id) {
@@ -1239,7 +1300,7 @@ window.FISH = (function () {
         { spot: "#2a5f95", bellyShade: "#c2a72e", sheen: "#f7f0c2" }) });
     },
     "Barracuda": function (id) {
-      return cuda({ id: id, pal: P("#38434e", "#a4aeb7", "#f2f3f3", "#414c57", "#414c57", "#1a222b",
+      return cuda({ id: id, pal: P("#38434e", "#a4aeb7", "#f2f3f3", "#5c6b79", "#5c6b79", "#1a222b",
         { spot: "#1a222b", bellyShade: "#a0a6a9" }) });
     },
     "Calico Bass": function (id) {
@@ -1263,6 +1324,14 @@ window.FISH = (function () {
       return bass({ id: id, pal: P("#574d36", "#a3966f", "#eae0bf", "#63583e", "#b09739", "#2b2619",
         { bellyShade: "#b2a88c", sheen: "#f6f0dc" }) });
     },
+    "Sculpin": function (id) {
+      var m = '<g fill="#4a2a1c" opacity=".3">' +
+        '<ellipse cx="56" cy="34" rx="7" ry="5"/><ellipse cx="80" cy="28" rx="8" ry="5"/>' +
+        '<ellipse cx="104" cy="34" rx="7" ry="5"/><ellipse cx="70" cy="52" rx="8" ry="5"/>' +
+        '<ellipse cx="98" cy="56" rx="7" ry="5"/><ellipse cx="124" cy="46" rx="6" ry="4"/></g>';
+      return rock({ id: id, pal: P("#5e3222", "#a2704b", "#dcb289", "#6d3b26", "#6d3b26", "#33180f",
+        { bellyShade: "#bf9068", sheen: "#ffe0c4" }), marks: m });
+    },
     "Rockfish": function (id) {
       return rock({ id: id, pal: P("#63160d", "#c4462a", "#f2bd93", "#761c10", "#761c10", "#320d07",
         { bellyShade: "#c88a63", sheen: "#ffe8d4" }) });
@@ -1272,7 +1341,7 @@ window.FISH = (function () {
         { spot: "#14120d", bellyShade: "#857b63", sheen: "#d8cfb4" }) });
     },
     "Mako Shark": function (id) {
-      return shark({ id: id, pal: P("#173a56", "#869cae", "#f4f5f5", "#1f4665", "#1f4665", "#0b1a26",
+      return shark({ id: id, pal: P("#173a56", "#869cae", "#f4f5f5", "#34618a", "#34618a", "#0b1a26",
         { bellyShade: "#9fa7aa" }) });
     }
   };
@@ -1442,7 +1511,11 @@ window.FISH = (function () {
     "</div>" +
     '<p class="headline">' + esc(v.headline) + "</p>";
 
-  document.getElementById("read-strip").textContent = v.detail;
+  document.getElementById("read-strip").innerHTML =
+    esc(v.detail) +
+    (D.meta.coverageNote
+      ? '<span class="coverage">' + esc(D.meta.coverageNote) + "</span>"
+      : "");
 
   /* Sparkline of the corridor's kept-per-angler, one point per report date. */
   function sparkline() {

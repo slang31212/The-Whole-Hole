@@ -52,6 +52,7 @@
   --baseline: #a5c5e0;
 
   --shadow: 0 1px 2px rgba(12,35,64,.07), 0 4px 14px rgba(12,35,64,.07);
+  --fish-halo: rgba(12,35,64,.30);
 
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
@@ -75,6 +76,7 @@
     --rule:        #1c3c5d;
     --rule-strong: #2b5682;
 
+    --fish-halo:   rgba(228,242,255,.34);
     --accent:      #7fc0f5;
     --accent-soft: #12314f
 
@@ -113,6 +115,7 @@
   --rule:        #1c3c5d;
   --rule-strong: #2b5682;
 
+  --fish-halo:   rgba(228,242,255,.34);
   --accent:      #7fc0f5;
   --accent-soft: #12314f
 
@@ -293,6 +296,10 @@ section { margin-top: 20px; }
   margin: 12px 0 0; font-size: 13px; color: var(--ink-soft); max-width: 118ch;
   padding-left: 11px; border-left: 3px solid var(--rule-strong);
 }
+.read-strip .coverage {
+  display: block; margin-top: 7px; padding-top: 7px; font-size: 12px;
+  color: var(--ink-mute); border-top: 1px solid var(--rule);
+}
 
 /* The briefing sits below the summary band so the KPI tiles stay short. */
 .briefing {
@@ -441,7 +448,7 @@ section { margin-top: 20px; }
    not a scroll. */
 .species-grid {
   display: grid; gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(min(186px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(152px, 100%), 1fr));
 }
 .sp {
   padding: 9px 11px 10px; display: flex; flex-direction: column; gap: 2px;
@@ -452,6 +459,7 @@ section { margin-top: 20px; }
 .sp .name { font-size: 13px; font-weight: 700; letter-spacing: -.01em; line-height: 1.18; }
 .sp .alias { font-size: 10px; color: var(--ink-mute); line-height: 1.25; }
 svg.fish, img.fish { display: block; width: 100%; height: 68px; margin: 4px 0 2px; }
+svg.fish { filter: drop-shadow(0 0 1.4px var(--fish-halo)); }
 img.fish { object-fit: contain; }
 /* No verified count is stated in words and shown in form: the fish goes flat. */
 .sp.uncounted svg.fish, .sp.uncounted img.fish { filter: saturate(.12) opacity(.5); }
@@ -931,7 +939,11 @@ __FISH_JS__
     "</div>" +
     '<p class="headline">' + esc(v.headline) + "</p>";
 
-  document.getElementById("read-strip").textContent = v.detail;
+  document.getElementById("read-strip").innerHTML =
+    esc(v.detail) +
+    (D.meta.coverageNote
+      ? '<span class="coverage">' + esc(D.meta.coverageNote) + "</span>"
+      : "");
 
   /* Sparkline of the corridor's kept-per-angler, one point per report date. */
   function sparkline() {
