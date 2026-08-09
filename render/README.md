@@ -17,11 +17,20 @@ image model cannot be made to respect a load path. A renderer can.
 
 | File | Scene | Aspect |
 |---|---|---|
-| `../images/mpss-turbine-erection.jpg` | Scene 4 — turbine erection over the corner column, deck part loaded | 16:9 |
-| `../images/mpss-deck-loadout.jpg` | Scene 5 — fully loaded deck alongside the quay, hull not yet mated | 4:5 |
+| `../images/mpss-hulls-in-series.jpg` | Scene 1 — four lower hulls in a row, four build stages | 16:9 |
+| `../images/mpss-deck-on-quay.jpg` | Scene 2 — the deck box alone on skidways, marked out | 16:9 |
+| `../images/mpss-loading-begins.jpg` | Scene 3 — modules rolling aboard, half the deck bare | 16:9 |
+| `../images/mpss-turbine-erection.jpg` | Scene 4 — turbine erection over the corner column | 16:9 |
+| `../images/mpss-deck-loadout.jpg` | Scene 5 — fully loaded deck at the quay, hull not yet mated | 4:5 |
+| `../images/mpss-wet-mating.jpg` | Scene 6 — the float-over, three panels | 21:9 |
 | `../images/mpss-on-station.jpg` | Scene 7 — on station at the 27 m operating draft | 16:9 |
+| `../images/mpss-four-missions.jpg` | Scene 8 — one hull, four loadouts, one camera | strip |
 
-Scene 5 is rendered 4:5 rather than 16:9 deliberately. With a 236 m rotor over
+Scenes 6 and 8 are composited from separately rendered panels by
+`make_strip.py`. That is what "same camera, same lighting" actually requires:
+one wide shot of four platforms would give every panel a different perspective.
+
+Scene 5 is rendered 4:5 rather than 16:9 deliberately. With a 240 m rotor over
 a 90 m deck the subject is roughly twice as tall as it is wide; forcing it into
 16:9 either shrinks the deck to a chip or leaves half the frame empty. The
 brief already allows 1:1 or 4:5 for the loadout scene, and that is the frame
@@ -33,7 +42,10 @@ the subject actually has.
 pip install numpy pillow
 
 python3 render_mpss.py --scene quay --preview          # 640x360, ~5 s
-python3 render_mpss.py --scene station --preview
+python3 test_geometry.py                              # 39 checks
+
+# --scene takes: series | deckbox | loading | erect | quay | station
+#                mate:A|B|C | mission:wind|power|carbon|data
 
 # what shipped
 python3 render_mpss.py --scene quay \
@@ -54,11 +66,11 @@ long render:
 
 ```bash
 # orbit <az> <el> <dist> <focal> [rotor_az] [spin] [deck_top] [aim_y]
-FC_W=1600 FC_H=2000 python3 frame_check.py orbit 156 22 305 35 155 60 7.35 109
+FC_W=1600 FC_H=2000 python3 frame_check.py orbit 156 22 305 35 155 60 7.35 107
 
 # the camera actually used for Scene 5
 FC_W=1600 FC_H=2000 \
-  python3 frame_check.py eye "(102.6,162.7,-230.9)" "(0,109,0)" 35 155 60 7.35
+  python3 frame_check.py eye "(102.2,162.3,-230.0)" "(0,107,0)" 35 155 60 7.35
 ```
 
 Worth knowing before you move a camera: the rotor's blade phase changes how
@@ -73,9 +85,39 @@ the old framing still holds.
 | File | What it is |
 |---|---|
 | `mpss_raytracer.py` | The tracer: oriented boxes, capped cone frusta, a two-level cluster accelerator, the camera, value noise |
-| `mpss_scene.py` | All MPSS geometry and the two scene definitions. Every dimension in the brief lives here |
+| `mpss_scene.py` | All MPSS geometry and every scene definition. Every dimension in the brief lives here |
 | `render_mpss.py` | Sky model, procedural materials, skylight sampling, water, tone mapping, the driver |
-| `frame_check.py` | Camera framing solver |
+| `frame_check.py` | Camera framing solver (`solve()` searches orbits subject to keep-in-frame constraints) |
+| `test_geometry.py` | Asserts the geometry lock and that every scene builds |
+| `make_strip.py` | Composites the Scene 6 and Scene 8 panels |
+
+## The turbine is the NREL reference machine
+
+The 15 MW machine is IEA-15-240-RWT — the NREL/DTU reference turbine — rather
+than an invented one: 240 m rotor, 117 m blades, 150 m hub height, tower
+tapering 10 m to 6.5 m OD, 7.94 m hub, 6 degrees of shaft tilt, 4 degrees of
+precone. `tower_radius_at()` in `mpss_scene.py` is the single source for the
+taper, so a part-erected tower section in Scene 4 has the same profile as the
+finished tower in Scene 5.
+
+The brief asks for "~236-240 m across with ~115 m blades". 240 m is the top of
+its own range; the 117 m blade is 2 m over, which is the reference machine's
+number and is kept.
+
+## A note on the mating panels
+
+Scene 6 is the one place where the brief's geometry and hydrostatics pull
+apart. A deck box carrying 30,000 t would float at roughly 5 m draft, which
+would put the whole mating interface under water and make it unphotographable.
+The series instead follows the brief's own convention — "deck underside inches
+above the waterline" — so the deck floats high, the ballasted hull's column
+tops stand 2.5 m proud, and the deck clears the stab cones by 0.2 m on the way
+in. Those clearances are asserted in `test_geometry.py`. They are a drawing
+convention, not a stability calculation.
+
+Panels A and B are close-ups on one mating corner. At any framing wide enough
+to hold the whole 90 m deck the clearance is about two pixels, so the sequence
+would not read at all.
 
 ## How it is lit
 
@@ -99,7 +141,7 @@ keeping it only produces moiré. Reflections are traced for the near field.
 
 ## Geometry lock
 
-Held identical across both scenes, straight from the brief:
+Held identical across all eight scenes, straight from the brief:
 
 ```
 deck            90 m x 90 m x 7 m box girder, flat plate, no trusses, no bracing
@@ -110,7 +152,7 @@ pontoon         ONE continuous square ring, 15 m wide, 9 m deep
 operating draft 27 m; deck underside 20 m above the waterline at sea
 at the quay     deck underside 0.35 m above the waterline, quay level with the deck
 turbine         tower centreline at (-37.5, +37.5) -- dead centre on the NW column
-                10 m base diameter, 150 m hub height, 236 m rotor, 115 m blades
+                10 m base diameter, 150 m hub height, 240 m rotor, 117 m blades
 ```
 
 ### Scene 4 contradicts itself, and this is how it was resolved

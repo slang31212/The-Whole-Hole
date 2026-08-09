@@ -330,11 +330,11 @@ def shade_water(scene, o, d, t, env, terms, irr_ref):
         streak = fbm(p * np.array([0.9, 0.0, 0.9], F32), 0.42, 3)
         foam = np.clip(crest * (streak * 1.9 - 0.35), 0, 1) ** 0.8
         # wash and broken water where the sea meets the columns
-        for cx, cz, rad in env.get('wash', ()):
+        for cx, cz, rad, str_ in env.get('wash', ()):
             dr = np.sqrt((p[:, 0] - cx) ** 2 + (p[:, 2] - cz) ** 2)
             ring = np.clip((rad - dr) / (rad * 0.5), 0.0, 1.0) ** 0.7
             ring *= np.clip(0.35 + 1.5 * streak, 0.0, 1.0)
-            foam = np.maximum(foam, ring * 0.9)
+            foam = np.maximum(foam, ring * str_)
         foam = foam * np.exp(-t / F32(env['detail_fade'] * 2.5))
         foam_col = np.array([0.60, 0.63, 0.65], F32)
         out = out * (1 - foam)[:, None] + foam_col[None, :] * foam[:, None]
@@ -371,8 +371,16 @@ def finish(rgb, w, h, exposure=1.22, grain=0.0055, vignette=0.16, seed=5):
 
 # ------------------------------------------------------------------ cameras
 CAMERAS = {
-    'quay': dict(eye=(102.6, 162.7, -230.9), target=(0.0, 109.0, 0.0), focal=35.0),
-    'station': dict(eye=(256.7, 47.0, -411.1), target=(0.0, 118.0, 0.0), focal=35.0),
+    # scene 6: A and B share a tight camera on the interface; C pulls back
+    'mate': dict(eye=(88.4, 14.6, 88.4), target=(45.0, 6.0, 45.0), focal=50.0),
+    'matec': dict(eye=(114.6, 160.5, -198.7), target=(0.0, 120.0, 0.0), focal=35.0),
+    # scene 8: one camera shared by all four catalogue panels
+    'mission': dict(eye=(113.9, 72.0, -197.2), target=(0.0, 40.0, 0.0), focal=50.0),
+    'series': dict(eye=(412.9, 150.6, -322.6), target=(0.0, 20.0, 0.0), focal=35.0),
+    'deckbox': dict(eye=(101.3, 98.9, -144.7), target=(0.0, 5.0, 0.0), focal=35.0),
+    'loading': dict(eye=(97.6, 94.9, -156.3), target=(0.0, 5.0, 0.0), focal=35.0),
+    'quay': dict(eye=(102.2, 162.3, -230.0), target=(0.0, 107.0, 0.0), focal=35.0),
+    'station': dict(eye=(256.7, 47.0, -411.1), target=(0.0, 117.0, 0.0), focal=35.0),
     # scene 4 looks in over the NW corner so the 7.5 m inset reads as a real gap
     'erect': dict(eye=(-35.8, 130.9, 181.2), target=(-18.75, 44.0, 18.75), focal=35.0),
 }
@@ -383,15 +391,28 @@ def render(scene_name, width, height, ao_samples, ao_stride, ao_dist,
     t_start = time.time()
     if scene_name == 'quay':
         scene, env = S.scene_quay_loaded()
+    elif scene_name == 'series':
+        scene, env = S.scene_hulls_in_series()
+    elif scene_name == 'deckbox':
+        scene, env = S.scene_deck_on_quay()
+    elif scene_name == 'loading':
+        scene, env = S.scene_loading_begins()
     elif scene_name == 'erect':
         scene, env = S.scene_turbine_erection()
+    elif scene_name.startswith('mission:'):
+        scene, env = S.scene_single_mission(scene_name.split(':', 1)[1])
+    elif scene_name.startswith('mate:'):
+        scene, env = S.scene_wet_mating(scene_name.split(':', 1)[1].upper())
     elif scene_name == 'station':
         scene, env = S.scene_on_station()
     else:
         raise SystemExit('unknown scene: %s' % scene_name)
 
     rw, rh = int(width * supersample), int(height * supersample)
-    spec = CAMERAS[scene_name]
+    key = scene_name.split(':', 1)[0] if ':' in scene_name else scene_name
+    if scene_name == 'mate:C':
+        key = 'matec'
+    spec = CAMERAS[key]
     cam = Camera(spec['eye'], spec['target'], focal_mm=spec['focal'])
     terms = _wave_terms(env['water'])
 
@@ -509,7 +530,8 @@ def render(scene_name, width, height, ao_samples, ao_stride, ao_dist,
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--scene', default='quay',
-                    choices=['quay', 'erect', 'station'])
+                    help="series | deckbox | loading | erect | quay | station"
+                         " | mate:A|B|C | mission:wind|power|carbon|data")
     ap.add_argument('--width', type=int, default=1920)
     ap.add_argument('--height', type=int, default=1080)
     ap.add_argument('--ss', type=int, default=2, help='supersampling factor')

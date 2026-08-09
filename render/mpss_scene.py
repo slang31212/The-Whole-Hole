@@ -44,10 +44,22 @@ PONT_H = 9.0
 DRAFT = 27.0
 AIRGAP = 20.0                       # deck underside above the waterline at sea
 
+# 15 MW machine: IEA-15-240-RWT (the NREL/DTU reference turbine), so the
+# proportions in the image are a real machine's rather than an invented one's.
 TOWER_BASE_D = 10.0                 # comfortably inside the 15 m column
+TOWER_TOP_D = 6.5
 HUB_HEIGHT = 150.0                  # above deck level
-BLADE_LEN = 115.0
-ROTOR_R = 118.0                     # ~236 m rotor, ~2.6 deck widths
+HUB_D = 7.94
+BLADE_LEN = 117.0
+ROTOR_R = 120.0                     # 240 m rotor, 2.67 deck widths
+SHAFT_TILT = 6.0                    # degrees
+PRECONE = 4.0                       # degrees, upwind
+
+
+def tower_radius_at(h):
+    """Tower outer radius h metres above the base flange, linear 10 m -> 6.5 m."""
+    d = TOWER_BASE_D - (TOWER_BASE_D - TOWER_TOP_D) * (h / HUB_HEIGHT)
+    return d / 2.0
 
 CTR_L, CTR_W, CTR_H = 12.192, 2.438, 2.896   # 40 ft ISO container
 
@@ -158,9 +170,14 @@ def add_deck(sc, ytop, group='deck'):
         rail_line(sc, x0, x1, -DECK_HALF + .5, -DECK_HALF + .5, ytop, group)
 
 
-def add_hull(sc, deck_bottom, group='hull'):
-    """Four square columns on a single continuous square ring pontoon."""
-    pb, pt = -DRAFT, -DRAFT + PONT_H          # pontoon bottom / top
+def add_hull(sc, deck_bottom, group='hull', draft=DRAFT, cones=False):
+    """Four square columns on a single continuous square ring pontoon.
+
+    ``draft`` is the depth of the pontoon underside below the waterline, so the
+    hull can be ballasted down for mating and pumped back up afterwards.
+    ``cones`` adds the mating cones on the column tops.
+    """
+    pb, pt = -draft, -draft + PONT_H          # pontoon bottom / top
     ring_out, ring_in = DECK_HALF, DECK_HALF - COL
     cy = (pt + deck_bottom) / 2
     ch = (deck_bottom - pt) / 2
@@ -168,13 +185,17 @@ def add_hull(sc, deck_bottom, group='hull'):
         for sz in (-1, 1):
             sc.box((sx * COL_C, cy, sz * COL_C), (COL_HALF, ch, COL_HALF),
                    M['hull_navy'], group=group)
-            # boot-top band at the waterline
-            sc.box((sx * COL_C, 1.6, sz * COL_C),
+            # boot-top band, painted at the design waterline on the hull --
+            # it rides down with the hull when she ballasts for mating
+            sc.box((sx * COL_C, pb + DRAFT + 1.6, sz * COL_C),
                    (COL_HALF + 0.06, 3.2, COL_HALF + 0.06),
                    M['boot_black'], group=group)
             # column top haunch into the deck
             sc.box((sx * COL_C, deck_bottom - 1.0, sz * COL_C),
                    (COL_HALF + 0.9, 1.0, COL_HALF + 0.9), M['hull_navy'], group=group)
+            if cones:
+                sc.cyl((sx * COL_C, deck_bottom, sz * COL_C), (0, 1, 0), 3.2,
+                       2.3, 0.9, M['safety_yellow'], group=group)
     mid = (pb + pt) / 2
     hh = PONT_H / 2
     span = (ring_out + ring_in) / 2
@@ -191,14 +212,14 @@ def add_turbine(sc, ytop, group='turbine', azimuth=155.0, spin=60.0):
     base_r = TOWER_BASE_D / 2
     sc.cyl((tx, ytop, tz), (0, 1, 0), 2.0, base_r + 0.55, base_r + 0.35,
            M['steel_grey'], group=group)
-    sc.cyl((tx, ytop + 1.9, tz), (0, 1, 0), HUB_HEIGHT - 8.0, base_r, 2.65,
-           M['turbine_white'], group=group)
+    sc.cyl((tx, ytop + 1.9, tz), (0, 1, 0), HUB_HEIGHT - 8.0, base_r,
+           tower_radius_at(HUB_HEIGHT - 6.1), M['turbine_white'], group=group)
     sc.box((tx - base_r - 0.05, ytop + 1.6, tz), (0.25, 1.2, 0.9),
            M['dark_steel'], group=group)   # tower door
 
-    # rotor axis: tilted 5 deg, pointing out over the corner
+    # rotor axis: reference shaft tilt, pointing out over the corner
     a = math.radians(azimuth)
-    tilt = math.radians(5.0)
+    tilt = math.radians(SHAFT_TILT)
     ax = np.array([math.sin(a) * math.cos(tilt), math.sin(tilt),
                    math.cos(a) * math.cos(tilt)], F32)
     ax = norm(ax)
@@ -212,18 +233,22 @@ def add_turbine(sc, ytop, group='turbine', azimuth=155.0, spin=60.0):
     sc.box(nac_c, (5.2, 4.4, 11.5), M['turbine_white'], M=Mn, group=group)
     sc.box(nac_c + vert * 4.6, (3.4, 0.35, 7.0), M['galv'], M=Mn, group=group)
 
+    hub_r = HUB_D / 2.0
     hub = nac_c + ax * 12.0
-    sc.cyl(hub - ax * 3.0, ax, 6.0, 3.4, 3.6, M['turbine_white'], group=group)
-    sc.cyl(hub + ax * 3.0, ax, 4.2, 3.6, 0.7, M['turbine_white'], group=group)
+    sc.cyl(hub - ax * 3.2, ax, 6.4, hub_r * 0.86, hub_r,
+           M['turbine_white'], group=group)
+    sc.cyl(hub + ax * 3.2, ax, 4.6, hub_r, 0.7, M['turbine_white'], group=group)
 
-    # three blades: 6 tapered segments each, with twist and prebend
-    prof_r = np.array([3.0, 22.0, 45.0, 68.0, 91.0, 106.0, ROTOR_R], F32)
-    chord = np.array([3.2, 6.4, 5.3, 4.0, 2.9, 1.9, 0.7], F32)
-    thick = np.array([2.9, 2.2, 1.5, 0.95, 0.60, 0.36, 0.14], F32)
+    # three blades: 6 tapered segments each, with twist, precone and prebend
+    prof_r = np.array([hub_r, 24.0, 47.0, 70.0, 93.0, 108.0, ROTOR_R], F32)
+    chord = np.array([3.4, 6.5, 5.4, 4.1, 2.9, 1.9, 0.7], F32)
+    thick = np.array([3.0, 2.2, 1.5, 0.95, 0.60, 0.36, 0.14], F32)
     twist = np.array([14.0, 9.0, 5.0, 2.5, 1.0, 0.2, 0.0], F32)
+    cone = math.radians(PRECONE)
     for b in range(3):
         phi = math.radians(spin + b * 120.0)
         span = norm(side * math.cos(phi) + vert * math.sin(phi))
+        span = norm(span * math.cos(cone) + ax * math.sin(cone))
         for s in range(len(prof_r) - 1):
             r0, r1 = float(prof_r[s]), float(prof_r[s + 1])
             rm = 0.5 * (r0 + r1)
@@ -235,7 +260,7 @@ def add_turbine(sc, ytop, group='turbine', azimuth=155.0, spin=60.0):
             cd = ch_dir * math.cos(tw) + th_dir * math.sin(tw)
             td = norm(np.cross(cd, span))
             Mb = np.stack([norm(cd), span, td], axis=1).astype(F32)
-            prebend = ax * (0.0035 * rm * rm / 10.0)
+            prebend = ax * (0.00022 * rm * rm)
             centre = hub + span * rm + prebend
             sc.box(centre, (c / 2, (r1 - r0) / 2, t / 2),
                    M['turbine_white'], M=Mb, group=group)
@@ -330,14 +355,16 @@ def add_ccs(sc, y, group='ccs', stage='complete'):
     """SW quarter: CO2 knock-out drums, compression trains, air coolers.
 
     ``stage='frame'`` gives the steel and the compressor skids only -- the
-    state the block is in while the turbine is still going up.
+    state the block is in while the turbine is still going up. ``'skids'`` is
+    earlier still: skids landing on bare plate, before any steel.
     """
-    frame_bay(sc, -41.5, -11.5, -41.0, -20.0, y, 14.0, M['steel_grey'], group,
-              nx=5, nz=4)
-    # deck plates at two levels inside the frame
-    for lev in (7.3, 14.0):
-        sc.box((-26.5, y + lev + 0.12, -30.5), (15.3, 0.12, 10.8),
-               M['grating'], group=group)
+    if stage != 'skids':
+        frame_bay(sc, -41.5, -11.5, -41.0, -20.0, y, 14.0, M['steel_grey'], group,
+                  nx=5, nz=4)
+        # deck plates at two levels inside the frame
+        for lev in (7.3, 14.0):
+            sc.box((-26.5, y + lev + 0.12, -30.5), (15.3, 0.12, 10.8),
+                   M['grating'], group=group)
     # compression trains under the frame: casing + motor + skid
     for i, z in enumerate((-38.5, -33.0, -27.5, -22.0)):
         sc.box((-27.0, y + 0.6, z), (11.0, 0.6, 2.2), M['dark_steel'], group=group)
@@ -346,7 +373,7 @@ def add_ccs(sc, y, group='ccs', stage='complete'):
         sc.box((-21.5, y + 2.6, z), (3.0, 1.7, 1.7), M['steel_grey'], group=group)
         sc.cyl((-34.2, y + 2.6, z), (1, 0, 0), 1.2, 1.7, 1.7,
                M['steel_grey'], group=group)
-    if stage == 'frame':
+    if stage in ('frame', 'skids'):
         return
     # vertical CO2 knock-out drums on skirts, north edge of the block
     for x in (-39.0, -33.0, -27.0, -21.0, -15.0):
@@ -442,8 +469,8 @@ def add_turbine_erection(sc, y, group='erection', stub_h=26.0, lift_gap=15.0):
            M['steel_grey'], group=group)
     sc.cyl((tx, y + 0.59, tz), (0, 1, 0), 0.85, base_r + 0.25, base_r + 0.15,
            M['dark_steel'], group=group)
-    # lower tower section, already bolted down
-    top_r = base_r - 0.9
+    # lower tower section, already bolted down. Taper follows the real tower.
+    top_r = tower_radius_at(stub_h)
     sc.cyl((tx, y + 1.44, tz), (0, 1, 0), stub_h, base_r, top_r,
            M['turbine_white'], group=group)
     sc.cyl((tx, y + 1.44 + stub_h, tz), (0, 1, 0), 0.5, top_r + 0.28, top_r + 0.28,
@@ -465,8 +492,8 @@ def add_turbine_erection(sc, y, group='erection', stub_h=26.0, lift_gap=15.0):
     # second tower section, slung and hovering just above the flange
     sec_h = 34.0
     sec_bot = y + 1.44 + stub_h + lift_gap
-    sc.cyl((tx, sec_bot, tz), (0, 1, 0), sec_h, top_r, top_r - 0.85,
-           M['turbine_white'], group=group)
+    sc.cyl((tx, sec_bot, tz), (0, 1, 0), sec_h, top_r,
+           tower_radius_at(stub_h + sec_h), M['turbine_white'], group=group)
     sc.cyl((tx, sec_bot - 0.5, tz), (0, 1, 0), 0.5, top_r + 0.28, top_r + 0.28,
            M['steel_grey'], group=group)
     # lifting frame and slings up to the hook
@@ -603,6 +630,193 @@ def add_deck_details(sc, y, group='deckdet'):
 
 
 # ---------------------------------------------------------------- the yard
+HULL_COL_H = AIRGAP + DRAFT - PONT_H      # 38 m: pontoon top to deck underside
+
+
+def add_hull_stage(sc, cx, cz, qtop, stage, group='hullseries'):
+    """One lower hull on skidways, at a given point in its build.
+
+    stage 1  complete and painted
+    stage 2  in primer, three columns up, the fourth being landed
+    stage 3  ring pontoon closed, no columns yet
+    stage 4  pontoon segments on skidways, not yet joined
+    """
+    mat = M['hull_navy'] if stage == 1 else M['primer_red']
+    pb = qtop + 1.2                       # sitting on skidways
+    pt = pb + PONT_H
+    mid = (pb + pt) / 2
+    ring_in = DECK_HALF - COL
+    span = (DECK_HALF + ring_in) / 2
+
+    # skidways under the footprint
+    for x in (-37.5, -12.5, 12.5, 37.5):
+        sc.box((cx + x, qtop + 0.6, cz), (1.5, 0.6, DECK_HALF + 2.0),
+               M['dark_steel'], group=group)
+
+    if stage == 4:
+        # four unjoined pontoon legs, gapped at the corners
+        for sz in (-1, 1):
+            sc.box((cx, mid, cz + sz * span), (DECK_HALF - COL - 1.5, PONT_H / 2,
+                                               COL_HALF), mat, group=group)
+        for sx in (-1, 1):
+            sc.box((cx + sx * span, mid, cz), (COL_HALF, PONT_H / 2, ring_in - 6.0),
+                   mat, group=group)
+        # loose plate panels and a segment still on its transporter
+        for i, (dx, dz) in enumerate(((-52, 34), (-52, 22), (52, -30), (52, -42))):
+            sc.box((cx + dx, qtop + 1.0, cz + dz), (8.0, 1.0, 4.5),
+                   M['rust'], group=group, tint=jitter(0.08))
+        return
+
+    # closed square ring pontoon
+    for sz in (-1, 1):
+        sc.box((cx, mid, cz + sz * span), (DECK_HALF, PONT_H / 2, COL_HALF),
+               mat, group=group)
+    for sx in (-1, 1):
+        sc.box((cx + sx * span, mid, cz), (COL_HALF, PONT_H / 2, ring_in),
+               mat, group=group)
+    if stage == 3:
+        return
+
+    # columns: all four up, except stage 2 which is still landing its fourth
+    ch = HULL_COL_H / 2
+    landing = (-1, 1) if stage == 2 else None
+    for sx in (-1, 1):
+        for sz in (-1, 1):
+            if landing and (sx, sz) == landing:
+                continue
+            sc.box((cx + sx * COL_C, pt + ch, cz + sz * COL_C),
+                   (COL_HALF, ch, COL_HALF), mat, group=group)
+            if stage == 1:
+                sc.box((cx + sx * COL_C, pt + HULL_COL_H - 1.0, cz + sz * COL_C),
+                       (COL_HALF + 0.9, 1.0, COL_HALF + 0.9), mat, group=group)
+
+    if stage == 2:
+        lx, lz = cx + landing[0] * COL_C, cz + landing[1] * COL_C
+        lift = pt + 14.0                       # slung above its final seat
+        sc.box((lx, lift + ch, lz), (COL_HALF, ch, COL_HALF), mat, group=group)
+        sc.box((lx, lift + HULL_COL_H + 1.0, lz), (COL_HALF - 1.0, 1.0, 1.4),
+               M['safety_yellow'], group=group)
+        hook = np.array([lx, lift + HULL_COL_H + 11.0, lz], F32)
+        for sx in (-1, 1):
+            a = np.array([lx + sx * (COL_HALF - 1.5), lift + HULL_COL_H + 1.8, lz], F32)
+            d = hook - a
+            sc.cyl(a, d, float(np.linalg.norm(d)), 0.08, 0.08,
+                   M['dark_steel'], group=group)
+        sc.box(hook, (0.8, 1.4, 0.8), M['dark_steel'], group=group)
+        add_erection_crane(sc, qtop, hook, base_xz=(cx + 6.0, cz - 62.0),
+                           group=group)
+    # welders' tents and staging against the finished hulls
+    for dx, dz in ((-44, -50), (-16, -52), (20, -50), (44, -48)):
+        sc.box((cx + dx, qtop + 1.6, cz + dz), (2.6, 1.6, 2.2),
+               M['ctr_white'], group=group)
+    people(sc, [(cx - 40, cz - 48), (cx - 14, cz - 50), (cx + 24, cz - 47),
+                (cx + 47, cz - 45)], qtop, group)
+
+
+def add_dry_quay(sc, qtop, water_z=78.0, build_band=(150.0, 290.0),
+                 group='dryquay'):
+    """A broad concrete apron with the water edge to the north.
+
+    Scenes 1 and 2 stand things *on* the quay rather than floating them
+    alongside it, so the quay has to extend under the origin. Kept separate
+    from add_quay() rather than threading an offset through the whole yard,
+    which would disturb scenes already rendered.
+    """
+    sc.box((0.0, qtop - 9.0, water_z - 300.0), (760.0, 9.0, 300.0),
+           M['concrete'], group=group)
+    sc.box((0.0, qtop - 0.9, water_z - 0.6), (760.0, 0.9, 0.6),
+           M['dark_steel'], group=group)
+    for x in np.arange(-320.0, 321.0, 14.0):
+        sc.cyl((float(x), qtop - 2.6, water_z - 1.6), (0, 0, 1), 1.2, 1.3, 1.3,
+               M['rubber'], group=group)
+    for x in np.arange(-330.0, 331.0, 24.0):
+        sc.cyl((float(x), qtop, water_z - 5.0), (0, 1, 0), 1.15, 0.42, 0.50,
+               M['dark_steel'], group=group)
+    _r = np.random.default_rng(1207)
+    # workshops and stores set well back, plus ordinary portal cranes
+    for i in range(16):
+        w = float(_r.uniform(22, 60)); d = float(_r.uniform(16, 34))
+        h = float(_r.uniform(10, 22))
+        sc.box((float(_r.uniform(-620, 620)), qtop + h / 2,
+                water_z - float(_r.uniform(*build_band))), (w, h / 2, d),
+               M['steel_grey'], group=group, tint=jitter(0.06))
+    for x in (-430.0, -230.0, -155.0, 150.0, 250.0, 460.0):
+        for dz in (-16.0, -44.0):
+            sc.box((x, qtop + 15.0, water_z + dz), (1.2, 15.0, 1.2),
+                   M['ctr_grey'], group=group)
+        sc.cyl((x, qtop + 31.0, water_z - 30.0), (0, 0, 1), 46.0, 0.85, 0.65,
+               M['ctr_grey'], group=group)
+    for x in np.arange(-600.0, 601.0, 120.0):
+        sc.cyl((float(x), qtop, water_z - 120.0), (0, 1, 0), 24.0, 0.55, 0.40,
+               M['galv'], group=group)
+        sc.box((float(x), qtop + 24.6, water_z - 120.0), (1.6, 0.35, 0.8),
+               M['galv'], group=group)
+    # plate stacks, pipe bundles and welders' tents -- ordinary yard clutter
+    for i in range(40):
+        x = float(_r.uniform(-560, 560)); z = water_z - float(_r.uniform(40, 430))
+        sc.box((x, qtop + 0.55, z), (4.6, 0.55, 2.8),
+               [M['primer_red'], M['rust'], M['steel_grey']][i % 3],
+               group=group, tint=jitter(0.08))
+    for i in range(18):
+        x = float(_r.uniform(-520, 520)); z = water_z - float(_r.uniform(60, 400))
+        sc.box((x, qtop + 2.0, z), (4.5, 2.0, 3.6), M['ctr_white'], group=group)
+
+
+def add_grillage(sc, qtop, deck_bottom, group='grillage'):
+    """Skidways and grillage carrying the deck box while it sits on the quay."""
+    for x in (-33.0, -11.0, 11.0, 33.0):            # skidway beams, north-south
+        sc.box((x, qtop + 0.35, 0.0), (1.4, 0.35, DECK_HALF + 3.0),
+               M['dark_steel'], group=group)
+    h = (deck_bottom - (qtop + 0.7)) / 2.0
+    for x in (-37.0, -22.0, -7.0, 7.0, 22.0, 37.0):
+        for z in (-37.0, -18.5, 0.0, 18.5, 37.0):   # grillage stools
+            sc.box((x, qtop + 0.7 + h, z), (1.5, h, 1.5),
+                   M['rust'], group=group, tint=jitter(0.07))
+    for z in (-37.0, 0.0, 37.0):                    # tie beams between stools
+        sc.box((0.0, deck_bottom - 0.5, z), (DECK_HALF - 2.0, 0.4, 0.5),
+               M['steel_grey'], group=group)
+
+
+ZONE_FOOTPRINTS = (
+    (8.4, 42.0, 9.7, 37.1),        # NE  data centre
+    (8.4, 41.0, -41.0, -10.0),     # SE  BESS + power conversion
+    (-42.0, -11.0, -42.0, -14.0),  # SW  CCS process block
+    (-42.0, -13.0, 10.0, 42.0),    # NW  turbine plant
+)
+
+
+def add_module_footprints(sc, y, group='footprints'):
+    """Painted module footprints marked out on bare deck plate."""
+    t, w = 0.028, 0.34
+    for x0, x1, z0, z1 in ZONE_FOOTPRINTS:
+        cx, cz = (x0 + x1) / 2, (z0 + z1) / 2
+        hx, hz = (x1 - x0) / 2, (z1 - z0) / 2
+        for sx in (-1, 1):
+            sc.box((cx + sx * hx, y + t, cz), (w, t, hz), M['safety_yellow'],
+                   group=group)
+            sc.box((cx, y + t, cz + sx * hz), (hx, t, w), M['safety_yellow'],
+                   group=group)
+
+
+def add_spmt(sc, y, x, z, yaw=0.0, module=True, group='spmt'):
+    """Self-propelled modular transporter, optionally with a module aboard."""
+    Mv = yaw_matrix(yaw)
+
+    def put(c, h, mat, tint=(1, 1, 1)):
+        sc.box(Mv @ np.asarray(c, F32) + np.array([x, y, z], F32), h, mat,
+               M=Mv, tint=tint, group=group)
+
+    for dx in np.arange(-8.0, 8.1, 2.0):            # axle lines
+        put((float(dx), 0.55, 0.0), (0.85, 0.55, 3.1), M['dark_steel'])
+    put((0.0, 1.35, 0.0), (9.4, 0.35, 3.3), M['steel_grey'])
+    put((0.0, 1.75, 0.0), (9.2, 0.12, 3.1), M['safety_yellow'])
+    put((10.2, 1.15, 0.0), (1.1, 1.15, 1.4), M['safety_yellow'])   # power pack
+    if module:
+        put((0.0, 2.05, 0.0), (7.6, 0.25, 2.8), M['dark_steel'])
+        put((0.0, 4.3, 0.0), (7.4, 2.0, 2.6), M['ctr_grey'], jitter(0.06))
+        put((0.0, 6.5, 0.0), (6.4, 0.2, 2.2), M['galv'])
+
+
 def add_quay(sc, ytop, group='quay'):
     """Concrete quay along the south edge, its surface level with the deck."""
     sc.box((0.0, ytop - 9.0, -272.0), (720.0, 9.0, 224.0), M['concrete'], group=group)
@@ -822,6 +1036,24 @@ def add_basin_traffic(sc, group='traffic'):
            M['dark_steel'], group=group)
 
 
+def add_tug(sc, x0, z0, yaw_deg, group='tug'):
+    """Harbour tug: 26 m, orange upperworks, for mating and manoeuvring."""
+    Mv = yaw_matrix(yaw_deg)
+    base = np.array([x0, 0.0, z0], F32)
+
+    def put(c, h, mat):
+        sc.box(Mv @ np.asarray(c, F32) + base, h, mat, M=Mv, group=group)
+
+    put((0, 1.4, 0), (13.0, 2.6, 4.6), M['boot_black'])
+    put((0, 4.2, 0), (13.0, 1.2, 4.8), M['hull_navy'])
+    put((-1.0, 6.6, 0), (5.0, 2.2, 3.8), M['white_paint'])
+    put((-1.0, 9.4, 0), (3.0, 1.0, 3.0), M['white_paint'])
+    put((-1.0, 10.8, 0), (2.4, 0.5, 2.4), M['glass_dark'])
+    put((6.0, 5.8, 0), (2.2, 1.4, 3.0), M['orange'])
+    sc.cyl(base + Mv @ np.array([-2.0, 10.9, 0.0], F32), (0, 1, 0), 6.0, 0.5, 0.4,
+           M['dark_steel'], group=group)
+
+
 def add_supply_vessel(sc, x0, z0, yaw_deg, group='vessel'):
     """Platform supply vessel alongside, for scale (Scene 7)."""
     Mv = yaw_matrix(yaw_deg)
@@ -879,6 +1111,91 @@ def scene_quay_loaded(loaded=True):
     return sc.build(), env
 
 
+def scene_hulls_in_series():
+    """Scene 1 -- four identical lower hulls in a row, at four build stages.
+
+    No decks, no turbines, no topsides anywhere in frame. The repetition is
+    the subject: the same hull built again and again like a production run.
+    """
+    sc = Scene()
+    qtop = 7.35
+    add_dry_quay(sc, qtop, water_z=118.0, build_band=(8.0, 48.0))
+    # goliath gantry straddling the build berths
+    gx, gh = -62.5, 62.0
+    for dx in (-58.0, 58.0):
+        for dz in (-56.0, 56.0):
+            sc.box((gx + dx, qtop + gh / 2, dz), (2.2, gh / 2, 2.2),
+                   M['ctr_grey'], group='gantry')
+        sc.box((gx + dx, qtop + gh - 2.0, 0.0), (2.0, 2.0, 58.0),
+               M['ctr_grey'], group='gantry')
+    sc.box((gx, qtop + gh + 2.5, 0.0), (62.0, 2.8, 3.2), M['ctr_grey'],
+           group='gantry')
+    sc.box((gx + 14.0, qtop + gh - 3.0, 0.0), (5.0, 3.0, 4.0),
+           M['safety_yellow'], group='gantry')
+    for i, (cx, stage) in enumerate(((187.5, 1), (62.5, 2), (-62.5, 3), (-187.5, 4))):
+        add_hull_stage(sc, cx, 0.0, qtop, stage)
+    env = dict(water='harbour', water_y=0.0, deck_top=qtop,
+               fog_density=0.00007, detail_fade=420.0, horizon_props=True)
+    return sc.build(), env
+
+
+def scene_deck_on_quay():
+    """Scene 2 -- the deck box alone on skidways, before it ever touches a hull.
+
+    No hull, no columns underneath. Bare plate with the module footprints and
+    column hard points marked out, and workers on it for scale.
+    """
+    sc = Scene()
+    qtop = 7.35                       # quay surface
+    ytop = qtop + 1.6 + DECK_THK      # deck underside a metre or two clear
+    add_dry_quay(sc, qtop)
+    add_grillage(sc, qtop, ytop - DECK_THK)
+    add_deck(sc, ytop)
+    add_module_footprints(sc, ytop)
+    for sx in (-1, 1):
+        for sz in (-1, 1):
+            add_column_footprint(sc, ytop, sx * COL_C, sz * COL_C)
+    # access stair up from the quay, and the crew walking the empty deck
+    sc.box((0.0, qtop + 4.3, -DECK_HALF - 4.0), (3.0, 4.3, 4.0),
+           M['steel_grey'], group='access')
+    for lvl in range(1, 5):
+        sc.box((0.0, qtop + lvl * 1.9, -DECK_HALF - 4.0), (3.4, 0.10, 3.6),
+               M['grating'], group='access')
+    people(sc, [(-30, 20), (-26, 17), (5, 6), (18, -14), (33, 30), (-12, -32),
+                (40, 5), (-40, -20), (8, 38), (22, 22), (-6, -8), (14, -36),
+                (-34, 40), (28, -30), (0, -42), (-18, 8)], ytop, 'crew')
+    people(sc, [(-52, -20), (46, -30), (-70, 10), (64, 24)], qtop, 'crew')
+    env = dict(water='harbour', water_y=0.0, deck_top=ytop,
+               fog_density=0.00009, detail_fade=420.0, horizon_props=True)
+    return sc.build(), env
+
+
+def scene_loading_begins():
+    """Scene 3 -- modules rolling aboard over the ramp, half the deck still bare."""
+    sc = Scene()
+    ytop = 7.35
+    add_deck(sc, ytop)
+    add_module_footprints(sc, ytop)
+    for sx in (-1, 1):
+        for sz in (-1, 1):
+            add_column_footprint(sc, ytop, sx * COL_C, sz * COL_C)
+    add_bess(sc, ytop, rows=BESS_ROWS[:2], full=False)
+    add_ccs(sc, ytop, stage='skids')
+    # roll-on in progress: one transporter on the link-span, one already aboard
+    add_spmt(sc, ytop, 0.0, -47.0, 90.0, module=True)
+    add_spmt(sc, ytop, 4.0, -22.0, 90.0, module=True)
+    add_spmt(sc, ytop, -34.0, -60.0, 0.0, module=False)
+    add_deck_details(sc, ytop)
+    add_quay(sc, ytop)
+    add_apron(sc, ytop)
+    add_yard(sc, ytop)
+    add_far_bank(sc, ytop)
+    add_basin_traffic(sc)
+    env = dict(water='harbour', water_y=0.0, deck_top=ytop,
+               fog_density=0.00008, detail_fade=420.0, horizon_props=True)
+    return sc.build(), env
+
+
 def scene_turbine_erection():
     """Scene 4 -- turbine erection over the corner column, deck part loaded.
 
@@ -918,6 +1235,145 @@ def scene_turbine_erection():
     return sc.build(), env
 
 
+def _full_loadout(sc, ytop):
+    """Everything bolted to the deck, at whatever height the deck is sitting."""
+    add_turbine(sc, ytop, azimuth=158.0, spin=60.0)
+    add_datacentre(sc, ytop)
+    add_bess(sc, ytop)
+    add_ccs(sc, ytop)
+    add_turbine_plant(sc, ytop)
+    add_deck_details(sc, ytop)
+
+
+# Mating drafts. Column top sits at (PONT_H + HULL_COL_H) - draft = 47 - draft.
+# A float-over only works if the deck can pass over the column tops, so the
+# hull is ballasted until its tops are just awash and the floating deck clears
+# them by about a metre -- which is also the moment the brief describes.
+MATE_DRAFT = 44.5          # column tops 2.5 m proud, so the hull actually reads
+MATE_DECK_BOTTOM = 3.5     # floating deck underside, 1.0 m of clearance
+LIFT_DRAFT = 35.0          # part deballasted, deck 12 m clear of the water
+
+
+def scene_wet_mating(panel):
+    """Scene 6 -- the float-over, in three panels off the quay.
+
+    A  hull ballasted deep, manoeuvring in beneath the loaded deck
+    B  hull centred under it, mating cones entering the deck sockets
+    C  deballasting; the whole loaded platform lifts clear as one unit
+
+    Mating happens last: the deck is already loaded and commissioned in all
+    three panels. Panels A and B share a tight camera on the interface, which
+    is where the action is; C pulls back to show the finished platform.
+    """
+    if panel not in ('A', 'B', 'C'):
+        raise ValueError('panel must be A, B or C')
+    sc = Scene()
+
+    if panel == 'C':
+        deck_bottom = (PONT_H + HULL_COL_H) - LIFT_DRAFT      # 12 m
+        ytop = deck_bottom + DECK_THK
+        add_hull(sc, deck_bottom, draft=LIFT_DRAFT)
+        add_deck(sc, ytop)
+        _full_loadout(sc, ytop)
+        for x, z in ((-150.0, 70.0), (140.0, -80.0)):
+            add_tug(sc, x, z, 40.0)
+    else:
+        deck_bottom = MATE_DECK_BOTTOM                         # deck still afloat
+        ytop = deck_bottom + DECK_THK
+        add_deck(sc, ytop)
+        _full_loadout(sc, ytop)
+        # receiving sockets under the deck, on the column lines
+        for sx in (-1, 1):
+            for sz in (-1, 1):
+                sc.box((sx * COL_C, deck_bottom - 0.45, sz * COL_C),
+                       (COL_HALF - 0.5, 0.45, COL_HALF - 0.5),
+                       M['steel_grey'], group='sockets')
+                sc.cyl((sx * COL_C, deck_bottom - 0.9, sz * COL_C), (0, 1, 0),
+                       0.45, 3.1, 2.7, M['dark_steel'], group='sockets')
+        col_top = (PONT_H + HULL_COL_H) - MATE_DRAFT           # -0.5 m
+        dx = -13.0 if panel == 'A' else 0.0                    # still coming in
+        sc.hull_offset = dx
+        _offset_hull(sc, col_top, MATE_DRAFT, dx)
+        for x, z in ((dx - 108.0, 66.0), (dx - 98.0, -72.0)):
+            add_tug(sc, x, z, 88.0)
+        # winch lines from the hull's deck-level fairleads out to the tugs
+        for sx, sz in ((-1, 1), (-1, -1)):
+            a = np.array([dx + sx * DECK_HALF, col_top + 0.8, sz * COL_C], F32)
+            b = np.array([dx - 102.0, 4.6, sz * 66.0], F32)
+            d = b - a
+            sc.cyl(a, d, float(np.linalg.norm(d)), 0.09, 0.09,
+                   M['ctr_white'], group='winch')
+
+    env = dict(water='harbour', water_y=0.0, deck_top=ytop,
+               fog_density=0.00009, detail_fade=420.0, horizon_props=True)
+    add_quay(sc, 7.35)
+    add_apron(sc, 7.35)
+    add_yard(sc, 7.35)
+    add_far_bank(sc, 7.35)
+    return sc.build(), env
+
+
+def _offset_hull(sc, col_top, draft, dx):
+    """The lower hull, shifted along x so it can be shown mid-manoeuvre."""
+    pb, pt = -draft, -draft + PONT_H
+    mid, hh = (pb + pt) / 2, PONT_H / 2
+    ring_in = DECK_HALF - COL
+    span = (DECK_HALF + ring_in) / 2
+    cy = (pt + col_top) / 2
+    ch = (col_top - pt) / 2
+    g = 'matehull'
+    for sx in (-1, 1):
+        for sz in (-1, 1):
+            sc.box((dx + sx * COL_C, cy, sz * COL_C), (COL_HALF, ch, COL_HALF),
+                   M['hull_navy'], group=g)
+            sc.box((dx + sx * COL_C, pb + DRAFT + 1.6, sz * COL_C),
+                   (COL_HALF + 0.06, 3.2, COL_HALF + 0.06), M['boot_black'], group=g)
+            # mating cone on each column top, reaching up for its socket
+            sc.cyl((dx + sx * COL_C, col_top, sz * COL_C), (0, 1, 0), 0.8,
+                   2.5, 1.4, M['safety_yellow'], group=g)
+    for sz in (-1, 1):
+        sc.box((dx, mid, sz * span), (DECK_HALF, hh, COL_HALF), M['hull_navy'], group=g)
+    for sx in (-1, 1):
+        sc.box((dx + sx * span, mid, 0), (COL_HALF, hh, ring_in),
+               M['hull_navy'], group=g)
+
+
+MISSIONS = ('wind', 'power', 'carbon', 'data')
+
+
+def scene_single_mission(mission):
+    """Scene 8 -- one platform carrying exactly one mission.
+
+    Rendered four times with an identical camera and composited into a strip,
+    which is what "same camera, same lighting, same hull" actually requires;
+    one wide shot of four platforms would give each a different perspective.
+    """
+    if mission not in MISSIONS:
+        raise ValueError('unknown mission %r' % (mission,))
+    sc = Scene()
+    ytop = AIRGAP + DECK_THK
+    add_deck(sc, ytop)
+    add_hull(sc, AIRGAP)
+    add_module_footprints(sc, ytop)
+    for sx in (-1, 1):
+        for sz in (-1, 1):
+            add_column_footprint(sc, ytop, sx * COL_C, sz * COL_C)
+    if mission == 'wind':
+        add_turbine(sc, ytop, azimuth=158.0, spin=60.0)
+        add_turbine_plant(sc, ytop)
+    elif mission == 'power':
+        add_bess(sc, ytop)
+    elif mission == 'carbon':
+        add_ccs(sc, ytop)
+    elif mission == 'data':
+        add_datacentre(sc, ytop)
+    env = dict(water='sea', water_y=0.0, deck_top=ytop,
+               fog_density=0.00013, detail_fade=1300.0, horizon_props=False,
+               wash=tuple((sx * COL_C, sz * COL_C, 15.0, 0.45)
+                          for sx in (-1, 1) for sz in (-1, 1)))
+    return sc.build(), env
+
+
 def scene_on_station():
     """Scene 7 -- on station at the 27 m operating draft, moderate 3-4 m sea."""
     sc = Scene()
@@ -938,7 +1394,7 @@ def scene_on_station():
         fog_density=0.00013,
         detail_fade=1300.0,
         horizon_props=False,
-        wash=tuple((sx * COL_C, sz * COL_C, 23.0)
+        wash=tuple((sx * COL_C, sz * COL_C, 23.0, 0.9)
                    for sx in (-1, 1) for sz in (-1, 1)),
     )
     return sc.build(), env

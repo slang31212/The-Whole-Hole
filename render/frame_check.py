@@ -86,6 +86,48 @@ def report(eye, target, focal, w=None, h=None, deck_top=7.35,
     return deck_w, bad, fill_u, fill_v
 
 
+def deck_corners(deck_top):
+    return [(sx * S.DECK_HALF, deck_top, sz * S.DECK_HALF)
+            for sx in (-1, 1) for sz in (-1, 1)]
+
+
+def solve(must, w, h, focal=35.0, az=(140, 210, 5), el=(18, 36, 2),
+          dist=(140, 400, 10), aimy=(10, 90, 5), aim_xz=(0.0, 0.0),
+          margin_u=0.93, margin_v=0.91, centre_tol=0.14, score=None, top=3):
+    """Search camera orbits that keep every point in ``must`` inside the frame.
+
+    Returns the best few as (score, az, el, dist, aimy, eye, aim). Default score
+    is the on-screen width of the deck, i.e. make the subject as large as the
+    constraints allow. Pass ``score(uv)`` to optimise something else -- Scene 4
+    maximised the gap between the tower base and the deck corner instead.
+    """
+    must = np.asarray(must, F32)
+    out = []
+    for a_deg in range(*az):
+        for e_deg in range(*el):
+            a, e = math.radians(a_deg), math.radians(e_deg)
+            u = np.array([math.sin(a) * math.cos(e), math.sin(e),
+                          math.cos(a) * math.cos(e)], F32)
+            for d in range(*dist):
+                for ay in range(*aimy):
+                    aim = np.array([aim_xz[0], float(ay), aim_xz[1]], F32)
+                    eye = aim + u * d
+                    cam = Camera(tuple(float(v) for v in eye),
+                                 tuple(float(v) for v in aim), focal_mm=focal)
+                    uv = project(cam, must, w, h)
+                    if np.abs(uv[:, 0]).max() > margin_u: continue
+                    if np.abs(uv[:, 1]).max() > margin_v: continue
+                    if abs((uv[:, 1].min() + uv[:, 1].max()) / 2) > centre_tol:
+                        continue
+                    s = (score(uv) if score
+                         else float(uv[:4, 0].max() - uv[:4, 0].min()))
+                    out.append((round(s * 50, 1), a_deg, e_deg, d, ay,
+                                tuple(round(float(v), 1) for v in eye),
+                                tuple(round(float(v), 1) for v in aim)))
+    out.sort(reverse=True)
+    return out[:top]
+
+
 def orbit(az, el, dist, aim=(0.0, 60.0, 0.0)):
     a, e = math.radians(az), math.radians(el)
     aim = np.array(aim, F32)
