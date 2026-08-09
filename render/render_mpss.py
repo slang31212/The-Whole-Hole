@@ -372,7 +372,7 @@ def finish(rgb, w, h, exposure=1.22, grain=0.0055, vignette=0.16, seed=5):
 # ------------------------------------------------------------------ cameras
 CAMERAS = {
     # scene 6: A and B share a tight camera on the interface; C pulls back
-    'mate': dict(eye=(88.4, 14.6, 88.4), target=(45.0, 6.0, 45.0), focal=50.0),
+    'mate': dict(eye=(71.4, 10.6, 71.4), target=(45.0, 4.0, 45.0), focal=50.0),
     'matec': dict(eye=(114.6, 160.5, -198.7), target=(0.0, 120.0, 0.0), focal=35.0),
     # scene 8: one camera shared by all four catalogue panels
     'mission': dict(eye=(113.9, 72.0, -197.2), target=(0.0, 40.0, 0.0), focal=50.0),
