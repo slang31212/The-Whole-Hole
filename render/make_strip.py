@@ -13,8 +13,11 @@ import argparse
 from PIL import Image
 
 
-def build(paths, gutter=6, edge=0, bg=(214, 217, 220)):
+def build(paths, gutter=6, edge=0, bg=(214, 217, 220), crop=None):
     ims = [Image.open(p).convert('RGB') for p in paths]
+    if crop:
+        y0, y1 = crop
+        ims = [i.crop((0, y0, i.width, y1)) for i in ims]
     w = min(i.width for i in ims)
     h = min(i.height for i in ims)
     ims = [i if i.size == (w, h) else i.resize((w, h), Image.LANCZOS) for i in ims]
@@ -33,8 +36,13 @@ def main():
     ap.add_argument('--gutter', type=int, default=6,
                     help='hairline between panels, px (0 for a seamless strip)')
     ap.add_argument('--edge', type=int, default=0)
+    ap.add_argument('--crop', type=int, nargs=2, metavar=('Y0', 'Y1'),
+                    help='trim every panel to this vertical band before '
+                         'compositing; the catalogue panels are rendered with '
+                         'headroom for the turbine and cropped back so the '
+                         'deck payloads read')
     a = ap.parse_args()
-    strip = build(a.panels, a.gutter, a.edge)
+    strip = build(a.panels, a.gutter, a.edge, crop=a.crop)
     strip.save(a.out, quality=94, subsampling=0)
     print('wrote %s (%dx%d) from %d panels'
           % (a.out, strip.width, strip.height, len(a.panels)))
