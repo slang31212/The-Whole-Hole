@@ -106,18 +106,27 @@ number and is kept.
 
 ## A note on the mating panels
 
-Scene 6 is the one place where the brief's geometry and hydrostatics pull
-apart. A deck box carrying 30,000 t would float at roughly 5 m draft, which
-would put the whole mating interface under water and make it unphotographable.
-The series instead follows the brief's own convention — "deck underside inches
-above the waterline" — so the deck floats high, the ballasted hull's column
-tops stand 2.5 m proud, and the deck clears the stab cones by 0.2 m on the way
-in. Those clearances are asserted in `test_geometry.py`. They are a drawing
-convention, not a stability calculation.
+The deck does not float on its own. A semi-submersible transport barge runs in
+through the 60 m clear opening between the columns, carries the loaded deck out
+over the ballasted hull and acts as a camel; the hull then deballasts, takes
+the load, and the barge ballasts down and withdraws. `add_camel_barge()` models
+it, sized to pass between the columns.
 
-Panels A and B are close-ups on one mating corner. At any framing wide enough
-to hold the whole 90 m deck the clearance is about two pixels, so the sequence
-would not read at all.
+That is what makes the float-over drawable at all. Without the barge a deck box
+carrying this much payload would float at several metres' draft and put the
+whole mating interface under water, where there is nothing to photograph.
+
+Panel A stands the ballasted hull off to one side so it reads as a separate
+object: four column tops just proud of the water, mating cones up, each in a
+ring of broken water. Panel B has it underneath, the same rings now at the
+deck's corners. Panel C is the platform lifted clear on its own columns with
+the barge gone. The wash rings are doing most of the storytelling -- a
+submerged hull has almost no silhouette otherwise.
+
+Exact clearances (column tops 2.5 m proud, deck underside 3.5 m, 0.2 m over the
+cone tips) are asserted in `test_geometry.py` so they cannot drift, but they are
+a drawing convention chosen to make the operation legible, not a stability
+calculation.
 
 ## How it is lit
 

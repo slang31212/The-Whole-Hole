@@ -1254,12 +1254,52 @@ MATE_DECK_BOTTOM = 3.5     # floating deck underside, 1.0 m of clearance
 LIFT_DRAFT = 35.0          # part deballasted, deck 12 m clear of the water
 
 
+def add_camel_barge(sc, deck_bottom, dx=0.0, group='camel'):
+    """Semi-submersible transport barge under the deck during the float-over.
+
+    It runs in through the 60 m clear opening between the columns, and when it
+    ballasts up it carries the loaded deck over the submerged hull and acts as
+    a camel. The deck is not floating on its own -- the barge is doing it.
+    """
+    L, B = 60.0, 26.0                 # half-length, half-beam: fits the 60 m gap
+    top = deck_bottom - 0.5           # barge deck, grillage on top of it
+    D = 5.8                           # half-depth
+    cy = top - D
+    sc.box((dx, cy, 0.0), (L, D, B), M['hull_navy'], group=group)
+    sc.box((dx, top - 0.25, 0.0), (L - 0.6, 0.25, B - 0.6),
+           M['steel_grey'], group=group)                     # barge deck plate
+    sc.box((dx, 0.0, 0.0), (L + 0.07, 1.7, B + 0.07),
+           M['boot_black'], group=group)                     # boot-top
+    # grillage stools carrying the box girder above
+    for gx in np.arange(-48.0, 48.1, 16.0):
+        for gz in (-17.0, 0.0, 17.0):
+            sc.box((dx + float(gx), top + 0.25, gz), (2.4, 0.25, 2.4),
+                   M['rust'], group=group)
+    # deckhouse and mast at the far end, where it stands clear of the deck
+    sc.box((dx - L + 11.0, top + 6.5, 0.0), (10.0, 6.5, 15.0),
+           M['white_paint'], group=group)
+    sc.box((dx - L + 11.0, top + 13.6, 0.0), (6.5, 0.7, 11.0),
+           M['glass_dark'], group=group)
+    sc.cyl((dx - L + 11.0, top + 14.3, 0.0), (0, 1, 0), 9.0, 0.5, 0.35,
+           M['galv'], group=group)
+    for sz in (-1, 1):
+        sc.box((dx - L + 24.0, top + 1.4, sz * (B - 3.0)),
+               (5.0, 1.4, 2.2), M['safety_yellow'], group=group)   # winches
+    rail_line(sc, dx - L, dx + L, B - 0.9, B - 0.9, top, group)
+    rail_line(sc, dx - L, dx + L, -B + 0.9, -B + 0.9, top, group)
+
+
 def scene_wet_mating(panel):
     """Scene 6 -- the float-over, in three panels off the quay.
 
-    A  hull ballasted deep, manoeuvring in beneath the loaded deck
-    B  hull centred under it, mating cones entering the deck sockets
-    C  deballasting; the whole loaded platform lifts clear as one unit
+    A  barge carrying the loaded deck in over the ballasted hull
+    B  centred, the hull's cones lined up under the deck sockets
+    C  hull deballasted; the platform lifts clear and the barge is gone
+
+    The deck does not float on its own: a semi-submersible transport barge runs
+    in through the 60 m gap between the columns, carries the deck over the
+    submerged hull and acts as a camel. The hull then deballasts, takes the
+    load, and the barge ballasts down and withdraws.
 
     Mating happens last: the deck is already loaded and commissioned in all
     three panels. Panels A and B share a tight camera on the interface, which
@@ -1290,8 +1330,9 @@ def scene_wet_mating(panel):
                        M['steel_grey'], group='sockets')
                 sc.cyl((sx * COL_C, deck_bottom - 0.9, sz * COL_C), (0, 1, 0),
                        0.45, 3.1, 2.7, M['dark_steel'], group='sockets')
-        col_top = (PONT_H + HULL_COL_H) - MATE_DRAFT           # -0.5 m
-        dx = -13.0 if panel == 'A' else 0.0                    # still coming in
+        col_top = (PONT_H + HULL_COL_H) - MATE_DRAFT
+        add_camel_barge(sc, deck_bottom)
+        dx = 88.0 if panel == 'A' else 0.0                     # standing off
         sc.hull_offset = dx
         _offset_hull(sc, col_top, MATE_DRAFT, dx)
         for x, z in ((dx - 108.0, 66.0), (dx - 98.0, -72.0)):
@@ -1306,6 +1347,11 @@ def scene_wet_mating(panel):
 
     env = dict(water='harbour', water_y=0.0, deck_top=ytop,
                fog_density=0.00009, detail_fade=420.0, horizon_props=True)
+    if panel != 'C':
+        # the ballasted hull announces itself on the surface as four rings of
+        # broken water round the column tops
+        env['wash'] = tuple((dx + sx * COL_C, sz * COL_C, 17.0, 0.6)
+                            for sx in (-1, 1) for sz in (-1, 1))
     add_quay(sc, 7.35)
     add_apron(sc, 7.35)
     add_yard(sc, 7.35)
