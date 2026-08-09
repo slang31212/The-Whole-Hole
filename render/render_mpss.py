@@ -370,8 +370,8 @@ def finish(rgb, w, h, exposure=1.22, grain=0.0055, vignette=0.16, seed=5):
 
 # ------------------------------------------------------------------ cameras
 CAMERAS = {
-    'quay': dict(eye=(108.0, 168.0, -243.0), target=(0.0, 62.0, 0.0), focal=35.0),
-    'station': dict(eye=(216.0, 56.0, -346.0), target=(0.0, 104.0, 0.0), focal=35.0),
+    'quay': dict(eye=(102.6, 162.7, -230.9), target=(0.0, 109.0, 0.0), focal=35.0),
+    'station': dict(eye=(256.7, 47.0, -411.1), target=(0.0, 118.0, 0.0), focal=35.0),
 }
 
 

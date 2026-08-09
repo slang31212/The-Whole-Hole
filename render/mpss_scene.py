@@ -185,7 +185,7 @@ def add_hull(sc, deck_bottom, group='hull'):
 
 
 # ---------------------------------------------------------------- turbine
-def add_turbine(sc, ytop, group='turbine', azimuth=148.0, spin=30.0):
+def add_turbine(sc, ytop, group='turbine', azimuth=155.0, spin=60.0):
     """15 MW machine on the NW column centreline: x = -37.5, z = +37.5."""
     tx, tz = -COL_C, COL_C
     base_r = TOWER_BASE_D / 2
@@ -691,7 +691,7 @@ def scene_on_station():
     ytop = AIRGAP + DECK_THK          # deck underside 20 m above the waterline
     add_deck(sc, ytop)
     add_hull(sc, AIRGAP)
-    add_turbine(sc, ytop, azimuth=145.0, spin=30.0)
+    add_turbine(sc, ytop, azimuth=158.0, spin=60.0)
     add_datacentre(sc, ytop)
     add_bess(sc, ytop)
     add_ccs(sc, ytop)

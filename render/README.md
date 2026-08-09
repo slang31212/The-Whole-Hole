@@ -52,9 +52,20 @@ camera and reports what falls outside the frame. Use it before committing to a
 long render:
 
 ```bash
-FC_W=1600 FC_H=2000 python3 frame_check.py orbit 156 22 305 35 148 30 7.35 64
-FC_W=1600 FC_H=2000 python3 frame_check.py eye "(108,168,-243)" "(0,62,0)" 35
+# orbit <az> <el> <dist> <focal> [rotor_az] [spin] [deck_top] [aim_y]
+FC_W=1600 FC_H=2000 python3 frame_check.py orbit 156 22 305 35 155 60 7.35 109
+
+# the camera actually used for Scene 5
+FC_W=1600 FC_H=2000 \
+  python3 frame_check.py eye "(102.6,162.7,-230.9)" "(0,109,0)" 35 155 60 7.35
 ```
+
+Worth knowing before you move a camera: the rotor's blade phase changes how
+much vertical room the subject needs. With one blade pointing straight down
+the rotor spans 1.5 R; rotated 30 degrees off that it spans about 1.73 R, which
+is another 27 m of frame to find. Cameras here are solved for the phase in
+`add_turbine`, so if you change `spin` you need to re-solve rather than assume
+the old framing still holds.
 
 ## Files
 
