@@ -1,0 +1,4 @@
+__pycache__/
+*.log
+preview-*.jpg
+cmp-*.jpg
