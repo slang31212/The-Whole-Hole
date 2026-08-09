@@ -45,8 +45,10 @@ def main():
     r.append(check('tower base fits inside the column footprint',
                    S.COL - S.TOWER_BASE_D, 5.0))
 
-    # both scenes must build
-    for name, fn in (('quay', S.scene_quay_loaded), ('station', S.scene_on_station)):
+    # every scene must build
+    for name, fn in (('quay', S.scene_quay_loaded),
+                     ('erect', S.scene_turbine_erection),
+                     ('station', S.scene_on_station)):
         sc, env = fn()
         print('%-46s %d boxes, %d cones, %d clusters'
               % ('scene %r builds' % name, sc.nb, len(sc.CH), len(sc.clusters)))

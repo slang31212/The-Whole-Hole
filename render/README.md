@@ -17,6 +17,7 @@ image model cannot be made to respect a load path. A renderer can.
 
 | File | Scene | Aspect |
 |---|---|---|
+| `../images/mpss-turbine-erection.jpg` | Scene 4 — turbine erection over the corner column, deck part loaded | 16:9 |
 | `../images/mpss-deck-loadout.jpg` | Scene 5 — fully loaded deck alongside the quay, hull not yet mated | 4:5 |
 | `../images/mpss-on-station.jpg` | Scene 7 — on station at the 27 m operating draft | 16:9 |
 
@@ -111,6 +112,37 @@ at the quay     deck underside 0.35 m above the waterline, quay level with the d
 turbine         tower centreline at (-37.5, +37.5) -- dead centre on the NW column
                 10 m base diameter, 150 m hub height, 236 m rotor, 115 m blades
 ```
+
+### Scene 4 contradicts itself, and this is how it was resolved
+
+The brief asks Scene 4 to *"show the column below the deck edge to make the
+load path obvious"*. It cannot. Scenes 2, 3, 5 and 6 all establish that the
+deck is built and loaded at quay level and the hull is floated under it **last**
+— so at turbine-erection time there is no column under the deck to show. The
+two instructions cannot both be honoured.
+
+Production note 3 breaks the tie: *"Scene 4 = the 7.5 m offset."* The offset is
+what the frame is for; the column was only the device for showing it. So the
+build sequence is kept intact and the load path is carried three other ways:
+
+1. the camera looks in over the NW corner, the angle that opens the offset up
+   rather than flattening it — solved numerically by maximising the on-screen
+   distance between the tower base and the deck corner;
+2. all four **column hard-point pads** are marked on the deck — a darker
+   non-skid square exactly on the 15 m column plan, bordered and hatched — so
+   the deck visibly has four column positions and the turbine stands centred on
+   one of them;
+3. two sides of each pad sit flush with the deck edge, because the column's
+   outer face is flush with it. That flushness is itself part of the argument.
+
+Worth knowing when reading the frame: the tower is 10 m across and its
+centreline is 7.5 m in, so its *skin* clears the deck edge by only 2.5 m. It
+genuinely stands close to the edge. What makes it a column load rather than an
+edge load is the pad it stands on, not apparent distance from the edge.
+
+If a literal column under the deck is wanted instead, that is a different
+picture — the deck already mated — and it contradicts the series' central
+claim. Ask before rendering it.
 
 One honest caveat about the turbine offset. It is correct in the model — the
 tower centreline is at `(-37.5, +37.5)`, exactly on the NW column centreline —

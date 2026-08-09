@@ -242,16 +242,26 @@ def add_turbine(sc, ytop, group='turbine', azimuth=155.0, spin=60.0):
 
 
 # ---------------------------------------------------------------- modules
-def add_bess(sc, y, group='bess'):
-    """SE quarter: containerised battery storage + power conversion."""
+BESS_ROWS = (-11.6, -16.2, -20.8, -25.4, -30.0, -34.6, -39.2)
+
+
+def add_bess(sc, y, group='bess', rows=None, full=True):
+    """SE quarter: containerised battery storage + power conversion.
+
+    ``rows`` and ``full`` exist so a part-loaded deck can land the first few
+    rows without the balance-of-plant that only goes in once they are all down.
+    """
+    rows = BESS_ROWS if rows is None else rows
     pal = [M['ctr_white'], M['ctr_grey'], M['ctr_white'], M['ctr_grey']]
-    for r, z in enumerate((-11.6, -16.2, -20.8, -25.4, -30.0, -34.6, -39.2)):
+    for r, z in enumerate(rows):
         for c, x in enumerate((14.6, 27.4)):
             container(sc, x, y + 0.35, z, 0.0, pal[(r + c) % len(pal)], group)
             sc.box((x, y + 0.17, z), (CTR_L / 2 - 0.2, 0.18, CTR_W / 2 - 0.1),
                    M['dark_steel'], group=group)
         # HVAC / fire panels on the row ends
         sc.box((34.9, y + 1.2, z), (1.1, 1.2, 0.9), M['ctr_grey'], group=group)
+    if not full:
+        return
     # power conversion / e-house modules along the east edge
     for z in (-12.5, -21.0, -29.5, -38.0):
         sc.box((39.4, y + 2.3, z), (3.4, 2.3, 4.0), M['ctr_grey'],
@@ -260,7 +270,7 @@ def add_bess(sc, y, group='bess'):
         sc.box((36.2, y + 1.8, z), (0.6, 1.8, 2.4), M['steel_grey'], group=group)
     # cable rack spine + branches
     sc.box((34.0, y + 1.85, -25.4), (0.55, 0.13, 14.6), M['galv'], group=group)
-    for z in (-11.6, -16.2, -20.8, -25.4, -30.0, -34.6, -39.2):
+    for z in rows:
         sc.box((25.0, y + 1.85, z), (9.5, 0.11, 0.45), M['galv'], group=group)
     # transformers
     for x, z in ((9.5, -43.0), (17.5, -43.0), (25.5, -43.0), (33.0, -43.0)):
@@ -270,12 +280,16 @@ def add_bess(sc, y, group='bess'):
                    M['galv'], group=group)
 
 
-def add_datacentre(sc, y, group='data'):
-    """NE quarter: container modules stacked three high + dry coolers."""
+def add_datacentre(sc, y, group='data', levels=3, fitout=True, columns=13):
+    """NE quarter: container modules stacked three high + dry coolers.
+
+    ``levels``/``columns``/``fitout`` let a part-loaded deck show the steel and
+    the first tier landed, with the roof plant still to come.
+    """
     pal = [M['ctr_white'], M['ctr_grey'], M['ctr_blue'], M['ctr_white'], M['ctr_grey']]
-    xs = [9.8 + i * 2.62 for i in range(13)]
+    xs = [9.8 + i * 2.62 for i in range(columns)]
     zs = [16.4, 30.4]
-    for lvl in range(3):
+    for lvl in range(levels):
         yb = y + 0.45 + lvl * (CTR_H + 0.10)
         for zi, z in enumerate(zs):
             for xi, x in enumerate(xs):
@@ -286,6 +300,8 @@ def add_datacentre(sc, y, group='data'):
     for z in (9.7, 23.4, 37.1):
         sc.box((25.2, y + 4.9, z), (16.8, 4.9, 0.35), M['steel_grey'], group=group)
     sc.box((25.2, y + 0.22, 23.4), (17.0, 0.22, 14.6), M['dark_steel'], group=group)
+    if not fitout:
+        return
     # dry-cooler array on the roof
     ytop_ctr = y + 0.45 + 3 * (CTR_H + 0.10)
     sc.box((25.2, ytop_ctr + 0.2, 23.4), (12.6, 0.2, 10.4), M['galv'], group=group)
@@ -310,8 +326,12 @@ def add_datacentre(sc, y, group='data'):
         sc.box((42.0, y + lvl * 3.0, 12.0), (2.9, 0.10, 1.5), M['grating'], group=group)
 
 
-def add_ccs(sc, y, group='ccs'):
-    """SW quarter: CO2 knock-out drums, compression trains, air coolers."""
+def add_ccs(sc, y, group='ccs', stage='complete'):
+    """SW quarter: CO2 knock-out drums, compression trains, air coolers.
+
+    ``stage='frame'`` gives the steel and the compressor skids only -- the
+    state the block is in while the turbine is still going up.
+    """
     frame_bay(sc, -41.5, -11.5, -41.0, -20.0, y, 14.0, M['steel_grey'], group,
               nx=5, nz=4)
     # deck plates at two levels inside the frame
@@ -326,6 +346,8 @@ def add_ccs(sc, y, group='ccs'):
         sc.box((-21.5, y + 2.6, z), (3.0, 1.7, 1.7), M['steel_grey'], group=group)
         sc.cyl((-34.2, y + 2.6, z), (1, 0, 0), 1.2, 1.7, 1.7,
                M['steel_grey'], group=group)
+    if stage == 'frame':
+        return
     # vertical CO2 knock-out drums on skirts, north edge of the block
     for x in (-39.0, -33.0, -27.0, -21.0, -15.0):
         sc.cyl((x, y + 0.2, -16.5), (0, 1, 0), 3.0, 2.35, 2.35,
@@ -376,6 +398,178 @@ def add_turbine_plant(sc, y, group='wtgplant'):
     for i, z in enumerate((25.0, 28.5)):
         sc.box((-38.0, y + 1.0, z), (3.4, 1.0, 1.1), M['steel_grey'], group=group)
     people(sc, [(-24.0, 33.0), (-21.0, 27.0), (-33.0, 14.0), (-16.0, 12.0)], y, group)
+
+
+def add_column_footprint(sc, y, cx, cz, group='footprint'):
+    """Paint the 15 m column footprint on the deck plate.
+
+    Scene 4 has to make the load path legible without a hull -- at the quay
+    there isn't one yet, the deck is mated last. The painted square is what a
+    real yard marks out anyway, and it puts the column outline on the deck
+    directly under the tower base where the eye can check it.
+    """
+    t, w = 0.030, 0.55                       # proud of the plate, paint width
+    # the pad itself: a darker non-skid square exactly on the column plan
+    sc.box((cx, y + t * 0.6, cz), (COL_HALF, t * 0.6, COL_HALF),
+           M['deck_paint'], tint=(0.62, 0.64, 0.66), group=group)
+    # bold border. Two of these sit on the deck edge, because the column's outer
+    # face is flush with it -- which is itself the thing worth seeing.
+    for sx in (-1, 1):
+        sc.box((cx + sx * (COL_HALF - w), y + t, cz), (w, t, COL_HALF),
+               M['safety_yellow'], group=group)
+        sc.box((cx, y + t, cz + sx * (COL_HALF - w)), (COL_HALF, t, w),
+               M['safety_yellow'], group=group)
+    # hatching in the margin the tower does not cover, so the pad reads as a
+    # marked hard point rather than a stray rectangle
+    inner = COL_HALF - 2 * w
+    step, run = 1.55, 1.5
+    n = int((2 * inner) // step)
+    for i in range(n + 1):
+        o = -inner + i * step
+        for ax, az_, sgn in ((o, inner - run * 0.7, 1), (o, -inner + run * 0.7, -1),
+                             (inner - run * 0.7, o, 1), (-inner + run * 0.7, o, -1)):
+            sc.box((cx + ax, y + t * 1.2, cz + az_), (run * 0.5, t, 0.16),
+                   M['safety_yellow'], yaw=45.0 * sgn, group=group)
+
+
+def add_turbine_erection(sc, y, group='erection', stub_h=26.0, lift_gap=15.0):
+    """Scene 4: base flange and lower tower section down, second in the air."""
+    tx, tz = -COL_C, COL_C
+    base_r = TOWER_BASE_D / 2
+
+    # bolted base flange and the anchor ring on the deck
+    sc.cyl((tx, y + 0.04, tz), (0, 1, 0), 0.55, base_r + 0.35, base_r + 0.35,
+           M['steel_grey'], group=group)
+    sc.cyl((tx, y + 0.59, tz), (0, 1, 0), 0.85, base_r + 0.25, base_r + 0.15,
+           M['dark_steel'], group=group)
+    # lower tower section, already bolted down
+    top_r = base_r - 0.9
+    sc.cyl((tx, y + 1.44, tz), (0, 1, 0), stub_h, base_r, top_r,
+           M['turbine_white'], group=group)
+    sc.cyl((tx, y + 1.44 + stub_h, tz), (0, 1, 0), 0.5, top_r + 0.28, top_r + 0.28,
+           M['steel_grey'], group=group)          # exposed mating flange
+    sc.box((tx - base_r - 0.05, y + 1.9, tz), (0.25, 1.2, 0.9),
+           M['dark_steel'], group=group)          # tower door
+
+    # erection aids: access stair, working platform at the flange, tag lines
+    sc.box((tx + base_r + 1.5, y + 3.0, tz), (1.6, 3.0, 1.6),
+           M['steel_grey'], group=group)
+    sc.cyl((tx, y + 1.44 + stub_h - 1.1, tz), (0, 1, 0), 0.14,
+           top_r + 1.8, top_r + 1.8, M['grating'], group=group)
+    for a in (0.0, 90.0, 180.0, 270.0):     # handrail posts round that platform
+        r = math.radians(a)
+        sc.box((tx + math.cos(r) * (top_r + 1.4), y + 1.44 + stub_h - 0.4,
+                tz + math.sin(r) * (top_r + 1.4)), (0.08, 0.55, 0.08),
+               M['safety_yellow'], group=group)
+
+    # second tower section, slung and hovering just above the flange
+    sec_h = 34.0
+    sec_bot = y + 1.44 + stub_h + lift_gap
+    sc.cyl((tx, sec_bot, tz), (0, 1, 0), sec_h, top_r, top_r - 0.85,
+           M['turbine_white'], group=group)
+    sc.cyl((tx, sec_bot - 0.5, tz), (0, 1, 0), 0.5, top_r + 0.28, top_r + 0.28,
+           M['steel_grey'], group=group)
+    # lifting frame and slings up to the hook
+    sc.box((tx, sec_bot + sec_h + 0.6, tz), (top_r - 0.6, 0.6, 1.0),
+           M['safety_yellow'], group=group)
+    hook = np.array([tx, sec_bot + sec_h + 9.5, tz], F32)
+    for sx in (-1, 1):
+        a = np.array([tx + sx * (top_r - 1.0), sec_bot + sec_h + 1.2, tz], F32)
+        d = hook - a
+        sc.cyl(a, d, float(np.linalg.norm(d)), 0.075, 0.075,
+               M['dark_steel'], group=group)
+    sc.box(hook, (0.7, 1.3, 0.7), M['dark_steel'], group=group)
+    # tag lines running down to the deck
+    for sx, sz in ((-1, -1), (1, 1)):
+        a = np.array([tx + sx * (top_r - 0.5), sec_bot + 1.0, tz + sz * 0.4], F32)
+        b = np.array([tx + sx * 16.0, y + 0.4, tz + sz * 13.0], F32)
+        d = b - a
+        sc.cyl(a, d, float(np.linalg.norm(d)), 0.045, 0.045,
+               M['ctr_white'], group=group)
+    people(sc, [(tx + 7.5, tz - 2.0), (tx + 8.4, tz - 3.2), (tx - 6.0, tz + 6.5),
+                (tx + 14.0, tz - 12.0), (tx + 16.5, tz - 13.5),
+                (tx - 2.0, tz - 9.0)], y, group)
+    return hook
+
+
+def add_erection_crane(sc, y, hook, base_xz=(-2.0, 22.0), group='ecrane'):
+    """The heavy crawler doing the lift, standing on the deck itself.
+
+    It stands on the deck rather than the quay because it can: the deck is at
+    quay level, so a crawler drives aboard instead of reaching 90 m across the
+    quay edge. That is the same argument the whole series is making.
+    """
+    cx, cz = base_xz
+    for dz in (-4.4, 4.4):
+        sc.box((cx, y + 0.95, cz + dz), (7.6, 0.95, 1.8), M['dark_steel'], group=group)
+        sc.box((cx, y + 1.7, cz + dz), (7.8, 0.4, 2.0), M['steel_grey'], group=group)
+    sc.box((cx, y + 2.4, cz), (6.2, 0.7, 4.8), M['dark_steel'], group=group)
+    sc.box((cx, y + 4.6, cz), (5.4, 1.8, 4.2), M['safety_yellow'], group=group)
+    sc.box((cx + 5.6, y + 4.4, cz), (2.0, 2.6, 3.8), M['dark_steel'], group=group)
+    sc.box((cx - 4.2, y + 7.0, cz - 3.0), (1.4, 1.4, 1.2), M['ctr_grey'], group=group)
+    for i in range(4):                      # counterweight slabs
+        sc.box((cx + 7.6 + i * 0.1, y + 3.2 + i * 1.5, cz), (1.9, 0.75, 3.4),
+               M['dark_steel'], group=group)
+
+    pivot = np.array([cx - 3.6, y + 5.6, cz], F32)
+    tip = np.asarray(hook, F32) + np.array([0.0, 3.2, 0.0], F32)
+    bd = tip - pivot
+    boom_len = float(np.linalg.norm(bd))
+    bd = bd / boom_len
+    side = norm(np.cross(bd, np.array([0.0, 1.0, 0.0], F32)))
+    upv = norm(np.cross(side, bd))
+    for ox, oy in ((-1.3, -1.3), (1.3, -1.3), (-1.3, 1.3), (1.3, 1.3)):
+        sc.cyl(pivot + side * ox + upv * oy, bd, boom_len, 0.24, 0.18,
+               M['safety_yellow'], group=group)
+    rungs = int(boom_len // 3.2)
+    Mb = np.stack([upv, bd, side], axis=1).astype(F32)
+    for k in range(1, rungs):
+        p = pivot + bd * (k * 3.2)
+        sc.box(p, (0.10, 0.10, 1.4), M['safety_yellow'], M=Mb, group=group)
+        diag = norm(bd * 3.2 + side * (2.6 if k % 2 else -2.6))
+        sc.cyl(p - side * (1.3 if k % 2 else -1.3), diag, 4.2, 0.08, 0.08,
+               M['safety_yellow'], group=group)
+    # mast and backstay pendants
+    mast = norm(np.array([0.62, 0.78, 0.0], F32))
+    sc.cyl(pivot, mast, 26.0, 0.26, 0.19, M['safety_yellow'], group=group)
+    top = pivot + mast * 26.0
+    for target in (pivot + bd * boom_len, np.array([cx + 8.2, y + 8.0, cz], F32)):
+        d = target - top
+        sc.cyl(top, d, float(np.linalg.norm(d)), 0.06, 0.06,
+               M['dark_steel'], group=group)
+    # hoist rope from boom tip down to the hook block
+    d = np.asarray(hook, F32) - (pivot + bd * boom_len)
+    sc.cyl(pivot + bd * boom_len, d, float(np.linalg.norm(d)), 0.06, 0.06,
+           M['dark_steel'], group=group)
+
+
+def add_blade_layout(sc, y, group='blades'):
+    """Nacelle and three blades laid out on the quay, waiting their turn."""
+    prof = ((0.0, 3.0, 2.6), (18.0, 6.2, 2.2), (44.0, 5.1, 1.5),
+            (70.0, 3.8, 0.95), (95.0, 2.4, 0.55), (115.0, 0.8, 0.2))
+    for bi, (bz, x0) in enumerate(((-78.0, -56.0), (-90.0, -52.0), (-102.0, -60.0))):
+        for s in range(len(prof) - 1):
+            r0, c0, t0 = prof[s]
+            r1, c1, t1 = prof[s + 1]
+            c = (c0 + c1) / 2
+            t = (t0 + t1) / 2
+            sc.box((x0 + (r0 + r1) / 2, y + 2.3 + t / 2, bz),
+                   ((r1 - r0) / 2, t / 2, c / 2), M['turbine_white'], group=group)
+        sc.cyl((x0 - 0.4, y + 2.3 + 1.4, bz), (1, 0, 0), 1.6, 1.55, 1.55,
+               M['turbine_white'], group=group)
+        for r in (6.0, 40.0, 78.0, 108.0):   # transport trestles
+            sc.box((x0 + r, y + 1.15, bz), (1.5, 1.15, 2.6),
+                   M['safety_yellow'], group=group)
+    # nacelle on cribbing, cover off the top
+    nx, nz = 92.0, -84.0
+    sc.box((nx, y + 1.0, nz), (11.5, 1.0, 5.2), M['dark_steel'], group=group)
+    sc.box((nx, y + 6.0, nz), (11.0, 4.0, 4.8), M['turbine_white'], group=group)
+    sc.box((nx, y + 10.2, nz), (7.5, 0.25, 3.6), M['galv'], group=group)
+    sc.cyl((nx - 11.6, y + 6.0, nz), (1, 0, 0), 3.4, 3.4, 3.6,
+           M['turbine_white'], group=group)
+    sc.box((nx + 16.0, y + 3.4, nz), (4.0, 3.4, 4.0), M['ctr_grey'], group=group)
+    people(sc, [(nx - 16.0, nz + 7.0), (-30.0, -74.0), (-26.0, -75.5),
+                (20.0, -86.0), (60.0, -96.0)], y, group)
 
 
 def add_deck_details(sc, y, group='deckdet'):
@@ -674,6 +868,45 @@ def scene_quay_loaded(loaded=True):
     add_yard(sc, ytop)
     add_far_bank(sc, ytop)
     add_basin_traffic(sc)
+    env = dict(
+        water='harbour',
+        water_y=0.0,
+        deck_top=ytop,
+        fog_density=0.00008,
+        detail_fade=420.0,
+        horizon_props=True,
+    )
+    return sc.build(), env
+
+
+def scene_turbine_erection():
+    """Scene 4 -- turbine erection over the corner column, deck part loaded.
+
+    The brief asks this frame to "show the column below the deck edge". It
+    cannot: at the quay there is no hull yet, because mating happens last, and
+    that sequence is the series' whole argument. So the load path is carried
+    instead by the camera -- square onto the NW corner, where both 7.5 m insets
+    read as real gaps -- and by the 15 m column footprint painted on the deck
+    directly under the tower base.
+    """
+    sc = Scene()
+    ytop = 7.35
+    add_deck(sc, ytop)
+    for sx in (-1, 1):
+        for sz in (-1, 1):
+            add_column_footprint(sc, ytop, sx * COL_C, sz * COL_C)
+    hook = add_turbine_erection(sc, ytop)
+    add_erection_crane(sc, ytop, hook)
+    add_bess(sc, ytop, rows=BESS_ROWS[:3], full=False)
+    add_datacentre(sc, ytop, levels=1, fitout=False, columns=9)
+    add_ccs(sc, ytop, stage='frame')
+    add_deck_details(sc, ytop)
+    add_quay(sc, ytop)
+    add_apron(sc, ytop)
+    add_yard(sc, ytop)
+    add_blade_layout(sc, ytop)
+    add_basin_traffic(sc)
+    add_far_bank(sc, ytop)
     env = dict(
         water='harbour',
         water_y=0.0,

@@ -8,6 +8,7 @@ photograph comes from sky occlusion, weathering and correct scale, not from
 dramatic light.
 
     python3 render_mpss.py --scene quay --preview
+    python3 render_mpss.py --scene erect --preview
     python3 render_mpss.py --scene quay  --out ../images/mpss-deck-loadout.jpg
     python3 render_mpss.py --scene station --out ../images/mpss-on-station.jpg
 """
@@ -372,6 +373,8 @@ def finish(rgb, w, h, exposure=1.22, grain=0.0055, vignette=0.16, seed=5):
 CAMERAS = {
     'quay': dict(eye=(102.6, 162.7, -230.9), target=(0.0, 109.0, 0.0), focal=35.0),
     'station': dict(eye=(256.7, 47.0, -411.1), target=(0.0, 118.0, 0.0), focal=35.0),
+    # scene 4 looks in over the NW corner so the 7.5 m inset reads as a real gap
+    'erect': dict(eye=(-35.8, 130.9, 181.2), target=(-18.75, 44.0, 18.75), focal=35.0),
 }
 
 
@@ -380,6 +383,8 @@ def render(scene_name, width, height, ao_samples, ao_stride, ao_dist,
     t_start = time.time()
     if scene_name == 'quay':
         scene, env = S.scene_quay_loaded()
+    elif scene_name == 'erect':
+        scene, env = S.scene_turbine_erection()
     elif scene_name == 'station':
         scene, env = S.scene_on_station()
     else:
@@ -503,7 +508,8 @@ def render(scene_name, width, height, ao_samples, ao_stride, ao_dist,
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--scene', default='quay', choices=['quay', 'station'])
+    ap.add_argument('--scene', default='quay',
+                    choices=['quay', 'erect', 'station'])
     ap.add_argument('--width', type=int, default=1920)
     ap.add_argument('--height', type=int, default=1080)
     ap.add_argument('--ss', type=int, default=2, help='supersampling factor')
