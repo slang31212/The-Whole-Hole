@@ -252,6 +252,67 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0; }
 .lead strong { color: var(--navy-900); }
 .lead.light strong { color: #fff; }
 
+/* ===================== PLATES (renders) =====================
+   The renders are the only photographic imagery on the site, so they get a
+   figure component of their own rather than being dropped in as bare <img>.
+   Every <img> carries intrinsic width/height so the page never reflows as
+   they load. */
+.plate {
+  margin: 0 0 40px;
+}
+.plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  background: var(--bg-tint);
+}
+.plate-caption {
+  margin: 14px 0 0;
+  font-size: .9rem;
+  color: var(--slate);
+  max-width: 720px;
+}
+.plate-caption b {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: .74rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  margin-bottom: 5px;
+}
+.plate--dark .plate-caption { color: #bcd0e4; }
+.plate--dark .plate-caption b { color: var(--accent-glow); }
+
+/* full-bleed band, used directly under the hero */
+.plate--band {
+  margin: 0;
+  background: var(--navy-900);
+}
+.plate--band img {
+  border-radius: 0;
+  max-height: 62vh;
+  object-fit: cover;
+}
+.plate--band .plate-caption {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 16px 24px 22px;
+  color: #a9c0d6;
+}
+.plate--band .plate-caption b { color: var(--accent-glow); }
+
+/* the four-mission strip is very wide and very short; let it scroll on
+   narrow screens rather than shrinking to an illegible ribbon */
+.plate--strip { overflow-x: auto; }
+.plate--strip img { min-width: 680px; border-radius: var(--radius-sm); }
+
+@media (max-width: 640px) {
+  .plate { margin-bottom: 30px; }
+  .plate--band img { max-height: 46vh; }
+}
+
 /* ===================== LIFECYCLE ===================== */
 .lifecycle { margin: 0 0 48px; }
 .lifecycle-track {
