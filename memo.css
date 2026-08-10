@@ -309,4 +309,16 @@
   .memo-cover { page-break-after: always; }
   .memo-quote, .memo-ask, .memo-cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .memo-pad { padding: 40px 30px; }
+  /* A plate split across a page break is worse than a smaller plate. The
+     section-level avoid above has to be relaxed for sections carrying a plate:
+     a section taller than the sheet gets broken regardless, and while it is
+     forbidding breaks the browser ignores the plate's own avoid and cuts
+     through the image. Letting the section break lets the plate stay whole. */
+  .memo-section:has(.plate) { break-inside: auto; page-break-inside: auto; }
+  .memo .plate {
+    break-inside: avoid; page-break-inside: avoid;
+    margin-bottom: 24px; text-align: center;
+  }
+  .memo .plate img { max-height: 80mm; width: auto; max-width: 100%; }
+  .memo .plate-caption { font-size: .78rem; text-align: left; }
 }
