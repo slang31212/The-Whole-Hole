@@ -1,0 +1,966 @@
+<title>Renewables, Vessels &amp; the MPSS</title>
+<style>
+  /* ================= tokens — bare :root is the complete light palette ================= */
+  :root {
+    --paper:       #f4f7f9;
+    --surface:     #ffffff;
+    --surface-2:   #edf3f7;
+    --ink:         #131e29;
+    --ink-2:       #45596c;
+    --ink-3:       #6f8296;
+    --rule:        #d6e0e8;
+    --rule-soft:   #e7eef3;
+    --accent:      #1c7fb0;
+    --accent-ink:  #145d81;
+    --accent-wash: #e3f0f8;
+    --oxide:       #a8542c;
+    --oxide-ink:   #8c4322;
+    --oxide-wash:  #f7eae3;
+    --shadow:      0 1px 2px rgba(19,30,41,.05), 0 10px 28px rgba(19,30,41,.06);
+
+    --serif: "Iowan Old Style", "Charter", "Palatino Linotype", Georgia, "Times New Roman", serif;
+    --sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+    --measure: 68ch;
+    --wide: 1100px;
+  }
+  /* system dark — un-stamped root; tokens only, explicit-light still wins */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:       #0d1621;
+      --surface:     #13202d;
+      --surface-2:   #182634;
+      --ink:         #e2eaf1;
+      --ink-2:       #a4b6c6;
+      --ink-3:       #7e91a3;
+      --rule:        #26374a;
+      --rule-soft:   #1d2c3c;
+      --accent:      #57c4f0;
+      --accent-ink:  #8ed6f6;
+      --accent-wash: #14303f;
+      --oxide:       #d98a5e;
+      --oxide-ink:   #e9a880;
+      --oxide-wash:  #332016;
+      --shadow:      0 1px 2px rgba(0,0,0,.40), 0 10px 28px rgba(0,0,0,.34);
+    }
+  }
+  /* explicit dark toggle wins in the other direction */
+  :root[data-theme="dark"] {
+    --paper:       #0d1621;
+    --surface:     #13202d;
+    --surface-2:   #182634;
+    --ink:         #e2eaf1;
+    --ink-2:       #a4b6c6;
+    --ink-3:       #7e91a3;
+    --rule:        #26374a;
+    --rule-soft:   #1d2c3c;
+    --accent:      #57c4f0;
+    --accent-ink:  #8ed6f6;
+    --accent-wash: #14303f;
+    --oxide:       #d98a5e;
+    --oxide-ink:   #e9a880;
+    --oxide-wash:  #332016;
+    --shadow:      0 1px 2px rgba(0,0,0,.40), 0 10px 28px rgba(0,0,0,.34);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ================= layout ================= */
+  .page { display: flex; flex-direction: column; gap: 0; }
+
+  .band { padding: 0 24px; }
+  .col  { width: 100%; max-width: var(--measure); margin: 0 auto; }
+  .col-wide { width: 100%; max-width: var(--wide); margin: 0 auto; }
+
+  section.band { padding-top: 56px; padding-bottom: 8px; }
+  section.band > .col > * + *,
+  section.band > .col-wide > * + * { margin-top: 24px; }
+
+  /* ================= type ================= */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(34px, 6vw, 52px);
+    line-height: 1.06;
+    letter-spacing: -.015em;
+    font-weight: 600;
+    text-wrap: balance;
+    margin: 12px 0 0;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(25px, 3.4vw, 33px);
+    line-height: 1.15;
+    letter-spacing: -.012em;
+    font-weight: 600;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  h3 {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -.005em;
+    margin: 0;
+  }
+
+  p { margin: 0; }
+  strong { font-weight: 650; color: var(--ink); }
+  em { font-style: italic; }
+
+  a {
+    color: var(--accent-ink);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    text-underline-offset: 2px;
+  }
+  a:hover { text-decoration-color: var(--accent); }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  code, .mono { font-family: var(--mono); font-size: .88em; }
+  code {
+    background: var(--surface-2);
+    border: 1px solid var(--rule-soft);
+    border-radius: 3px;
+    padding: .08em .34em;
+    color: var(--ink-2);
+  }
+
+  /* ================= masthead ================= */
+  .masthead {
+    background: var(--surface);
+    border-bottom: 1px solid var(--rule);
+    padding: 64px 24px 40px;
+  }
+  .standfirst {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.3vw, 21px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin-top: 20px;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule-soft);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .06em;
+    color: var(--ink-3);
+  }
+  .meta b { color: var(--ink-2); font-weight: 500; }
+
+  /* ================= section heading block ================= */
+  .head { display: flex; flex-direction: column; gap: 7px; }
+  .head .lede { color: var(--ink-2); font-size: 16px; }
+
+  /* ================= scope cards ================= */
+  .scope {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 26px;
+  }
+  @media (min-width: 780px) { .scope { grid-template-columns: repeat(3, 1fr); } }
+  .scope-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    box-shadow: var(--shadow);
+  }
+  .scope-card .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+  .scope-card p { font-size: 14.5px; line-height: 1.55; color: var(--ink-2); }
+  .scope-card .role {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule-soft);
+    font-size: 13.5px;
+    font-weight: 650;
+    color: var(--ink);
+  }
+
+  /* ================= SWOT 2x2 ================= */
+  .swot {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 26px;
+  }
+  @media (min-width: 900px) { .swot { grid-template-columns: 1fr 1fr; } }
+
+  .quad {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--edge);
+    border-radius: 4px;
+    padding: 18px 20px 20px;
+    box-shadow: var(--shadow);
+  }
+  .quad-helpful { --edge: var(--accent); --edge-ink: var(--accent-ink); --edge-wash: var(--accent-wash); }
+  .quad-harmful { --edge: var(--oxide);  --edge-ink: var(--oxide-ink);  --edge-wash: var(--oxide-wash); }
+
+  .quad-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .quad-head h3 { color: var(--edge-ink); }
+  .axis {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    background: var(--edge-wash);
+    border-radius: 2px;
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+
+  .quad ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .quad li {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    padding-left: 15px;
+    position: relative;
+  }
+  .quad li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .62em;
+    width: 6px;
+    height: 1.5px;
+    background: var(--edge);
+  }
+  .quad li strong { color: var(--ink); }
+
+  /* ================= tables ================= */
+  .scroller {
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 14px; }
+  thead th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-3);
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface-2);
+    white-space: nowrap;
+    vertical-align: bottom;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--rule-soft);
+    color: var(--ink-2);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); font-size: 13px; white-space: nowrap; }
+  th.num { text-align: right; }
+  .row-label { color: var(--ink); font-weight: 600; }
+  .caption {
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+
+  /* meter cell: magnitude bar on a shared baseline, hurdle marked */
+  .meter { width: 168px; min-width: 168px; }
+  .track {
+    display: block;
+    clear: both;
+    position: relative;
+    height: 9px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    margin-top: 5px;
+    overflow: hidden;
+  }
+  .bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    border-radius: 2px 4px 4px 2px;
+    background: var(--oxide);
+  }
+  .clears .bar { background: var(--accent); }
+  .hurdle {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: var(--ink-3);
+    opacity: .75;
+  }
+  .verdict {
+    float: right;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    line-height: 1.9;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--oxide-ink);
+    white-space: nowrap;
+  }
+  .clears .verdict { color: var(--accent-ink); }
+  .hurdle-key {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .05em;
+    color: var(--ink-3);
+  }
+  .hurdle-key::before {
+    content: "";
+    width: 1px;
+    height: 13px;
+    background: var(--ink-3);
+    flex: none;
+  }
+
+  /* ================= findings ================= */
+  .findings { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+  .finding {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 16px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .finding h3 { font-size: 15.5px; }
+  .finding p { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+
+  /* ================= verdict block ================= */
+  .verdict-block {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 26px 26px 28px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .verdict-block p { font-size: 15.5px; line-height: 1.62; color: var(--ink-2); }
+  .verdict-block p.key {
+    font-family: var(--serif);
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  /* ================= recommendations ================= */
+  ol.recs { margin: 26px 0 0; padding: 0; list-style: none; counter-reset: rec; display: flex; flex-direction: column; gap: 12px; }
+  ol.recs > li {
+    counter-increment: rec;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 16px 20px 17px 56px;
+    position: relative;
+    font-size: 14.5px;
+    line-height: 1.58;
+    color: var(--ink-2);
+  }
+  ol.recs > li::before {
+    content: counter(rec, decimal-leading-zero);
+    position: absolute;
+    left: 20px;
+    top: 16px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    color: var(--accent-ink);
+    font-weight: 500;
+  }
+  ol.recs > li b { display: block; color: var(--ink); font-weight: 650; margin-bottom: 3px; }
+
+  /* ================= sources ================= */
+  .sources { margin-top: 56px; border-top: 1px solid var(--rule); background: var(--surface); padding: 40px 24px 56px; }
+  .sources ul { margin: 18px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .sources li { font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
+  .note {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule-soft);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="page">
+
+  <!-- ============ masthead ============ -->
+  <header class="masthead">
+    <div class="col">
+      <p class="eyebrow">Seaways MPSS · Internal working analysis</p>
+      <h1>Renewables, Vessels &amp; the MPSS</h1>
+      <p class="standfirst">
+        Three SWOTs and a comparison, prepared to test the one question the site and the
+        memorandum currently leave open: <em>how much of the MPSS case should rest on
+        renewables?</em>
+      </p>
+      <div class="meta">
+        <span><b>Prepared</b> August 2026</span>
+        <span><b>Status</b> Working analysis — not investor copy</span>
+        <span><b>Inputs</b> day-rates.js · invest.js · memo.html · index.html · render/</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ scope ============ -->
+  <section class="band">
+    <div class="col-wide">
+      <div class="head">
+        <p class="eyebrow">Scope</p>
+        <h2>Three different businesses, not three versions of one</h2>
+        <p class="lede">
+          That distinction turns out to drive the entire comparison, so it is worth fixing
+          before the analysis starts.
+        </p>
+      </div>
+      <div class="scope">
+        <article class="scope-card">
+          <span class="tag">A · Renewable projects</span>
+          <p>
+            Offshore wind, fixed-bottom and floating, plus the adjacent transition missions the
+            repo already sells against: CCS, offshore green hydrogen, offshore power and BESS,
+            offshore data centres.
+          </p>
+          <p class="role">The asset owner's position</p>
+        </article>
+        <article class="scope-card">
+          <span class="tag">B · Support vessels</span>
+          <p>
+            WTIVs and offshore heavy-lift, SOV/CSOVs, CSVs and cable-lay, feeder barges, and the
+            AHTS and tow spreads that floating wind depends on.
+          </p>
+          <p class="role">The tonnage owner's position</p>
+        </article>
+        <article class="scope-card">
+          <span class="tag">C · The MPSS</span>
+          <p>
+            A moored, low-motion 90 × 90 m box semi: 30,000 t deck payload, 8,100 m² deck, a single
+            27 m operating draft, ~14-month hull, LR/ABS/DNV reviewed, leased on multi-year day rate.
+          </p>
+          <p class="role">The infrastructure landlord's position</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SWOT A ============ -->
+  <section class="band">
+    <div class="col-wide">
+      <div class="head">
+        <p class="eyebrow">SWOT A</p>
+        <h2>Renewable projects</h2>
+        <p class="lede">Offshore wind and the adjacent transition assets — the developer's side of the contract.</p>
+      </div>
+      <div class="swot">
+        <article class="quad quad-helpful">
+          <div class="quad-head"><h3>Strengths</h3><span class="axis">Internal · Helpful</span></div>
+          <ul>
+            <li><strong>Long-dated contracted revenue.</strong> CfDs, PPAs and offtake agreements run 15–20 years — longer than any oil-and-gas charter, and largely insulated from the commodity price.</li>
+            <li><strong>Policy-manufactured demand.</strong> Where the mandate holds, demand is legislated rather than discovered: net-zero targets, seabed leasing rounds, CCS storage licences.</li>
+            <li><strong>Investment-grade counterparties.</strong> Utilities and majors — Ørsted, Equinor, EnBW, RWE, bp — not marginal E&amp;P independents.</li>
+            <li><strong>Real technical adjacency for a low-motion host.</strong> Floating wind, offshore hydrogen, CO₂ injection and offshore data all need exactly what the MPSS sells: deck area, payload, station-keeping, low heave.</li>
+          </ul>
+        </article>
+        <article class="quad quad-harmful">
+          <div class="quad-head"><h3>Weaknesses</h3><span class="axis">Internal · Harmful</span></div>
+          <ul>
+            <li><strong>The economics do not carry a $600 M host.</strong> A semi-submersible floating-wind substructure runs roughly €430–485 k per MW installed — about €15 M for a 12 MW unit. One 15 MW machine on a corner column is ~€6–7 M of substructure value on a platform the memo prices at $600 M.</li>
+            <li><strong>Power is the lowest-value cargo per m² of deck.</strong> Wind sells electrons at a strike price; oil sells barrels. The gap shows up directly in the repo's own day rates.</li>
+            <li><strong>Chronic schedule slip.</strong> Consenting, grid connection, port capacity and turbine supply each delay first power independently; the compounded schedule is the sector's defining risk.</li>
+            <li><strong>Fabrication and quay capacity are the real constraint</strong> on floating wind — not hull design. The MPSS does not relieve that bottleneck; it competes for the same quay.</li>
+          </ul>
+        </article>
+        <article class="quad quad-helpful">
+          <div class="quad-head"><h3>Opportunities</h3><span class="axis">External · Helpful</span></div>
+          <ul>
+            <li><strong>Floating wind is still pre-industrial</strong> — no dominant substructure design, no serial production line, no incumbent. The MPSS's serial-build thesis aims at precisely this gap.</li>
+            <li><strong>The adjacent missions are emptier than wind.</strong> Offshore CCS, hydrogen and data centres have no standard host at all — a blanker sheet than wind.</li>
+            <li><strong>Offshore data is the outlier</strong>: power-hungry, latency-tolerant if sited well, and backed by counterparties whose willingness to pay dwarfs anything in the wind supply chain.</li>
+            <li><strong>A 2026 recovery is being called</strong> after two brutal years, with UK AR7 adding secured floating offtake.</li>
+          </ul>
+        </article>
+        <article class="quad quad-harmful">
+          <div class="quad-head"><h3>Threats</h3><span class="axis">External · Harmful</span></div>
+          <ul>
+            <li><strong>A live wave of cancellations.</strong> EnBW halted its 3 GW Mona and Morgan projects in the Irish Sea; the 58.4 MW Blyth 2 floating project was cancelled in January 2026; in February 2026 the US suspended leases on five large projects including Empire Wind.</li>
+            <li><strong>Strict capital discipline has replaced growth at any cost.</strong> Every developer is cutting scope — not adding a novel, unproven host to the critical path.</li>
+            <li><strong>A thin floating pipeline.</strong> 2026 added roughly 193 MW of secured floating offtake — a fraction of one MPSS's worth of capital.</li>
+            <li><strong>Political reversibility.</strong> Unlike an oil field, the demand is a policy artefact and can be withdrawn by an election, as the US lease suspensions show.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SWOT B ============ -->
+  <section class="band">
+    <div class="col-wide">
+      <div class="head">
+        <p class="eyebrow">SWOT B</p>
+        <h2>Renewable-support vessels</h2>
+        <p class="lede">WTIV, SOV/CSOV, CSV, feeder and tow — the contractor's side of the contract.</p>
+      </div>
+      <div class="swot">
+        <article class="quad quad-helpful">
+          <div class="quad-head"><h3>Strengths</h3><span class="axis">Internal · Helpful</span></div>
+          <ul>
+            <li><strong>A proven, liquid business model.</strong> Day-rate chartering is a century-old bankable structure with an established owner base, standard charterparties and deep second-hand markets.</li>
+            <li><strong>Very high rates at the top of the fleet.</strong> High-spec WTIVs are valued around $500 k/day, with wait-on-weather for a full spread at $18–22 k/hour in 2026.</li>
+            <li><strong>Mobility is the core asset.</strong> When the North Sea softens the hull sails to Taiwan or the US East Coast — the single most valuable structural feature the MPSS does not have.</li>
+            <li><strong>O&amp;M demand is structural.</strong> Every turbine installed becomes 20–25 years of SOV demand whether or not new FIDs are taken.</li>
+          </ul>
+        </article>
+        <article class="quad quad-harmful">
+          <div class="quad-head"><h3>Weaknesses</h3><span class="axis">Internal · Harmful</span></div>
+          <ul>
+            <li><strong>Utilisation risk sits with the owner.</strong> Idle steel earns nothing, and the spread between a chartered and an idle year is the whole return.</li>
+            <li><strong>Long charters earn thin returns.</strong> Guaranteed-utilisation SOV charters trade at comparatively low day rates and often yield single-digit IRRs — the safety is priced in.</li>
+            <li><strong>Turbine upscaling obsoletes tonnage.</strong> A jack-up specified for 8 MW machines cannot install 15 MW. Modern SOVs earn €45–60 k/day, ~30% above 2020 — but that is a rate for the current generation only.</li>
+            <li><strong>Capital-intensive with no alternative use.</strong> A WTIV outside offshore wind is a stranded asset with a very short buyer list.</li>
+          </ul>
+        </article>
+        <article class="quad quad-helpful">
+          <div class="quad-head"><h3>Opportunities</h3><span class="axis">External · Helpful</span></div>
+          <ul>
+            <li><strong>Europe tightens later in the decade.</strong> Supply of ≥15 MW-capable WTIVs is forecast tight from 2032, and from 2030 in other markets. Patient, well-timed tonnage gets paid.</li>
+            <li><strong>Floating wind re-shuffles the vessel mix</strong>, shifting work from jack-ups toward tow, mooring and offshore-assembly spreads — an opening for new asset types.</li>
+            <li><strong>Consolidation is under way.</strong> Fleet sales signal a maturing sector where scale owners buy distressed tonnage cheaply.</li>
+          </ul>
+        </article>
+        <article class="quad quad-harmful">
+          <div class="quad-head"><h3>Threats</h3><span class="axis">External · Harmful</span></div>
+          <ul>
+            <li><strong>A structural oversupply, now arriving.</strong> More than 60 WTIVs and heavy-lift vessels deliver between 2026 and 2030; ≥15 MW-capable supply outside China goes from none in 2020 to over 25 by 2028.</li>
+            <li><strong>The same story in the service fleet</strong>: around 60 SOV/CSOV deliveries by end-2026 against 40 in 2025, into a market widely forecast oversupplied through 2030.</li>
+            <li><strong>Rate collapse is the base case, not the tail.</strong> The 2022–24 record rates were a shortage artefact, and the orderbook is fixing the shortage.</li>
+            <li><strong>Cancellations hit the vessel market twice</strong> — less installation work now, and fewer turbines to service for the next 25 years.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SWOT C ============ -->
+  <section class="band">
+    <div class="col-wide">
+      <div class="head">
+        <p class="eyebrow">SWOT C</p>
+        <h2>The MPSS</h2>
+        <p class="lede">The validated standard host, leased as infrastructure — the landlord's side of the contract.</p>
+      </div>
+      <div class="swot">
+        <article class="quad quad-helpful">
+          <div class="quad-head"><h3>Strengths</h3><span class="axis">Internal · Helpful</span></div>
+          <ul>
+            <li><strong>The engineering risk is genuinely behind it.</strong> Four decades of work, 1:100 tank testing, doctoral research at Glasgow and Newcastle, peer-reviewed publication, and classification review by Lloyd's Register, ABS and DNV. Very few offshore concepts can say this.</li>
+            <li><strong>The build sequence is the real differentiator.</strong> Deck box outfitted at quay level, hull floated under it last. That removes the afloat lift and ~25–30 m of hook height — not the crane, but the most expensive hour in the schedule.</li>
+            <li><strong>Load path integrity.</strong> Tower centreline 7.5 m inboard lands dead centre on a 15 m square column, putting point loads into the ring pontoon rather than a deck span.</li>
+            <li><strong>Low motion by construction.</strong> A deep ring pontoon at 27 m sees ~40% of surface wave height; tested to a 37.5 m survival wave with no water on deck and no change of draft.</li>
+            <li><strong>Standardisation is the actual product.</strong> Serial hulls, one classed design, topsides swapped per mission — leaseable inventory available <em>before</em> FID. Nobody in floating wind has industrialised anything comparable.</li>
+          </ul>
+        </article>
+        <article class="quad quad-harmful">
+          <div class="quad-head"><h3>Weaknesses</h3><span class="axis">Internal · Harmful</span></div>
+          <ul>
+            <li><strong>The renewable tenants cannot pay the required rate.</strong> On the repo's own inputs, the ~15% unlevered yield in the memorandum is achievable on exactly one preset: oil production.</li>
+            <li><strong>A naming error diligence will catch.</strong> <code>day-rates.js:15</code> sells "Offshore wind turbine install" at $180 k/day. The MPSS is a moored host with no heavy-lift crane and no transit mode — it is not an installation vessel. The turbine in the renders stands <em>on</em> the platform; it is not installed <em>by</em> it.</li>
+            <li><strong>Immobile by design.</strong> The mobility that lets a WTIV chase demand across basins is exactly what a moored host gives up. Redeployment is a de-mob, tow and re-moor campaign, not a voyage.</li>
+            <li><strong>Not yet built.</strong> Classed and reviewed is not delivered. First-of-class risk, yard slot risk and the ~14-month hull claim are unproven in steel.</li>
+            <li><strong>Single-asset concentration.</strong> One $600 M hull, one tenant at a time; a vessel owner diversifies across a fleet.</li>
+          </ul>
+        </article>
+        <article class="quad quad-helpful">
+          <div class="quad-head"><h3>Opportunities</h3><span class="axis">External · Helpful</span></div>
+          <ul>
+            <li><strong>Reposition wind from generator to hub.</strong> The value is not one turbine on a corner column — it is the substation, BESS, conversion, hydrogen and accommodation functions for a whole floating array, on one classed platform that also survives a 37.5 m wave.</li>
+            <li><strong>Offshore data is the strongest transition tenant in the repo's own model</strong> — the only non-hydrocarbon preset that clears the assumed 8% debt cost with room to spare.</li>
+            <li><strong>CCS and hydrogen sell term, not rate.</strong> 12-year and 10-year charters at 8.2–8.3% unlevered are the closest renewable analogue to infrastructure yield — and appeal to a different investor than the memo addresses.</li>
+            <li><strong>Counter-cyclical yard pricing.</strong> Cancellations free yard slots and soften steel and fabrication pricing. The best time to order serial hulls is a bad market.</li>
+            <li><strong>Vessel oversupply is an argument <em>for</em> the MPSS</strong>: a permanently moored host substitutes for chartered tonnage over a 10–20 year life, converting volatile day-rate exposure into a fixed one.</li>
+          </ul>
+        </article>
+        <article class="quad quad-harmful">
+          <div class="quad-head"><h3>Threats</h3><span class="axis">External · Harmful</span></div>
+          <ul>
+            <li><strong>The hydrocarbon core carries the returns while the renewable story carries the marketing.</strong> Any investor who runs the day-rate model finds this in ten minutes. It should be stated first, not discovered.</li>
+            <li><strong>Renewables counterparties are cutting, not committing.</strong> Under strict capital discipline, no developer adds a first-of-class host to the critical path.</li>
+            <li><strong>The market will compare against known things</strong> — a WindFloat-class floater, a chartered CSOV, an FPSO conversion — not the "conventional bespoke FPU" the site benchmarks against. That table answers a question nobody in renewables is asking.</li>
+            <li><strong>Illustrative figures still anchor.</strong> $600 M, ~15%, 2× MOIC and 60% residual are placeholders in <code>invest.js</code>, but they read as claims.</li>
+            <li><strong>First-mover risk is unpriced.</strong> Serial production needs a second and third order that do not exist until the first hull earns.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ comparison: the model ============ -->
+  <section class="band">
+    <div class="col-wide">
+      <div class="head">
+        <p class="eyebrow">Comparison · D.1</p>
+        <h2>The repo's own model, run tenant by tenant</h2>
+        <p class="lede">
+          Every preset in <code>day-rates.js</code> at face value, against the <code>invest.js</code>
+          deal: $600 M asset, 55% debt at 8% — $26.4 M/yr interest on $270 M of equity.
+        </p>
+      </div>
+
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Tenant preset</th>
+              <th scope="col" class="num">Term</th>
+              <th scope="col" class="num">Net&nbsp;$M/yr</th>
+              <th scope="col">Unlevered yield vs 8% debt cost</th>
+              <th scope="col" class="num">Equity&nbsp;CF</th>
+              <th scope="col" class="num">Cash-on-equity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="clears">
+              <td class="row-label">Oil production host (FPSO)</td>
+              <td class="num">8 y</td>
+              <td class="num">94.0</td>
+              <td class="meter">
+                <span class="num" style="float:left">15.7%</span><span class="verdict">clears</span>
+                <span class="track"><span class="bar" style="width:98.1%"></span><span class="hurdle"></span></span>
+              </td>
+              <td class="num">$67.6M</td>
+              <td class="num">25.0%</td>
+            </tr>
+            <tr class="clears">
+              <td class="row-label">Drilling support</td>
+              <td class="num">3 y</td>
+              <td class="num">72.9</td>
+              <td class="meter">
+                <span class="num" style="float:left">12.2%</span><span class="verdict">clears</span>
+                <span class="track"><span class="bar" style="width:76.3%"></span><span class="hurdle"></span></span>
+              </td>
+              <td class="num">$46.5M</td>
+              <td class="num">17.2%</td>
+            </tr>
+            <tr class="clears">
+              <td class="row-label">Offshore data center</td>
+              <td class="num">10 y</td>
+              <td class="num">55.5</td>
+              <td class="meter">
+                <span class="num" style="float:left">9.2%</span><span class="verdict">clears</span>
+                <span class="track"><span class="bar" style="width:57.5%"></span><span class="hurdle"></span></span>
+              </td>
+              <td class="num">$29.1M</td>
+              <td class="num">10.8%</td>
+            </tr>
+            <tr class="clears">
+              <td class="row-label">Green hydrogen</td>
+              <td class="num">10 y</td>
+              <td class="num">49.8</td>
+              <td class="meter">
+                <span class="num" style="float:left">8.3%</span><span class="verdict">clears</span>
+                <span class="track"><span class="bar" style="width:51.9%"></span><span class="hurdle"></span></span>
+              </td>
+              <td class="num">$23.4M</td>
+              <td class="num">8.7%</td>
+            </tr>
+            <tr class="clears">
+              <td class="row-label">CCS / carbon storage</td>
+              <td class="num">12 y</td>
+              <td class="num">49.3</td>
+              <td class="meter">
+                <span class="num" style="float:left">8.2%</span><span class="verdict">clears</span>
+                <span class="track"><span class="bar" style="width:51.3%"></span><span class="hurdle"></span></span>
+              </td>
+              <td class="num">$22.9M</td>
+              <td class="num">8.5%</td>
+            </tr>
+            <tr>
+              <td class="row-label">Power generation</td>
+              <td class="num">10 y</td>
+              <td class="num">37.8</td>
+              <td class="meter">
+                <span class="num" style="float:left">6.3%</span><span class="verdict">below</span>
+                <span class="track"><span class="bar" style="width:39.4%"></span><span class="hurdle"></span></span>
+              </td>
+              <td class="num">$11.4M</td>
+              <td class="num">4.2%</td>
+            </tr>
+            <tr>
+              <td class="row-label">Offshore wind turbine install</td>
+              <td class="num">2 y</td>
+              <td class="num">36.5</td>
+              <td class="meter">
+                <span class="num" style="float:left">6.1%</span><span class="verdict">below</span>
+                <span class="track"><span class="bar" style="width:38.1%"></span><span class="hurdle"></span></span>
+              </td>
+              <td class="num">$10.1M</td>
+              <td class="num">3.7%</td>
+            </tr>
+            <tr>
+              <td class="row-label">Accommodation / flotel</td>
+              <td class="num">2 y</td>
+              <td class="num">23.4</td>
+              <td class="meter">
+                <span class="num" style="float:left">3.9%</span><span class="verdict">below</span>
+                <span class="track"><span class="bar" style="width:24.4%"></span><span class="hurdle"></span></span>
+              </td>
+              <td class="num">−$3.0M</td>
+              <td class="num">−1.1%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hurdle-key">Vertical rule marks the 8% cost of debt — left of it, leverage destroys the spread</p>
+
+      <div class="findings">
+        <article class="finding">
+          <h3>The memorandum's headline is the oil case</h3>
+          <p>
+            <code>invest.js</code> defaults to <code>netCharter: 94000000</code> — which is, to the
+            dollar, the oil-production preset at 92% utilisation. The "~15% illustrative unlevered
+            net yield" in the memorandum is not a blended figure and not a renewable one.
+          </p>
+        </article>
+        <article class="finding">
+          <h3>Leverage only works above 8%</h3>
+          <p>
+            At the assumed debt cost, gearing is accretive for oil, drilling, data centre, hydrogen
+            and — marginally — CCS. For power generation, wind install and accommodation the debt
+            eats the spread, and the flotel case goes cash-negative.
+          </p>
+        </article>
+        <article class="finding">
+          <h3>Term and rate trade in the right direction</h3>
+          <p>
+            CCS at 12 years and hydrogen at 10 pay less per day but far more predictably than 2-year
+            wind or flotel work. For an infrastructure buyer, 8.2% across twelve years is a
+            <em>better</em> asset than 12.2% across three — an argument the memorandum does not yet make.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ comparison: structural ============ -->
+  <section class="band">
+    <div class="col-wide">
+      <div class="head">
+        <p class="eyebrow">Comparison · D.2</p>
+        <h2>Where the three sit structurally</h2>
+      </div>
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Dimension</th>
+              <th scope="col">Renewable projects</th>
+              <th scope="col">Support vessels</th>
+              <th scope="col">MPSS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="row-label">Position in the chain</td><td>Asset owner / developer</td><td>Contractor, tonnage supplier</td><td>Infrastructure landlord</td></tr>
+            <tr><td class="row-label">Revenue</td><td>Power price × output</td><td>Day rate × utilisation</td><td>Day rate × utilisation</td></tr>
+            <tr><td class="row-label">Contract length</td><td>15–20 y (CfD / PPA)</td><td>2–10 y, spot to term</td><td>2–12 y by mission</td></tr>
+            <tr><td class="row-label">Who holds utilisation risk</td><td>Developer (wind resource)</td><td><strong>Owner</strong></td><td><strong>Owner</strong></td></tr>
+            <tr><td class="row-label">Mobility</td><td>Fixed for life</td><td><strong>High — chases demand</strong></td><td>Low; moored, tow to redeploy</td></tr>
+            <tr><td class="row-label">Current supply balance</td><td>Demand shrinking</td><td><strong>Oversupplied 2025–2030</strong></td><td>No supply — none built</td></tr>
+            <tr><td class="row-label">Rate direction</td><td>Strike prices under pressure</td><td>Softening from 2022–24 peak</td><td>Unproven</td></tr>
+            <tr><td class="row-label">Capital per unit</td><td>€430–485 k/MW substructure</td><td>~$300–500 M+ high-spec WTIV</td><td>$600 M/host (illustrative)</td></tr>
+            <tr><td class="row-label">Obsolescence</td><td>25–30 y asset life</td><td><strong>High — turbine upscaling</strong></td><td>Low — topsides swap, hull stays</td></tr>
+            <tr><td class="row-label">Residual value</td><td>Site-bound, decom liability</td><td>Liquid but cyclical</td><td>Hard steel, redeployable</td></tr>
+            <tr><td class="row-label">Counterparty</td><td>Government / utility</td><td>Developer / EPC</td><td>Operator / utility / hyperscaler</td></tr>
+            <tr><td class="row-label">Main risk</td><td>Policy and consenting</td><td>Utilisation and rate collapse</td><td><strong>First-of-class, single asset</strong></td></tr>
+            <tr><td class="row-label">Best return in repo's model</td><td>6.1–9.2% unlevered</td><td>Single-digit IRR on term charters</td><td>15.7% unlevered — on oil</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ what it says ============ -->
+  <section class="band">
+    <div class="col">
+      <div class="head">
+        <p class="eyebrow">Comparison · D.3</p>
+        <h2>What the comparison actually says</h2>
+      </div>
+      <div class="verdict-block">
+        <p class="key">
+          The MPSS is structurally closer to a vessel than to a renewable project — and it inherits
+          the vessel model's weakness, owner-held utilisation risk, without its strength, mobility.
+        </p>
+        <p>
+          It compensates with two things a vessel does not have: <strong>topside
+          reconfigurability</strong>, which defeats the turbine-upscaling obsolescence that dates a
+          WTIV, and a <strong>27 m fixed draft with a 37.5 m survival wave</strong>, which lets it
+          hold station through weather that sends a CSOV to port. Those two features are the honest
+          core of the advantage over tonnage, and the site currently buries them under the five-S pitch.
+        </p>
+        <p>
+          <strong>Against renewable projects, the MPSS is not a competitor and should stop implying
+          it is.</strong> It cannot beat a €15 M semi-submersible floater as a 15 MW generator
+          platform, and it cannot beat a $500 k/day WTIV as an installer. What it can do — and what
+          no floater or vessel does — is hold a large, powered, low-motion, permanently-manned deck
+          on station for twenty years. That is the natural home for an array substation, BESS,
+          hydrogen production, CO₂ compression and injection, a data centre, or all of them at once:
+          the argument Scene 5 of the render series already makes visually and the copy does not make
+          commercially.
+        </p>
+        <p>
+          <strong>The timing argument cuts both ways.</strong> Vessel oversupply and project
+          cancellations both make renewables a poor <em>first</em> tenant — nobody is committing
+          capital to a first-of-class host in this market. The same conditions make it an excellent
+          <em>second</em> one: a hull ordered into a soft yard market and paid for by an
+          oil-production charter is positioned to take transition work when floating wind
+          industrialises later in the decade, exactly as European ≥15 MW vessel supply tightens
+          from 2030–32.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ recommendations ============ -->
+  <section class="band">
+    <div class="col-wide">
+      <div class="head">
+        <p class="eyebrow">Actions · in priority order</p>
+        <h2>What follows from it</h2>
+      </div>
+      <ol class="recs">
+        <li>
+          <b>Lead the memorandum with the hydrocarbon case and name it as such.</b>
+          The ~15% figure is the oil-production preset. Saying so up front converts a diligence
+          liability into a credibility asset, and makes the transition tenants optionality on top
+          of an oil-underwritten return — a stronger structure than a blended claim nobody can reproduce.
+        </li>
+        <li>
+          <b>Fix <code>day-rates.js:15</code>.</b>
+          Rename "Offshore wind turbine install" to something the MPSS can actually do —
+          "Floating wind hub: substation, BESS &amp; O&amp;M base" — and re-rate it on a 10-year
+          term. The current line invites the question "where is your crane?"
+        </li>
+        <li>
+          <b>Promote the offshore data centre.</b>
+          It is the best-yielding non-hydrocarbon tenant in the repo's own model — 9.2% unlevered,
+          10.8% on equity, 10-year term at 95% utilisation — and it faces a counterparty class with
+          a genuinely different willingness to pay.
+        </li>
+        <li>
+          <b>Sell CCS and hydrogen on term, not rate.</b>
+          Twelve and ten years of contracted cash flow at ~8% unlevered is an infrastructure product
+          for an infrastructure buyer — a different and larger pool of capital than the family
+          offices <code>invest.html</code> currently targets.
+        </li>
+        <li>
+          <b>Add the comparison the market will actually make.</b>
+          The hull table in <code>index.html</code> benchmarks against a conventional twin-pontoon
+          FPU. Add a second table against a floating-wind semi and a chartered CSOV — the MPSS wins
+          on deck, payload, station-keeping and mission life, and that is a fight worth picking publicly.
+        </li>
+        <li>
+          <b>Use Scene 8 as the wind story, not Scene 4.</b>
+          Four identical hulls under four loadouts is the standardisation argument. A single turbine
+          being erected on a corner column is a $600 M platform doing a €15 M job, and a wind
+          specialist will say so.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ sources ============ -->
+  <footer class="sources">
+    <div class="col-wide">
+      <p class="eyebrow">Sources</p>
+      <ul>
+        <li><a href="https://www.oedigital.com/news/538691-vessel-sector-deep-dive-wtivs">Vessel Sector Deep Dive: WTIVs</a> — Offshore Engineer</li>
+        <li><a href="https://oithamarine.com/2026-wtiv-charter-rate-forecast-estimating-epci-mobilization-costs-for-15mw-offshore-projects/">2026 WTIV Charter Rate Forecast</a> — Oitha Marine</li>
+        <li><a href="https://www.maritimemagazines.com/offshore-engineer/202501/oversupply-and-market-volatility/">SOV/CSOV Through 2030: Oversupply and Market Volatility</a> — Maritime Magazines</li>
+        <li><a href="https://eagleintelmari.com/news/offshore-wind-csov-market-60-vessels-delivery-2026">CSOV Market Consolidates as 60 Service Vessels Deliver in 2026</a> — Eagle Intel Maritime</li>
+        <li><a href="https://guidetofloatingoffshorewind.com/guide/o-operations-and-maintenance/o-4-offshore-vessels-and-logistics/o-4-2-service-operation-vessels/">Service operation vessels</a> — Guide to a Floating Offshore Wind Farm</li>
+        <li><a href="https://www.tgs.com/press-releases/offshore-wind-forecast-slashed-but-signs-of-recovery-emerge-for-2026">Offshore Wind Forecast Slashed, but Signs of Recovery Emerge for 2026</a> — TGS</li>
+        <li><a href="https://www.aegirinsights.com/2026-global-floating-status-small-boost-early-this-year-but-pipeline-remains-slim">2026 Global floating status: pipeline remains slim</a> — Aegir Insights</li>
+        <li><a href="https://enkiai.com/offshore-wind/uk-project-cancellations-strike-price/">EnBW 3 GW UK project cancellation</a> — EnkiAI</li>
+        <li><a href="https://www.sciencedirect.com/science/article/pii/S0306261924013849">Modelling the installation of next generation floating offshore wind farms</a> — ScienceDirect</li>
+        <li><a href="https://guidetofloatingoffshorewind.com/guide/b-balance-of-plant/b-2-floating-substructure/">Floating substructure</a> — Guide to a Floating Offshore Wind Farm</li>
+      </ul>
+      <p class="note">
+        Repo inputs: <code>day-rates.js</code> tenant presets, <code>invest.js</code>
+        <code>defaultState()</code>, <code>memo.html</code> §04–06, <code>index.html</code> specs and
+        hull comparison, <code>render/mpssdeckloadingscenes.md</code> deck loadout and Scenes 4–8.
+        Market figures are third-party estimates gathered August 2026 and are indicative only.
+        All MPSS economics are the repo's own illustrative placeholders — not projections, offers or
+        guarantees of return.
+      </p>
+    </div>
+  </footer>
+
+</div>
