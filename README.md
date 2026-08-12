@@ -13,6 +13,7 @@ leaseable offshore infrastructure that compresses the timeline from FID to first
 | `day-rates.html` + `day-rates.js` | An editable day-rate leasing model — swap tenants in/out, compare revenue, net and payback; export to CSV. |
 | `invest.html` + `invest.js` | **For Family Offices.** An investor page framing the MPSS as a hard, income-producing real asset, with an interactive equity-returns calculator: type in a check size and see ownership, cash yield, IRR, MOIC and payback compute live, plus a year-by-year distribution schedule and CSV export. |
 | `memo.html` + `memo.css` | **Founding Investor Memorandum.** A brochure-style, print-friendly memorandum: cover page, numbered sections (opportunity, problem, solution, market, business model, illustrative economics, heritage, founding round & use of proceeds, the ask) and a full disclaimer. Reuses `styles.css`; `memo.css` adds the brochure layer. |
+| `SWOT.md` + `swot.html` | **SWOT: renewables vs. vessels vs. the MPSS.** An internal working analysis — three SWOTs (offshore renewable projects, the vessels that serve them, the MPSS) and a comparison that runs every tenant preset in `day-rates.js` against the `invest.js` deal. Not investor-facing copy. |
 | `styles.css` | All styling. Navy / ocean-blue / steel palette; fully responsive. |
 | `main.js`   | Mobile nav toggle and footer year. The site works without JS (the calculators need JS). |
 
