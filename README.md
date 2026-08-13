@@ -47,10 +47,12 @@ For the `seaways-mpss.com` domain, point the host at this repository / folder.
 - Key figures (30,000 t payload, 8,100 m² deck, 2M bbl SWIS storage, 37.5 m survival wave,
   ~14-month hull delivery, LR/ABS/DNV design review) and the design heritage are drawn from
   Seaways Engineering source material.
-- **Two different 15,000 / 30,000 t figures, and they are both right.** Deck *payload* is
-  30,000 t. The 15,000 t figures in `invest.html` are the *hull steel mass* — what the
-  investor copy means by "tonnes of steel". They are not a stale payload number; don't
-  reconcile them.
+- **Mass figures — one confirmed, one open.** Deck *payload* is **30,000 t+**; that number
+  is confirmed and is the one to quote. The `15,000 t` that used to appear in `invest.html`
+  was **wrong as a hull-steel figure** and has been removed: the structure is on the order
+  of **10,000 t** of steel for a 90 × 90 × 57 m envelope. A 15,000 t figure does exist in
+  the source material and sits *inside* the 30,000 t payload, but what it covers is not yet
+  established — do not publish it until it is.
 - **Classification wording.** The societies reviewed the *design*. Nothing is built, so
   nothing is "classed" and nothing is "certified" — those are terms of art for a
   constructed, surveyed vessel. Copy says "independently reviewed" / "design reviewed"
