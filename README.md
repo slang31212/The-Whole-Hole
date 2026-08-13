@@ -44,6 +44,15 @@ For the `seaways-mpss.com` domain, point the host at this repository / folder.
   The use-of-proceeds percentages and milestone phases in the same section are illustrative too.
 - Specs, the Five S and the lifecycle/driver tables are hand-built in HTML/CSS (no
   third-party chart images), so they're safe to edit and reuse.
-- Key figures (15,000 t payload, 8,100 m² deck, 2M bbl SWIS storage, 37.5 m survival wave,
-  ~14-month hull delivery, LR/ABS/DNV approval) and the design heritage are drawn from
+- Key figures (30,000 t payload, 8,100 m² deck, 2M bbl SWIS storage, 37.5 m survival wave,
+  ~14-month hull delivery, LR/ABS/DNV design review) and the design heritage are drawn from
   Seaways Engineering source material.
+- **Two different 15,000 / 30,000 t figures, and they are both right.** Deck *payload* is
+  30,000 t. The 15,000 t figures in `invest.html` are the *hull steel mass* — what the
+  investor copy means by "tonnes of steel". They are not a stale payload number; don't
+  reconcile them.
+- **Classification wording.** The societies reviewed the *design*. Nothing is built, so
+  nothing is "classed" and nothing is "certified" — those are terms of art for a
+  constructed, surveyed vessel. Copy says "independently reviewed" / "design reviewed"
+  throughout, and the scope (primary structure, intact & damaged stability, mooring,
+  ballast) is kept because it is accurate and it is the strong part.

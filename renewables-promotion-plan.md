@@ -3,6 +3,21 @@
 *A plan to promote the Seaways MPSS into offshore renewables and the wider energy
 transition, built from what is already in this repository.*
 
+> **Superseded in two places — do not execute as written.**
+>
+> **§6.1 is wrong.** There is no payload contradiction. Deck payload is 30,000 t; the
+> 15,000 t figures in `invest.html` are *hull steel mass*, deliberately left that way in
+> `9bf9c02`. Only `README.md` was stale, and it has been corrected.
+>
+> **§3 overstates the wind case.** A full IEA-15-240-RWT is roughly 2,000–2,500 t against
+> a 30,000 t deck. Wind is a light-duty loadout for a hull sized around dry trees, SCRs
+> and 2M bbl of storage — so the renewables argument is *headroom*, not capability, and it
+> sits inside the oil and gas story rather than beside it. The positioning in §3 needs
+> rebuilding on that basis before any of §5 is built.
+>
+> The claim-accuracy work in §6.2–6.5 has been done — see the class-wording pass across
+> `index.html`, `invest.html`, `memo.html` and `README.md`.
+
 ---
 
 ## 1. The read — what we actually have
